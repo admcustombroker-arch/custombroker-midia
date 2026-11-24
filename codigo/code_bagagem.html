@@ -1,0 +1,981 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"><style>:root{--card:#e6e1dd;
+--ink:#161b2f;
+--ink-2:#163250;
+--paper:#ddd7d3;
+--white:#ffffff;
+--text:#2b3142;
+--muted:#444d5e;
+--line:#b9b2ad;
+--brand:#5b687c;
+--brand-dark:#3f4a5e;
+--wine:#6b1d33;
+--whats:#15803d;
+--f-display:"Archivo", "Arial Narrow", Arial, sans-serif;
+--f-body:"IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+--f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+--wrap:1180px;
+--ease:cubic-bezier(.2,.7,.2,1);
+color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:112%;color:var(--ink);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-dark);margin:0 0 14px}
+.preview-note{background:#fff7d6;color:#5a4a00;font-size:.85rem;text-align:center;padding-block:7px}
+.preview-note .wrap{padding-block:0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(22,27,47,.96);backdrop-filter:blur(8px);transition:box-shadow .3s}
+.top.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
+.logo-bulb{flex:none;width:26px;height:40px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(140,195,238,.25));transition:transform .4s var(--ease)}
+.logo:hover .logo-bulb{transform:rotate(-6deg) scale(1.05)}
+.logo-words{display:grid;line-height:1}
+.logo b{font-family:var(--f-display);font-stretch:125%;font-weight:600;font-size:1.08rem;letter-spacing:.09em;color:#d4cdc8}
+.logo small{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#8d8f8e;margin-top:5px}
+.nav{display:flex;gap:20px;margin-left:auto;font-size:.92rem}
+.nav a{color:#d4cdc8;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--white);border-color:var(--brand)}
+.btn{display:inline-flex;align-items:center;gap:9px;font:600 .95rem/1 var(--f-body);text-decoration:none;padding:14px 22px;border-radius:6px;border:2px solid transparent;transition:transform .25s var(--ease),background .25s,box-shadow .25s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-whats{background:var(--whats);color:var(--white)}
+.btn-whats:hover{background:#116a32;box-shadow:0 8px 22px rgba(21,128,61,.35)}
+.btn-line{border-color:rgba(255,255,255,.45);color:var(--white)}
+.btn-line:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.top .btn{padding:10px 16px;font-size:.88rem}
+.nav a.new{color:#e9b7c4}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.3);border-radius:6px;color:var(--white);font:600 .85rem/1 var(--f-body);padding:9px 12px;cursor:pointer;gap:8px;align-items:center}
+.menu-btn span{display:block;width:16px;height:2px;background:currentColor;box-shadow:0 5px 0 currentColor,0 -5px 0 currentColor}
+@media (max-width:1140px){
+.menu-btn{display:inline-flex}
+.top .wrap{flex-wrap:wrap}
+.nav{display:none;order:3;width:100%;flex-direction:column;gap:0;margin:0;padding-bottom:12px}
+.nav.open{display:flex;animation:rise .35s var(--ease) both}
+.nav a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:1rem}
+}
+.hero{background:var(--ink);color:#d6e2ee;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:stretch;padding-block:0}
+.hero-text{padding-block:84px 72px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow{color:#d4cdc8}
+.hero h1{color:var(--white);font-size:clamp(2.3rem,5vw,3.9rem);font-weight:800}
+.hero h1 em{font-style:normal;color:#d4cdc8}
+.hero p.lead{font-size:1.15rem;max-width:34em;margin:22px 0 32px;color:#d4cdc8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-modes{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#8d8f8e}
+.hero-modes span{transition:color .4s}
+.hero-modes span.on{color:var(--white)}
+.hero-modes span.on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);margin-right:8px;vertical-align:1px}
+.stage{position:relative;overflow:hidden;min-height:540px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.4s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);transition:transform 9s ease-out}
+.slide.zoom img{transform:scale(1.07)}
+@keyframes drift{from{transform:scale(1.01)}to{transform:scale(1.07)}}
+.stage::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 22%);pointer-events:none}
+.slide figcaption{position:absolute;right:20px;bottom:18px;z-index:2;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:rgba(22,27,47,.7);padding:6px 10px;border-radius:4px}
+.dots{position:absolute;left:28px;bottom:22px;z-index:3;display:flex;gap:8px}
+.dots{gap:4px}
+.dots button{width:40px;height:44px;border:0;background:none;cursor:pointer;padding:0;position:relative;display:grid;align-items:center}
+.dots button::before{content:"";display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.dots button.on::after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:var(--card,#e6e1dd);transform-origin:left;animation:fill 6s linear forwards}
+.stage.paused .dots button.on::after{animation-play-state:paused}
+.dots{bottom:6px}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.load{animation:rise .9s var(--ease) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.34s}.d4{animation-delay:.48s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:900px){
+.hero .wrap{grid-template-columns:1fr;gap:0}
+.hero-text{padding-block:52px 40px}
+.stage{min-height:340px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+.stage::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 25%)}
+}
+.docs{background:var(--card,#e6e1dd);border-bottom:1px solid var(--line)}
+.docs .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding-block:20px;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+.docs strong{font-family:var(--f-body);font-weight:600;color:var(--ink);letter-spacing:0;font-size:.9rem}
+section{padding-block:96px}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:24px 56px;align-items:end;margin-bottom:48px}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:800}
+.sec-head p{margin:0;color:var(--muted);max-width:34em}
+@media (max-width:800px){.sec-head{grid-template-columns:1fr}section{padding-block:68px}}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+.card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:420px;border-radius:10px;overflow:hidden;color:var(--white);text-decoration:none;background:var(--ink-2);isolation:isolate}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s var(--ease)}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,0) 20%,rgba(22,27,47,.55) 45%,rgba(22,27,47,.95) 75%);transition:background .4s}
+.card:hover img{transform:scale(1.04)}
+.card-body{padding:24px}
+.card .tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#cfe4f6;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.card h3{color:var(--white);font-size:1.45rem;font-weight:800;margin:8px 0 10px}
+.card p{margin:0;font-size:.95rem;color:#d3dfeb;line-height:1.5}
+.card .more{display:inline-flex;gap:6px;margin-top:16px;font-weight:600;font-size:.9rem;color:var(--white)}
+.card .more i{font-style:normal;transition:transform .3s var(--ease)}
+.card:hover .more i{transform:translateX(5px)}
+.card.wine{background:var(--wine)}
+.card.wine::before{background:radial-gradient(120% 70% at 85% 0%,rgba(255,255,255,.12),transparent 60%)}
+.card.wine .tag{color:#f0c2cd}
+.card.wine p{color:#f2dbe1}
+.wine-mark{position:absolute;top:24px;right:24px;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:5.4rem;line-height:.8;color:rgba(255,255,255,.12)}
+.wine-mark small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;color:rgba(255,255,255,.55);text-align:right;margin-top:8px;font-weight:500}
+.facts{background:var(--card,#e6e1dd);border-block:1px solid var(--line);padding-block:64px}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media (max-width:760px){.facts .wrap{grid-template-columns:1fr}}
+.fact{border-left:3px solid var(--brand);padding-left:20px}
+.fact .n{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.fact .n small{font-size:.45em;margin-left:4px;color:var(--brand-dark)}
+.fact p{margin:10px 0 0;color:var(--muted);max-width:22em}
+.about-link{grid-column:1/-1;justify-self:start;font-weight:600;color:var(--brand-dark);text-decoration:none;border-bottom:2px solid var(--brand);padding-bottom:3px}
+.about-link i{font-style:normal;display:inline-block;transition:transform .3s var(--ease)}
+.about-link:hover i{transform:translateX(5px)}
+.wines{background:var(--paper)}
+.wines .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+@media (max-width:900px){.wines .wrap{grid-template-columns:1fr;gap:36px}}
+.wines figure{margin:0;position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/5;max-width:100%}
+.wines figure img{width:100%;height:100%;object-fit:cover;display:block}
+.wines h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;margin-bottom:18px}
+.wines p{margin:0 0 26px;max-width:36em}
+.checklist{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+@media (max-width:520px){.checklist{grid-template-columns:1fr}}
+.checklist li{display:flex;gap:10px;align-items:baseline;font-size:.95rem;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.checklist li::before{content:"";flex:none;width:8px;height:8px;border-radius:2px;background:var(--wine);transform:translateY(-1px)}
+.more-list{margin-bottom:30px}
+.more-list dt a{text-decoration:none;color:var(--ink);border-bottom:1px solid var(--brand)}
+.more-list dt a:hover{color:var(--brand-dark)}
+.btn-wine{background:var(--wine);color:var(--white)}
+.btn-wine:hover{box-shadow:0 8px 22px rgba(107,29,51,.3)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;position:relative}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr;gap:28px 0}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding:0 24px 0 0}
+.step .num{font-family:var(--f-mono);font-size:.8rem;color:var(--brand-dark);letter-spacing:.1em}
+.step .bar{height:2px;background:var(--line);margin:12px 0 20px;position:relative;overflow:hidden}
+.step .bar::after{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(1);transform-origin:left;transition:transform 1s var(--ease)}
+.steps.armed .step .bar::after{transform:scaleX(0)}
+.steps.armed.in .step .bar::after{transform:scaleX(1)}
+.steps.in .step:nth-child(2) .bar::after{transition-delay:.25s}
+.steps.in .step:nth-child(3) .bar::after{transition-delay:.5s}
+.steps.in .step:nth-child(4) .bar::after{transition-delay:.75s}
+.step h3{font-size:1.2rem;font-weight:800;margin-bottom:8px}
+.step p{margin:0;color:var(--muted);font-size:.95rem}
+.cta{color:var(--white);padding-block:0;background:var(--ink);overflow:hidden}
+.cta .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:stretch}
+.cta-text{padding-block:96px;min-width:0}
+.cta-photo{margin:0;position:relative;overflow:hidden;min-height:420px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.cta-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}
+@media (max-width:900px){.cta .wrap{grid-template-columns:1fr;gap:0}.cta-text{padding-block:64px 40px}.cta-photo{min-height:300px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}.cta-photo::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}}
+.cta h2{color:var(--white);font-size:clamp(2rem,4.2vw,3.2rem);font-weight:800;max-width:15em}
+.cta p{color:#d4cdc8;max-width:32em;margin:18px 0 30px}
+.contact-row{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:34px;font-size:.95rem;color:#d4cdc8}
+.contact-row span{user-select:all}
+.contact-row b{display:block;font-family:var(--f-mono);font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#8d8f8e;user-select:none}
+footer{background:#08182a;color:#8ea4b9;font-size:.9rem;padding-block:40px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+footer .logo{margin-bottom:6px}
+.feature-rev .wrap{grid-template-columns:1.1fr .9fr}
+.feature-rev figure{order:2}
+@media (max-width:900px){.feature-rev .wrap{grid-template-columns:1fr}.feature-rev figure{order:0}}
+.wines .prose-sm p{margin:0 0 16px}
+[id]{scroll-margin-top:96px}
+.tiles .tile{display:flex;flex-direction:column}
+.tile-link{display:inline-flex;align-self:flex-start;gap:6px;margin-top:auto;padding-top:18px;font-weight:600;font-size:.95rem;color:var(--brand-dark);text-decoration:none}
+.tile-link i{font-style:normal;transition:transform .3s var(--ease)}
+.tile-link:hover i{transform:translateX(4px)}
+.flash{animation:flash 2.2s ease-out}
+@keyframes flash{0%,40%{box-shadow:0 0 0 3px var(--brand),0 12px 28px rgba(22,27,47,.12)}100%{box-shadow:0 0 0 0 rgba(61,143,209,0)}}
+.tile-img{margin:-28px -28px 22px;height:190px;overflow:hidden;border-radius:10px 10px 0 0}
+.tile-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease)}
+.tile:hover .tile-img img{transform:scale(1.05)}
+.card.wine::before{background:linear-gradient(180deg,rgba(74,18,34,0) 20%,rgba(74,18,34,.6) 45%,rgba(60,14,28,.96) 75%)}
+.faq{display:grid;border-top:1px solid var(--line);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-weight:600;color:var(--ink);font-size:1.05rem;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--brand-dark);font-weight:500;font-size:1.2rem;transition:transform .3s var(--ease),background .3s}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--paper)}
+.faq details p{margin:0 0 20px;color:var(--muted);max-width:68ch}
+.faq details[open] p{animation:rise .35s var(--ease) both}
+.edge{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:22px;border:1px solid var(--line);border-radius:10px;background:var(--card,#e6e1dd);overflow:hidden}
+.edge div{padding:18px 22px;border-left:1px solid var(--line)}
+.edge div:first-child{border-left:0}
+.edge b{display:block;font-family:var(--f-display);font-stretch:112%;font-weight:800;color:var(--ink);font-size:1.15rem}
+.edge span{font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){.edge{grid-template-columns:1fr}.edge div{border-left:0;border-top:1px solid var(--line)}.edge div:first-child{border-top:0}}
+.legal{max-width:760px}
+.legal h2{font-size:1.35rem;font-weight:800;margin:36px 0 10px}
+.legal p,.legal li{color:var(--text)}
+.legal ul{padding-left:20px;display:grid;gap:8px}
+.legal-date{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.link-btn{font:inherit;color:var(--brand-dark);font-weight:600;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.cookie{position:fixed;z-index:58;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:var(--card,#e6e1dd);color:var(--text);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 40px rgba(22,27,47,.18);padding:20px;display:grid;gap:14px;font-size:.92rem;animation:rise .5s var(--ease) both}
+.cookie p{margin:0}
+.cookie a{color:var(--brand-dark);font-weight:600}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:10px}
+.cookie-actions .btn{padding:11px 18px;font-size:.9rem}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:var(--card,#e6e1dd)}
+@media (max-width:640px){.cookie{left:12px;right:12px;max-width:none;bottom:calc(84px + env(safe-area-inset-bottom,0px))}.cookie-actions .btn{flex:1;justify-content:center}}
+.f-consent{margin:0;font-size:.85rem;color:var(--muted)}
+.f-consent a{color:var(--brand-dark);font-weight:600}
+.lang-pill{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;color:#d4cdc8;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 10px;white-space:nowrap}
+.lang-pill:hover{color:var(--white);border-color:var(--white)}
+footer .f-links{display:grid;gap:6px}
+footer .f-links a{color:#d4cdc8;text-decoration:none}
+footer .f-links a:hover{color:var(--white);text-decoration:underline}
+.view[hidden]{display:none!important}
+.page-head{background:var(--ink);color:#d4cdc8;padding-block:0;overflow:hidden}
+.page-head .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:stretch}
+.ph-text{padding-block:72px 64px;min-width:0;animation:rise .8s var(--ease) both}
+.page-head .eyebrow{color:#d4cdc8}
+.page-head h1{color:var(--white);font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800}
+.page-head .lead{font-size:1.1rem;max-width:36em;margin:20px 0 0;color:#d4cdc8}
+.ph-photo{margin:0;position:relative;overflow:hidden;min-height:340px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.ph-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:drift 12s ease-out both}
+.ph-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}
+.page-head-wine{background:var(--wine)}
+.page-head-wine .eyebrow{color:#f0c2cd}
+.page-head-wine .ph-photo::after{background:linear-gradient(90deg,var(--wine) 0%,rgba(107,29,51,0) 30%)}
+@media (max-width:900px){
+.page-head .wrap{grid-template-columns:1fr;gap:0}
+.ph-text{padding-block:48px 36px}
+.ph-photo{min-height:240px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+.ph-photo::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 35%)}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,var(--wine) 0%,rgba(107,29,51,0) 35%)}
+}
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+@media (max-width:900px){.two-col{grid-template-columns:1fr;gap:36px}}
+.prose{max-width:62ch;min-width:0}
+.prose h2{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;margin-bottom:18px}
+.prose p{margin:0 0 16px}
+.h2-sm{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;margin-bottom:22px}
+.pillars{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.pillars li{display:grid;gap:4px;padding:18px 0;border-bottom:1px solid var(--line)}
+.pillars b{font-family:var(--f-display);font-stretch:112%;font-weight:800;color:var(--ink);font-size:1.1rem}
+.pillars span{color:var(--muted);font-size:.95rem}
+.svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media (max-width:860px){.svc-cols{grid-template-columns:1fr;gap:48px}}
+.rows{margin:0;display:grid;border-top:1px solid var(--line)}
+.rows>div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rows dt{font-weight:600;color:var(--ink)}
+.rows dd{margin:0;color:var(--muted);font-size:.95rem}
+@media (max-width:520px){.rows>div{grid-template-columns:1fr;gap:2px}}
+.rows-2{grid-template-columns:1fr 1fr;column-gap:48px;border-top:0}
+.rows-2>div{grid-template-columns:1fr;gap:4px;border-top:1px solid var(--line);border-bottom:0}
+@media (max-width:760px){.rows-2{grid-template-columns:1fr}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.tiles{grid-template-columns:1fr}}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:28px;transition:transform .3s var(--ease),box-shadow .3s}
+section:not([style]) .tile{background:var(--card,#e6e1dd)}
+.tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(22,27,47,.08)}
+.tile h3{font-size:1.25rem;font-weight:800;margin-bottom:10px}
+.tile p{margin:0;color:var(--muted);font-size:.95rem}
+.tile-hl{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+.dots-list{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem;display:grid;gap:6px}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.rules{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--card,#e6e1dd);border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:8px;padding:24px}
+.rule-k{display:block;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;color:var(--brand-dark);margin-bottom:12px}
+.rule h3{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.rule p{margin:0;color:var(--muted);font-size:.93rem}
+@media (min-width:1001px){.rules-3{grid-template-columns:repeat(3,1fr)}}
+.rule p a{color:var(--brand-dark);font-weight:600}
+.compare{background:var(--card,#e6e1dd);border:1px solid var(--line);border-radius:10px;padding:28px;display:grid;gap:26px}
+.cmp-row{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center}
+@media (max-width:640px){.cmp-row{grid-template-columns:1fr;gap:12px}}
+.cmp-label{font-weight:600;color:var(--ink)}
+.cmp-label small{display:block;font-family:var(--f-mono);font-size:.74rem;color:var(--muted);font-weight:500}
+.cmp-bars{display:grid;gap:10px;min-width:0}
+.cmp-bar{position:relative;display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:6px;background:var(--paper);overflow:hidden;font-size:.9rem;isolation:isolate}
+.cmp-bar i{position:absolute;inset:0 auto 0 0;width:var(--w);background:#c7d6e4;z-index:-1;transform-origin:left}
+.compare.armed .cmp-bar i{transform:scaleX(0)}
+.compare.armed.in .cmp-bar i{transform:scaleX(1);transition:transform 1.2s var(--ease) .3s}
+.compare.armed.in .cmp-row.good .cmp-bar i{transition-delay:.7s}
+.cmp-bar.icms i{background:#e4b9a8}
+.good .cmp-bar i{background:#b9dcc6}
+.good .cmp-bar.icms i{background:#8fcaa5}
+.cmp-bar b{font-weight:500;color:var(--ink)}
+.cmp-bar em{font-style:normal;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.cmp-note{margin:0;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line);padding-top:18px}
+.cmp-note strong{color:#17733f}
+.inline-cta{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;background:var(--ink);color:#d4cdc8;border-radius:10px;padding:28px 32px}
+.inline-cta p{margin:0;max-width:40em}
+.btn-primary{background:var(--brand-dark);color:var(--white)}
+.btn-primary:hover{background:#1f5f95;box-shadow:0 8px 22px rgba(61,143,209,.3)}
+.contact-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:start}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.form{background:var(--card,#e6e1dd);border:1px solid var(--line);border-radius:10px;padding:32px;display:grid;gap:18px;min-width:0}
+.f-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:600px){.f-2{grid-template-columns:1fr}.form{padding:22px}}
+.f-row{display:grid;gap:6px;min-width:0}
+.f-row label{font-size:.85rem;font-weight:600;color:var(--ink)}
+.f-row input,.f-row select,.f-row textarea{font:inherit;font-size:1rem;color:var(--text);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s}
+.f-row input:focus,.f-row select:focus,.f-row textarea:focus{outline:none;border-color:var(--brand);background:var(--card,#e6e1dd)}
+.form .btn{justify-self:start}
+.f-note{margin:0;font-size:.9rem;color:#5a4a00;background:#fff7d6;border-radius:6px;padding:10px 14px}
+.contact-side{display:grid;gap:22px;align-content:start}
+.contact-side .btn{justify-self:start}
+.contact-side dl{margin:0;display:grid;gap:16px}
+.contact-side dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.contact-side dd{margin:2px 0 0;color:var(--ink);font-weight:500;user-select:all}
+.map-link{font-weight:600;color:var(--brand-dark);text-decoration:none;border-bottom:2px solid var(--brand);justify-self:start;padding-bottom:3px}
+.map-link i{font-style:normal}
+.nav a.active{color:var(--white);border-color:var(--brand)}
+.float-whats{display:none!important;position:fixed;z-index:55;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--whats);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s var(--ease)}
+.float-whats:hover{transform:scale(1.08)}
+.float-whats::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--whats);animation:pulse 2.8s ease-out infinite;z-index:-1}
+@keyframes pulse{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.55);opacity:0}}
+.reveal.armed{opacity:0;transform:translateY(26px)}
+.reveal.armed.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.cards .reveal.armed.in:nth-child(2){transition-delay:.1s}
+.cards .reveal.armed.in:nth-child(3){transition-delay:.2s}
+.cards .reveal.armed.in:nth-child(4){transition-delay:.3s}
+.mbar{display:none}
+@media (max-width:1140px){
+.top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--ink)}
+.nav{position:fixed;left:0;right:0;top:calc(68px + env(safe-area-inset-top,0px));bottom:0;z-index:49;background:var(--ink);padding:8px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));overflow-y:auto;width:auto;order:0}
+.nav a{display:flex;justify-content:space-between;align-items:center;min-height:56px;font-size:1.15rem;font-weight:500;color:var(--white);border-bottom:1px solid rgba(255,255,255,.1)}
+.nav a::after{content:"›";font-size:1.5rem;color:#8d8f8e;line-height:1}
+.nav a.active{color:#d4cdc8;border-bottom-color:rgba(255,255,255,.1)}
+.nav a.active::after{color:#d4cdc8}
+.nav-extra{display:grid;gap:12px;margin-top:24px}
+.nav-extra .btn{justify-content:center}
+.nav-extra p{margin:8px 0 0;color:#8d8f8e;font-size:.9rem;line-height:1.5}
+.nav-extra p span{user-select:all;color:#d4cdc8}
+body.menu-open{overflow:hidden}
+.menu-btn[aria-expanded="true"] span{background:transparent;box-shadow:none;position:relative}
+.menu-btn[aria-expanded="true"] span::before,.menu-btn[aria-expanded="true"] span::after{content:"";position:absolute;left:0;top:0;width:16px;height:2px;background:currentColor;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:rotate(-45deg)}
+}
+@media (min-width:1141px){.nav-extra,.nav .m-only{display:none}}
+@media (max-width:640px){
+body{font-size:16px}
+.preview-note{font-size:.75rem;padding-block:5px}
+.top .wrap{min-height:60px;gap:12px}
+.nav{top:calc(60px + env(safe-area-inset-top,0px))}
+.top .wrap > .btn-whats,.top .lang-pill{display:none}
+.menu-btn{padding:10px 14px;min-height:44px}
+.logo b{font-size:.95rem}
+.logo small{font-size:.55rem}
+section{padding-block:56px}
+.sec-head{margin-bottom:28px}
+.hero-text{padding-block:36px 28px}
+.hero h1{font-size:2.1rem}
+.hero p.lead{font-size:1.02rem;margin:16px 0 24px}
+.hero-actions{display:grid;grid-template-columns:1fr;gap:10px}
+.hero-actions .btn,.wines .btn,.inline-cta .btn,.cta .btn,.form .btn{width:100%;justify-content:center;min-height:50px}
+.hero-modes{display:none}
+.stage{min-height:250px}
+.dots{left:20px;bottom:16px}
+.slide figcaption{right:16px;bottom:12px;font-size:.66rem}
+.docs .wrap{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;padding-block:14px;gap:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.docs .wrap::-webkit-scrollbar{display:none}
+.docs strong{flex:none;font-size:.82rem;padding-right:4px}
+.docs span{flex:none;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:calc(-1 * max(20px,env(safe-area-inset-left,0px)));padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cards::-webkit-scrollbar{display:none}
+.cards .card{flex:0 0 84%;min-height:340px;scroll-snap-align:center}
+.swipe-hint{display:flex}
+.facts{padding-block:44px}
+.facts .wrap{gap:24px}
+.wines figure{aspect-ratio:16/11}
+.ph-text{padding-block:36px 28px}
+.page-head h1{font-size:1.95rem}
+.page-head .lead{font-size:1rem}
+.ph-photo{min-height:200px}
+.tile{padding:22px}
+.tile-img{margin:-22px -22px 18px;height:160px}
+.rule{padding:20px}
+.compare{padding:20px}
+.inline-cta{padding:22px}
+.cta-text{padding-block:52px 32px}
+.cta-photo{min-height:220px}
+.contact-row{display:grid;gap:14px}
+.step{padding-right:0}
+.float-whats{display:none}
+.mbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(22,27,47,.08);transition:transform .3s var(--ease)}
+.mbar .btn{justify-content:center;min-height:48px;padding:12px}
+.mbar .btn-ghost{border-color:var(--ink);color:var(--ink);background:var(--card,#e6e1dd)}
+body.menu-open .mbar{transform:translateY(110%)}
+footer{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
+.swipe-hint{display:none;align-items:center;gap:8px;margin:14px 0 0;font-size:.85rem;color:var(--muted)}
+.swipe-hint i{font-style:normal;display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important}
+.reveal.armed{opacity:1;transform:none}
+.steps.armed .step .bar::after{transform:scaleX(1)}
+.compare.armed .cmp-bar i{transform:none}
+.slide img,.slide.zoom img{transform:none}
+}
+:root{--f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-mono:"Archivo",system-ui,sans-serif;--ink:#17181f;--ink-2:#161b2f;--brand:#5b687c;--brand-dark:#3f4a5e;--paper:#d4cdc8}
+html{scroll-behavior:auto}
+body{background:var(--paper)}
+.page-main{background:var(--paper)}
+.eyebrow{font-family:var(--f-display);font-size:1rem;letter-spacing:0;text-transform:none;font-weight:600;color:var(--brand-dark);font-stretch:100%}
+h1,h2,h3{font-stretch:118%;letter-spacing:-.025em}
+.sec-head h2,.prose h2,.wines h2,.cta h2{font-size:clamp(2.2rem,4.6vw,3.9rem);line-height:.98;letter-spacing:-.035em;font-stretch:125%}
+.h2-sm{font-size:clamp(1.8rem,3.2vw,2.6rem);font-stretch:125%;letter-spacing:-.03em}
+section{padding-block:clamp(72px,10vw,140px)}
+.page-head{position:relative;padding-block:130px 72px!important;overflow:hidden}
+.page-head .wrap{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,5vw,72px);align-items:end}
+.ph-photo{position:relative!important;margin:0!important;min-height:0!important;aspect-ratio:4/5;max-height:72svh;width:100%;max-width:560px;justify-self:end;border-radius:28px;overflow:hidden}
+.ph-photo img{animation:none!important;position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover;image-rendering:auto}
+.ph-photo::after{display:none!important}
+.ph-text{position:relative;z-index:1;padding:0 0 8px!important;animation:none!important}
+.page-head h1{font-size:clamp(2.6rem,6.2vw,5.8rem)!important;line-height:.93;letter-spacing:-.045em;font-stretch:125%;max-width:14ch}
+.page-head .lead{font-size:clamp(1.05rem,1.4vw,1.22rem);color:#dbe5ee;max-width:40em}
+.page-head .eyebrow{color:var(--brand)}
+.page-head-wine .eyebrow{color:#f0c2cd}
+@media (max-width:900px){.page-head{padding-block:110px 48px!important}.page-head .wrap{grid-template-columns:1fr}.ph-photo{justify-self:stretch;max-width:none;aspect-ratio:4/3;max-height:none;order:2}}
+.f-go{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-weight:600;color:var(--ink)}
+.btn{border-radius:999px;padding:15px 24px}
+.btn:hover{transform:none}
+.btn-primary{background:var(--ink);color:#fff}
+.tile-link,.about-link,.map-link{color:var(--brand-dark)}
+.rule{border-top-color:var(--brand)}
+.fact{border-left-color:var(--brand)}
+.cards .card,.tile,.rule,.compare,.form,.inline-cta,.edge,.wines figure{border-radius:22px}
+.tile-img{border-radius:22px 22px 0 0}
+.card .tag,.rule-k,.cmp-label small,.contact-side dt,.legal-date,.step .num,.contact-row b{letter-spacing:0;text-transform:none;font-size:.9rem;font-weight:600}
+.step .bar::after{transform:scaleX(var(--p,1))!important;transition:none!important;background:var(--brand)!important}
+.reveal.armed{opacity:1;transform:none}
+.f-row input,.f-row select,.f-row textarea{border-radius:12px}
+.inline-cta{background:var(--ink)}
+.fill{background:#fff2b8}
+@media (max-width:900px){.page-head{min-height:72svh;padding-block:120px 40px!important}}
+html,body{margin:0}
+:root{
+--c-navy:#17181f;--c-navy-2:#161b2f;--c-steel:#8d8f8e;--c-signal:#d4cdc8;--c-go:#1f9d5c;
+--c-f:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+.loader{position:fixed;inset:0;z-index:100;background:var(--c-navy);color:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:24px max(24px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));font-family:var(--c-f)}
+.loader .count{font-weight:800;font-stretch:125%;font-size:clamp(72px,16vw,220px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.loader .who{color:var(--c-steel);font-size:15px;max-width:22ch;text-align:right}
+.loader.done{display:none}
+.pnav{position:fixed;z-index:50;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:7px 7px 7px 14px;border-radius:999px;background:rgba(23,24,31,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);width:min(1080px,calc(100% - 32px));justify-content:space-between;transition:width .5s cubic-bezier(.2,.8,.2,1);font-family:var(--c-f);color:#fff}
+.pnav.small{width:min(460px,calc(100% - 32px))}
+.pnav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-stretch:112%;white-space:nowrap;font-size:16px}
+.pnav .brand img{width:22px;height:34px;object-fit:contain}
+.pnav .links{display:flex;gap:16px;font-size:15px}
+.pnav .links a{text-decoration:none;color:#e2deda;padding:6px 2px;border-bottom:2px solid transparent}
+.pnav .links a:hover{color:#fff}
+.pnav .links a[aria-current="page"]{color:#fff;border-color:var(--c-signal)}
+.pnav.small .links{display:none}
+.pnav .r{display:flex;align-items:center;gap:8px}
+.pnav .wa{background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;white-space:nowrap}
+.pnav .menu-b{border:0;background:#fff;color:var(--c-navy);font:600 15px var(--c-f);padding:10px 16px;border-radius:999px;cursor:pointer}
+@media (max-width:1100px){.pnav .links{display:none}.pnav{width:min(560px,calc(100% - 32px))}}
+@media (max-width:520px){.pnav .wa,.pnav .lang{display:none}}
+.povl{position:fixed;inset:0;z-index:45;background:var(--c-navy);color:#fff;font-family:var(--c-f);overflow-y:auto;padding:100px max(20px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));clip-path:inset(0 0 100% 0)}
+.povl .in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+@media (max-width:820px){.povl .in{grid-template-columns:1fr}}
+.povl .big a{display:block;overflow:hidden;text-decoration:none;color:#fff;font-weight:800;font-stretch:125%;font-size:clamp(34px,6vw,80px);line-height:1.04;letter-spacing:-.03em}
+.povl .big a span{display:inline-block}
+.povl .big a:hover,.povl .big a[aria-current="page"]{color:var(--c-signal)}
+.povl .extra{display:grid;gap:18px;color:var(--c-steel);font-size:16px}
+.povl .extra a{color:#fff}
+.povl .extra p{margin:0}
+.povl .extra .wa{justify-self:start;background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;padding:16px 24px;border-radius:999px}
+.page-main{position:relative;z-index:2}
+.foot-spacer{height:var(--fh,560px)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:1;background:#161b2f;color:#fff;font-family:var(--c-f);padding:56px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.foot .in{max-width:1280px;margin:0 auto}
+.foot .big{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(36px,6.6vw,104px);line-height:.92;letter-spacing:-.045em;max-width:18ch}
+.foot .sub{margin:16px 0 0;font-size:19px;max-width:46ch}
+.foot .grid{display:flex;flex-wrap:wrap;gap:24px 56px;justify-content:space-between;align-items:flex-end;margin-top:32px}
+.foot dl{margin:0;display:grid;grid-template-columns:auto auto;gap:6px 20px;font-size:16px}
+.foot dt{font-weight:700}.foot dd{margin:0}
+.foot .cta{display:inline-flex;background:var(--c-signal);color:var(--c-navy);text-decoration:none;font-weight:600;font-size:18px;padding:20px 30px;border-radius:999px;will-change:transform}
+.foot .legal{display:flex;flex-wrap:wrap;gap:16px 48px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(212,205,200,.25);font-size:14px;line-height:1.5}
+.foot .legal a{color:#d4cdc8;text-underline-offset:3px}
+.foot small{display:block;margin-top:20px;font-size:13px;opacity:.75}
+@media (max-height:700px),(max-width:600px){.foot{position:relative}.foot-spacer{display:none}}
+@media (prefers-reduced-motion:reduce){.loader{display:none}}
+.langw{position:relative}
+.pnav .lang{font:700 13px var(--c-f);color:#fff;background:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 12px;line-height:1;cursor:pointer}
+.pnav .lang:hover{border-color:#fff}
+.langm{position:absolute;right:0;top:calc(100% + 10px);list-style:none;margin:0;padding:6px;min-width:190px;background:#fff;border-radius:16px;box-shadow:0 18px 40px rgba(23,24,31,.25);z-index:5}
+.langm button{display:block;width:100%;text-align:left;font:500 15px var(--c-f);color:var(--c-navy);background:none;border:0;border-radius:10px;padding:10px 12px;cursor:pointer}
+.langm button:hover,.langm button[aria-current="true"]{background:#d4cdc8}
+@media (max-width:520px){.pnav .langw{display:none}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;max-width:min(560px,calc(100% - 32px));background:var(--c-navy);color:#fff;font:15px/1.45 var(--c-f);padding:14px 18px;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.toast a{color:var(--c-signal)}
+.cookie-b{position:fixed;z-index:65;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:#fff;color:#2b3142;border-radius:20px;box-shadow:0 18px 44px rgba(23,24,31,.25);padding:20px;font:15px/1.5 var(--c-f);display:grid;gap:14px}
+.cookie-b[hidden]{display:none}
+.cookie-b p{margin:0}.cookie-b a{color:#3f4a5e;font-weight:600}
+.ck-a{display:flex;flex-wrap:wrap;gap:10px}
+.ck-a button{font:600 15px var(--c-f);border-radius:999px;padding:11px 18px;cursor:pointer;border:2px solid var(--c-navy);background:#fff;color:var(--c-navy)}
+.ck-a button:first-child{background:var(--c-navy);color:#fff}
+@media (max-width:640px){.cookie-b{left:12px;right:12px;max-width:none}}
+.btn,.cta,.wa,.menu-b,.lang,.ck-a button,.langm button{transition:scale .18s cubic-bezier(.34,1.56,.64,1)}
+.btn:active,.cta:active,.wa:active,.menu-b:active,.lang:active,.ck-a button:active{scale:.94 1.04;transition-duration:.08s}
+@media (hover:hover){.btn:hover,.cta:hover,.wa:hover,.menu-b:hover{scale:1.04}}
+.page-head .btn-primary,.inline-cta .btn-primary,section.cta .btn-primary{background:var(--c-signal);color:var(--c-navy)}
+.page-head .btn-primary:hover,.inline-cta .btn-primary:hover,section.cta .btn-primary:hover{background:#e8e3df;box-shadow:none}
+.wa-float{display:none}
+@media (max-width:820px){
+.wa-float{display:flex;position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--c-go);color:#fff;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(23,24,31,.35);text-decoration:none}
+.wa-float svg{width:30px;height:30px}
+.pnav{padding:6px 6px 6px 12px}
+.pnav .brand{font-size:15px}
+}
+@media (max-width:820px){
+.page-head{min-height:min(100svh,860px)!important;display:flex!important;align-items:flex-end;padding-block:120px 40px!important}
+.page-head .wrap{display:block!important;position:static!important;width:100%}
+.page-head .ph-photo{position:absolute!important;inset:0!important;aspect-ratio:auto!important;max-height:none!important;max-width:none!important;width:auto!important;border-radius:0!important;margin:0!important;z-index:0}
+.page-head .ph-photo img{height:115%!important}
+.page-head .ph-photo::after{display:block!important;content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,31,.55) 0%,rgba(23,24,31,.25) 30%,rgba(23,24,31,.75) 62%,rgba(23,24,31,.96) 100%)!important}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,rgba(80,18,36,.5) 0%,rgba(80,18,36,.25) 30%,rgba(80,18,36,.8) 62%,rgba(80,18,36,.97) 100%)!important}
+.page-head .ph-text{position:relative;z-index:1}
+.page-head .lead{color:#e6edf3}
+}
+@media (max-width:820px){
+.pnav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(23,24,31,.9)}
+.fact{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(255,255,255,.9)!important}
+.page-head h1{font-size:clamp(2rem,9.2vw,3.2rem)!important;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+h1,h2{overflow-wrap:break-word}
+.eyebrow{transform:none}
+}
+.povl{display:flex;align-items:center;padding-top:calc(96px + env(safe-area-inset-top,0px))}
+.povl[hidden]{display:none}
+.povl .in{width:100%;max-width:1080px;align-items:center}
+.povl .big a{font-size:clamp(28px,min(5.6vw,6.4vh),72px);line-height:1.06;padding-block:.04em}
+@media (max-width:820px){.povl{align-items:flex-start}.povl .big a{font-size:clamp(28px,min(9vw,5.6vh),56px)}}
+html:not([lang="pt-BR"]) .page-head h1,html:not([lang="pt-BR"]) h2{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+html:not([lang="pt-BR"]) .page-head h1{max-width:16ch}
+.page-head .eyebrow{font-size:clamp(18px,1.9vw,26px);font-weight:700;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:14px;margin-bottom:18px;transform-origin:0 100%}
+.page-head .eyebrow::before{content:"";display:inline-block;width:44px;height:4px;border-radius:2px;background:currentColor;transform-origin:0 50%;transform:scaleX(var(--b,1));flex:none}
+.page-head h1{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.foot .fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.page-head .eyebrow{color:var(--c-signal)}
+.foot .sub,.foot dd,.foot .legal,.foot small{color:#d4cdc8}.foot dt{color:#8d8f8e}
+.foot{border-top:1px solid rgba(212,205,200,.18)}
+@media (min-width:901px){
+.page-head{min-height:min(88svh,820px);display:flex!important;align-items:flex-end}
+.page-head .wrap{display:block!important;width:100%}
+.page-head .ph-text{max-width:min(58%,760px)}
+.page-head .ph-photo{position:absolute!important;top:0;right:0;bottom:0;width:min(46vw,760px);max-width:none!important;max-height:none!important;aspect-ratio:auto!important;border-radius:0;z-index:0}
+.page-head .ph-photo img{height:110%!important}
+.page-head::after{content:"";position:absolute;z-index:2;width:128px;height:128px;border-radius:50%;background:#161b2f url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/logo.png) center/58% no-repeat;box-shadow:0 0 0 8px rgba(212,205,200,.9);right:calc(min(46vw,760px) - 64px);bottom:72px;animation:seloIn 1.2s cubic-bezier(.34,1.56,.64,1) .9s both}
+@keyframes seloIn{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1) rotate(0)}}
+.pg-sobre .page-head .ph-photo{border-radius:50vh 0 0 50vh}
+.pg-servicos .page-head .ph-photo{border-radius:0 0 0 260px}
+.pg-servicos .page-head::after{bottom:auto;top:140px}
+.pg-pf .page-head .ph-photo{top:110px;bottom:-140px;right:-6vw;width:min(52vw,820px);border-radius:50%}
+.pg-bagagem .page-head .ph-photo{top:110px;border-radius:999px 999px 0 0;right:4vw;width:min(40vw,640px)}
+.pg-bagagem .page-head::after{right:calc(4vw + min(40vw,640px) - 64px)}
+.pg-trading .page-head .ph-photo{border-radius:260px 0 0 0}
+.pg-trading .page-head::after{bottom:auto;top:120px}
+.pg-vinhos .page-head .ph-photo{top:110px;right:6vw;width:min(34vw,520px);border-radius:999px 999px 0 0}
+.pg-vinhos .page-head::after{right:calc(6vw + min(34vw,520px) - 64px);background-color:#4a1323}
+.pg-contato .page-head .ph-photo{border-radius:0 0 0 50%}
+.pg-pf .page-head::after{right:calc(min(46vw,760px) - 20px);bottom:90px}
+}
+.wines .wrap{align-items:center}
+.wines .wrap>.prose-sm{position:relative;z-index:2;background:#161b2f;color:#d4cdc8;padding:clamp(28px,4vw,56px);border-radius:28px;box-shadow:0 30px 60px -30px rgba(22,27,47,.6)}
+.wines .wrap>.prose-sm h2{color:#fff}
+.wines .wrap>.prose-sm p,.wines .wrap>.prose-sm li{color:#d4cdc8}
+.wines .wrap>.prose-sm .eyebrow{color:#d4cdc8!important}
+.wines .wrap>.prose-sm .checklist li{border-color:rgba(212,205,200,.2)}
+.pg-vinhos .wines .wrap>.prose-sm{background:#4a1323}
+@media (min-width:901px){
+.wines .wrap{gap:0!important;grid-template-columns:1.05fr .95fr}
+.wines .wrap>.prose-sm{margin-left:-140px}
+.feature-rev .wrap{grid-template-columns:.95fr 1.05fr}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-140px}
+.wines figure{aspect-ratio:auto;min-height:620px}
+.pg-sobre .wines figure{border-radius:28px 28px 28px 220px}
+.pg-trading .wines figure{border-radius:50vh 28px 28px 50vh}
+.pg-pf .wines figure{border-radius:220px 28px 220px 28px}
+.pg-vinhos .wines figure{border-radius:999px 999px 28px 28px}
+}
+@media (max-width:900px){
+.wines .wrap{gap:0!important}
+.wines .wrap>.prose-sm{margin:-56px 12px 0}
+}
+.photo-band{position:relative;isolation:isolate;background:#161b2f;color:#d4cdc8;overflow:hidden}
+.photo-band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,.92) 0%,rgba(22,27,47,.7) 45%,rgba(22,27,47,.9) 100%),var(--bg) center/cover no-repeat}
+.photo-band .sec-head h2{color:#fff}
+.photo-band .sec-head p,.photo-band .sec-head .eyebrow{color:#d4cdc8}
+.photo-band .tile{background:#e6e1dd!important;border-color:transparent}
+.wines .wrap>.prose-sm .checklist li::before{background:#d4cdc8}
+@media (min-width:901px){
+.page-head{--pw:min(46vw,760px);--pr:0px}
+.pg-pf .page-head{--pw:min(52vw,820px);--pr:-6vw}
+.pg-bagagem .page-head{--pw:min(40vw,640px);--pr:4vw}
+.pg-vinhos .page-head{--pw:min(34vw,520px);--pr:6vw}
+.page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+.pg-pf .page-head .ph-text{max-width:calc(100vw + 6vw - var(--pw) - 40px - max(20px,(100vw - 1280px) / 2))!important}
+.page-head .ph-text .lead{max-width:none}
+.wines .wrap>.prose-sm{margin-left:-100px}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-100px}
+}
+@media (min-width:901px){
+.page-head::after,.pg-servicos .page-head::after,.pg-trading .page-head::after,.pg-bagagem .page-head::after,.pg-vinhos .page-head::after,.pg-pf .page-head::after{top:auto;bottom:48px;right:calc(var(--pr) + 48px)}
+.pg-pf .page-head::after{right:48px}
+.page-head .ph-text,.pg-pf .page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+}
+.pnav .brand img{border-radius:5px;box-shadow:0 0 0 1px rgba(212,205,200,.45)}
+@media (min-width:901px){
+.page-head::after{width:132px;height:132px;border-radius:16px;background:url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png) center/cover no-repeat!important;box-shadow:0 0 0 6px rgba(212,205,200,.9),0 24px 40px -16px rgba(0,0,0,.6)}
+@keyframes seloIn{from{transform:translateY(-40px) rotate(-12deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+}
+.pnav .brand img,.brand img{width:30px;height:30px;object-fit:cover}
+.pg-vinhos .photo-band .rule{border-top-color:#8a2a44}
+.chat-btn{position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:52px;padding:0 20px;border:0;border-radius:999px;background:#161b2f;color:#d4cdc8;font:600 15px/1 var(--c-f);box-shadow:0 0 0 1px rgba(212,205,200,.35),0 14px 30px -12px rgba(0,0,0,.5);cursor:pointer}
+.chat-btn svg{width:20px;height:20px}
+.chat-btn.is-loading{opacity:.7;cursor:progress}
+@media (max-width:820px) and (pointer:coarse){.chat-btn{bottom:calc(86px + env(safe-area-inset-bottom,0px));height:48px;padding:0 16px}}
+.pf-panels{display:flex;gap:14px;height:min(560px,70vh);margin-top:8px}
+.pfp{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border-radius:26px;background:#161b2f;color:#fff;cursor:pointer;outline:none;transition:flex-grow .9s cubic-bezier(.34,1.35,.5,1)}
+.pfp.is-open{flex-grow:3.2;cursor:default}
+.pfp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.2s cubic-bezier(.2,.8,.2,1),filter .6s}
+.pfp:not(.is-open) img{filter:saturate(.6) brightness(.75)}
+.pfp.is-open img{transform:scale(1)}
+.pfp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,27,47,0) 30%,rgba(22,27,47,.55) 60%,rgba(22,27,47,.94) 100%)}
+.pfp-txt{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(18px,2.4vw,32px)}
+.pfp-k{display:inline-block;font:600 13px/1 var(--c-f);color:#161b2f;background:#d4cdc8;border-radius:999px;padding:7px 12px;margin-bottom:12px}
+.pfp h3{color:#fff;font-size:clamp(19px,1.7vw,26px);line-height:1.15;margin:0}
+.pfp p{color:#e6e1dd;margin:10px 0 0;max-width:44ch;max-height:0;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .6s cubic-bezier(.34,1.5,.5,1),max-height .6s}
+.pfp.is-open p{max-height:12em;opacity:1;transform:none;transition-delay:.25s}
+.pfp p a{color:#fff}
+.pfp:focus-visible{box-shadow:0 0 0 3px #d4cdc8}
+@media (max-width:900px){
+.pf-panels{flex-direction:column;height:auto}
+.pfp{flex:none;height:340px;cursor:default}
+.pfp img{transform:none;filter:none!important}
+.pfp p{max-height:none;opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.pfp,.pfp img,.pfp p{transition:none}}
+@media (min-width:901px){
+.pfp:not(.is-open) h3{font-size:16px;hyphens:auto;overflow-wrap:anywhere}
+.pfp:not(.is-open) .pfp-k{font-size:11px;padding:6px 10px}
+}
+.pnav .brand img,.brand img{width:44px!important;height:44px!important;border-radius:6px}
+.pnav .brand{gap:12px;font-size:18px}
+@media (max-width:820px){.pnav .brand img,.brand img{width:38px!important;height:38px!important}.pnav .brand{font-size:15px}}
+.pnav .brand img,.brand img{background:#d4cdc8;padding:4px;box-shadow:none;object-fit:contain}
+.pnav .brand img,.brand img{width:84px!important;height:84px!important;padding:6px;border-radius:10px;margin:-22px 0 -40px;position:relative;z-index:2;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+@media (max-width:820px){.pnav .brand img,.brand img{width:64px!important;height:64px!important;padding:5px;margin:-14px 0 -30px}}
+@media (min-width:821px){.pnav .brand img,.brand img{width:100px!important;height:100px!important;margin:-26px 0 -52px}}
+.pnav .brand img,.brand img{padding:0!important;background:#161b2f!important;border:1px solid rgba(212,205,200,.75);border-radius:8px!important;box-shadow:0 12px 28px -12px rgba(0,0,0,.7)}
+.pnav .brand img,.brand img{width:56px!important;height:56px!important;margin:0!important;box-shadow:none!important}
+@media (max-width:820px){.pnav .brand img,.brand img{width:46px!important;height:46px!important}}
+.pnav .brand{margin-right:18px;font-size:17px}
+.pnav .brand{flex-shrink:0}
+.pnav .wa{font-size:13px;padding:7px 12px}
+.pnav.small{width:min(580px,calc(100% - 32px))}
+@media (max-width:1100px){.pnav{width:min(580px,calc(100% - 32px))}}
+
+
+header.cs-section-header,footer.cs-section-footer{display:none!important}
+.cs-widget:not(.cs-code-widget){display:none!important}
+.cs-section:not(:has(.cs-code-widget)){display:none!important}
+.cs-box:not(:has(.cs-code-widget)),.cs-line:not(:has(.cs-code-widget)){display:none!important}
+html,body{overflow-x:clip}
+body{margin:0!important}
+.cs-section:has(#cb),.cs-section:has(#cb) .cs-lines,.cs-section:has(#cb) .cs-line,.cs-section:has(#cb) .cs-boxes,.cs-section:has(#cb) .cs-box,.cs-section:has(#cb) .cs-widgets,.cs-code-widget:has(#cb),.cs-code-widget-preview:has(#cb){padding:0!important;margin:0!important;border:0!important;min-height:0!important;overflow:visible!important;transform:none!important;filter:none!important;contain:none!important;background:transparent!important}
+.cs-boxes:has(#cb),.cs-box:has(#cb),.cs-line:has(#cb){display:block!important;width:100%!important;max-width:none!important;flex:none!important;position:static!important}
+#cb{width:100vw;position:relative;left:50%;margin-left:-50vw;text-align:left}
+#cb [hidden]{display:none!important}
+</style><div id="cb" class="pg-bagagem" data-page="bagagem">
+<nav aria-label="Menu principal" class="pnav">
+<a class="brand" data-noi18n="" href="/"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png"/>Custom Broker</a>
+<div class="links"><a data-i="627001be" href="/sobre">Sobre</a><a data-i="07d63ea5" href="/servicos">Serviços</a><a data-i="5d4ce746" href="/pessoa-fisica">Pessoa Física</a><a data-i="e3cd5b2c" href="/tradingcompany">Trading</a><a data-i="4dace3b0" href="/vinhos">Vinhos</a><a data-i="1bd66dd4" href="/contato">Contato</a></div>
+<div class="r"><div class="langw"><button aria-expanded="false" aria-haspopup="true" aria-label="Idioma" class="lang" type="button">PT</button><ul class="langm" data-noi18n="" hidden=""><li><button data-l="pt" type="button">Português</button></li><li><button data-l="en" type="button">English</button></li><li><button data-l="es" type="button">Español</button></li><li><button data-l="fr" type="button">Français</button></li><li><button data-l="it" type="button">Italiano</button></li><li><button data-l="de" type="button">Deutsch</button></li><li><button data-l="zh" type="button">中文（普通话）</button></li></ul></div><a class="wa" href="https://wa.me/5511941012210" rel="noopener" target="_blank">WhatsApp</a><button aria-controls="menu" aria-expanded="false" class="menu-b" data-i="b6154120" type="button">Menu</button></div>
+</nav>
+<div class="povl" hidden="" id="menu"><div class="in">
+<div class="big"><a href="/"><span data-i="94db4e17">Início</span></a><a href="/sobre"><span data-i="627001be">Sobre</span></a><a href="/servicos"><span data-i="07d63ea5">Serviços</span></a><a href="/pessoa-fisica"><span data-i="5d4ce746">Pessoa Física</span></a><a href="/tradingcompany"><span data-i="e3cd5b2c">Trading</span></a><a href="/vinhos"><span data-i="4dace3b0">Vinhos</span></a><a aria-current="page" href="/bagagem-internacional"><span data-i="dcbcc054">Bagagem internacional</span></a><a href="/contato"><span data-i="1bd66dd4">Contato</span></a></div>
+<div class="extra"><a class="wa" data-i="cc068e4d" href="https://wa.me/5511941012210" rel="noopener" target="_blank">Falar no WhatsApp</a><p data-i="9f46f84c">Telefone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br</p><p><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></p></div>
+</div></div>
+<main class="page-main">
+<section class="page-head">
+<div class="wrap">
+<div class="ph-text">
+<p class="eyebrow" data-i="eafbb06c"><a href="/pessoa-fisica" style="color:inherit;text-decoration:none">Pessoa física</a> · Bagagem internacional</p>
+<h1 data-i="b455b957">Bagagem desacompanhada e mudanças internacionais</h1>
+<p class="lead" data-i="b28d4750">Bagagem desacompanhada é toda mercadoria que chega ao país ou sai dele antes ou depois do viajante, ou que o acompanha, mas em condição de carga. Cuidamos da liberação de bagagens, encomendas e mudanças.</p>
+</div>
+<figure class="ph-photo"><img alt="Malas e caixas de mudança conferidas na área de carga do aeroporto" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-bagagem.jpg" style="object-position:50% 60%"/></figure>
+</div>
+</section>
+<section>
+<div class="wrap">
+<div class="sec-head reveal">
+<div><p class="eyebrow" data-i="92bcddd4">O que você precisa saber</p><h2 data-i="5cef3e3c">Regras principais</h2></div>
+<p data-i="f0083b65">Um resumo das regras que mais geram dúvidas. Cada caso é analisado conforme a situação do viajante.</p>
+</div>
+<div class="rules">
+<div class="rule reveal"><span class="rule-k" data-i="1c9faaff">3 meses antes · 6 meses depois</span><h3 data-i="b0918ed5">Prazo da bagagem</h3><p data-i="2301b299">A bagagem deve vir do país onde o viajante estava e chegar entre 3 meses antes e 6 meses depois da chegada dele. Fora desse prazo, segue o regime comum de importação.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="81ec5fa4">Bens de uso pessoal</span><h3 data-i="610d69cb">Isenções para bagagem</h3><p data-i="6a451579">Roupas, objetos de uso pessoal usados, livros e periódicos são isentos. Outras isenções podem valer, conforme o caso e as condições do viajante.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="c2d966c4">Mais de 1 ano no exterior</span><h3 data-i="ad015c1d">Residentes no exterior</h3><p data-i="e404ea30">Pelas regras atuais da Receita Federal, quem morou fora por mais de um ano tem isenção para móveis, bens de uso doméstico e ferramentas de trabalho, novos ou usados, comprovando o tempo de residência no exterior. Bens novos precisam do comprovante de compra.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="e498726d">Atenção ao prazo</span><h3 data-i="c0840b25">Início do despacho</h3><p data-i="8869d7ed">O despacho só começa após a comprovação da chegada do viajante, por passagem ou passaporte. Pelas regras atuais da Receita Federal, se não for iniciado em até 45 dias da chegada da bagagem ao país, os bens podem ser considerados abandonados.</p></div>
+</div>
+</div>
+</section>
+<section style="background:var(--card,#e6e1dd);border-top:1px solid var(--line)">
+<div class="wrap two-col">
+<div class="prose reveal">
+<p class="eyebrow" data-i="ab2d860a">Assessoria completa</p>
+<h2 data-i="5164192e">Sua bagagem acompanhada do embarque à liberação</h2>
+<p data-i="e1cd1f2d">Acompanhamos cada etapa para que bagagens, encomendas e mudanças sejam liberadas dentro do prazo e com menos risco de complicações.</p>
+<p data-i="8576c19a">Na exportação, quando o viajante solicita, também providenciamos embalagens adequadas para transporte aéreo e marítimo.</p>
+</div>
+<ul class="checklist reveal" style="grid-template-columns:1fr">
+<li data-i="92676f87">Itens excluídos do conceito de bagagem (permitidos e proibidos)</li>
+<li data-i="7afa06e7">Lista de bens isentos de tributação</li>
+<li data-i="a5e36acf">Orientação sobre embalagem das mercadorias</li>
+<li data-i="57181dc6">Estimativa de custos para a liberação</li>
+<li data-i="494fed6d">Documentação exigida pela Alfândega no Brasil</li>
+</ul>
+</div>
+</section>
+</main>
+<div aria-hidden="true" class="foot-spacer"></div>
+<footer class="foot" id="rodape">
+<div class="in">
+<p class="big" data-i="c817d547">Vai se mudar? Comece pelo prazo.</p>
+<p class="sub" data-i="f0e7553d">A bagagem pode chegar ao Brasil de 3 meses antes até 6 meses depois da sua chegada. Fale com a gente e planejamos o envio juntos.</p>
+<div class="grid">
+<dl><dt data-i="904ef931">Telefone</dt><dd>+55 11 2577-4757</dd><dt>WhatsApp</dt><dd>+55 11 94101-2210</dd><dt data-i="1e884e30">E-mail</dt><dd>contato@custombroker.com.br</dd></dl>
+<a class="cta" data-i="db8ca96a" href="https://wa.me/5511941012210?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20planejar%20o%20envio%20da%20minha%20bagagem/mudan%C3%A7a." rel="noopener" target="_blank">Planejar minha mudança</a>
+</div>
+<div class="legal">
+<div data-i="54bda3a8"><b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00</div>
+<div data-i="33de9c2a">R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001</div>
+<div><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></div>
+</div>
+<small data-i="0dc62a4a">© 2026 Custom Broker. Todos os direitos reservados.</small>
+</div>
+</footer>
+<div aria-label="Aviso de cookies" class="cookie-b" hidden="" id="cookie" role="dialog">
+<p data-i="92daad1c">Usamos só cookies necessários para o site funcionar e para lembrar o seu idioma. O chat só grava cookies se você abri-lo. Não usamos cookies de publicidade nem de medição. Saiba mais na <a href="/privacidade">Política de Privacidade</a>.</p>
+<div class="ck-a"><button data-i="7d23bcfe" id="cookie-ok" type="button">Entendi</button></div>
+</div>
+<div aria-live="polite" class="toast" hidden="" role="status"></div>
+</div><script>(function(){
+  var D={"en": {"c817d547": "Moving? Start with the deadline.", "b28d4750": "Unaccompanied baggage is any goods that enter or leave the country before or after the traveller, or that travel with them but as cargo. We handle the release of baggage, parcels and moves.", "ad015c1d": "Residents abroad", "6a451579": "Clothes, used personal items, books and periodicals are exempt. Other exemptions may apply, depending on the case and the traveller's conditions.", "92daad1c": "We only use cookies needed for the site to work and to remember your language. The chat only stores cookies if you open it. We do not use advertising or analytics cookies. Learn more in the <a href=\"/privacidade\">Privacy Policy</a>.", "8869d7ed": "Clearance only starts after the traveler’s arrival is proven, by ticket or passport. Under current Federal Revenue rules, if it is not started within 45 days of the baggage arriving in the country, the goods may be considered abandoned.", "5d4ce746": "Individuals", "a5e36acf": "Guidance on packing the goods", "5164192e": "Your baggage followed from shipment to clearance", "57181dc6": "Estimate of release costs", "610d69cb": "Baggage exemptions", "7afa06e7": "List of tax-exempt goods", "db8ca96a": "Plan my move", "5cef3e3c": "Main rules", "94db4e17": "Home", "92bcddd4": "What you need to know", "23781b5e": "Close", "7d23bcfe": "Got it", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brazil", "1e884e30": "Email", "9f46f84c": "Phone +55 11 2577-4757<br/>Email contato@custombroker.com.br", "ab2d860a": "Full support", "627001be": "About", "8576c19a": "For exports, when the traveller asks, we also arrange suitable packaging for air and sea transport.", "c2d966c4": "More than 1 year abroad", "494fed6d": "Documents required by Brazilian Customs", "4dace3b0": "Wine", "07d63ea5": "Services", "c0840b25": "Start of clearance", "e3cd5b2c": "Trading", "1bd66dd4": "Contact", "81ec5fa4": "Personal items", "b6154120": "Menu", "e1cd1f2d": "We follow every step so that baggage, parcels and moves are cleared on time and with less risk of complications.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "0dc62a4a": "© 2026 Custom Broker. All rights reserved.", "1c9faaff": "3 months before · 6 months after", "cc068e4d": "Chat on WhatsApp", "f0083b65": "A summary of the rules that raise the most questions. Each case is reviewed according to the traveller's situation.", "60324c31": "Privacy Policy", "92676f87": "Items excluded from the concept of baggage (allowed and prohibited)", "b455b957": "Unaccompanied baggage and international moves", "f0e7553d": "Baggage can arrive in Brazil from 3 months before to 6 months after your arrival. Talk to us and we will plan the shipment together.", "b0918ed5": "Baggage deadline", "2301b299": "The baggage must come from the country where the traveller was and arrive between 3 months before and 6 months after their arrival. Outside this period, the standard import regime applies.", "eafbb06c": "<a href=\"/pessoa-fisica\" style=\"color:inherit;text-decoration:none\">Individuals</a> · International baggage", "dcbcc054": "International baggage", "e498726d": "Watch the deadline", "e404ea30": "Under current Federal Revenue rules, anyone who lived abroad for more than one year is exempt for furniture, household goods and work tools, new or used, upon proof of residence abroad. New goods require proof of purchase.", "904ef931": "Phone"}, "es": {"c817d547": "¿Te vas a mudar? Empieza por el plazo.", "b28d4750": "Equipaje no acompañado es toda mercancía que llega al país o sale de él antes o después del viajero, o que lo acompaña, pero como carga. Gestionamos la liberación de equipajes, encomiendas y mudanzas.", "ad015c1d": "Residentes en el exterior", "6a451579": "Ropa, objetos de uso personal usados, libros y periódicos están exentos. Pueden aplicarse otras exenciones, según el caso y las condiciones del viajero.", "92daad1c": "Solo usamos cookies necesarias para que el sitio funcione y para recordar tu idioma. El chat solo guarda cookies si lo abres. No usamos cookies de publicidad ni de medición. Más información en la <a href=\"/privacidade\">Política de Privacidad</a>.", "8869d7ed": "El despacho solo empieza tras comprobar la llegada del viajero, con pasaje o pasaporte. Según las reglas actuales de la Receita Federal, si no se inicia dentro de los 45 días de la llegada del equipaje al país, los bienes pueden considerarse abandonados.", "5d4ce746": "Personas físicas", "a5e36acf": "Orientación sobre el embalaje de las mercancías", "5164192e": "Tu equipaje acompañado del embarque a la liberación", "57181dc6": "Estimación de costos de liberación", "610d69cb": "Exenciones para equipaje", "7afa06e7": "Lista de bienes exentos de tributación", "db8ca96a": "Planificar mi mudanza", "5cef3e3c": "Reglas principales", "94db4e17": "Inicio", "92bcddd4": "Lo que necesita saber", "23781b5e": "Cerrar", "7d23bcfe": "Entendido", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasil", "1e884e30": "Correo", "9f46f84c": "Teléfono +55 11 2577-4757<br/>Correo contato@custombroker.com.br", "ab2d860a": "Asesoría completa", "627001be": "Nosotros", "8576c19a": "En la exportación, cuando el viajero lo solicita, también proporcionamos embalajes adecuados para transporte aéreo y marítimo.", "c2d966c4": "Más de 1 año en el exterior", "494fed6d": "Documentación exigida por la Aduana de Brasil", "4dace3b0": "Vinos", "07d63ea5": "Servicios", "c0840b25": "Inicio del despacho", "e3cd5b2c": "Trading", "1bd66dd4": "Contacto", "81ec5fa4": "Bienes de uso personal", "b6154120": "Menú", "e1cd1f2d": "Acompañamos cada etapa para que equipajes, encomiendas y mudanzas se liberen dentro del plazo y con menos riesgo de complicaciones.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "0dc62a4a": "© 2026 Custom Broker. Todos los derechos reservados.", "1c9faaff": "3 meses antes · 6 meses después", "cc068e4d": "Hablar por WhatsApp", "f0083b65": "Un resumen de las reglas que más dudas generan. Cada caso se analiza según la situación del viajero.", "60324c31": "Política de Privacidad", "92676f87": "Artículos excluidos del concepto de equipaje (permitidos y prohibidos)", "b455b957": "Equipaje no acompañado y mudanzas internacionales", "f0e7553d": "El equipaje puede llegar a Brasil desde 3 meses antes hasta 6 meses después de tu llegada. Habla con nosotros y planificamos el envío juntos.", "b0918ed5": "Plazo del equipaje", "2301b299": "El equipaje debe venir del país donde estaba el viajero y llegar entre 3 meses antes y 6 meses después de su llegada. Fuera de ese plazo, se aplica el régimen común de importación.", "eafbb06c": "<a href=\"/pessoa-fisica\" style=\"color:inherit;text-decoration:none\">Personas físicas</a> · Equipaje internacional", "dcbcc054": "Equipaje internacional", "e498726d": "Atención al plazo", "e404ea30": "Según las reglas actuales de la Receita Federal, quien vivió fuera más de un año tiene exención para muebles, bienes de uso doméstico y herramientas de trabajo, nuevos o usados, comprobando el tiempo de residencia en el exterior. Los bienes nuevos necesitan comprobante de compra.", "904ef931": "Teléfono"}, "fr": {"c817d547": "Vous déménagez ? Commencez par le délai.", "b28d4750": "Un bagage non accompagné est toute marchandise qui entre dans le pays ou en sort avant ou après le voyageur, ou qui l'accompagne mais en tant que fret. Nous gérons le dédouanement des bagages, colis et déménagements.", "ad015c1d": "Résidents à l'étranger", "6a451579": "Vêtements, effets personnels usagés, livres et périodiques sont exonérés. D'autres exonérations peuvent s'appliquer selon le cas et la situation du voyageur.", "92daad1c": "Nous utilisons uniquement les cookies nécessaires au fonctionnement du site et à la mémorisation de votre langue. Le chat n'enregistre des cookies que si vous l'ouvrez. Nous n'utilisons pas de cookies publicitaires ni de mesure d'audience. En savoir plus dans la <a href=\"/privacidade\">Politique de confidentialité</a>.", "8869d7ed": "Le dédouanement ne commence qu'après la preuve de l'arrivée du voyageur, par billet ou passeport. Selon les règles actuelles de la Receita Federal, s'il n'est pas lancé dans les 45 jours suivant l'arrivée des bagages dans le pays, les biens peuvent être considérés comme abandonnés.", "5d4ce746": "Particuliers", "a5e36acf": "Conseils sur l'emballage des marchandises", "5164192e": "Vos bagages suivis de l'expédition au dédouanement", "57181dc6": "Estimation des frais de dédouanement", "610d69cb": "Exonérations pour les bagages", "7afa06e7": "Liste des biens exonérés de taxes", "db8ca96a": "Planifier mon déménagement", "5cef3e3c": "Règles principales", "94db4e17": "Accueil", "92bcddd4": "Ce qu'il faut savoir", "23781b5e": "Fermer", "7d23bcfe": "J'ai compris", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brésil", "1e884e30": "E-mail", "9f46f84c": "Téléphone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "ab2d860a": "Accompagnement complet", "627001be": "À propos", "8576c19a": "À l'export, à la demande du voyageur, nous fournissons aussi des emballages adaptés au transport aérien et maritime.", "c2d966c4": "Plus d'un an à l'étranger", "494fed6d": "Documents exigés par la douane brésilienne", "4dace3b0": "Vins", "07d63ea5": "Services", "c0840b25": "Début du dédouanement", "e3cd5b2c": "Trading", "1bd66dd4": "Contact", "81ec5fa4": "Effets personnels", "b6154120": "Menu", "e1cd1f2d": "Nous suivons chaque étape pour que bagages, colis et déménagements soient dédouanés dans les délais et avec moins de risques de complications.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "0dc62a4a": "© 2026 Custom Broker. Tous droits réservés.", "1c9faaff": "3 mois avant · 6 mois après", "cc068e4d": "Écrire sur WhatsApp", "f0083b65": "Un résumé des règles qui suscitent le plus de questions. Chaque cas est analysé selon la situation du voyageur.", "60324c31": "Politique de confidentialité", "92676f87": "Articles exclus de la notion de bagage (autorisés et interdits)", "b455b957": "Bagages non accompagnés et déménagements internationaux", "f0e7553d": "Les bagages peuvent arriver au Brésil de 3 mois avant à 6 mois après votre arrivée. Parlez-nous et nous planifierons l'envoi ensemble.", "b0918ed5": "Délai du bagage", "2301b299": "Le bagage doit provenir du pays où se trouvait le voyageur et arriver entre 3 mois avant et 6 mois après son arrivée. En dehors de ce délai, le régime d'importation ordinaire s'applique.", "eafbb06c": "<a href=\"/pessoa-fisica\" style=\"color:inherit;text-decoration:none\">Particuliers</a> · Bagages internationaux", "dcbcc054": "Bagages internationaux", "e498726d": "Attention au délai", "e404ea30": "Selon les règles actuelles de la Receita Federal, toute personne ayant vécu plus d'un an à l'étranger bénéficie d'une exonération pour les meubles, biens d'usage domestique et outils de travail, neufs ou usagés, sur preuve de résidence à l'étranger. Les biens neufs exigent une preuve d'achat.", "904ef931": "Téléphone"}, "it": {"c817d547": "Ti trasferisci? Parti dalla scadenza.", "b28d4750": "Il bagaglio non accompagnato è qualsiasi merce che entra o esce dal paese prima o dopo il viaggiatore, oppure che lo accompagna ma come merce. Ci occupiamo dello sdoganamento di bagagli, pacchi e traslochi.", "ad015c1d": "Residenti all'estero", "6a451579": "Abiti, oggetti personali usati, libri e periodici sono esenti. Possono valere altre esenzioni, secondo il caso e le condizioni del viaggiatore.", "92daad1c": "Usiamo solo i cookie necessari al funzionamento del sito e per ricordare la tua lingua. La chat salva cookie solo se la apri. Non usiamo cookie pubblicitari né di misurazione. Maggiori informazioni nell'<a href=\"/privacidade\">Informativa sulla privacy</a>.", "8869d7ed": "Lo sdoganamento inizia solo dopo la prova dell'arrivo del viaggiatore, con biglietto o passaporto. Secondo le regole attuali della Receita Federal, se non viene avviato entro 45 giorni dall'arrivo del bagaglio nel paese, i beni possono essere considerati abbandonati.", "5d4ce746": "Privati", "a5e36acf": "Indicazioni sull'imballaggio della merce", "5164192e": "Il tuo bagaglio seguito dall'imbarco allo sdoganamento", "57181dc6": "Stima dei costi di sdoganamento", "610d69cb": "Esenzioni per il bagaglio", "7afa06e7": "Elenco dei beni esenti da imposte", "db8ca96a": "Pianifica il mio trasloco", "5cef3e3c": "Regole principali", "94db4e17": "Home", "92bcddd4": "Cosa devi sapere", "23781b5e": "Chiudi", "7d23bcfe": "Ho capito", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasile", "1e884e30": "E-mail", "9f46f84c": "Telefono +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "ab2d860a": "Assistenza completa", "627001be": "Chi siamo", "8576c19a": "Nell'esportazione, su richiesta del viaggiatore, forniamo anche imballaggi adatti al trasporto aereo e marittimo.", "c2d966c4": "Più di un anno all'estero", "494fed6d": "Documenti richiesti dalla Dogana brasiliana", "4dace3b0": "Vini", "07d63ea5": "Servizi", "c0840b25": "Avvio dello sdoganamento", "e3cd5b2c": "Trading", "1bd66dd4": "Contatti", "81ec5fa4": "Beni di uso personale", "b6154120": "Menu", "e1cd1f2d": "Seguiamo ogni fase perché bagagli, pacchi e traslochi siano sdoganati nei tempi e con meno rischio di complicazioni.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "0dc62a4a": "© 2026 Custom Broker. Tutti i diritti riservati.", "1c9faaff": "3 mesi prima · 6 mesi dopo", "cc068e4d": "Scrivici su WhatsApp", "f0083b65": "Un riepilogo delle regole che generano più dubbi. Ogni caso viene analizzato secondo la situazione del viaggiatore.", "60324c31": "Informativa sulla privacy", "92676f87": "Articoli esclusi dal concetto di bagaglio (ammessi e vietati)", "b455b957": "Bagaglio non accompagnato e traslochi internazionali", "f0e7553d": "Il bagaglio può arrivare in Brasile da 3 mesi prima a 6 mesi dopo il tuo arrivo. Parlaci e pianifichiamo insieme la spedizione.", "b0918ed5": "Termine per il bagaglio", "2301b299": "Il bagaglio deve provenire dal paese in cui si trovava il viaggiatore e arrivare tra 3 mesi prima e 6 mesi dopo il suo arrivo. Fuori da questo termine si applica il regime ordinario di importazione.", "eafbb06c": "<a href=\"/pessoa-fisica\" style=\"color:inherit;text-decoration:none\">Privati</a> · Bagagli internazionali", "dcbcc054": "Bagaglio internazionale", "e498726d": "Attenzione al termine", "e404ea30": "Secondo le regole attuali della Receita Federal, chi ha vissuto all'estero per più di un anno ha l'esenzione per mobili, beni di uso domestico e strumenti di lavoro, nuovi o usati, dimostrando il periodo di residenza all'estero. I beni nuovi richiedono la prova d'acquisto.", "904ef931": "Telefono"}, "de": {"c817d547": "Sie ziehen um? Beginnen Sie mit der Frist.", "b28d4750": "Unbegleitetes Gepäck ist jede Ware, die vor oder nach dem Reisenden ins Land kommt oder es verlässt, oder die ihn begleitet, aber als Fracht. Wir kümmern uns um die Freigabe von Gepäck, Paketen und Umzügen.", "ad015c1d": "Im Ausland Ansässige", "6a451579": "Kleidung, gebrauchte persönliche Gegenstände, Bücher und Zeitschriften sind abgabenfrei. Weitere Befreiungen können je nach Fall und Situation des Reisenden gelten.", "92daad1c": "Wir verwenden nur Cookies, die für die Funktion der Website und zum Speichern Ihrer Sprache nötig sind. Der Chat speichert nur Cookies, wenn Sie ihn öffnen. Wir verwenden keine Werbe- oder Analyse-Cookies. Mehr in der <a href=\"/privacidade\">Datenschutzerklärung</a>.", "8869d7ed": "Die Abfertigung beginnt erst nach Nachweis der Ankunft des Reisenden, per Ticket oder Reisepass. Nach den aktuellen Regeln gilt: Wird sie nicht innerhalb von 45 Tagen nach Ankunft des Gepäcks im Land begonnen, können die Waren als aufgegeben gelten.", "5d4ce746": "Privatpersonen", "a5e36acf": "Beratung zur Verpackung der Waren", "5164192e": "Ihr Gepäck begleitet von der Verschiffung bis zur Freigabe", "57181dc6": "Schätzung der Freigabekosten", "610d69cb": "Befreiungen für Gepäck", "7afa06e7": "Liste der abgabenfreien Güter", "db8ca96a": "Meinen Umzug planen", "5cef3e3c": "Wichtigste Regeln", "94db4e17": "Startseite", "92bcddd4": "Was Sie wissen müssen", "23781b5e": "Schließen", "7d23bcfe": "Verstanden", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasilien", "1e884e30": "E-Mail", "9f46f84c": "Telefon +55 11 2577-4757<br/>E-Mail contato@custombroker.com.br", "ab2d860a": "Komplette Betreuung", "627001be": "Über uns", "8576c19a": "Beim Export besorgen wir auf Wunsch des Reisenden auch geeignete Verpackungen für Luft- und Seetransport.", "c2d966c4": "Mehr als ein Jahr im Ausland", "494fed6d": "Vom brasilianischen Zoll verlangte Dokumente", "4dace3b0": "Wein", "07d63ea5": "Leistungen", "c0840b25": "Beginn der Verzollung", "e3cd5b2c": "Trading", "1bd66dd4": "Kontakt", "81ec5fa4": "Persönliche Gegenstände", "b6154120": "Menü", "e1cd1f2d": "Wir begleiten jeden Schritt, damit Gepäck, Sendungen und Umzüge fristgerecht und mit weniger Komplikationsrisiko freigegeben werden.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "0dc62a4a": "© 2026 Custom Broker. Alle Rechte vorbehalten.", "1c9faaff": "3 Monate vorher · 6 Monate nachher", "cc068e4d": "Per WhatsApp schreiben", "f0083b65": "Eine Zusammenfassung der Regeln, die die meisten Fragen aufwerfen. Jeder Fall wird nach der Situation des Reisenden geprüft.", "60324c31": "Datenschutzerklärung", "92676f87": "Vom Gepäckbegriff ausgeschlossene Artikel (erlaubt und verboten)", "b455b957": "Unbegleitetes Gepäck und internationale Umzüge", "f0e7553d": "Das Gepäck kann von 3 Monaten vor bis 6 Monate nach Ihrer Ankunft in Brasilien eintreffen. Sprechen Sie mit uns, und wir planen den Versand gemeinsam.", "b0918ed5": "Frist für das Gepäck", "2301b299": "Das Gepäck muss aus dem Land kommen, in dem sich der Reisende aufgehalten hat, und zwischen 3 Monaten vor und 6 Monaten nach seiner Ankunft eintreffen. Außerhalb dieser Frist gilt das normale Importverfahren.", "eafbb06c": "<a href=\"/pessoa-fisica\" style=\"color:inherit;text-decoration:none\">Privatpersonen</a> · Internationales Gepäck", "dcbcc054": "Internationales Gepäck", "e498726d": "Achten Sie auf die Frist", "e404ea30": "Nach den aktuellen Regeln der Bundessteuerbehörde sind Personen, die mehr als ein Jahr im Ausland gelebt haben, für Möbel, Haushaltsgegenstände und Arbeitswerkzeuge, neu oder gebraucht, befreit, wenn sie den Auslandsaufenthalt nachweisen. Für neue Waren ist ein Kaufbeleg nötig.", "904ef931": "Telefon"}, "zh": {"c817d547": "要搬家？先看期限。", "b28d4750": "非随身行李是指在旅客之前或之后入境或出境的物品，或与旅客同行但以货物方式运输的物品。我们负责行李、包裹和搬家物品的清关。", "ad015c1d": "海外居民", "6a451579": "衣物、使用过的个人用品、书籍和期刊免税。根据具体情况和旅客条件，还可能适用其他免税。", "92daad1c": "我们只使用网站运行和记住您语言所必需的 Cookie。聊天窗口只有在您打开时才会存储 Cookie。我们不使用广告或统计 Cookie。详情请见<a href=\"/privacidade\">隐私政策</a>。", "8869d7ed": "清关只有在凭机票或护照证明旅客已抵达后才能开始。根据联邦税务局现行规定，如果行李抵达巴西后 45 天内未开始清关，物品可能被视为放弃。", "5d4ce746": "个人客户", "a5e36acf": "货物包装建议", "5164192e": "从装运到放行，全程跟进您的行李", "57181dc6": "清关费用估算", "610d69cb": "行李免税", "7afa06e7": "免税物品清单", "db8ca96a": "规划我的搬家", "5cef3e3c": "主要规定", "94db4e17": "首页", "92bcddd4": "您需要了解的内容", "23781b5e": "关闭", "7d23bcfe": "知道了", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · 巴西", "1e884e30": "邮箱", "9f46f84c": "电话 +55 11 2577-4757<br/>邮箱 contato@custombroker.com.br", "ab2d860a": "全程服务", "627001be": "关于我们", "8576c19a": "出口时，如旅客需要，我们也会提供适合空运和海运的包装。", "c2d966c4": "在海外居住 1 年以上", "494fed6d": "巴西海关要求的文件", "4dace3b0": "葡萄酒", "07d63ea5": "服务", "c0840b25": "开始清关", "e3cd5b2c": "贸易公司", "1bd66dd4": "联系我们", "81ec5fa4": "个人用品", "b6154120": "菜单", "e1cd1f2d": "我们跟进每个环节，让行李、包裹和搬家物品按时放行，减少麻烦。", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "0dc62a4a": "© 2026 Custom Broker。保留所有权利。", "1c9faaff": "到达前 3 个月 · 到达后 6 个月", "cc068e4d": "通过 WhatsApp 联系", "f0083b65": "最常引起疑问的规定摘要。每种情况根据旅客的具体情况分析。", "60324c31": "隐私政策", "92676f87": "不属于行李范围的物品（允许和禁止）", "b455b957": "非随身行李和国际搬家", "f0e7553d": "行李可以在您抵达前 3 个月至抵达后 6 个月内运抵巴西。联系我们，一起规划运输。", "b0918ed5": "行李期限", "2301b299": "行李必须来自旅客所在的国家，并在旅客到达前 3 个月至到达后 6 个月之间抵达。超出此期限则适用普通进口制度。", "eafbb06c": "<a href=\"/pessoa-fisica\" style=\"color:inherit;text-decoration:none\">个人客户</a> · 国际行李", "dcbcc054": "国际行李", "e498726d": "注意期限", "e404ea30": "根据联邦税务局现行规定，在国外居住超过一年的人，凭国外居住证明，其家具、家用物品和工作工具（新旧均可）可享受免税。新物品需提供购买凭证。", "904ef931": "电话"}};
+  var HL={pt:'pt-BR',en:'en',es:'es',fr:'fr',it:'it',de:'de',zh:'zh-CN'};
+  var root=document.getElementById('cb');if(!root)return;
+  var els=[].slice.call(root.querySelectorAll('[data-i]'));
+  els.forEach(function(e){e.__pt=e.innerHTML;});
+  var cur='pt';
+  function t(l,k){return (D[l]||{})[k];}
+  window.cbTx=function(k,pt){return cur==='pt'?pt:(t(cur,k)||pt);};
+  function apply(l,save){
+    if(!HL[l])l='pt';cur=l;
+    els.forEach(function(e){var v=l==='pt'?e.__pt:t(l,e.getAttribute('data-i'));if(v!=null&&e.innerHTML!==v)e.innerHTML=v;});
+    document.documentElement.lang=HL[l];
+    [].slice.call(root.querySelectorAll('.pnav .lang')).forEach(function(b){b.textContent=l.toUpperCase();});
+    [].slice.call(root.querySelectorAll('.langm [data-l]')).forEach(function(b){b.setAttribute('aria-current',b.getAttribute('data-l')===l?'true':'false');});
+    var mb=root.querySelector('.menu-b');if(mb)mb.textContent=mb.getAttribute('aria-expanded')==='true'?cbTx('23781b5e','Fechar'):cbTx('b6154120','Menu');
+    if(save){try{localStorage.setItem('cb_lang',l);}catch(e){}}
+  }
+  window.cbSetLang=function(l){apply(l,true);};
+  var l='pt';
+  try{var q=new URLSearchParams(location.search).get('lang');if(q&&HL[q]){l=q;localStorage.setItem('cb_lang',q);}else{var s=localStorage.getItem('cb_lang');if(s&&HL[s])l=s;}}catch(e){}
+  apply(l,false);
+})();
+</script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script><script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script><script>/* Comum a todas as páginas: carregamento, rolagem suave, menu, rodapé revelado, botões magnéticos */
+(function(){
+  const CB=window.CB={intro:[],lenis:null};
+  // cada página abre sempre no topo (sem herdar a posição da página anterior)
+  try{history.scrollRestoration='manual';}catch(e){}
+  const toTop=()=>{if(location.hash)return;scrollTo(0,0);CB.lenis&&CB.lenis.scrollTo(0,{immediate:true,force:true});
+    // quando a prévia está dentro de outra página, leva também o quadro para o topo
+    try{if(window.top!==window.self)document.documentElement.scrollIntoView({block:'start'});}catch(e){}};
+  toTop();addEventListener('pageshow',toTop);
+  const loader=document.querySelector('.loader');
+  const foot=document.querySelector('.foot');
+  const setFH=()=>{if(foot)document.documentElement.style.setProperty('--fh',foot.offsetHeight+'px');};
+  setFH();addEventListener('resize',setFH);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const runIntro=()=>{loader&&loader.classList.add('done');CB.intro.forEach(f=>{try{f()}catch(e){console.error(e)}});CB.started=true;};
+  CB.onIntro=f=>{CB.started?f():CB.intro.push(f);};
+  CB.mobile=matchMedia('(max-width: 820px) and (pointer: coarse)').matches;
+  // dispara uma vez quando o elemento aparece na tela (funciona em qualquer rolagem, também no celular)
+  CB.see=(el,fn,margin)=>{if(!el)return;if(!('IntersectionObserver' in window))return fn();
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{rootMargin:margin||'0px 0px -12% 0px'});io.observe(el);};
+
+  // celular: botão flutuante do WhatsApp
+  if(!document.querySelector('.wa-float')){const w=document.createElement('a');w.className='wa-float';w.href='https://wa.me/5511941012210';w.target='_blank';w.rel='noopener';w.setAttribute('aria-label','Falar no WhatsApp');
+    w.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    document.body.appendChild(w);}
+
+  // menu (funciona mesmo sem GSAP)
+  const btn=document.querySelector('.menu-b'),ov=document.querySelector('.povl'),nav=document.querySelector('.pnav');
+  ov&&ov.setAttribute('data-lenis-prevent','');
+  let open=false;
+  function closeMenu(){if(!open)return;open=false;btn.textContent=window.cbTx?cbTx('b6154120','Menu'):'Menu';btn.setAttribute('aria-expanded','false');
+    if(window.gsap&&!reduce)gsap.to(ov,{clipPath:'inset(0 0 100% 0)',duration:.6,ease:'expo.inOut',onComplete:()=>ov.hidden=true});else{ov.hidden=true;}
+    CB.lenis&&CB.lenis.start();}
+  CB.closeMenu=closeMenu;
+  btn&&btn.addEventListener('click',()=>{if(open)return closeMenu();open=true;const ckb=document.getElementById('cookie');ckb&&(ckb.hidden=true);ov.hidden=false;btn.textContent=window.cbTx?cbTx('23781b5e','Fechar'):'Fechar';btn.setAttribute('aria-expanded','true');CB.lenis&&CB.lenis.stop();
+    if(window.gsap&&!reduce){gsap.timeline().to(ov,{clipPath:'inset(0 0 0% 0)',duration:.7,ease:'expo.inOut'}).from(ov.querySelectorAll('.big a span'),{yPercent:110,duration:.8,stagger:.05,ease:'expo.out'},'-=.3').from(ov.querySelector('.extra'),{opacity:0,y:30,duration:.6},'-=.5');}
+    else ov.style.clipPath='none';});
+
+  // aviso curto
+  const toastEl=document.querySelector('.toast');let tt;
+  CB.toast=(html,ms)=>{if(!toastEl)return;toastEl.innerHTML=html;toastEl.hidden=false;clearTimeout(tt);tt=setTimeout(()=>toastEl.hidden=true,ms||5000);};
+  // seletor de idioma
+  const lb=document.querySelector('.pnav .lang'),lm=document.querySelector('.langm');
+  if(lb&&lm){
+    const NAMES={pt:'Português',en:'English',es:'Español',fr:'Français',it:'Italiano',de:'Deutsch',zh:'中文（普通话）'};
+    const setOpen=o=>{lm.hidden=!o;lb.setAttribute('aria-expanded',String(o));};
+    lb.addEventListener('click',e=>{e.stopPropagation();setOpen(lm.hidden);});
+    document.addEventListener('click',e=>{if(!lm.hidden&&!lm.contains(e.target))setOpen(false);});
+    lm.querySelectorAll('button').forEach(b=>{if(b.dataset.l==='pt')b.setAttribute('aria-current','true');
+      b.addEventListener('click',()=>{setOpen(false);const l=b.dataset.l;
+        window.cbSetLang&&cbSetLang(l);});});
+  }
+  // cookies
+  const ck=document.getElementById('cookie');
+  if(ck){let v=null;try{v=localStorage.getItem('cb-cookies');}catch(e){}
+    if(!v)setTimeout(()=>ck.hidden=false,1800);
+    const set=x=>{try{localStorage.setItem('cb-cookies',x);}catch(e){}ck.hidden=true;};
+    document.getElementById('cookie-ok').addEventListener('click',()=>set('todos'));
+    const ckn=document.getElementById('cookie-no');ckn&&ckn.addEventListener('click',()=>set('necessarios'));
+    const re=document.getElementById('cookie-reopen');re&&re.addEventListener('click',()=>{ck.hidden=false;});}
+
+  addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();lm&&(lm.hidden=true);}});
+
+  if(!window.gsap||reduce){runIntro();return;}
+  gsap.registerPlugin(ScrollTrigger,SplitText,ScrambleTextPlugin);
+
+  if(window.Lenis&&!CB.mobile){CB.lenis=new Lenis({lerp:.09});CB.lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>CB.lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);toTop();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();closeMenu();CB.lenis.scrollTo(t,{offset:-90,duration:1.3});}}));}
+
+  ScrollTrigger.create({start:140,onUpdate:s=>nav&&nav.classList.toggle('small',s.scroll()>140)});
+
+  // botões magnéticos (só com mouse)
+  gsap.matchMedia().add('(hover: hover) and (pointer: fine)',()=>{
+    document.querySelectorAll('.mag,.foot .cta,.pnav .wa').forEach(b=>{
+      const xT=gsap.quickTo(b,'x',{duration:.6,ease:'elastic.out(1,.4)'}),yT=gsap.quickTo(b,'y',{duration:.6,ease:'elastic.out(1,.4)'});
+      b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();xT((e.clientX-r.left-r.width/2)*.35);yT((e.clientY-r.top-r.height/2)*.35);});
+      b.addEventListener('pointerleave',()=>{xT(0);yT(0);});
+    });
+  });
+
+  // rodapé: a chamada sobe enquanto é revelada
+  if(foot&&!CB.mobile){const big=new SplitText(foot.querySelector('.big'),{type:'words,chars'});
+    gsap.from(big.chars,{yPercent:100,opacity:0,stagger:.012,ease:'expo.out',scrollTrigger:{trigger:'.foot-spacer',start:'top 85%',end:'bottom bottom',scrub:1}});}
+
+  // carregamento só na primeira visita
+  let first=!!loader;try{if(sessionStorage.getItem('cbSeen'))first=false;sessionStorage.setItem('cbSeen','1');}catch(e){}
+  if(first&&loader){const c={v:0},cnt=loader.querySelector('.count');
+    gsap.timeline().to(c,{v:100,duration:1.2,ease:'power2.inOut',onUpdate:()=>cnt.textContent=Math.round(c.v)+'%'})
+      .to(loader,{clipPath:'inset(0 0 100% 0)',duration:.8,ease:'expo.inOut'}).add(runIntro,'-=.35');}
+  else runIntro();
+  addEventListener('load',()=>{setFH();ScrollTrigger.refresh();});
+})();
+
+/* Chat (JivoChat) carregado só quando a pessoa clica — LGPD: sem cookies do chat antes do clique.
+   Na Locaweb: desligar o JivoChat automático e preencher o código do widget em CB_JIVO_ID. */
+(function(){
+  const ID=window.CB_JIVO_ID||'OthWJcb9T1';if(!ID)return;
+  const b=document.createElement('button');b.type='button';b.className='chat-btn';b.setAttribute('aria-label','Abrir o chat');
+  b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span>Chat</span>';
+  document.body.appendChild(b);
+  let loading=false;
+  b.addEventListener('click',()=>{
+    if(window.jivo_api){window.jivo_api.open();return;}
+    if(loading)return;loading=true;b.classList.add('is-loading');
+    window.jivo_onLoadCallback=function(){b.remove();try{window.jivo_api.open();}catch(e){}};
+    const s=document.createElement('script');s.src='https://code.jivosite.com/widget/'+encodeURIComponent(ID);s.async=true;
+    s.onerror=()=>{loading=false;b.classList.remove('is-loading');};
+    document.head.appendChild(s);
+  });
+})();
+
+/* Páginas internas: movimento aplicado aos blocos de conteúdo existentes */
+(function(){
+  // formulário de contato: monta a mensagem e abre o WhatsApp
+  const form=document.querySelector('form.form');
+  if(form)form.addEventListener('submit',e=>{e.preventDefault();
+    if(!form.reportValidity())return;
+    const v=n=>{const el=form.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+    const txt='Olá, Custom Broker.\nNome: '+v('nome')+'\nE-mail: '+v('email')+(v('telefone')?'\nTelefone: '+v('telefone'):'')+'\nAssunto: '+v('assunto')+(v('mensagem')?'\n\n'+v('mensagem'):'');
+    const url='https://wa.me/5511941012210?text='+encodeURIComponent(txt);
+    let n=form.querySelector('.f-go');if(!n){n=document.createElement('p');n.className='f-go';form.appendChild(n);}
+    n.innerHTML='Mensagem pronta. <a class="btn btn-whats" href="'+url+'" target="_blank" rel="noopener">Abrir no WhatsApp</a>';
+    n.querySelector('a').focus();});
+  // painéis de fotos (Pessoa Física): o painel escolhido abre e os outros encolhem
+  document.querySelectorAll('.pf-panels').forEach(g=>{const ps=[...g.querySelectorAll('.pfp')];
+    const open=p=>ps.forEach(x=>x.classList.toggle('is-open',x===p));
+    ps.forEach(p=>{p.addEventListener('mouseenter',()=>open(p));p.addEventListener('focus',()=>open(p));p.addEventListener('click',()=>open(p));});});
+  // assunto vindo de um botão (?assunto=...)
+  try{const a=new URLSearchParams(location.search).get('assunto'),sel=document.querySelector('select[name="assunto"]');
+    if(a&&sel){const o=[...sel.options].find(o=>o.text===a);if(o)sel.value=o.value;}}catch(e){}
+  if(!window.gsap||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const CB=window.CB,M=CB.mobile;
+  // dispara uma vez: no celular quando aparece na tela, no computador pelo ScrollTrigger
+  const on=(el,start,fn)=>M?CB.see(el,fn):ScrollTrigger.create({trigger:el,start,once:true,onEnter:fn});
+
+  // topo da página: foto em tela cheia aproxima e título sobe linha por linha
+  const ph=document.querySelector('.page-head');
+  if(ph){
+    const h1=ph.querySelector('h1');const sp=new SplitText(h1,{type:'lines',mask:'lines'});
+    const img=ph.querySelector('.ph-photo img');
+    gsap.set(sp.lines,{yPercent:110});gsap.set(ph.querySelectorAll('.eyebrow,.lead,.ph-text .btn,.ph-text .hero-actions,.ph-text .edge,.ph-text p:not(.eyebrow):not(.lead)'),{opacity:0,y:30});
+    const R=matchMedia('(max-width: 820px)').matches?'0px':'28px';
+    CB.onIntro(()=>{const tl=gsap.timeline();
+      if(img)tl.fromTo(img.parentElement,{clipPath:'inset(100% 0 0 0 round '+R+')'},{clipPath:'inset(0% 0 0 0 round '+R+')',duration:1.4,ease:'expo.out',clearProps:'clipPath'},0).fromTo(img,{scale:1.25},{scale:1,duration:1.8,ease:'expo.out'},0);
+      // nome da página cai com peso, passa do ponto e assenta; o traço estica com mola
+      const eb=ph.querySelector('.eyebrow');
+      tl.fromTo(eb,{opacity:0,y:-60,rotate:-7},{opacity:1,y:0,rotate:0,duration:1.3,ease:'elastic.out(1,.45)'},.05);
+      if(eb)tl.fromTo(eb,{'--b':0},{'--b':1,duration:1.1,ease:'elastic.out(1.1,.35)'},.3);
+      tl
+        .to(sp.lines,{yPercent:0,duration:1.1,stagger:.09,ease:'expo.out'},.15)
+        .to(ph.querySelectorAll('.lead,.ph-text .btn,.ph-text .hero-actions,.ph-text .edge,.ph-text p:not(.eyebrow):not(.lead)'),{opacity:1,y:0,duration:1,stagger:.1,ease:'expo.out'},.45);});
+    if(img&&!M)gsap.to(img.parentElement,{yPercent:-10,ease:'none',scrollTrigger:{trigger:ph,start:'top top',end:'bottom top',scrub:true}});
+  }
+
+  // títulos de seção sobem de dentro de uma máscara
+  document.querySelectorAll('main section:not(.page-head) h2').forEach(h=>{
+    const s=new SplitText(h,{type:'lines',mask:'lines'});
+    gsap.set(s.lines,{yPercent:110});on(h,'top 88%',()=>gsap.to(s.lines,{yPercent:0,duration:1.1,stagger:.08,ease:'expo.out'}));
+  });
+  // rótulos curtos acima dos títulos
+  gsap.utils.toArray('main section:not(.page-head) .eyebrow').forEach(e=>{if(M||e.matches('.prose > p,.prose-sm > p'))return;gsap.set(e,{opacity:0,x:-24});on(e,'top 90%',()=>gsap.to(e,{opacity:1,x:0,duration:.8,ease:'expo.out'}));});
+
+  // fotos reveladas de baixo para cima, com leve zoom
+  gsap.utils.toArray('main section:not(.page-head) figure img, .tile-img img, .cta-photo img').forEach(im=>{
+    if(M)im.loading='eager';gsap.set(im,{clipPath:'inset(100% 0 0 0)',scale:1.25});on(M?(im.closest('figure,.tile-img,.cta-photo')||im.parentElement):im,'top 85%',()=>gsap.to(im,{clipPath:'inset(0% 0 0 0)',scale:1,duration:1.4,ease:'expo.out'}));
+    if(!M)gsap.to(im,{yPercent:-6,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  // blocos em grupo entram com peso (passam um pouco do ponto e assentam)
+  const groups=['.pf-panels .pfp','.tiles .tile','.rules .rule','.cards .card','.steps .step','.pillars li','.rows > div','.checklist li','.faq details','.fact','.edge > div','.contact-side > *','.form > *','.legal > *','.prose > p','.prose-sm > p','.dots-list li','.more-list > *','.inline-cta','.compare'];
+  const enter=b=>gsap.fromTo(b,{y:48,opacity:0,rotate:()=>gsap.utils.random(-1.2,1.2)},{y:0,x:0,opacity:1,rotate:0,duration:1,stagger:.08,ease:'back.out(1.7)',overwrite:true,clearProps:'transform'});
+  if(M)document.querySelectorAll(groups.join(',')).forEach(el=>CB.see(el,()=>enter([el])));
+  else ScrollTrigger.batch(groups.join(','),{start:'top 90%',once:true,onEnter:enter});
+  gsap.set(groups.join(','),{opacity:0});
+
+  // passos: a barra enche conforme a rolagem
+  gsap.utils.toArray('.steps').forEach(st=>{st.classList.remove('armed');
+    if(M){gsap.set(st.querySelectorAll('.bar'),{'--p':0});CB.see(st,()=>gsap.to(st.querySelectorAll('.bar'),{'--p':1,duration:1.2,stagger:.3,ease:'power2.out'}));}
+    else gsap.fromTo(st.querySelectorAll('.bar'),{'--p':0},{'--p':1,stagger:.25,ease:'none',scrollTrigger:{trigger:st,start:'top 80%',end:'bottom 55%',scrub:true}});});
+
+  // números e rótulos: entrada suave (sem letras embaralhadas)
+  gsap.utils.toArray('.fact .n, .rule-k, .edge b').forEach(n=>{gsap.set(n,{opacity:0,y:12});
+    on(n,'top 88%',()=>gsap.to(n,{opacity:1,y:0,duration:1,ease:'power3.out'}));});
+
+  // comparação do ICMS: barras crescem com a rolagem e assentam com mola
+  gsap.utils.toArray('.compare').forEach(c=>{c.classList.remove('armed');
+    gsap.set(c.querySelectorAll('.cmp-bar i'),{scaleX:0});on(c,'top 75%',()=>gsap.to(c.querySelectorAll('.cmp-bar i'),{scaleX:1,duration:1.6,stagger:.15,ease:'elastic.out(1,.55)'}));});
+
+  // perguntas: abrir com movimento
+  document.querySelectorAll('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open){const p=d.querySelector('p');p&&gsap.from(p,{y:-10,opacity:0,duration:.5,ease:'expo.out'});}}));
+
+  // seção escura de chamada: entra com leve escala
+  if(!M)gsap.utils.toArray('section.cta').forEach(c=>gsap.from(c,{clipPath:'inset(8% 4% 8% 4% round 28px)',ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top 35%',scrub:true}}));
+})();
+</script>

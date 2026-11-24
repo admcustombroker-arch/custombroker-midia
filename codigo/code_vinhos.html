@@ -1,0 +1,1041 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"><style>:root{--card:#e6e1dd;
+--ink:#161b2f;
+--ink-2:#163250;
+--paper:#ddd7d3;
+--white:#ffffff;
+--text:#2b3142;
+--muted:#444d5e;
+--line:#b9b2ad;
+--brand:#5b687c;
+--brand-dark:#3f4a5e;
+--wine:#6b1d33;
+--whats:#15803d;
+--f-display:"Archivo", "Arial Narrow", Arial, sans-serif;
+--f-body:"IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+--f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+--wrap:1180px;
+--ease:cubic-bezier(.2,.7,.2,1);
+color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:112%;color:var(--ink);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-dark);margin:0 0 14px}
+.preview-note{background:#fff7d6;color:#5a4a00;font-size:.85rem;text-align:center;padding-block:7px}
+.preview-note .wrap{padding-block:0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(22,27,47,.96);backdrop-filter:blur(8px);transition:box-shadow .3s}
+.top.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
+.logo-bulb{flex:none;width:26px;height:40px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(140,195,238,.25));transition:transform .4s var(--ease)}
+.logo:hover .logo-bulb{transform:rotate(-6deg) scale(1.05)}
+.logo-words{display:grid;line-height:1}
+.logo b{font-family:var(--f-display);font-stretch:125%;font-weight:600;font-size:1.08rem;letter-spacing:.09em;color:#d4cdc8}
+.logo small{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#8d8f8e;margin-top:5px}
+.nav{display:flex;gap:20px;margin-left:auto;font-size:.92rem}
+.nav a{color:#d4cdc8;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--white);border-color:var(--brand)}
+.btn{display:inline-flex;align-items:center;gap:9px;font:600 .95rem/1 var(--f-body);text-decoration:none;padding:14px 22px;border-radius:6px;border:2px solid transparent;transition:transform .25s var(--ease),background .25s,box-shadow .25s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-whats{background:var(--whats);color:var(--white)}
+.btn-whats:hover{background:#116a32;box-shadow:0 8px 22px rgba(21,128,61,.35)}
+.btn-line{border-color:rgba(255,255,255,.45);color:var(--white)}
+.btn-line:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.top .btn{padding:10px 16px;font-size:.88rem}
+.nav a.new{color:#e9b7c4}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.3);border-radius:6px;color:var(--white);font:600 .85rem/1 var(--f-body);padding:9px 12px;cursor:pointer;gap:8px;align-items:center}
+.menu-btn span{display:block;width:16px;height:2px;background:currentColor;box-shadow:0 5px 0 currentColor,0 -5px 0 currentColor}
+@media (max-width:1140px){
+.menu-btn{display:inline-flex}
+.top .wrap{flex-wrap:wrap}
+.nav{display:none;order:3;width:100%;flex-direction:column;gap:0;margin:0;padding-bottom:12px}
+.nav.open{display:flex;animation:rise .35s var(--ease) both}
+.nav a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:1rem}
+}
+.hero{background:var(--ink);color:#d6e2ee;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:stretch;padding-block:0}
+.hero-text{padding-block:84px 72px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow{color:#d4cdc8}
+.hero h1{color:var(--white);font-size:clamp(2.3rem,5vw,3.9rem);font-weight:800}
+.hero h1 em{font-style:normal;color:#d4cdc8}
+.hero p.lead{font-size:1.15rem;max-width:34em;margin:22px 0 32px;color:#d4cdc8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-modes{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#8d8f8e}
+.hero-modes span{transition:color .4s}
+.hero-modes span.on{color:var(--white)}
+.hero-modes span.on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);margin-right:8px;vertical-align:1px}
+.stage{position:relative;overflow:hidden;min-height:540px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.4s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);transition:transform 9s ease-out}
+.slide.zoom img{transform:scale(1.07)}
+@keyframes drift{from{transform:scale(1.01)}to{transform:scale(1.07)}}
+.stage::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 22%);pointer-events:none}
+.slide figcaption{position:absolute;right:20px;bottom:18px;z-index:2;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:rgba(22,27,47,.7);padding:6px 10px;border-radius:4px}
+.dots{position:absolute;left:28px;bottom:22px;z-index:3;display:flex;gap:8px}
+.dots{gap:4px}
+.dots button{width:40px;height:44px;border:0;background:none;cursor:pointer;padding:0;position:relative;display:grid;align-items:center}
+.dots button::before{content:"";display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.dots button.on::after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:var(--card,#e6e1dd);transform-origin:left;animation:fill 6s linear forwards}
+.stage.paused .dots button.on::after{animation-play-state:paused}
+.dots{bottom:6px}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.load{animation:rise .9s var(--ease) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.34s}.d4{animation-delay:.48s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:900px){
+.hero .wrap{grid-template-columns:1fr;gap:0}
+.hero-text{padding-block:52px 40px}
+.stage{min-height:340px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+.stage::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 25%)}
+}
+.docs{background:var(--card,#e6e1dd);border-bottom:1px solid var(--line)}
+.docs .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding-block:20px;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+.docs strong{font-family:var(--f-body);font-weight:600;color:var(--ink);letter-spacing:0;font-size:.9rem}
+section{padding-block:96px}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:24px 56px;align-items:end;margin-bottom:48px}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:800}
+.sec-head p{margin:0;color:var(--muted);max-width:34em}
+@media (max-width:800px){.sec-head{grid-template-columns:1fr}section{padding-block:68px}}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+.card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:420px;border-radius:10px;overflow:hidden;color:var(--white);text-decoration:none;background:var(--ink-2);isolation:isolate}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s var(--ease)}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,0) 20%,rgba(22,27,47,.55) 45%,rgba(22,27,47,.95) 75%);transition:background .4s}
+.card:hover img{transform:scale(1.04)}
+.card-body{padding:24px}
+.card .tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#cfe4f6;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.card h3{color:var(--white);font-size:1.45rem;font-weight:800;margin:8px 0 10px}
+.card p{margin:0;font-size:.95rem;color:#d3dfeb;line-height:1.5}
+.card .more{display:inline-flex;gap:6px;margin-top:16px;font-weight:600;font-size:.9rem;color:var(--white)}
+.card .more i{font-style:normal;transition:transform .3s var(--ease)}
+.card:hover .more i{transform:translateX(5px)}
+.card.wine{background:var(--wine)}
+.card.wine::before{background:radial-gradient(120% 70% at 85% 0%,rgba(255,255,255,.12),transparent 60%)}
+.card.wine .tag{color:#f0c2cd}
+.card.wine p{color:#f2dbe1}
+.wine-mark{position:absolute;top:24px;right:24px;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:5.4rem;line-height:.8;color:rgba(255,255,255,.12)}
+.wine-mark small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;color:rgba(255,255,255,.55);text-align:right;margin-top:8px;font-weight:500}
+.facts{background:var(--card,#e6e1dd);border-block:1px solid var(--line);padding-block:64px}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media (max-width:760px){.facts .wrap{grid-template-columns:1fr}}
+.fact{border-left:3px solid var(--brand);padding-left:20px}
+.fact .n{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.fact .n small{font-size:.45em;margin-left:4px;color:var(--brand-dark)}
+.fact p{margin:10px 0 0;color:var(--muted);max-width:22em}
+.about-link{grid-column:1/-1;justify-self:start;font-weight:600;color:var(--brand-dark);text-decoration:none;border-bottom:2px solid var(--brand);padding-bottom:3px}
+.about-link i{font-style:normal;display:inline-block;transition:transform .3s var(--ease)}
+.about-link:hover i{transform:translateX(5px)}
+.wines{background:var(--paper)}
+.wines .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+@media (max-width:900px){.wines .wrap{grid-template-columns:1fr;gap:36px}}
+.wines figure{margin:0;position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/5;max-width:100%}
+.wines figure img{width:100%;height:100%;object-fit:cover;display:block}
+.wines h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;margin-bottom:18px}
+.wines p{margin:0 0 26px;max-width:36em}
+.checklist{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+@media (max-width:520px){.checklist{grid-template-columns:1fr}}
+.checklist li{display:flex;gap:10px;align-items:baseline;font-size:.95rem;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.checklist li::before{content:"";flex:none;width:8px;height:8px;border-radius:2px;background:var(--wine);transform:translateY(-1px)}
+.more-list{margin-bottom:30px}
+.more-list dt a{text-decoration:none;color:var(--ink);border-bottom:1px solid var(--brand)}
+.more-list dt a:hover{color:var(--brand-dark)}
+.btn-wine{background:var(--wine);color:var(--white)}
+.btn-wine:hover{box-shadow:0 8px 22px rgba(107,29,51,.3)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;position:relative}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr;gap:28px 0}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding:0 24px 0 0}
+.step .num{font-family:var(--f-mono);font-size:.8rem;color:var(--brand-dark);letter-spacing:.1em}
+.step .bar{height:2px;background:var(--line);margin:12px 0 20px;position:relative;overflow:hidden}
+.step .bar::after{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(1);transform-origin:left;transition:transform 1s var(--ease)}
+.steps.armed .step .bar::after{transform:scaleX(0)}
+.steps.armed.in .step .bar::after{transform:scaleX(1)}
+.steps.in .step:nth-child(2) .bar::after{transition-delay:.25s}
+.steps.in .step:nth-child(3) .bar::after{transition-delay:.5s}
+.steps.in .step:nth-child(4) .bar::after{transition-delay:.75s}
+.step h3{font-size:1.2rem;font-weight:800;margin-bottom:8px}
+.step p{margin:0;color:var(--muted);font-size:.95rem}
+.cta{color:var(--white);padding-block:0;background:var(--ink);overflow:hidden}
+.cta .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:stretch}
+.cta-text{padding-block:96px;min-width:0}
+.cta-photo{margin:0;position:relative;overflow:hidden;min-height:420px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.cta-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}
+@media (max-width:900px){.cta .wrap{grid-template-columns:1fr;gap:0}.cta-text{padding-block:64px 40px}.cta-photo{min-height:300px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}.cta-photo::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}}
+.cta h2{color:var(--white);font-size:clamp(2rem,4.2vw,3.2rem);font-weight:800;max-width:15em}
+.cta p{color:#d4cdc8;max-width:32em;margin:18px 0 30px}
+.contact-row{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:34px;font-size:.95rem;color:#d4cdc8}
+.contact-row span{user-select:all}
+.contact-row b{display:block;font-family:var(--f-mono);font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#8d8f8e;user-select:none}
+footer{background:#08182a;color:#8ea4b9;font-size:.9rem;padding-block:40px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+footer .logo{margin-bottom:6px}
+.feature-rev .wrap{grid-template-columns:1.1fr .9fr}
+.feature-rev figure{order:2}
+@media (max-width:900px){.feature-rev .wrap{grid-template-columns:1fr}.feature-rev figure{order:0}}
+.wines .prose-sm p{margin:0 0 16px}
+[id]{scroll-margin-top:96px}
+.tiles .tile{display:flex;flex-direction:column}
+.tile-link{display:inline-flex;align-self:flex-start;gap:6px;margin-top:auto;padding-top:18px;font-weight:600;font-size:.95rem;color:var(--brand-dark);text-decoration:none}
+.tile-link i{font-style:normal;transition:transform .3s var(--ease)}
+.tile-link:hover i{transform:translateX(4px)}
+.flash{animation:flash 2.2s ease-out}
+@keyframes flash{0%,40%{box-shadow:0 0 0 3px var(--brand),0 12px 28px rgba(22,27,47,.12)}100%{box-shadow:0 0 0 0 rgba(61,143,209,0)}}
+.tile-img{margin:-28px -28px 22px;height:190px;overflow:hidden;border-radius:10px 10px 0 0}
+.tile-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease)}
+.tile:hover .tile-img img{transform:scale(1.05)}
+.card.wine::before{background:linear-gradient(180deg,rgba(74,18,34,0) 20%,rgba(74,18,34,.6) 45%,rgba(60,14,28,.96) 75%)}
+.faq{display:grid;border-top:1px solid var(--line);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-weight:600;color:var(--ink);font-size:1.05rem;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--brand-dark);font-weight:500;font-size:1.2rem;transition:transform .3s var(--ease),background .3s}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--paper)}
+.faq details p{margin:0 0 20px;color:var(--muted);max-width:68ch}
+.faq details[open] p{animation:rise .35s var(--ease) both}
+.edge{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:22px;border:1px solid var(--line);border-radius:10px;background:var(--card,#e6e1dd);overflow:hidden}
+.edge div{padding:18px 22px;border-left:1px solid var(--line)}
+.edge div:first-child{border-left:0}
+.edge b{display:block;font-family:var(--f-display);font-stretch:112%;font-weight:800;color:var(--ink);font-size:1.15rem}
+.edge span{font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){.edge{grid-template-columns:1fr}.edge div{border-left:0;border-top:1px solid var(--line)}.edge div:first-child{border-top:0}}
+.legal{max-width:760px}
+.legal h2{font-size:1.35rem;font-weight:800;margin:36px 0 10px}
+.legal p,.legal li{color:var(--text)}
+.legal ul{padding-left:20px;display:grid;gap:8px}
+.legal-date{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.link-btn{font:inherit;color:var(--brand-dark);font-weight:600;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.cookie{position:fixed;z-index:58;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:var(--card,#e6e1dd);color:var(--text);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 40px rgba(22,27,47,.18);padding:20px;display:grid;gap:14px;font-size:.92rem;animation:rise .5s var(--ease) both}
+.cookie p{margin:0}
+.cookie a{color:var(--brand-dark);font-weight:600}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:10px}
+.cookie-actions .btn{padding:11px 18px;font-size:.9rem}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:var(--card,#e6e1dd)}
+@media (max-width:640px){.cookie{left:12px;right:12px;max-width:none;bottom:calc(84px + env(safe-area-inset-bottom,0px))}.cookie-actions .btn{flex:1;justify-content:center}}
+.f-consent{margin:0;font-size:.85rem;color:var(--muted)}
+.f-consent a{color:var(--brand-dark);font-weight:600}
+.lang-pill{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;color:#d4cdc8;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 10px;white-space:nowrap}
+.lang-pill:hover{color:var(--white);border-color:var(--white)}
+footer .f-links{display:grid;gap:6px}
+footer .f-links a{color:#d4cdc8;text-decoration:none}
+footer .f-links a:hover{color:var(--white);text-decoration:underline}
+.view[hidden]{display:none!important}
+.page-head{background:var(--ink);color:#d4cdc8;padding-block:0;overflow:hidden}
+.page-head .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:stretch}
+.ph-text{padding-block:72px 64px;min-width:0;animation:rise .8s var(--ease) both}
+.page-head .eyebrow{color:#d4cdc8}
+.page-head h1{color:var(--white);font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800}
+.page-head .lead{font-size:1.1rem;max-width:36em;margin:20px 0 0;color:#d4cdc8}
+.ph-photo{margin:0;position:relative;overflow:hidden;min-height:340px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.ph-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:drift 12s ease-out both}
+.ph-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}
+.page-head-wine{background:var(--wine)}
+.page-head-wine .eyebrow{color:#f0c2cd}
+.page-head-wine .ph-photo::after{background:linear-gradient(90deg,var(--wine) 0%,rgba(107,29,51,0) 30%)}
+@media (max-width:900px){
+.page-head .wrap{grid-template-columns:1fr;gap:0}
+.ph-text{padding-block:48px 36px}
+.ph-photo{min-height:240px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+.ph-photo::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 35%)}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,var(--wine) 0%,rgba(107,29,51,0) 35%)}
+}
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+@media (max-width:900px){.two-col{grid-template-columns:1fr;gap:36px}}
+.prose{max-width:62ch;min-width:0}
+.prose h2{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;margin-bottom:18px}
+.prose p{margin:0 0 16px}
+.h2-sm{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;margin-bottom:22px}
+.pillars{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.pillars li{display:grid;gap:4px;padding:18px 0;border-bottom:1px solid var(--line)}
+.pillars b{font-family:var(--f-display);font-stretch:112%;font-weight:800;color:var(--ink);font-size:1.1rem}
+.pillars span{color:var(--muted);font-size:.95rem}
+.svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media (max-width:860px){.svc-cols{grid-template-columns:1fr;gap:48px}}
+.rows{margin:0;display:grid;border-top:1px solid var(--line)}
+.rows>div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rows dt{font-weight:600;color:var(--ink)}
+.rows dd{margin:0;color:var(--muted);font-size:.95rem}
+@media (max-width:520px){.rows>div{grid-template-columns:1fr;gap:2px}}
+.rows-2{grid-template-columns:1fr 1fr;column-gap:48px;border-top:0}
+.rows-2>div{grid-template-columns:1fr;gap:4px;border-top:1px solid var(--line);border-bottom:0}
+@media (max-width:760px){.rows-2{grid-template-columns:1fr}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.tiles{grid-template-columns:1fr}}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:28px;transition:transform .3s var(--ease),box-shadow .3s}
+section:not([style]) .tile{background:var(--card,#e6e1dd)}
+.tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(22,27,47,.08)}
+.tile h3{font-size:1.25rem;font-weight:800;margin-bottom:10px}
+.tile p{margin:0;color:var(--muted);font-size:.95rem}
+.tile-hl{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+.dots-list{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem;display:grid;gap:6px}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.rules{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--card,#e6e1dd);border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:8px;padding:24px}
+.rule-k{display:block;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;color:var(--brand-dark);margin-bottom:12px}
+.rule h3{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.rule p{margin:0;color:var(--muted);font-size:.93rem}
+@media (min-width:1001px){.rules-3{grid-template-columns:repeat(3,1fr)}}
+.rule p a{color:var(--brand-dark);font-weight:600}
+.compare{background:var(--card,#e6e1dd);border:1px solid var(--line);border-radius:10px;padding:28px;display:grid;gap:26px}
+.cmp-row{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center}
+@media (max-width:640px){.cmp-row{grid-template-columns:1fr;gap:12px}}
+.cmp-label{font-weight:600;color:var(--ink)}
+.cmp-label small{display:block;font-family:var(--f-mono);font-size:.74rem;color:var(--muted);font-weight:500}
+.cmp-bars{display:grid;gap:10px;min-width:0}
+.cmp-bar{position:relative;display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:6px;background:var(--paper);overflow:hidden;font-size:.9rem;isolation:isolate}
+.cmp-bar i{position:absolute;inset:0 auto 0 0;width:var(--w);background:#c7d6e4;z-index:-1;transform-origin:left}
+.compare.armed .cmp-bar i{transform:scaleX(0)}
+.compare.armed.in .cmp-bar i{transform:scaleX(1);transition:transform 1.2s var(--ease) .3s}
+.compare.armed.in .cmp-row.good .cmp-bar i{transition-delay:.7s}
+.cmp-bar.icms i{background:#e4b9a8}
+.good .cmp-bar i{background:#b9dcc6}
+.good .cmp-bar.icms i{background:#8fcaa5}
+.cmp-bar b{font-weight:500;color:var(--ink)}
+.cmp-bar em{font-style:normal;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.cmp-note{margin:0;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line);padding-top:18px}
+.cmp-note strong{color:#17733f}
+.inline-cta{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;background:var(--ink);color:#d4cdc8;border-radius:10px;padding:28px 32px}
+.inline-cta p{margin:0;max-width:40em}
+.btn-primary{background:var(--brand-dark);color:var(--white)}
+.btn-primary:hover{background:#1f5f95;box-shadow:0 8px 22px rgba(61,143,209,.3)}
+.contact-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:start}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.form{background:var(--card,#e6e1dd);border:1px solid var(--line);border-radius:10px;padding:32px;display:grid;gap:18px;min-width:0}
+.f-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:600px){.f-2{grid-template-columns:1fr}.form{padding:22px}}
+.f-row{display:grid;gap:6px;min-width:0}
+.f-row label{font-size:.85rem;font-weight:600;color:var(--ink)}
+.f-row input,.f-row select,.f-row textarea{font:inherit;font-size:1rem;color:var(--text);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s}
+.f-row input:focus,.f-row select:focus,.f-row textarea:focus{outline:none;border-color:var(--brand);background:var(--card,#e6e1dd)}
+.form .btn{justify-self:start}
+.f-note{margin:0;font-size:.9rem;color:#5a4a00;background:#fff7d6;border-radius:6px;padding:10px 14px}
+.contact-side{display:grid;gap:22px;align-content:start}
+.contact-side .btn{justify-self:start}
+.contact-side dl{margin:0;display:grid;gap:16px}
+.contact-side dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.contact-side dd{margin:2px 0 0;color:var(--ink);font-weight:500;user-select:all}
+.map-link{font-weight:600;color:var(--brand-dark);text-decoration:none;border-bottom:2px solid var(--brand);justify-self:start;padding-bottom:3px}
+.map-link i{font-style:normal}
+.nav a.active{color:var(--white);border-color:var(--brand)}
+.float-whats{display:none!important;position:fixed;z-index:55;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--whats);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s var(--ease)}
+.float-whats:hover{transform:scale(1.08)}
+.float-whats::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--whats);animation:pulse 2.8s ease-out infinite;z-index:-1}
+@keyframes pulse{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.55);opacity:0}}
+.reveal.armed{opacity:0;transform:translateY(26px)}
+.reveal.armed.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.cards .reveal.armed.in:nth-child(2){transition-delay:.1s}
+.cards .reveal.armed.in:nth-child(3){transition-delay:.2s}
+.cards .reveal.armed.in:nth-child(4){transition-delay:.3s}
+.mbar{display:none}
+@media (max-width:1140px){
+.top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--ink)}
+.nav{position:fixed;left:0;right:0;top:calc(68px + env(safe-area-inset-top,0px));bottom:0;z-index:49;background:var(--ink);padding:8px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));overflow-y:auto;width:auto;order:0}
+.nav a{display:flex;justify-content:space-between;align-items:center;min-height:56px;font-size:1.15rem;font-weight:500;color:var(--white);border-bottom:1px solid rgba(255,255,255,.1)}
+.nav a::after{content:"›";font-size:1.5rem;color:#8d8f8e;line-height:1}
+.nav a.active{color:#d4cdc8;border-bottom-color:rgba(255,255,255,.1)}
+.nav a.active::after{color:#d4cdc8}
+.nav-extra{display:grid;gap:12px;margin-top:24px}
+.nav-extra .btn{justify-content:center}
+.nav-extra p{margin:8px 0 0;color:#8d8f8e;font-size:.9rem;line-height:1.5}
+.nav-extra p span{user-select:all;color:#d4cdc8}
+body.menu-open{overflow:hidden}
+.menu-btn[aria-expanded="true"] span{background:transparent;box-shadow:none;position:relative}
+.menu-btn[aria-expanded="true"] span::before,.menu-btn[aria-expanded="true"] span::after{content:"";position:absolute;left:0;top:0;width:16px;height:2px;background:currentColor;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:rotate(-45deg)}
+}
+@media (min-width:1141px){.nav-extra,.nav .m-only{display:none}}
+@media (max-width:640px){
+body{font-size:16px}
+.preview-note{font-size:.75rem;padding-block:5px}
+.top .wrap{min-height:60px;gap:12px}
+.nav{top:calc(60px + env(safe-area-inset-top,0px))}
+.top .wrap > .btn-whats,.top .lang-pill{display:none}
+.menu-btn{padding:10px 14px;min-height:44px}
+.logo b{font-size:.95rem}
+.logo small{font-size:.55rem}
+section{padding-block:56px}
+.sec-head{margin-bottom:28px}
+.hero-text{padding-block:36px 28px}
+.hero h1{font-size:2.1rem}
+.hero p.lead{font-size:1.02rem;margin:16px 0 24px}
+.hero-actions{display:grid;grid-template-columns:1fr;gap:10px}
+.hero-actions .btn,.wines .btn,.inline-cta .btn,.cta .btn,.form .btn{width:100%;justify-content:center;min-height:50px}
+.hero-modes{display:none}
+.stage{min-height:250px}
+.dots{left:20px;bottom:16px}
+.slide figcaption{right:16px;bottom:12px;font-size:.66rem}
+.docs .wrap{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;padding-block:14px;gap:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.docs .wrap::-webkit-scrollbar{display:none}
+.docs strong{flex:none;font-size:.82rem;padding-right:4px}
+.docs span{flex:none;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:calc(-1 * max(20px,env(safe-area-inset-left,0px)));padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cards::-webkit-scrollbar{display:none}
+.cards .card{flex:0 0 84%;min-height:340px;scroll-snap-align:center}
+.swipe-hint{display:flex}
+.facts{padding-block:44px}
+.facts .wrap{gap:24px}
+.wines figure{aspect-ratio:16/11}
+.ph-text{padding-block:36px 28px}
+.page-head h1{font-size:1.95rem}
+.page-head .lead{font-size:1rem}
+.ph-photo{min-height:200px}
+.tile{padding:22px}
+.tile-img{margin:-22px -22px 18px;height:160px}
+.rule{padding:20px}
+.compare{padding:20px}
+.inline-cta{padding:22px}
+.cta-text{padding-block:52px 32px}
+.cta-photo{min-height:220px}
+.contact-row{display:grid;gap:14px}
+.step{padding-right:0}
+.float-whats{display:none}
+.mbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(22,27,47,.08);transition:transform .3s var(--ease)}
+.mbar .btn{justify-content:center;min-height:48px;padding:12px}
+.mbar .btn-ghost{border-color:var(--ink);color:var(--ink);background:var(--card,#e6e1dd)}
+body.menu-open .mbar{transform:translateY(110%)}
+footer{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
+.swipe-hint{display:none;align-items:center;gap:8px;margin:14px 0 0;font-size:.85rem;color:var(--muted)}
+.swipe-hint i{font-style:normal;display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important}
+.reveal.armed{opacity:1;transform:none}
+.steps.armed .step .bar::after{transform:scaleX(1)}
+.compare.armed .cmp-bar i{transform:none}
+.slide img,.slide.zoom img{transform:none}
+}
+:root{--f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-mono:"Archivo",system-ui,sans-serif;--ink:#17181f;--ink-2:#161b2f;--brand:#5b687c;--brand-dark:#3f4a5e;--paper:#d4cdc8}
+html{scroll-behavior:auto}
+body{background:var(--paper)}
+.page-main{background:var(--paper)}
+.eyebrow{font-family:var(--f-display);font-size:1rem;letter-spacing:0;text-transform:none;font-weight:600;color:var(--brand-dark);font-stretch:100%}
+h1,h2,h3{font-stretch:118%;letter-spacing:-.025em}
+.sec-head h2,.prose h2,.wines h2,.cta h2{font-size:clamp(2.2rem,4.6vw,3.9rem);line-height:.98;letter-spacing:-.035em;font-stretch:125%}
+.h2-sm{font-size:clamp(1.8rem,3.2vw,2.6rem);font-stretch:125%;letter-spacing:-.03em}
+section{padding-block:clamp(72px,10vw,140px)}
+.page-head{position:relative;padding-block:130px 72px!important;overflow:hidden}
+.page-head .wrap{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,5vw,72px);align-items:end}
+.ph-photo{position:relative!important;margin:0!important;min-height:0!important;aspect-ratio:4/5;max-height:72svh;width:100%;max-width:560px;justify-self:end;border-radius:28px;overflow:hidden}
+.ph-photo img{animation:none!important;position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover;image-rendering:auto}
+.ph-photo::after{display:none!important}
+.ph-text{position:relative;z-index:1;padding:0 0 8px!important;animation:none!important}
+.page-head h1{font-size:clamp(2.6rem,6.2vw,5.8rem)!important;line-height:.93;letter-spacing:-.045em;font-stretch:125%;max-width:14ch}
+.page-head .lead{font-size:clamp(1.05rem,1.4vw,1.22rem);color:#dbe5ee;max-width:40em}
+.page-head .eyebrow{color:var(--brand)}
+.page-head-wine .eyebrow{color:#f0c2cd}
+@media (max-width:900px){.page-head{padding-block:110px 48px!important}.page-head .wrap{grid-template-columns:1fr}.ph-photo{justify-self:stretch;max-width:none;aspect-ratio:4/3;max-height:none;order:2}}
+.f-go{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-weight:600;color:var(--ink)}
+.btn{border-radius:999px;padding:15px 24px}
+.btn:hover{transform:none}
+.btn-primary{background:var(--ink);color:#fff}
+.tile-link,.about-link,.map-link{color:var(--brand-dark)}
+.rule{border-top-color:var(--brand)}
+.fact{border-left-color:var(--brand)}
+.cards .card,.tile,.rule,.compare,.form,.inline-cta,.edge,.wines figure{border-radius:22px}
+.tile-img{border-radius:22px 22px 0 0}
+.card .tag,.rule-k,.cmp-label small,.contact-side dt,.legal-date,.step .num,.contact-row b{letter-spacing:0;text-transform:none;font-size:.9rem;font-weight:600}
+.step .bar::after{transform:scaleX(var(--p,1))!important;transition:none!important;background:var(--brand)!important}
+.reveal.armed{opacity:1;transform:none}
+.f-row input,.f-row select,.f-row textarea{border-radius:12px}
+.inline-cta{background:var(--ink)}
+.fill{background:#fff2b8}
+@media (max-width:900px){.page-head{min-height:72svh;padding-block:120px 40px!important}}
+html,body{margin:0}
+:root{
+--c-navy:#17181f;--c-navy-2:#161b2f;--c-steel:#8d8f8e;--c-signal:#d4cdc8;--c-go:#1f9d5c;
+--c-f:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+.loader{position:fixed;inset:0;z-index:100;background:var(--c-navy);color:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:24px max(24px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));font-family:var(--c-f)}
+.loader .count{font-weight:800;font-stretch:125%;font-size:clamp(72px,16vw,220px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.loader .who{color:var(--c-steel);font-size:15px;max-width:22ch;text-align:right}
+.loader.done{display:none}
+.pnav{position:fixed;z-index:50;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:7px 7px 7px 14px;border-radius:999px;background:rgba(23,24,31,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);width:min(1080px,calc(100% - 32px));justify-content:space-between;transition:width .5s cubic-bezier(.2,.8,.2,1);font-family:var(--c-f);color:#fff}
+.pnav.small{width:min(460px,calc(100% - 32px))}
+.pnav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-stretch:112%;white-space:nowrap;font-size:16px}
+.pnav .brand img{width:22px;height:34px;object-fit:contain}
+.pnav .links{display:flex;gap:16px;font-size:15px}
+.pnav .links a{text-decoration:none;color:#e2deda;padding:6px 2px;border-bottom:2px solid transparent}
+.pnav .links a:hover{color:#fff}
+.pnav .links a[aria-current="page"]{color:#fff;border-color:var(--c-signal)}
+.pnav.small .links{display:none}
+.pnav .r{display:flex;align-items:center;gap:8px}
+.pnav .wa{background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;white-space:nowrap}
+.pnav .menu-b{border:0;background:#fff;color:var(--c-navy);font:600 15px var(--c-f);padding:10px 16px;border-radius:999px;cursor:pointer}
+@media (max-width:1100px){.pnav .links{display:none}.pnav{width:min(560px,calc(100% - 32px))}}
+@media (max-width:520px){.pnav .wa,.pnav .lang{display:none}}
+.povl{position:fixed;inset:0;z-index:45;background:var(--c-navy);color:#fff;font-family:var(--c-f);overflow-y:auto;padding:100px max(20px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));clip-path:inset(0 0 100% 0)}
+.povl .in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+@media (max-width:820px){.povl .in{grid-template-columns:1fr}}
+.povl .big a{display:block;overflow:hidden;text-decoration:none;color:#fff;font-weight:800;font-stretch:125%;font-size:clamp(34px,6vw,80px);line-height:1.04;letter-spacing:-.03em}
+.povl .big a span{display:inline-block}
+.povl .big a:hover,.povl .big a[aria-current="page"]{color:var(--c-signal)}
+.povl .extra{display:grid;gap:18px;color:var(--c-steel);font-size:16px}
+.povl .extra a{color:#fff}
+.povl .extra p{margin:0}
+.povl .extra .wa{justify-self:start;background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;padding:16px 24px;border-radius:999px}
+.page-main{position:relative;z-index:2}
+.foot-spacer{height:var(--fh,560px)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:1;background:#161b2f;color:#fff;font-family:var(--c-f);padding:56px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.foot .in{max-width:1280px;margin:0 auto}
+.foot .big{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(36px,6.6vw,104px);line-height:.92;letter-spacing:-.045em;max-width:18ch}
+.foot .sub{margin:16px 0 0;font-size:19px;max-width:46ch}
+.foot .grid{display:flex;flex-wrap:wrap;gap:24px 56px;justify-content:space-between;align-items:flex-end;margin-top:32px}
+.foot dl{margin:0;display:grid;grid-template-columns:auto auto;gap:6px 20px;font-size:16px}
+.foot dt{font-weight:700}.foot dd{margin:0}
+.foot .cta{display:inline-flex;background:var(--c-signal);color:var(--c-navy);text-decoration:none;font-weight:600;font-size:18px;padding:20px 30px;border-radius:999px;will-change:transform}
+.foot .legal{display:flex;flex-wrap:wrap;gap:16px 48px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(212,205,200,.25);font-size:14px;line-height:1.5}
+.foot .legal a{color:#d4cdc8;text-underline-offset:3px}
+.foot small{display:block;margin-top:20px;font-size:13px;opacity:.75}
+@media (max-height:700px),(max-width:600px){.foot{position:relative}.foot-spacer{display:none}}
+@media (prefers-reduced-motion:reduce){.loader{display:none}}
+.langw{position:relative}
+.pnav .lang{font:700 13px var(--c-f);color:#fff;background:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 12px;line-height:1;cursor:pointer}
+.pnav .lang:hover{border-color:#fff}
+.langm{position:absolute;right:0;top:calc(100% + 10px);list-style:none;margin:0;padding:6px;min-width:190px;background:#fff;border-radius:16px;box-shadow:0 18px 40px rgba(23,24,31,.25);z-index:5}
+.langm button{display:block;width:100%;text-align:left;font:500 15px var(--c-f);color:var(--c-navy);background:none;border:0;border-radius:10px;padding:10px 12px;cursor:pointer}
+.langm button:hover,.langm button[aria-current="true"]{background:#d4cdc8}
+@media (max-width:520px){.pnav .langw{display:none}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;max-width:min(560px,calc(100% - 32px));background:var(--c-navy);color:#fff;font:15px/1.45 var(--c-f);padding:14px 18px;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.toast a{color:var(--c-signal)}
+.cookie-b{position:fixed;z-index:65;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:#fff;color:#2b3142;border-radius:20px;box-shadow:0 18px 44px rgba(23,24,31,.25);padding:20px;font:15px/1.5 var(--c-f);display:grid;gap:14px}
+.cookie-b[hidden]{display:none}
+.cookie-b p{margin:0}.cookie-b a{color:#3f4a5e;font-weight:600}
+.ck-a{display:flex;flex-wrap:wrap;gap:10px}
+.ck-a button{font:600 15px var(--c-f);border-radius:999px;padding:11px 18px;cursor:pointer;border:2px solid var(--c-navy);background:#fff;color:var(--c-navy)}
+.ck-a button:first-child{background:var(--c-navy);color:#fff}
+@media (max-width:640px){.cookie-b{left:12px;right:12px;max-width:none}}
+.btn,.cta,.wa,.menu-b,.lang,.ck-a button,.langm button{transition:scale .18s cubic-bezier(.34,1.56,.64,1)}
+.btn:active,.cta:active,.wa:active,.menu-b:active,.lang:active,.ck-a button:active{scale:.94 1.04;transition-duration:.08s}
+@media (hover:hover){.btn:hover,.cta:hover,.wa:hover,.menu-b:hover{scale:1.04}}
+.page-head .btn-primary,.inline-cta .btn-primary,section.cta .btn-primary{background:var(--c-signal);color:var(--c-navy)}
+.page-head .btn-primary:hover,.inline-cta .btn-primary:hover,section.cta .btn-primary:hover{background:#e8e3df;box-shadow:none}
+.wa-float{display:none}
+@media (max-width:820px){
+.wa-float{display:flex;position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--c-go);color:#fff;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(23,24,31,.35);text-decoration:none}
+.wa-float svg{width:30px;height:30px}
+.pnav{padding:6px 6px 6px 12px}
+.pnav .brand{font-size:15px}
+}
+@media (max-width:820px){
+.page-head{min-height:min(100svh,860px)!important;display:flex!important;align-items:flex-end;padding-block:120px 40px!important}
+.page-head .wrap{display:block!important;position:static!important;width:100%}
+.page-head .ph-photo{position:absolute!important;inset:0!important;aspect-ratio:auto!important;max-height:none!important;max-width:none!important;width:auto!important;border-radius:0!important;margin:0!important;z-index:0}
+.page-head .ph-photo img{height:115%!important}
+.page-head .ph-photo::after{display:block!important;content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,31,.55) 0%,rgba(23,24,31,.25) 30%,rgba(23,24,31,.75) 62%,rgba(23,24,31,.96) 100%)!important}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,rgba(80,18,36,.5) 0%,rgba(80,18,36,.25) 30%,rgba(80,18,36,.8) 62%,rgba(80,18,36,.97) 100%)!important}
+.page-head .ph-text{position:relative;z-index:1}
+.page-head .lead{color:#e6edf3}
+}
+@media (max-width:820px){
+.pnav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(23,24,31,.9)}
+.fact{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(255,255,255,.9)!important}
+.page-head h1{font-size:clamp(2rem,9.2vw,3.2rem)!important;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+h1,h2{overflow-wrap:break-word}
+.eyebrow{transform:none}
+}
+.povl{display:flex;align-items:center;padding-top:calc(96px + env(safe-area-inset-top,0px))}
+.povl[hidden]{display:none}
+.povl .in{width:100%;max-width:1080px;align-items:center}
+.povl .big a{font-size:clamp(28px,min(5.6vw,6.4vh),72px);line-height:1.06;padding-block:.04em}
+@media (max-width:820px){.povl{align-items:flex-start}.povl .big a{font-size:clamp(28px,min(9vw,5.6vh),56px)}}
+html:not([lang="pt-BR"]) .page-head h1,html:not([lang="pt-BR"]) h2{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+html:not([lang="pt-BR"]) .page-head h1{max-width:16ch}
+.page-head .eyebrow{font-size:clamp(18px,1.9vw,26px);font-weight:700;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:14px;margin-bottom:18px;transform-origin:0 100%}
+.page-head .eyebrow::before{content:"";display:inline-block;width:44px;height:4px;border-radius:2px;background:currentColor;transform-origin:0 50%;transform:scaleX(var(--b,1));flex:none}
+.page-head h1{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.foot .fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.page-head .eyebrow{color:var(--c-signal)}
+.foot .sub,.foot dd,.foot .legal,.foot small{color:#d4cdc8}.foot dt{color:#8d8f8e}
+.foot{border-top:1px solid rgba(212,205,200,.18)}
+@media (min-width:901px){
+.page-head{min-height:min(88svh,820px);display:flex!important;align-items:flex-end}
+.page-head .wrap{display:block!important;width:100%}
+.page-head .ph-text{max-width:min(58%,760px)}
+.page-head .ph-photo{position:absolute!important;top:0;right:0;bottom:0;width:min(46vw,760px);max-width:none!important;max-height:none!important;aspect-ratio:auto!important;border-radius:0;z-index:0}
+.page-head .ph-photo img{height:110%!important}
+.page-head::after{content:"";position:absolute;z-index:2;width:128px;height:128px;border-radius:50%;background:#161b2f url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/logo.png) center/58% no-repeat;box-shadow:0 0 0 8px rgba(212,205,200,.9);right:calc(min(46vw,760px) - 64px);bottom:72px;animation:seloIn 1.2s cubic-bezier(.34,1.56,.64,1) .9s both}
+@keyframes seloIn{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1) rotate(0)}}
+.pg-sobre .page-head .ph-photo{border-radius:50vh 0 0 50vh}
+.pg-servicos .page-head .ph-photo{border-radius:0 0 0 260px}
+.pg-servicos .page-head::after{bottom:auto;top:140px}
+.pg-pf .page-head .ph-photo{top:110px;bottom:-140px;right:-6vw;width:min(52vw,820px);border-radius:50%}
+.pg-bagagem .page-head .ph-photo{top:110px;border-radius:999px 999px 0 0;right:4vw;width:min(40vw,640px)}
+.pg-bagagem .page-head::after{right:calc(4vw + min(40vw,640px) - 64px)}
+.pg-trading .page-head .ph-photo{border-radius:260px 0 0 0}
+.pg-trading .page-head::after{bottom:auto;top:120px}
+.pg-vinhos .page-head .ph-photo{top:110px;right:6vw;width:min(34vw,520px);border-radius:999px 999px 0 0}
+.pg-vinhos .page-head::after{right:calc(6vw + min(34vw,520px) - 64px);background-color:#4a1323}
+.pg-contato .page-head .ph-photo{border-radius:0 0 0 50%}
+.pg-pf .page-head::after{right:calc(min(46vw,760px) - 20px);bottom:90px}
+}
+.wines .wrap{align-items:center}
+.wines .wrap>.prose-sm{position:relative;z-index:2;background:#161b2f;color:#d4cdc8;padding:clamp(28px,4vw,56px);border-radius:28px;box-shadow:0 30px 60px -30px rgba(22,27,47,.6)}
+.wines .wrap>.prose-sm h2{color:#fff}
+.wines .wrap>.prose-sm p,.wines .wrap>.prose-sm li{color:#d4cdc8}
+.wines .wrap>.prose-sm .eyebrow{color:#d4cdc8!important}
+.wines .wrap>.prose-sm .checklist li{border-color:rgba(212,205,200,.2)}
+.pg-vinhos .wines .wrap>.prose-sm{background:#4a1323}
+@media (min-width:901px){
+.wines .wrap{gap:0!important;grid-template-columns:1.05fr .95fr}
+.wines .wrap>.prose-sm{margin-left:-140px}
+.feature-rev .wrap{grid-template-columns:.95fr 1.05fr}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-140px}
+.wines figure{aspect-ratio:auto;min-height:620px}
+.pg-sobre .wines figure{border-radius:28px 28px 28px 220px}
+.pg-trading .wines figure{border-radius:50vh 28px 28px 50vh}
+.pg-pf .wines figure{border-radius:220px 28px 220px 28px}
+.pg-vinhos .wines figure{border-radius:999px 999px 28px 28px}
+}
+@media (max-width:900px){
+.wines .wrap{gap:0!important}
+.wines .wrap>.prose-sm{margin:-56px 12px 0}
+}
+.photo-band{position:relative;isolation:isolate;background:#161b2f;color:#d4cdc8;overflow:hidden}
+.photo-band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,.92) 0%,rgba(22,27,47,.7) 45%,rgba(22,27,47,.9) 100%),var(--bg) center/cover no-repeat}
+.photo-band .sec-head h2{color:#fff}
+.photo-band .sec-head p,.photo-band .sec-head .eyebrow{color:#d4cdc8}
+.photo-band .tile{background:#e6e1dd!important;border-color:transparent}
+.wines .wrap>.prose-sm .checklist li::before{background:#d4cdc8}
+@media (min-width:901px){
+.page-head{--pw:min(46vw,760px);--pr:0px}
+.pg-pf .page-head{--pw:min(52vw,820px);--pr:-6vw}
+.pg-bagagem .page-head{--pw:min(40vw,640px);--pr:4vw}
+.pg-vinhos .page-head{--pw:min(34vw,520px);--pr:6vw}
+.page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+.pg-pf .page-head .ph-text{max-width:calc(100vw + 6vw - var(--pw) - 40px - max(20px,(100vw - 1280px) / 2))!important}
+.page-head .ph-text .lead{max-width:none}
+.wines .wrap>.prose-sm{margin-left:-100px}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-100px}
+}
+@media (min-width:901px){
+.page-head::after,.pg-servicos .page-head::after,.pg-trading .page-head::after,.pg-bagagem .page-head::after,.pg-vinhos .page-head::after,.pg-pf .page-head::after{top:auto;bottom:48px;right:calc(var(--pr) + 48px)}
+.pg-pf .page-head::after{right:48px}
+.page-head .ph-text,.pg-pf .page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+}
+.pnav .brand img{border-radius:5px;box-shadow:0 0 0 1px rgba(212,205,200,.45)}
+@media (min-width:901px){
+.page-head::after{width:132px;height:132px;border-radius:16px;background:url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png) center/cover no-repeat!important;box-shadow:0 0 0 6px rgba(212,205,200,.9),0 24px 40px -16px rgba(0,0,0,.6)}
+@keyframes seloIn{from{transform:translateY(-40px) rotate(-12deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+}
+.pnav .brand img,.brand img{width:30px;height:30px;object-fit:cover}
+.pg-vinhos .photo-band .rule{border-top-color:#8a2a44}
+.chat-btn{position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:52px;padding:0 20px;border:0;border-radius:999px;background:#161b2f;color:#d4cdc8;font:600 15px/1 var(--c-f);box-shadow:0 0 0 1px rgba(212,205,200,.35),0 14px 30px -12px rgba(0,0,0,.5);cursor:pointer}
+.chat-btn svg{width:20px;height:20px}
+.chat-btn.is-loading{opacity:.7;cursor:progress}
+@media (max-width:820px) and (pointer:coarse){.chat-btn{bottom:calc(86px + env(safe-area-inset-bottom,0px));height:48px;padding:0 16px}}
+.pf-panels{display:flex;gap:14px;height:min(560px,70vh);margin-top:8px}
+.pfp{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border-radius:26px;background:#161b2f;color:#fff;cursor:pointer;outline:none;transition:flex-grow .9s cubic-bezier(.34,1.35,.5,1)}
+.pfp.is-open{flex-grow:3.2;cursor:default}
+.pfp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.2s cubic-bezier(.2,.8,.2,1),filter .6s}
+.pfp:not(.is-open) img{filter:saturate(.6) brightness(.75)}
+.pfp.is-open img{transform:scale(1)}
+.pfp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,27,47,0) 30%,rgba(22,27,47,.55) 60%,rgba(22,27,47,.94) 100%)}
+.pfp-txt{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(18px,2.4vw,32px)}
+.pfp-k{display:inline-block;font:600 13px/1 var(--c-f);color:#161b2f;background:#d4cdc8;border-radius:999px;padding:7px 12px;margin-bottom:12px}
+.pfp h3{color:#fff;font-size:clamp(19px,1.7vw,26px);line-height:1.15;margin:0}
+.pfp p{color:#e6e1dd;margin:10px 0 0;max-width:44ch;max-height:0;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .6s cubic-bezier(.34,1.5,.5,1),max-height .6s}
+.pfp.is-open p{max-height:12em;opacity:1;transform:none;transition-delay:.25s}
+.pfp p a{color:#fff}
+.pfp:focus-visible{box-shadow:0 0 0 3px #d4cdc8}
+@media (max-width:900px){
+.pf-panels{flex-direction:column;height:auto}
+.pfp{flex:none;height:340px;cursor:default}
+.pfp img{transform:none;filter:none!important}
+.pfp p{max-height:none;opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.pfp,.pfp img,.pfp p{transition:none}}
+@media (min-width:901px){
+.pfp:not(.is-open) h3{font-size:16px;hyphens:auto;overflow-wrap:anywhere}
+.pfp:not(.is-open) .pfp-k{font-size:11px;padding:6px 10px}
+}
+.pnav .brand img,.brand img{width:44px!important;height:44px!important;border-radius:6px}
+.pnav .brand{gap:12px;font-size:18px}
+@media (max-width:820px){.pnav .brand img,.brand img{width:38px!important;height:38px!important}.pnav .brand{font-size:15px}}
+.pnav .brand img,.brand img{background:#d4cdc8;padding:4px;box-shadow:none;object-fit:contain}
+.pnav .brand img,.brand img{width:84px!important;height:84px!important;padding:6px;border-radius:10px;margin:-22px 0 -40px;position:relative;z-index:2;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+@media (max-width:820px){.pnav .brand img,.brand img{width:64px!important;height:64px!important;padding:5px;margin:-14px 0 -30px}}
+@media (min-width:821px){.pnav .brand img,.brand img{width:100px!important;height:100px!important;margin:-26px 0 -52px}}
+.pnav .brand img,.brand img{padding:0!important;background:#161b2f!important;border:1px solid rgba(212,205,200,.75);border-radius:8px!important;box-shadow:0 12px 28px -12px rgba(0,0,0,.7)}
+.pnav .brand img,.brand img{width:56px!important;height:56px!important;margin:0!important;box-shadow:none!important}
+@media (max-width:820px){.pnav .brand img,.brand img{width:46px!important;height:46px!important}}
+.pnav .brand{margin-right:18px;font-size:17px}
+.pnav .brand{flex-shrink:0}
+.pnav .wa{font-size:13px;padding:7px 12px}
+.pnav.small{width:min(580px,calc(100% - 32px))}
+@media (max-width:1100px){.pnav{width:min(580px,calc(100% - 32px))}}
+
+
+header.cs-section-header,footer.cs-section-footer{display:none!important}
+.cs-widget:not(.cs-code-widget){display:none!important}
+.cs-section:not(:has(.cs-code-widget)){display:none!important}
+.cs-box:not(:has(.cs-code-widget)),.cs-line:not(:has(.cs-code-widget)){display:none!important}
+html,body{overflow-x:clip}
+body{margin:0!important}
+.cs-section:has(#cb),.cs-section:has(#cb) .cs-lines,.cs-section:has(#cb) .cs-line,.cs-section:has(#cb) .cs-boxes,.cs-section:has(#cb) .cs-box,.cs-section:has(#cb) .cs-widgets,.cs-code-widget:has(#cb),.cs-code-widget-preview:has(#cb){padding:0!important;margin:0!important;border:0!important;min-height:0!important;overflow:visible!important;transform:none!important;filter:none!important;contain:none!important;background:transparent!important}
+.cs-boxes:has(#cb),.cs-box:has(#cb),.cs-line:has(#cb){display:block!important;width:100%!important;max-width:none!important;flex:none!important;position:static!important}
+#cb{width:100vw;position:relative;left:50%;margin-left:-50vw;text-align:left}
+#cb [hidden]{display:none!important}
+</style><div id="cb" class="pg-vinhos" data-page="vinhos">
+<nav aria-label="Menu principal" class="pnav">
+<a class="brand" data-noi18n="" href="/"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png"/>Custom Broker</a>
+<div class="links"><a data-i="627001be" href="/sobre">Sobre</a><a data-i="07d63ea5" href="/servicos">Serviços</a><a data-i="5d4ce746" href="/pessoa-fisica">Pessoa Física</a><a data-i="e3cd5b2c" href="/tradingcompany">Trading</a><a aria-current="page" data-i="4dace3b0" href="/vinhos">Vinhos</a><a data-i="1bd66dd4" href="/contato">Contato</a></div>
+<div class="r"><div class="langw"><button aria-expanded="false" aria-haspopup="true" aria-label="Idioma" class="lang" type="button">PT</button><ul class="langm" data-noi18n="" hidden=""><li><button data-l="pt" type="button">Português</button></li><li><button data-l="en" type="button">English</button></li><li><button data-l="es" type="button">Español</button></li><li><button data-l="fr" type="button">Français</button></li><li><button data-l="it" type="button">Italiano</button></li><li><button data-l="de" type="button">Deutsch</button></li><li><button data-l="zh" type="button">中文（普通话）</button></li></ul></div><a class="wa" href="https://wa.me/5511941012210" rel="noopener" target="_blank">WhatsApp</a><button aria-controls="menu" aria-expanded="false" class="menu-b" data-i="b6154120" type="button">Menu</button></div>
+</nav>
+<div class="povl" hidden="" id="menu"><div class="in">
+<div class="big"><a href="/"><span data-i="94db4e17">Início</span></a><a href="/sobre"><span data-i="627001be">Sobre</span></a><a href="/servicos"><span data-i="07d63ea5">Serviços</span></a><a href="/pessoa-fisica"><span data-i="5d4ce746">Pessoa Física</span></a><a href="/tradingcompany"><span data-i="e3cd5b2c">Trading</span></a><a aria-current="page" href="/vinhos"><span data-i="4dace3b0">Vinhos</span></a><a href="/bagagem-internacional"><span data-i="dcbcc054">Bagagem internacional</span></a><a href="/contato"><span data-i="1bd66dd4">Contato</span></a></div>
+<div class="extra"><a class="wa" data-i="cc068e4d" href="https://wa.me/5511941012210" rel="noopener" target="_blank">Falar no WhatsApp</a><p data-i="9f46f84c">Telefone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br</p><p><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></p></div>
+</div></div>
+<main class="page-main">
+<section class="page-head page-head-wine">
+<div class="wrap">
+<div class="ph-text">
+<p class="eyebrow" data-i="1443e6e4">Importação de vinhos</p>
+<h1 data-i="c2d07044">Mais de 25 anos de experiência da nossa equipe com importação de vinhos</h1>
+<p class="lead" data-i="83804b26">Conferimos cada laudo e cada documento antes do embarque. Assim reduzimos o risco de exigências, de retenção no porto e de custos extras de armazenagem.</p>
+</div>
+<figure class="ph-photo"><img alt="Garrafas de vinho deitadas em adega de madeira" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-vinho-armazem.jpg" style="object-position:50% 40%"/></figure>
+</div>
+</section>
+<section>
+<div class="wrap two-col">
+<div class="prose reveal">
+<p class="eyebrow" data-i="a9cd7896" style="color:var(--wine)">O que fazemos</p>
+<h2 data-i="ff1edbd6">A documentação certa para cada rótulo</h2>
+<p data-i="8d4d6fb2">Na importação de vinhos, um laudo fora do padrão ou um contrarrótulo com informação errada pode segurar a carga no porto. Nossa equipe confere tudo com base nas normas do MAPA antes de o vinho embarcar.</p>
+<p data-i="d998a23f">Atendemos importadores, pessoas físicas e envios de produtores da Europa.</p>
+<p data-i="73c1baea">Trabalha com um produtor no exterior? Orientamos o produtor sobre cada documento antes do embarque, em português, inglês ou espanhol. <a href="#produtores">Veja o que precisamos do produtor</a>.</p>
+</div>
+<ul class="checklist reveal" style="grid-template-columns:1fr">
+<li data-i="f7f3a958">Laudo de análise e Certificado de Origem</li>
+<li data-i="dd2a8ca2">Anexo IX e Anexo XI</li>
+<li data-i="524348d1">Conferência de denominação e teor alcoólico</li>
+<li data-i="0518748a">Contrarrótulo conforme a norma</li>
+<li data-i="e0027985">Importação por empresa ou pessoa física</li>
+<li data-i="b925e2ce">Envios de produtores da Europa</li>
+</ul>
+</div>
+</section>
+<section class="wines feature-rev" style="background:var(--card,#e6e1dd);border-top:1px solid var(--line)">
+<div class="wrap">
+<figure class="reveal"><img alt="Vinho tinto sendo servido em taças" loading="lazy" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-vinho-taca.jpg" style="object-position:50% 45%"/></figure>
+<div class="reveal prose-sm">
+<p class="eyebrow" data-i="44fd75fb" style="color:var(--wine)">Do produtor ao seu cliente</p>
+<h2 data-i="79b3e002">Cada rótulo conferido antes do embarque</h2>
+<p data-i="b0892cb2">Antes do embarque, conferimos o laudo de análise, o Certificado de Origem e as informações do contrarrótulo. Se algo não estiver de acordo com a norma, o produtor corrige ainda na origem.</p>
+<p data-i="be9be2fd">Com a documentação em ordem, a fiscalização do MAPA e o desembaraço correm com menos risco de exigências, e você acompanha cada etapa até o vinho chegar ao seu estoque.</p>
+<a class="btn btn-wine" data-assunto="Importação de vinhos" data-i="84367a4b" href="/contato?assunto=Importa%C3%A7%C3%A3o%20de%20vinhos">Falar sobre uma importação de vinhos</a>
+</div>
+</div>
+</section>
+<section class="photo-band" id="produtores" style="--bg:url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-vinho-armazem.jpg)">
+<div class="wrap">
+<div class="sec-head reveal">
+<div><p class="eyebrow" data-i="44f52806">Para produtores de vinho no exterior</p><h2 data-i="c8932b32">Enviar vinho ao Brasil: o que precisamos de você</h2></div>
+<p data-i="6d384648">O Ministério da Agricultura (MAPA) fiscaliza todo vinho importado. A maioria dos atrasos no porto vem de pequenas diferenças entre os documentos. Envie os rascunhos antes do embarque e conferimos tudo conforme as normas brasileiras. Cada vinho do embarque precisa do seu próprio conjunto de documentos, e nomes, lotes e números devem ser idênticos em todos eles.</p>
+</div>
+<div class="rules rules-3">
+<div class="rule reveal"><span class="rule-k" data-i="c1048966">Por embarque</span><h3 data-i="456139b2">Fatura comercial e packing list</h3><p data-i="3f02ad3d">Nome de cada vinho, lotes, quantidades, preços unitários e totais, idênticos aos do Certificado de Origem e do laudo.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="7b05d61b">Por vinho · Anexo IX</span><h3 data-i="d65ab2df">Certificado de Origem</h3><p data-i="9f93d57e">Emitido por órgão oficial, normalmente a câmara de comércio. Nome e endereço devem ser idênticos aos registros oficiais do Brasil.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="f13dea71">Por vinho e lote</span><h3 data-i="54fde540">Laudo de análise laboratorial</h3><p data-i="7b1d94b0">De laboratório reconhecido pelo MAPA, do mesmo vinho e lote embarcados, com teor alcoólico e teor de açúcar.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="e5c73b65">Quando exigido · Anexo XI</span><h3 data-i="e82bc2de">Declaração de tipicidade</h3><p data-i="98c03210">Exigida para alguns vinhos. Avisamos com antecedência se vale para os seus produtos.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="2a33a45b">Por vinho</span><h3 data-i="4306acc5">Contrarrótulo em português</h3><p data-i="48761839">Preparamos o texto com você. Ele traz a graduação alcoólica total, que deve bater com o laudo dentro da tolerância legal.</p></div>
+<div class="rule reveal"><span class="rule-k" data-i="c1048966">Por embarque</span><h3 data-i="5201295b">Conhecimento de embarque (BL ou AWB)</h3><p data-i="c1db65b4">Emitido pelo agente de cargas. Paletes ou caixas de madeira precisam da marca de tratamento ISPM 15.</p></div>
+</div>
+</div>
+</section>
+<section style="background:var(--card,#e6e1dd);border-block:1px solid var(--line)">
+<div class="wrap">
+<div class="sec-head reveal">
+<div><p class="eyebrow" data-i="0f3a404e" style="color:var(--wine)">Erros comuns</p><h2 data-i="263559f3">O que costuma segurar o vinho no porto</h2></div>
+<p data-i="30b87287">Tudo isso pode ser corrigido antes do embarque. Depois da chegada, cada erro significa dias a mais de armazenagem.</p>
+</div>
+<dl class="rows rows-2 reveal">
+<div><dt data-i="bbcea28d">Nomes diferentes dos registros oficiais</dt><dd data-i="1b4827e9">A câmara de comércio e o laboratório devem aparecer exatamente com o nome e o endereço registrados no MAPA.</dd></div>
+<div><dt data-i="a873417c">Lote ou nome do vinho diferente entre documentos</dt><dd data-i="5c52fa88">Fatura, certificado, laudo e rótulo precisam se referir ao mesmo vinho e ao mesmo lote.</dd></div>
+<div><dt data-i="8840d1c9">Classificação que o laudo não sustenta</dt><dd data-i="ba487a98">O Brasil classifica o vinho pela cor e pelo teor de açúcar (por exemplo, seco ou demi-sec). Os números do laudo precisam sustentar o nome do rótulo.</dd></div>
+<div><dt data-i="fe736732">Graduação do rótulo fora da tolerância</dt><dd data-i="506bb799">A graduação alcoólica do rótulo deve bater com o laudo dentro da tolerância permitida pelas normas brasileiras.</dd></div>
+</dl>
+</div>
+</section>
+<section>
+<div class="wrap">
+<div class="sec-head reveal">
+<div><p class="eyebrow" data-i="fa42438c" style="color:var(--wine)">Como funciona</p><h2 data-i="9ce7a96e">Primeiro conferir, depois embarcar</h2></div>
+</div>
+<div class="steps">
+<div class="step"><span class="num">01</span><div class="bar"></div><h3 data-i="a5d941f1">Envie os rascunhos</h3><p data-i="6df16984">Mande por e-mail a fatura, os certificados e os laudos antes de reservar o embarque.</p></div>
+<div class="step"><span class="num">02</span><div class="bar"></div><h3 data-i="f337cfd8">Nós conferimos</h3><p data-i="b87684dd">Conferimos cada documento com as normas brasileiras e os dados do importador.</p></div>
+<div class="step"><span class="num">03</span><div class="bar"></div><h3 data-i="2caa6b00">Correção na origem</h3><p data-i="3fec333a">Se algo precisar mudar, você corrige antes de o vinho sair da vinícola.</p></div>
+<div class="step"><span class="num">04</span><div class="bar"></div><h3 data-i="5847f1cc">Embarque</h3><p data-i="e4fe79d5">O vinho viaja com a documentação conferida, com menos risco de exigências na chegada ao Brasil.</p></div>
+</div>
+<div class="inline-cta reveal" style="background:var(--wine)">
+<p data-i="8ebc60fe"><strong style="color:var(--white)">Envie os documentos para contato@custombroker.com.br</strong> ou fale conosco pelo WhatsApp +55 11 94101-2210. Atendemos em português, inglês e espanhol.</p>
+<a class="btn btn-whats" href="https://wa.me/5511941012210?text=Hello%2C%20I%20am%20a%20wine%20producer%20and%20would%20like%20to%20send%20documents%20for%20review." rel="noopener" target="_blank">WhatsApp</a>
+</div>
+</div>
+</section>
+<section>
+<div class="wrap">
+<div class="sec-head reveal">
+<div><p class="eyebrow" data-i="a8c3305e" style="color:var(--wine)">Dúvidas frequentes</p><h2 data-i="1443e6e4">Importação de vinhos</h2></div>
+</div>
+<div class="faq reveal">
+<details><summary data-i="07923597">Quais documentos o produtor precisa enviar?</summary><p data-i="7d4805a1">Basicamente o Certificado de Origem, o laudo de análise e as informações para o contrarrótulo, além da fatura e do packing list. Conferimos tudo antes do embarque e orientamos o produtor se algo precisar de ajuste.</p></details>
+<details><summary data-i="3849a726">Por que conferir o laudo antes do embarque?</summary><p data-i="15b46bea">Diferenças entre o laudo, o rótulo e a norma podem gerar exigência do MAPA e deixar a carga parada no porto, com custo de armazenagem. Corrigir na origem é mais rápido e mais barato.</p></details>
+<details><summary data-i="496f8f7a">O que costuma segurar o vinho no porto?</summary><p data-i="e4896900">Nomes da câmara de comércio ou do laboratório diferentes dos registros oficiais, lote ou nome do vinho diferente entre fatura, certificado e laudo, classificação que o laudo não sustenta (cor e teor de açúcar) e graduação do rótulo fora da tolerância. Tudo isso pode ser corrigido antes do embarque.</p></details>
+<details><summary data-i="0d4c46df">Pessoa física pode importar vinho?</summary><p data-i="8ece857e">Sim, para consumo próprio, com autorização do MAPA para importação sem fins comerciais. As regras são diferentes das aplicadas a importadores. Veja a página <a href="/pessoa-fisica" style="color:var(--brand-dark);font-weight:600">Pessoa Física</a> ou fale com a gente.</p></details>
+</div>
+</div>
+</section>
+</main>
+<div aria-hidden="true" class="foot-spacer"></div>
+<footer class="foot" id="rodape">
+<div class="in">
+<p class="big" data-i="151f0abc">Vai importar um rótulo novo? Fale com a gente antes do embarque.</p>
+<p class="sub" data-i="37ba4a78">Mande o laudo e o rótulo do produtor e conferimos tudo antes de o vinho sair da origem.</p>
+<div class="grid">
+<dl><dt data-i="904ef931">Telefone</dt><dd>+55 11 2577-4757</dd><dt>WhatsApp</dt><dd>+55 11 94101-2210</dd><dt data-i="1e884e30">E-mail</dt><dd>contato@custombroker.com.br</dd></dl>
+<a class="cta" data-i="32db4728" href="https://wa.me/5511941012210?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20conferir%20os%20documentos%20de%20um%20vinho%20antes%20do%20embarque." rel="noopener" target="_blank">Enviar laudo e rótulo</a>
+</div>
+<div class="legal">
+<div data-i="54bda3a8"><b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00</div>
+<div data-i="33de9c2a">R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001</div>
+<div><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></div>
+</div>
+<small data-i="0dc62a4a">© 2026 Custom Broker. Todos os direitos reservados.</small>
+</div>
+</footer>
+<div aria-label="Aviso de cookies" class="cookie-b" hidden="" id="cookie" role="dialog">
+<p data-i="92daad1c">Usamos só cookies necessários para o site funcionar e para lembrar o seu idioma. O chat só grava cookies se você abri-lo. Não usamos cookies de publicidade nem de medição. Saiba mais na <a href="/privacidade">Política de Privacidade</a>.</p>
+<div class="ck-a"><button data-i="7d23bcfe" id="cookie-ok" type="button">Entendi</button></div>
+</div>
+<div aria-live="polite" class="toast" hidden="" role="status"></div>
+</div><script>(function(){
+  var D={"en": {"b87684dd": "We check every document against Brazilian standards and the importer's data.", "0518748a": "Back label compliant with the rules", "d998a23f": "We serve importers, individuals and shipments from European producers.", "92daad1c": "We only use cookies needed for the site to work and to remember your language. The chat only stores cookies if you open it. We do not use advertising or analytics cookies. Learn more in the <a href=\"/privacidade\">Privacy Policy</a>.", "73c1baea": "Working with a producer abroad? We guide the producer on each document before shipment, in Portuguese, English or Spanish. <a href=\"#produtores\">See what we need from the producer</a>.", "5d4ce746": "Individuals", "dd2a8ca2": "Annex IX and Annex XI", "6df16984": "Email the invoice, certificates and lab reports before booking the shipment.", "8ebc60fe": "<strong style=\"color:var(--white)\">Email your documents to contato@custombroker.com.br</strong> or message us on WhatsApp at +55 11 94101-2210. We reply in Portuguese, English and Spanish.", "2a33a45b": "Per wine", "b0892cb2": "Before shipment, we check the lab report, the Certificate of Origin and the back label information. If something does not comply with the rules, the producer corrects it at origin.", "98c03210": "Required for some wines. We tell you in advance whether it applies to your products.", "1443e6e4": "Wine imports", "f13dea71": "Per wine and lot", "83804b26": "We check every lab report and every document before shipment. This reduces the risk of requirements, of holds at the port and of extra storage costs.", "7d23bcfe": "Got it", "496f8f7a": "What usually holds wine at the port?", "3849a726": "Why check the lab report before shipment?", "627001be": "About", "ba487a98": "Brazil classifies wine by colour and sugar content (for example, dry or demi-sec). The lab figures must support the name on the label.", "c8932b32": "Shipping wine to Brazil: what we need from you", "7b1d94b0": "From a laboratory recognised by MAPA, for the same wine and lot you are shipping, including alcoholic strength and sugar content.", "07d63ea5": "Services", "9ce7a96e": "Check first, then ship", "524348d1": "Check of classification and alcohol content", "be9be2fd": "With the documents in order, MAPA inspection and clearance run with less risk of requirements, and you follow every step until the wine reaches your stock.", "3f02ad3d": "Name of each wine, lots, quantities, unit and total prices, identical to those on the Certificate of Origin and the lab report.", "b6154120": "Menu", "3fec333a": "If something needs a change, you correct it before the wine leaves your winery.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "30b87287": "All of these can be fixed before shipping. After arrival, each one means extra days in storage.", "48761839": "We prepare the text with you. It shows the total alcoholic strength, which must match the lab report within the legal tolerance.", "5847f1cc": "Ship", "a873417c": "Different lot or wine name between documents", "cc068e4d": "Chat on WhatsApp", "79b3e002": "Every label checked before shipment", "5201295b": "Bill of lading or air waybill (BL or AWB)", "1b4827e9": "The chamber of commerce and the laboratory must appear with exactly the same name and address registered with MAPA.", "8ece857e": "Yes, for personal consumption, with MAPA authorization for non-commercial import. The rules differ from those for importers. See the <a href=\"/pessoa-fisica\" style=\"color:var(--brand-dark);font-weight:600\">Individuals</a> page or talk to us.", "e4fe79d5": "The wine travels with checked documents, with less risk of requirements on arrival in Brazil.", "60324c31": "Privacy Policy", "fe736732": "Alcohol on the label outside tolerance", "a5d941f1": "Send drafts", "07923597": "Which documents does the producer need to send?", "e0027985": "Imports by companies or individuals", "8d4d6fb2": "In wine imports, a lab report outside the standard or a back label with wrong information can hold the cargo at the port. Our team checks everything against MAPA rules before the wine is shipped.", "fa42438c": "How it works", "dcbcc054": "International baggage", "37ba4a78": "Send the producer’s lab report and label and we will check everything before the wine leaves the origin.", "ff1edbd6": "The right documents for every label", "904ef931": "Phone", "7d4805a1": "Basically the Certificate of Origin, the lab report and the information for the back label, plus the invoice and packing list. We check everything before shipment and guide the producer if anything needs adjusting.", "e4896900": "Chamber of commerce or laboratory names that differ from official records, a lot or wine name that differs between invoice, certificate and lab report, a classification the report does not support (color and sugar content) and label alcohol outside tolerance. All of this can be fixed before shipment.", "32db4728": "Send lab report and label", "6d384648": "The Ministry of Agriculture (MAPA) inspects every imported wine. Most delays at the port come from small differences between documents. Send the drafts before shipment and we check everything against Brazilian rules. Each wine in the shipment needs its own set of documents, and names, lots and numbers must be identical in all of them.", "9f93d57e": "Issued by an official body, usually the chamber of commerce. Its name and address must match Brazil's official records exactly.", "44fd75fb": "From the producer to your customer", "d65ab2df": "Certificate of Origin", "7b05d61b": "Per wine · Annex IX", "44f52806": "For wine producers abroad", "e82bc2de": "Typicity statement", "94db4e17": "Home", "54fde540": "Laboratory analysis report", "0f3a404e": "Common mistakes", "f337cfd8": "We review", "c2d07044": "Over 25 years of our team’s experience importing wine", "84367a4b": "Talk about a wine import", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brazil", "23781b5e": "Close", "456139b2": "Commercial invoice and packing list", "a8c3305e": "Frequently asked questions", "c1db65b4": "Issued by your forwarder. Wooden pallets or cases must carry the ISPM 15 treatment mark.", "9f46f84c": "Phone +55 11 2577-4757<br/>Email contato@custombroker.com.br", "4dace3b0": "Wine", "5c52fa88": "The invoice, certificate, lab report and label must all refer to the same wine and the same lot.", "b925e2ce": "Shipments from European producers", "bbcea28d": "Names that do not match official records", "f7f3a958": "Lab report and Certificate of Origin", "506bb799": "The alcoholic strength on the label must match the lab report within the tolerance allowed by Brazilian rules.", "e5c73b65": "When required · Annex XI", "15b46bea": "Differences between the lab report, the label and the rules can lead to a MAPA query and leave the cargo stuck at the port, with storage costs. Correcting at origin is faster and cheaper.", "e3cd5b2c": "Trading", "1bd66dd4": "Contact", "8840d1c9": "Classification not supported by the analysis", "a9cd7896": "What we do", "0dc62a4a": "© 2026 Custom Broker. All rights reserved.", "2caa6b00": "Fix at origin", "c1048966": "Per shipment", "0d4c46df": "Can individuals import wine?", "4306acc5": "Portuguese back label", "151f0abc": "Importing a new label? Talk to us before shipment.", "263559f3": "What usually stops wine at the port", "1e884e30": "Email"}, "es": {"b87684dd": "Revisamos cada documento según las normas brasileñas y los datos del importador.", "0518748a": "Contraetiqueta conforme a la norma", "d998a23f": "Atendemos a importadores, personas físicas y envíos de productores de Europa.", "92daad1c": "Solo usamos cookies necesarias para que el sitio funcione y para recordar tu idioma. El chat solo guarda cookies si lo abres. No usamos cookies de publicidad ni de medición. Más información en la <a href=\"/privacidade\">Política de Privacidad</a>.", "73c1baea": "¿Trabajas con un productor en el exterior? Orientamos al productor sobre cada documento antes del embarque, en portugués, inglés o español. <a href=\"#produtores\">Mira lo que necesitamos del productor</a>.", "5d4ce746": "Personas físicas", "dd2a8ca2": "Anexo IX y Anexo XI", "6df16984": "Mande por correo la factura, los certificados y los análisis antes de reservar el embarque.", "8ebc60fe": "<strong style=\"color:var(--white)\">Envíe los documentos a contato@custombroker.com.br</strong> o escríbanos por WhatsApp al +55 11 94101-2210. Atendemos en portugués, inglés y español.", "2a33a45b": "Por vino", "b0892cb2": "Antes del embarque, revisamos el análisis, el Certificado de Origen y la información de la contraetiqueta. Si algo no cumple la norma, el productor lo corrige en origen.", "98c03210": "Exigida para algunos vinos. Le avisamos con antelación si se aplica a sus productos.", "1443e6e4": "Importación de vinos", "f13dea71": "Por vino y lote", "83804b26": "Revisamos cada laudo y cada documento antes del embarque. Así reducimos el riesgo de exigencias, de retención en el puerto y de costos extra de almacenaje.", "7d23bcfe": "Entendido", "496f8f7a": "¿Qué suele retener el vino en el puerto?", "3849a726": "¿Por qué revisar el análisis antes del embarque?", "627001be": "Nosotros", "ba487a98": "Brasil clasifica el vino por color y contenido de azúcar (por ejemplo, seco o demi-sec). Las cifras del análisis deben respaldar el nombre de la etiqueta.", "c8932b32": "Enviar vino a Brasil: lo que necesitamos de usted", "7b1d94b0": "De un laboratorio reconocido por el MAPA, del mismo vino y lote embarcados, con grado alcohólico y contenido de azúcar.", "07d63ea5": "Servicios", "9ce7a96e": "Primero revisar, después embarcar", "524348d1": "Revisión de denominación y grado alcohólico", "be9be2fd": "Con la documentación en orden, la fiscalización del MAPA y el despacho corren con menos riesgo de exigencias, y acompañas cada etapa hasta que el vino llega a tu stock.", "3f02ad3d": "Nombre de cada vino, lotes, cantidades, precios unitarios y totales, idénticos a los del Certificado de Origen y del laudo.", "b6154120": "Menú", "3fec333a": "Si algo necesita cambiar, usted lo corrige antes de que el vino salga de la bodega.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "30b87287": "Todo esto puede corregirse antes del embarque. Después de la llegada, cada error significa días extra de almacenaje.", "48761839": "Preparamos el texto con usted. Indica el grado alcohólico total, que debe coincidir con el análisis dentro de la tolerancia legal.", "5847f1cc": "Embarque", "a873417c": "Lote o nombre del vino distinto entre documentos", "cc068e4d": "Hablar por WhatsApp", "79b3e002": "Cada etiqueta revisada antes del embarque", "5201295b": "Conocimiento de embarque (BL o AWB)", "1b4827e9": "La cámara de comercio y el laboratorio deben figurar exactamente con el nombre y la dirección registrados en el MAPA.", "8ece857e": "Sí, para consumo propio, con autorización del MAPA para importación sin fines comerciales. Las reglas son diferentes de las de los importadores. Mira la página <a href=\"/pessoa-fisica\" style=\"color:var(--brand-dark);font-weight:600\">Persona Física</a> o habla con nosotros.", "e4fe79d5": "El vino viaja con la documentación revisada, con menos riesgo de exigencias a la llegada a Brasil.", "60324c31": "Política de Privacidad", "fe736732": "Grado de la etiqueta fuera de tolerancia", "a5d941f1": "Envíe los borradores", "07923597": "¿Qué documentos debe enviar el productor?", "e0027985": "Importación por empresa o persona física", "8d4d6fb2": "En la importación de vinos, un análisis fuera del estándar o una contraetiqueta con información errónea puede retener la carga en el puerto. Nuestro equipo lo revisa todo según las normas del MAPA antes de que el vino embarque.", "fa42438c": "Cómo funciona", "dcbcc054": "Equipaje internacional", "37ba4a78": "Envía el laudo y la etiqueta del productor y revisamos todo antes de que el vino salga del origen.", "ff1edbd6": "La documentación correcta para cada etiqueta", "904ef931": "Teléfono", "7d4805a1": "Básicamente el Certificado de Origen, el análisis y la información para la contraetiqueta, además de la factura y el packing list. Lo revisamos todo antes del embarque y orientamos al productor si algo necesita ajuste.", "e4896900": "Nombres de la cámara de comercio o del laboratorio diferentes de los registros oficiales, lote o nombre del vino distinto entre factura, certificado y laudo, clasificación que el laudo no sostiene (color y contenido de azúcar) y graduación de la etiqueta fuera de la tolerancia. Todo esto puede corregirse antes del embarque.", "32db4728": "Enviar laudo y etiqueta", "6d384648": "El Ministerio de Agricultura (MAPA) fiscaliza todo vino importado. La mayoría de los atrasos en el puerto viene de pequeñas diferencias entre los documentos. Envía los borradores antes del embarque y revisamos todo según las normas brasileñas. Cada vino del embarque necesita su propio conjunto de documentos, y nombres, lotes y números deben ser idénticos en todos ellos.", "9f93d57e": "Emitido por un organismo oficial, normalmente la cámara de comercio. Nombre y dirección deben coincidir exactamente con los registros oficiales de Brasil.", "44fd75fb": "Del productor a su cliente", "d65ab2df": "Certificado de Origen", "7b05d61b": "Por vino · Anexo IX", "44f52806": "Para productores de vino en el exterior", "e82bc2de": "Declaración de tipicidad", "94db4e17": "Inicio", "54fde540": "Informe de análisis de laboratorio", "0f3a404e": "Errores comunes", "f337cfd8": "Nosotros revisamos", "c2d07044": "Más de 25 años de experiencia de nuestro equipo en importación de vinos", "84367a4b": "Hablar sobre una importación de vinos", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasil", "23781b5e": "Cerrar", "456139b2": "Factura comercial y packing list", "a8c3305e": "Preguntas frecuentes", "c1db65b4": "Emitido por el agente de carga. Los palés o cajas de madera deben llevar la marca de tratamiento ISPM 15.", "9f46f84c": "Teléfono +55 11 2577-4757<br/>Correo contato@custombroker.com.br", "4dace3b0": "Vinos", "5c52fa88": "Factura, certificado, análisis y etiqueta deben referirse al mismo vino y al mismo lote.", "b925e2ce": "Envíos de productores de Europa", "bbcea28d": "Nombres distintos de los registros oficiales", "f7f3a958": "Análisis y Certificado de Origen", "506bb799": "El grado alcohólico de la etiqueta debe coincidir con el análisis dentro de la tolerancia permitida por las normas brasileñas.", "e5c73b65": "Cuando se exige · Anexo XI", "15b46bea": "Las diferencias entre el análisis, la etiqueta y la norma pueden generar un requerimiento del MAPA y dejar la carga parada en el puerto, con costo de almacenaje. Corregir en origen es más rápido y más barato.", "e3cd5b2c": "Trading", "1bd66dd4": "Contacto", "8840d1c9": "Clasificación que el análisis no respalda", "a9cd7896": "Lo que hacemos", "0dc62a4a": "© 2026 Custom Broker. Todos los derechos reservados.", "2caa6b00": "Corrección en origen", "c1048966": "Por embarque", "0d4c46df": "¿Una persona física puede importar vino?", "4306acc5": "Contraetiqueta en portugués", "151f0abc": "¿Vas a importar una etiqueta nueva? Habla con nosotros antes del embarque.", "263559f3": "Lo que suele retener el vino en el puerto", "1e884e30": "Correo"}, "fr": {"b87684dd": "Nous contrôlons chaque document selon les normes brésiliennes et les données de l'importateur.", "0518748a": "Contre-étiquette conforme à la norme", "d998a23f": "Nous accompagnons importateurs, particuliers et envois de producteurs européens.", "92daad1c": "Nous utilisons uniquement les cookies nécessaires au fonctionnement du site et à la mémorisation de votre langue. Le chat n'enregistre des cookies que si vous l'ouvrez. Nous n'utilisons pas de cookies publicitaires ni de mesure d'audience. En savoir plus dans la <a href=\"/privacidade\">Politique de confidentialité</a>.", "73c1baea": "Vous travaillez avec un producteur à l'étranger ? Nous guidons le producteur sur chaque document avant l'expédition, en portugais, anglais ou espagnol. <a href=\"#produtores\">Voir ce dont nous avons besoin du producteur</a>.", "5d4ce746": "Particuliers", "dd2a8ca2": "Annexe IX et Annexe XI", "6df16984": "Envoyez par e-mail la facture, les certificats et les analyses avant de réserver l'expédition.", "8ebc60fe": "<strong style=\"color:var(--white)\">Envoyez vos documents à contato@custombroker.com.br</strong> ou écrivez-nous sur WhatsApp au +55 11 94101-2210. Nous répondons en portugais, anglais et espagnol.", "2a33a45b": "Par vin", "b0892cb2": "Avant l'embarquement, nous vérifions l'analyse, le certificat d'origine et les informations de la contre-étiquette. Si quelque chose n'est pas conforme, le producteur le corrige dès l'origine.", "98c03210": "Exigée pour certains vins. Nous vous indiquons à l'avance si elle s'applique à vos produits.", "1443e6e4": "Importation de vins", "f13dea71": "Par vin et par lot", "83804b26": "Nous vérifions chaque rapport d'analyse et chaque document avant l'expédition. Cela réduit le risque d'exigences, de blocage au port et de frais de stockage supplémentaires.", "7d23bcfe": "J'ai compris", "496f8f7a": "Qu’est-ce qui bloque souvent le vin au port ?", "3849a726": "Pourquoi vérifier l'analyse avant l'embarquement ?", "627001be": "À propos", "ba487a98": "Le Brésil classe le vin selon sa couleur et sa teneur en sucre (par exemple, sec ou demi-sec). Les chiffres de l'analyse doivent justifier la mention de l'étiquette.", "c8932b32": "Expédier du vin au Brésil : ce dont nous avons besoin", "7b1d94b0": "D'un laboratoire reconnu par le MAPA, pour le même vin et le même lot expédiés, avec titre alcoométrique et teneur en sucre.", "07d63ea5": "Services", "9ce7a96e": "Vérifier d'abord, expédier ensuite", "524348d1": "Contrôle de la dénomination et du titre alcoométrique", "be9be2fd": "Avec des documents en ordre, l'inspection du MAPA et le dédouanement se déroulent avec moins de risque d'exigences, et vous suivez chaque étape jusqu'à l'arrivée du vin dans votre stock.", "3f02ad3d": "Nom de chaque vin, lots, quantités, prix unitaires et totaux, identiques à ceux du certificat d'origine et du rapport d'analyse.", "b6154120": "Menu", "3fec333a": "Si quelque chose doit changer, vous le corrigez avant que le vin ne quitte votre domaine.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "30b87287": "Tout cela peut être corrigé avant l'expédition. Après l'arrivée, chaque erreur signifie des jours de stockage en plus.", "48761839": "Nous préparons le texte avec vous. Il indique le titre alcoométrique total, qui doit correspondre à l'analyse dans la tolérance légale.", "5847f1cc": "Expédition", "a873417c": "Lot ou nom du vin différent entre les documents", "cc068e4d": "Écrire sur WhatsApp", "79b3e002": "Chaque étiquette vérifiée avant l'expédition", "5201295b": "Connaissement ou LTA (BL ou AWB)", "1b4827e9": "La chambre de commerce et le laboratoire doivent figurer exactement avec le nom et l'adresse enregistrés auprès du MAPA.", "8ece857e": "Oui, pour consommation personnelle, avec une autorisation du MAPA pour importation sans but commercial. Les règles diffèrent de celles des importateurs. Voir la page <a href=\"/pessoa-fisica\" style=\"color:var(--brand-dark);font-weight:600\">Particuliers</a> ou contactez-nous.", "e4fe79d5": "Le vin voyage avec des documents vérifiés, avec moins de risque d'exigences à l'arrivée au Brésil.", "60324c31": "Politique de confidentialité", "fe736732": "Titre alcoométrique de l'étiquette hors tolérance", "a5d941f1": "Envoyez les brouillons", "07923597": "Quels documents le producteur doit-il envoyer ?", "e0027985": "Importation par une entreprise ou un particulier", "8d4d6fb2": "Dans l'importation de vins, une analyse hors norme ou une contre-étiquette erronée peut bloquer la marchandise au port. Notre équipe vérifie tout selon les normes du MAPA avant l'embarquement du vin.", "fa42438c": "Comment ça marche", "dcbcc054": "Bagages internationaux", "37ba4a78": "Envoyez le rapport d'analyse et l'étiquette du producteur et nous vérifions tout avant que le vin quitte l'origine.", "ff1edbd6": "Les bons documents pour chaque étiquette", "904ef931": "Téléphone", "7d4805a1": "Essentiellement le certificat d'origine, l'analyse et les informations pour la contre-étiquette, ainsi que la facture et la liste de colisage. Nous vérifions tout avant l'embarquement et guidons le producteur si un ajustement est nécessaire.", "e4896900": "Noms de la chambre de commerce ou du laboratoire différents des registres officiels, lot ou nom du vin différent entre facture, certificat et rapport, classification que le rapport ne justifie pas (couleur et teneur en sucre) et titre alcoométrique de l'étiquette hors tolérance. Tout cela peut être corrigé avant l'expédition.", "32db4728": "Envoyer rapport et étiquette", "6d384648": "Le ministère de l'Agriculture (MAPA) contrôle tout vin importé. La plupart des retards au port viennent de petites différences entre les documents. Envoyez les brouillons avant l'expédition et nous vérifions tout selon les normes brésiliennes. Chaque vin de l'envoi a besoin de son propre jeu de documents, et les noms, lots et numéros doivent être identiques partout.", "9f93d57e": "Délivré par un organisme officiel, généralement la chambre de commerce. Son nom et son adresse doivent correspondre exactement aux registres officiels du Brésil.", "44fd75fb": "Du producteur à votre client", "d65ab2df": "Certificat d'origine", "7b05d61b": "Par vin · Annexe IX", "44f52806": "Pour les producteurs de vin à l'étranger", "e82bc2de": "Déclaration de typicité", "94db4e17": "Accueil", "54fde540": "Bulletin d'analyse de laboratoire", "0f3a404e": "Erreurs fréquentes", "f337cfd8": "Nous vérifions", "c2d07044": "Plus de 25 ans d'expérience de notre équipe dans l'importation de vins", "84367a4b": "Parler d'une importation de vins", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brésil", "23781b5e": "Fermer", "456139b2": "Facture commerciale et liste de colisage", "a8c3305e": "Questions fréquentes", "c1db65b4": "Émis par votre transitaire. Les palettes ou caisses en bois doivent porter la marque de traitement ISPM 15.", "9f46f84c": "Téléphone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "4dace3b0": "Vins", "5c52fa88": "Facture, certificat, analyse et étiquette doivent porter sur le même vin et le même lot.", "b925e2ce": "Envois de producteurs européens", "bbcea28d": "Noms différents des registres officiels", "f7f3a958": "Analyse et certificat d'origine", "506bb799": "Le titre alcoométrique de l'étiquette doit correspondre à l'analyse dans la tolérance admise par les normes brésiliennes.", "e5c73b65": "Si exigé · Annexe XI", "15b46bea": "Des écarts entre l'analyse, l'étiquette et la norme peuvent entraîner une demande de régularisation du MAPA et bloquer la marchandise au port, avec des frais de stockage. Corriger à l'origine est plus rapide et moins cher.", "e3cd5b2c": "Trading", "1bd66dd4": "Contact", "8840d1c9": "Classification non justifiée par l'analyse", "a9cd7896": "Ce que nous faisons", "0dc62a4a": "© 2026 Custom Broker. Tous droits réservés.", "2caa6b00": "Correction à l'origine", "c1048966": "Par expédition", "0d4c46df": "Un particulier peut-il importer du vin ?", "4306acc5": "Contre-étiquette en portugais", "151f0abc": "Vous importez une nouvelle référence ? Parlez-nous avant l'expédition.", "263559f3": "Ce qui bloque le plus souvent le vin au port", "1e884e30": "E-mail"}, "it": {"b87684dd": "Controlliamo ogni documento secondo le norme brasiliane e i dati dell'importatore.", "0518748a": "Retroetichetta conforme alla norma", "d998a23f": "Assistiamo importatori, privati e spedizioni di produttori europei.", "92daad1c": "Usiamo solo i cookie necessari al funzionamento del sito e per ricordare la tua lingua. La chat salva cookie solo se la apri. Non usiamo cookie pubblicitari né di misurazione. Maggiori informazioni nell'<a href=\"/privacidade\">Informativa sulla privacy</a>.", "73c1baea": "Lavori con un produttore all'estero? Guidiamo il produttore su ogni documento prima dell'imbarco, in portoghese, inglese o spagnolo. <a href=\"#produtores\">Guarda cosa ci serve dal produttore</a>.", "5d4ce746": "Privati", "dd2a8ca2": "Allegato IX e Allegato XI", "6df16984": "Invia via e-mail fattura, certificati e analisi prima di prenotare la spedizione.", "8ebc60fe": "<strong style=\"color:var(--white)\">Invia i documenti a contato@custombroker.com.br</strong> o scrivici su WhatsApp al +55 11 94101-2210. Rispondiamo in portoghese, inglese e spagnolo.", "2a33a45b": "Per vino", "b0892cb2": "Prima dell'imbarco controlliamo l'analisi, il certificato di origine e le informazioni della retroetichetta. Se qualcosa non è conforme alla norma, il produttore lo corregge già all'origine.", "98c03210": "Richiesta per alcuni vini. Ti avvisiamo in anticipo se riguarda i tuoi prodotti.", "1443e6e4": "Importazione di vini", "f13dea71": "Per vino e lotto", "83804b26": "Controlliamo ogni certificato di analisi e ogni documento prima dell'imbarco. Così riduciamo il rischio di richieste, di fermo in porto e di costi extra di magazzinaggio.", "7d23bcfe": "Ho capito", "496f8f7a": "Cosa blocca di solito il vino in porto?", "3849a726": "Perché controllare l'analisi prima dell'imbarco?", "627001be": "Chi siamo", "ba487a98": "Il Brasile classifica il vino in base al colore e al contenuto zuccherino (per esempio, secco o demi-sec). I valori dell'analisi devono supportare la denominazione in etichetta.", "c8932b32": "Spedire vino in Brasile: cosa ci serve da te", "7b1d94b0": "Di un laboratorio riconosciuto dal MAPA, per lo stesso vino e lotto spediti, con titolo alcolometrico e contenuto zuccherino.", "07d63ea5": "Servizi", "9ce7a96e": "Prima controllare, poi spedire", "524348d1": "Controllo di denominazione e titolo alcolometrico", "be9be2fd": "Con la documentazione in ordine, il controllo del MAPA e lo sdoganamento procedono con meno rischio di richieste, e segui ogni fase finché il vino arriva in magazzino.", "3f02ad3d": "Nome di ogni vino, lotti, quantità, prezzi unitari e totali, identici a quelli del Certificato di Origine e del certificato di analisi.", "b6154120": "Menu", "3fec333a": "Se qualcosa va cambiato, lo correggi prima che il vino lasci la cantina.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "30b87287": "Tutto questo si può correggere prima della spedizione. Dopo l'arrivo, ogni errore significa giorni di magazzinaggio in più.", "48761839": "Prepariamo il testo con te. Riporta il titolo alcolometrico totale, che deve coincidere con l'analisi entro la tolleranza di legge.", "5847f1cc": "Spedizione", "a873417c": "Lotto o nome del vino diverso tra i documenti", "cc068e4d": "Scrivici su WhatsApp", "79b3e002": "Ogni etichetta controllata prima dell'imbarco", "5201295b": "Polizza di carico o lettera di vettura aerea (BL o AWB)", "1b4827e9": "La camera di commercio e il laboratorio devono comparire esattamente con il nome e l'indirizzo registrati presso il MAPA.", "8ece857e": "Sì, per consumo personale, con autorizzazione del MAPA per importazione senza fini commerciali. Le regole sono diverse da quelle per gli importatori. Vedi la pagina <a href=\"/pessoa-fisica\" style=\"color:var(--brand-dark);font-weight:600\">Privati</a> o parlaci.", "e4fe79d5": "Il vino viaggia con la documentazione controllata, con meno rischio di richieste all'arrivo in Brasile.", "60324c31": "Informativa sulla privacy", "fe736732": "Titolo alcolometrico in etichetta fuori tolleranza", "a5d941f1": "Invia le bozze", "07923597": "Quali documenti deve inviare il produttore?", "e0027985": "Importazione da parte di aziende o privati", "8d4d6fb2": "Nell'importazione di vini, un'analisi fuori standard o una retroetichetta con informazioni errate può bloccare la merce in porto. Il nostro team controlla tutto secondo le norme del MAPA prima che il vino venga imbarcato.", "fa42438c": "Come funziona", "dcbcc054": "Bagaglio internazionale", "37ba4a78": "Invia l'analisi e l'etichetta del produttore e controlliamo tutto prima che il vino parta dall'origine.", "ff1edbd6": "La documentazione giusta per ogni etichetta", "904ef931": "Telefono", "7d4805a1": "In sostanza il certificato di origine, l'analisi e le informazioni per la retroetichetta, oltre a fattura e packing list. Controlliamo tutto prima dell'imbarco e guidiamo il produttore se serve qualche modifica.", "e4896900": "Nomi della camera di commercio o del laboratorio diversi dai registri ufficiali, lotto o nome del vino diverso tra fattura, certificato e analisi, classificazione non supportata dall'analisi (colore e contenuto di zucchero) e gradazione in etichetta fuori tolleranza. Tutto questo si può correggere prima dell'imbarco.", "32db4728": "Invia analisi ed etichetta", "6d384648": "Il Ministero dell'Agricoltura (MAPA) controlla ogni vino importato. La maggior parte dei ritardi in porto nasce da piccole differenze tra i documenti. Invia le bozze prima dell'imbarco e controlliamo tutto secondo le norme brasiliane. Ogni vino della spedizione ha bisogno del proprio set di documenti, e nomi, lotti e numeri devono essere identici in tutti.", "9f93d57e": "Rilasciato da un ente ufficiale, di solito la camera di commercio. Nome e indirizzo devono coincidere esattamente con i registri ufficiali del Brasile.", "44fd75fb": "Dal produttore al tuo cliente", "d65ab2df": "Certificato di origine", "7b05d61b": "Per vino · Allegato IX", "44f52806": "Per i produttori di vino all'estero", "e82bc2de": "Dichiarazione di tipicità", "94db4e17": "Home", "54fde540": "Bollettino di analisi di laboratorio", "0f3a404e": "Errori comuni", "f337cfd8": "Noi controlliamo", "c2d07044": "Oltre 25 anni di esperienza del nostro team nell'importazione di vini", "84367a4b": "Parla di un'importazione di vini", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasile", "23781b5e": "Chiudi", "456139b2": "Fattura commerciale e packing list", "a8c3305e": "Domande frequenti", "c1db65b4": "Emessa dal tuo spedizioniere. Pallet o casse in legno devono avere il marchio di trattamento ISPM 15.", "9f46f84c": "Telefono +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "4dace3b0": "Vini", "5c52fa88": "Fattura, certificato, analisi ed etichetta devono riferirsi allo stesso vino e allo stesso lotto.", "b925e2ce": "Spedizioni di produttori europei", "bbcea28d": "Nomi diversi dai registri ufficiali", "f7f3a958": "Analisi e certificato di origine", "506bb799": "Il titolo alcolometrico in etichetta deve coincidere con l'analisi entro la tolleranza ammessa dalle norme brasiliane.", "e5c73b65": "Se richiesto · Allegato XI", "15b46bea": "Differenze tra analisi, etichetta e norma possono generare una richiesta del MAPA e lasciare la merce ferma in porto, con costi di magazzinaggio. Correggere all'origine è più rapido ed economico.", "e3cd5b2c": "Trading", "1bd66dd4": "Contatti", "8840d1c9": "Classificazione non supportata dall'analisi", "a9cd7896": "Cosa facciamo", "0dc62a4a": "© 2026 Custom Broker. Tutti i diritti riservati.", "2caa6b00": "Correzione all'origine", "c1048966": "Per spedizione", "0d4c46df": "Un privato può importare vino?", "4306acc5": "Retroetichetta in portoghese", "151f0abc": "Importi una nuova etichetta? Parlaci prima dell'imbarco.", "263559f3": "Cosa blocca più spesso il vino in porto", "1e884e30": "E-mail"}, "de": {"b87684dd": "Wir prüfen jedes Dokument anhand der brasilianischen Vorschriften und der Daten des Importeurs.", "0518748a": "Normgerechtes Rückenetikett", "d998a23f": "Wir betreuen Importeure, Privatpersonen und Sendungen europäischer Erzeuger.", "92daad1c": "Wir verwenden nur Cookies, die für die Funktion der Website und zum Speichern Ihrer Sprache nötig sind. Der Chat speichert nur Cookies, wenn Sie ihn öffnen. Wir verwenden keine Werbe- oder Analyse-Cookies. Mehr in der <a href=\"/privacidade\">Datenschutzerklärung</a>.", "73c1baea": "Sie arbeiten mit einem Erzeuger im Ausland? Wir begleiten den Erzeuger bei jedem Dokument vor der Verschiffung, auf Portugiesisch, Englisch oder Spanisch. <a href=\"#produtores\">Sehen Sie, was wir vom Erzeuger brauchen</a>.", "5d4ce746": "Privatpersonen", "dd2a8ca2": "Anhang IX und Anhang XI", "6df16984": "Senden Sie Rechnung, Zeugnisse und Analysen per E-Mail, bevor Sie die Verschiffung buchen.", "8ebc60fe": "<strong style=\"color:var(--white)\">Senden Sie Ihre Dokumente an contato@custombroker.com.br</strong> oder schreiben Sie uns per WhatsApp an +55 11 94101-2210. Wir antworten auf Portugiesisch, Englisch und Spanisch.", "2a33a45b": "Pro Wein", "b0892cb2": "Vor der Verschiffung prüfen wir die Analyse, das Ursprungszeugnis und die Angaben des Rückenetiketts. Entspricht etwas nicht der Norm, korrigiert der Erzeuger es schon am Ursprung.", "98c03210": "Für einige Weine erforderlich. Wir sagen Ihnen vorab, ob sie für Ihre Produkte gilt.", "1443e6e4": "Weinimport", "f13dea71": "Pro Wein und Los", "83804b26": "Wir prüfen jeden Analysebericht und jedes Dokument vor der Verschiffung. So sinkt das Risiko von Auflagen, Zurückhaltung im Hafen und zusätzlichen Lagerkosten.", "7d23bcfe": "Verstanden", "496f8f7a": "Was hält Wein im Hafen meist auf?", "3849a726": "Warum die Analyse vor der Verschiffung prüfen?", "627001be": "Über uns", "ba487a98": "Brasilien klassifiziert Wein nach Farbe und Zuckergehalt (zum Beispiel trocken oder demi-sec). Die Laborwerte müssen die Bezeichnung auf dem Etikett stützen.", "c8932b32": "Wein nach Brasilien senden: was wir von Ihnen brauchen", "7b1d94b0": "Von einem vom MAPA anerkannten Labor, für denselben Wein und dasselbe Los, mit Alkoholgehalt und Zuckergehalt.", "07d63ea5": "Leistungen", "9ce7a96e": "Erst prüfen, dann verschiffen", "524348d1": "Prüfung von Bezeichnung und Alkoholgehalt", "be9be2fd": "Mit geordneten Unterlagen laufen MAPA-Kontrolle und Verzollung mit weniger Auflagenrisiko, und Sie verfolgen jeden Schritt, bis der Wein in Ihrem Lager ist.", "3f02ad3d": "Name jedes Weins, Lose, Mengen, Einzel- und Gesamtpreise, identisch mit Ursprungszeugnis und Analysebericht.", "b6154120": "Menü", "3fec333a": "Wenn etwas geändert werden muss, korrigieren Sie es, bevor der Wein Ihr Weingut verlässt.", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "30b87287": "All das lässt sich vor der Verschiffung korrigieren. Nach der Ankunft bedeutet jeder Fehler zusätzliche Lagertage.", "48761839": "Wir erstellen den Text mit Ihnen. Er nennt den Gesamtalkoholgehalt, der innerhalb der gesetzlichen Toleranz mit der Analyse übereinstimmen muss.", "5847f1cc": "Verschiffung", "a873417c": "Abweichendes Los oder abweichender Weinname zwischen Dokumenten", "cc068e4d": "Per WhatsApp schreiben", "79b3e002": "Jedes Etikett vor der Verschiffung geprüft", "5201295b": "Konnossement oder Luftfrachtbrief (BL oder AWB)", "1b4827e9": "Handelskammer und Labor müssen exakt mit dem beim MAPA registrierten Namen und der Adresse erscheinen.", "8ece857e": "Ja, für den Eigenbedarf, mit MAPA-Genehmigung für nichtkommerzielle Einfuhr. Die Regeln unterscheiden sich von denen für Importeure. Siehe die Seite <a href=\"/pessoa-fisica\" style=\"color:var(--brand-dark);font-weight:600\">Privatpersonen</a> oder sprechen Sie mit uns.", "e4fe79d5": "Der Wein reist mit geprüften Unterlagen und weniger Auflagenrisiko bei der Ankunft in Brasilien.", "60324c31": "Datenschutzerklärung", "fe736732": "Alkoholangabe auf dem Etikett außerhalb der Toleranz", "a5d941f1": "Entwürfe senden", "07923597": "Welche Dokumente muss der Erzeuger senden?", "e0027985": "Import durch Unternehmen oder Privatpersonen", "8d4d6fb2": "Beim Weinimport kann eine Analyse außerhalb der Norm oder ein Rückenetikett mit falschen Angaben die Ware im Hafen festhalten. Unser Team prüft alles nach den MAPA-Vorgaben, bevor der Wein verschifft wird.", "fa42438c": "So funktioniert es", "dcbcc054": "Internationales Gepäck", "37ba4a78": "Senden Sie Analysebericht und Etikett des Erzeugers, und wir prüfen alles, bevor der Wein das Ursprungsland verlässt.", "ff1edbd6": "Die richtigen Dokumente für jedes Etikett", "904ef931": "Telefon", "7d4805a1": "Im Wesentlichen das Ursprungszeugnis, die Analyse und die Angaben für das Rückenetikett, dazu Rechnung und Packliste. Wir prüfen alles vor der Verschiffung und beraten den Erzeuger, wenn etwas angepasst werden muss.", "e4896900": "Namen von Handelskammer oder Labor, die von den amtlichen Registern abweichen, Los oder Weinname, die zwischen Rechnung, Zeugnis und Analyse abweichen, eine Einstufung, die die Analyse nicht stützt (Farbe und Zuckergehalt), und ein Alkoholgehalt auf dem Etikett außerhalb der Toleranz. All das lässt sich vor der Verschiffung korrigieren.", "32db4728": "Analyse und Etikett senden", "6d384648": "Das Landwirtschaftsministerium (MAPA) kontrolliert jeden importierten Wein. Die meisten Verzögerungen im Hafen entstehen durch kleine Unterschiede zwischen den Dokumenten. Senden Sie die Entwürfe vor der Verschiffung, und wir prüfen alles nach brasilianischen Vorschriften. Jeder Wein der Sendung braucht einen eigenen Satz Dokumente, und Namen, Lose und Nummern müssen überall identisch sein.", "9f93d57e": "Ausgestellt von einer amtlichen Stelle, meist der Handelskammer. Name und Adresse müssen exakt mit den amtlichen Registern Brasiliens übereinstimmen.", "44fd75fb": "Vom Erzeuger zu Ihrem Kunden", "d65ab2df": "Ursprungszeugnis", "7b05d61b": "Pro Wein · Anhang IX", "44f52806": "Für Weinerzeuger im Ausland", "e82bc2de": "Typizitätserklärung", "94db4e17": "Startseite", "54fde540": "Laboranalysebericht", "0f3a404e": "Häufige Fehler", "f337cfd8": "Wir prüfen", "c2d07044": "Über 25 Jahre Erfahrung unseres Teams mit Weinimporten", "84367a4b": "Über einen Weinimport sprechen", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasilien", "23781b5e": "Schließen", "456139b2": "Handelsrechnung und Packliste", "a8c3305e": "Häufige Fragen", "c1db65b4": "Ausgestellt von Ihrem Spediteur. Holzpaletten oder -kisten müssen die ISPM-15-Behandlungsmarke tragen.", "9f46f84c": "Telefon +55 11 2577-4757<br/>E-Mail contato@custombroker.com.br", "4dace3b0": "Wein", "5c52fa88": "Rechnung, Zeugnis, Analyse und Etikett müssen sich auf denselben Wein und dasselbe Los beziehen.", "b925e2ce": "Sendungen europäischer Erzeuger", "bbcea28d": "Namen, die nicht mit den amtlichen Registern übereinstimmen", "f7f3a958": "Analyse und Ursprungszeugnis", "506bb799": "Der Alkoholgehalt auf dem Etikett muss innerhalb der nach brasilianischen Vorschriften zulässigen Toleranz mit der Analyse übereinstimmen.", "e5c73b65": "Falls verlangt · Anhang XI", "15b46bea": "Abweichungen zwischen Analyse, Etikett und Norm können eine MAPA-Auflage auslösen und die Ware im Hafen festhalten, mit Lagerkosten. Am Ursprung zu korrigieren ist schneller und günstiger.", "e3cd5b2c": "Trading", "1bd66dd4": "Kontakt", "8840d1c9": "Klassifizierung, die die Analyse nicht stützt", "a9cd7896": "Was wir tun", "0dc62a4a": "© 2026 Custom Broker. Alle Rechte vorbehalten.", "2caa6b00": "Korrektur am Ursprung", "c1048966": "Pro Sendung", "0d4c46df": "Dürfen Privatpersonen Wein importieren?", "4306acc5": "Rückenetikett auf Portugiesisch", "151f0abc": "Sie importieren ein neues Etikett? Sprechen Sie vor der Verschiffung mit uns.", "263559f3": "Was Wein im Hafen meist aufhält", "1e884e30": "E-Mail"}, "zh": {"b87684dd": "我们按照巴西标准和进口商信息审核每份文件。", "0518748a": "符合规定的背标", "d998a23f": "我们服务进口商、个人客户以及来自欧洲生产商的货物。", "92daad1c": "我们只使用网站运行和记住您语言所必需的 Cookie。聊天窗口只有在您打开时才会存储 Cookie。我们不使用广告或统计 Cookie。详情请见<a href=\"/privacidade\">隐私政策</a>。", "73c1baea": "与海外酒庄合作？我们会在装运前用葡萄牙语、英语或西班牙语指导酒庄准备每份文件。<a href=\"#produtores\">查看我们需要酒庄提供的材料</a>。", "5d4ce746": "个人客户", "dd2a8ca2": "附件 IX 和附件 XI", "6df16984": "在订舱前通过邮件发送发票、证书和检测报告。", "8ebc60fe": "<strong style=\"color:var(--white)\">请将文件发送至 contato@custombroker.com.br</strong>，或通过 WhatsApp +55 11 94101-2210 联系我们。我们可使用葡萄牙语、英语和西班牙语沟通。", "2a33a45b": "每款酒", "b0892cb2": "装运前，我们审核检测报告、原产地证书和背标信息。如有不符合规定之处，生产商可在原产地更正。", "98c03210": "部分葡萄酒需要。我们会提前告知是否适用于您的产品。", "1443e6e4": "葡萄酒进口", "f13dea71": "每款酒每个批次", "83804b26": "我们在装运前核对每一份检测报告和每一份文件，降低被要求补正、在港口滞留以及额外仓储费用的风险。", "7d23bcfe": "知道了", "496f8f7a": "什么原因常导致葡萄酒在港口滞留？", "3849a726": "为什么要在装运前审核检测报告？", "627001be": "关于我们", "ba487a98": "巴西按颜色和含糖量对葡萄酒分类（例如干型或半干型）。检测数据必须支持酒标上的名称。", "c8932b32": "向巴西发运葡萄酒：我们需要您提供什么", "7b1d94b0": "由 MAPA 认可的实验室出具，针对所发运的同一款酒和同一批次，包括酒精度和含糖量。", "07d63ea5": "服务", "9ce7a96e": "先审核，再发货", "524348d1": "核对酒类名称和酒精度", "be9be2fd": "文件齐全时，MAPA 检查和清关被要求补正的风险更低，您可以跟进每一步，直到葡萄酒入库。", "3f02ad3d": "每款酒的名称、批次、数量、单价和总价，须与原产地证书和检测报告完全一致。", "b6154120": "菜单", "3fec333a": "如需修改，请在葡萄酒离开酒庄前更正。", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "30b87287": "这些都可以在发货前纠正。到港后，每个错误都意味着额外的仓储天数。", "48761839": "我们与您一起准备文字。背标标注总酒精度，须在法定误差范围内与检测报告一致。", "5847f1cc": "发货", "a873417c": "文件之间批号或酒名不一致", "cc068e4d": "通过 WhatsApp 联系", "79b3e002": "每张酒标都在装运前核对", "5201295b": "提单或空运单（BL 或 AWB）", "1b4827e9": "商会和实验室的名称和地址必须与在 MAPA 登记的完全一致。", "8ece857e": "可以，用于个人消费，需取得 MAPA 的非商业进口许可。规则与进口商不同。请查看<a href=\"/pessoa-fisica\" style=\"color:var(--brand-dark);font-weight:600\">个人进口</a>页面或联系我们。", "e4fe79d5": "葡萄酒带着核对过的文件出运，抵达巴西时被要求补正的风险更低。", "60324c31": "隐私政策", "fe736732": "酒标酒精度超出误差范围", "a5d941f1": "发送草稿", "07923597": "生产商需要提供哪些文件？", "e0027985": "企业或个人进口", "8d4d6fb2": "在葡萄酒进口中，不合规的检测报告或信息有误的背标都可能导致货物滞留港口。我们的团队会在葡萄酒装运前按照 MAPA 规定审核一切。", "fa42438c": "服务流程", "dcbcc054": "国际行李", "37ba4a78": "发送酒庄的检测报告和酒标，我们会在酒离开原产地前全部核对。", "ff1edbd6": "每个酒标都有正确的文件", "904ef931": "电话", "7d4805a1": "主要是原产地证书、检测报告和背标信息，以及发票和装箱单。我们在装运前审核所有文件，如需调整会指导生产商。", "e4896900": "商会或实验室名称与官方登记不一致；发票、证书和检测报告中的批次或酒名不一致；检测报告不支持的分类（颜色和含糖量）；酒标上的酒精度超出允许误差。这些问题都可以在装运前纠正。", "32db4728": "发送检测报告和酒标", "6d384648": "巴西农业部（MAPA）会检查每一款进口葡萄酒。港口延误大多源于文件之间的细微差异。请在装运前发送草稿，我们会按巴西规定逐项核对。每款酒都需要一套单独的文件，且所有文件中的名称、批次和编号必须完全一致。", "9f93d57e": "由官方机构出具，通常为商会。名称和地址必须与巴西官方登记完全一致。", "44fd75fb": "从生产商到您的客户", "d65ab2df": "原产地证书", "7b05d61b": "每款酒 · 附件 IX", "44f52806": "致海外葡萄酒生产商", "e82bc2de": "典型性声明", "94db4e17": "首页", "54fde540": "实验室检测报告", "0f3a404e": "常见错误", "f337cfd8": "我们审核", "c2d07044": "我们团队拥有 25 年以上的葡萄酒进口经验", "84367a4b": "咨询葡萄酒进口", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · 巴西", "23781b5e": "关闭", "456139b2": "商业发票和装箱单", "a8c3305e": "常见问题", "c1db65b4": "由您的货代出具。木托盘或木箱必须带有 ISPM 15 处理标识。", "9f46f84c": "电话 +55 11 2577-4757<br/>邮箱 contato@custombroker.com.br", "4dace3b0": "葡萄酒", "5c52fa88": "发票、证书、检测报告和酒标必须对应同一款酒和同一批次。", "b925e2ce": "欧洲生产商发货", "bbcea28d": "名称与官方登记不一致", "f7f3a958": "检测报告和原产地证书", "506bb799": "酒标上的酒精度必须在巴西规定允许的误差范围内与检测报告一致。", "e5c73b65": "如有要求 · 附件 XI", "15b46bea": "检测报告、酒标和规定之间的差异可能导致 MAPA 提出补充要求，使货物滞留港口并产生仓储费用。在原产地更正更快也更省钱。", "e3cd5b2c": "贸易公司", "1bd66dd4": "联系我们", "8840d1c9": "检测报告不支持的分类", "a9cd7896": "我们的服务", "0dc62a4a": "© 2026 Custom Broker。保留所有权利。", "2caa6b00": "在原产地更正", "c1048966": "每批货物", "0d4c46df": "个人可以进口葡萄酒吗？", "4306acc5": "葡萄牙语背标", "151f0abc": "要进口新酒款？装运前先联系我们。", "263559f3": "葡萄酒最常滞留港口的原因", "1e884e30": "邮箱"}};
+  var HL={pt:'pt-BR',en:'en',es:'es',fr:'fr',it:'it',de:'de',zh:'zh-CN'};
+  var root=document.getElementById('cb');if(!root)return;
+  var els=[].slice.call(root.querySelectorAll('[data-i]'));
+  els.forEach(function(e){e.__pt=e.innerHTML;});
+  var cur='pt';
+  function t(l,k){return (D[l]||{})[k];}
+  window.cbTx=function(k,pt){return cur==='pt'?pt:(t(cur,k)||pt);};
+  function apply(l,save){
+    if(!HL[l])l='pt';cur=l;
+    els.forEach(function(e){var v=l==='pt'?e.__pt:t(l,e.getAttribute('data-i'));if(v!=null&&e.innerHTML!==v)e.innerHTML=v;});
+    document.documentElement.lang=HL[l];
+    [].slice.call(root.querySelectorAll('.pnav .lang')).forEach(function(b){b.textContent=l.toUpperCase();});
+    [].slice.call(root.querySelectorAll('.langm [data-l]')).forEach(function(b){b.setAttribute('aria-current',b.getAttribute('data-l')===l?'true':'false');});
+    var mb=root.querySelector('.menu-b');if(mb)mb.textContent=mb.getAttribute('aria-expanded')==='true'?cbTx('23781b5e','Fechar'):cbTx('b6154120','Menu');
+    if(save){try{localStorage.setItem('cb_lang',l);}catch(e){}}
+  }
+  window.cbSetLang=function(l){apply(l,true);};
+  var l='pt';
+  try{var q=new URLSearchParams(location.search).get('lang');if(q&&HL[q]){l=q;localStorage.setItem('cb_lang',q);}else{var s=localStorage.getItem('cb_lang');if(s&&HL[s])l=s;}}catch(e){}
+  apply(l,false);
+})();
+</script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script><script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script><script>/* Comum a todas as páginas: carregamento, rolagem suave, menu, rodapé revelado, botões magnéticos */
+(function(){
+  const CB=window.CB={intro:[],lenis:null};
+  // cada página abre sempre no topo (sem herdar a posição da página anterior)
+  try{history.scrollRestoration='manual';}catch(e){}
+  const toTop=()=>{if(location.hash)return;scrollTo(0,0);CB.lenis&&CB.lenis.scrollTo(0,{immediate:true,force:true});
+    // quando a prévia está dentro de outra página, leva também o quadro para o topo
+    try{if(window.top!==window.self)document.documentElement.scrollIntoView({block:'start'});}catch(e){}};
+  toTop();addEventListener('pageshow',toTop);
+  const loader=document.querySelector('.loader');
+  const foot=document.querySelector('.foot');
+  const setFH=()=>{if(foot)document.documentElement.style.setProperty('--fh',foot.offsetHeight+'px');};
+  setFH();addEventListener('resize',setFH);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const runIntro=()=>{loader&&loader.classList.add('done');CB.intro.forEach(f=>{try{f()}catch(e){console.error(e)}});CB.started=true;};
+  CB.onIntro=f=>{CB.started?f():CB.intro.push(f);};
+  CB.mobile=matchMedia('(max-width: 820px) and (pointer: coarse)').matches;
+  // dispara uma vez quando o elemento aparece na tela (funciona em qualquer rolagem, também no celular)
+  CB.see=(el,fn,margin)=>{if(!el)return;if(!('IntersectionObserver' in window))return fn();
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{rootMargin:margin||'0px 0px -12% 0px'});io.observe(el);};
+
+  // celular: botão flutuante do WhatsApp
+  if(!document.querySelector('.wa-float')){const w=document.createElement('a');w.className='wa-float';w.href='https://wa.me/5511941012210';w.target='_blank';w.rel='noopener';w.setAttribute('aria-label','Falar no WhatsApp');
+    w.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    document.body.appendChild(w);}
+
+  // menu (funciona mesmo sem GSAP)
+  const btn=document.querySelector('.menu-b'),ov=document.querySelector('.povl'),nav=document.querySelector('.pnav');
+  ov&&ov.setAttribute('data-lenis-prevent','');
+  let open=false;
+  function closeMenu(){if(!open)return;open=false;btn.textContent=window.cbTx?cbTx('b6154120','Menu'):'Menu';btn.setAttribute('aria-expanded','false');
+    if(window.gsap&&!reduce)gsap.to(ov,{clipPath:'inset(0 0 100% 0)',duration:.6,ease:'expo.inOut',onComplete:()=>ov.hidden=true});else{ov.hidden=true;}
+    CB.lenis&&CB.lenis.start();}
+  CB.closeMenu=closeMenu;
+  btn&&btn.addEventListener('click',()=>{if(open)return closeMenu();open=true;const ckb=document.getElementById('cookie');ckb&&(ckb.hidden=true);ov.hidden=false;btn.textContent=window.cbTx?cbTx('23781b5e','Fechar'):'Fechar';btn.setAttribute('aria-expanded','true');CB.lenis&&CB.lenis.stop();
+    if(window.gsap&&!reduce){gsap.timeline().to(ov,{clipPath:'inset(0 0 0% 0)',duration:.7,ease:'expo.inOut'}).from(ov.querySelectorAll('.big a span'),{yPercent:110,duration:.8,stagger:.05,ease:'expo.out'},'-=.3').from(ov.querySelector('.extra'),{opacity:0,y:30,duration:.6},'-=.5');}
+    else ov.style.clipPath='none';});
+
+  // aviso curto
+  const toastEl=document.querySelector('.toast');let tt;
+  CB.toast=(html,ms)=>{if(!toastEl)return;toastEl.innerHTML=html;toastEl.hidden=false;clearTimeout(tt);tt=setTimeout(()=>toastEl.hidden=true,ms||5000);};
+  // seletor de idioma
+  const lb=document.querySelector('.pnav .lang'),lm=document.querySelector('.langm');
+  if(lb&&lm){
+    const NAMES={pt:'Português',en:'English',es:'Español',fr:'Français',it:'Italiano',de:'Deutsch',zh:'中文（普通话）'};
+    const setOpen=o=>{lm.hidden=!o;lb.setAttribute('aria-expanded',String(o));};
+    lb.addEventListener('click',e=>{e.stopPropagation();setOpen(lm.hidden);});
+    document.addEventListener('click',e=>{if(!lm.hidden&&!lm.contains(e.target))setOpen(false);});
+    lm.querySelectorAll('button').forEach(b=>{if(b.dataset.l==='pt')b.setAttribute('aria-current','true');
+      b.addEventListener('click',()=>{setOpen(false);const l=b.dataset.l;
+        window.cbSetLang&&cbSetLang(l);});});
+  }
+  // cookies
+  const ck=document.getElementById('cookie');
+  if(ck){let v=null;try{v=localStorage.getItem('cb-cookies');}catch(e){}
+    if(!v)setTimeout(()=>ck.hidden=false,1800);
+    const set=x=>{try{localStorage.setItem('cb-cookies',x);}catch(e){}ck.hidden=true;};
+    document.getElementById('cookie-ok').addEventListener('click',()=>set('todos'));
+    const ckn=document.getElementById('cookie-no');ckn&&ckn.addEventListener('click',()=>set('necessarios'));
+    const re=document.getElementById('cookie-reopen');re&&re.addEventListener('click',()=>{ck.hidden=false;});}
+
+  addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();lm&&(lm.hidden=true);}});
+
+  if(!window.gsap||reduce){runIntro();return;}
+  gsap.registerPlugin(ScrollTrigger,SplitText,ScrambleTextPlugin);
+
+  if(window.Lenis&&!CB.mobile){CB.lenis=new Lenis({lerp:.09});CB.lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>CB.lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);toTop();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();closeMenu();CB.lenis.scrollTo(t,{offset:-90,duration:1.3});}}));}
+
+  ScrollTrigger.create({start:140,onUpdate:s=>nav&&nav.classList.toggle('small',s.scroll()>140)});
+
+  // botões magnéticos (só com mouse)
+  gsap.matchMedia().add('(hover: hover) and (pointer: fine)',()=>{
+    document.querySelectorAll('.mag,.foot .cta,.pnav .wa').forEach(b=>{
+      const xT=gsap.quickTo(b,'x',{duration:.6,ease:'elastic.out(1,.4)'}),yT=gsap.quickTo(b,'y',{duration:.6,ease:'elastic.out(1,.4)'});
+      b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();xT((e.clientX-r.left-r.width/2)*.35);yT((e.clientY-r.top-r.height/2)*.35);});
+      b.addEventListener('pointerleave',()=>{xT(0);yT(0);});
+    });
+  });
+
+  // rodapé: a chamada sobe enquanto é revelada
+  if(foot&&!CB.mobile){const big=new SplitText(foot.querySelector('.big'),{type:'words,chars'});
+    gsap.from(big.chars,{yPercent:100,opacity:0,stagger:.012,ease:'expo.out',scrollTrigger:{trigger:'.foot-spacer',start:'top 85%',end:'bottom bottom',scrub:1}});}
+
+  // carregamento só na primeira visita
+  let first=!!loader;try{if(sessionStorage.getItem('cbSeen'))first=false;sessionStorage.setItem('cbSeen','1');}catch(e){}
+  if(first&&loader){const c={v:0},cnt=loader.querySelector('.count');
+    gsap.timeline().to(c,{v:100,duration:1.2,ease:'power2.inOut',onUpdate:()=>cnt.textContent=Math.round(c.v)+'%'})
+      .to(loader,{clipPath:'inset(0 0 100% 0)',duration:.8,ease:'expo.inOut'}).add(runIntro,'-=.35');}
+  else runIntro();
+  addEventListener('load',()=>{setFH();ScrollTrigger.refresh();});
+})();
+
+/* Chat (JivoChat) carregado só quando a pessoa clica — LGPD: sem cookies do chat antes do clique.
+   Na Locaweb: desligar o JivoChat automático e preencher o código do widget em CB_JIVO_ID. */
+(function(){
+  const ID=window.CB_JIVO_ID||'OthWJcb9T1';if(!ID)return;
+  const b=document.createElement('button');b.type='button';b.className='chat-btn';b.setAttribute('aria-label','Abrir o chat');
+  b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span>Chat</span>';
+  document.body.appendChild(b);
+  let loading=false;
+  b.addEventListener('click',()=>{
+    if(window.jivo_api){window.jivo_api.open();return;}
+    if(loading)return;loading=true;b.classList.add('is-loading');
+    window.jivo_onLoadCallback=function(){b.remove();try{window.jivo_api.open();}catch(e){}};
+    const s=document.createElement('script');s.src='https://code.jivosite.com/widget/'+encodeURIComponent(ID);s.async=true;
+    s.onerror=()=>{loading=false;b.classList.remove('is-loading');};
+    document.head.appendChild(s);
+  });
+})();
+
+/* Páginas internas: movimento aplicado aos blocos de conteúdo existentes */
+(function(){
+  // formulário de contato: monta a mensagem e abre o WhatsApp
+  const form=document.querySelector('form.form');
+  if(form)form.addEventListener('submit',e=>{e.preventDefault();
+    if(!form.reportValidity())return;
+    const v=n=>{const el=form.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+    const txt='Olá, Custom Broker.\nNome: '+v('nome')+'\nE-mail: '+v('email')+(v('telefone')?'\nTelefone: '+v('telefone'):'')+'\nAssunto: '+v('assunto')+(v('mensagem')?'\n\n'+v('mensagem'):'');
+    const url='https://wa.me/5511941012210?text='+encodeURIComponent(txt);
+    let n=form.querySelector('.f-go');if(!n){n=document.createElement('p');n.className='f-go';form.appendChild(n);}
+    n.innerHTML='Mensagem pronta. <a class="btn btn-whats" href="'+url+'" target="_blank" rel="noopener">Abrir no WhatsApp</a>';
+    n.querySelector('a').focus();});
+  // painéis de fotos (Pessoa Física): o painel escolhido abre e os outros encolhem
+  document.querySelectorAll('.pf-panels').forEach(g=>{const ps=[...g.querySelectorAll('.pfp')];
+    const open=p=>ps.forEach(x=>x.classList.toggle('is-open',x===p));
+    ps.forEach(p=>{p.addEventListener('mouseenter',()=>open(p));p.addEventListener('focus',()=>open(p));p.addEventListener('click',()=>open(p));});});
+  // assunto vindo de um botão (?assunto=...)
+  try{const a=new URLSearchParams(location.search).get('assunto'),sel=document.querySelector('select[name="assunto"]');
+    if(a&&sel){const o=[...sel.options].find(o=>o.text===a);if(o)sel.value=o.value;}}catch(e){}
+  if(!window.gsap||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const CB=window.CB,M=CB.mobile;
+  // dispara uma vez: no celular quando aparece na tela, no computador pelo ScrollTrigger
+  const on=(el,start,fn)=>M?CB.see(el,fn):ScrollTrigger.create({trigger:el,start,once:true,onEnter:fn});
+
+  // topo da página: foto em tela cheia aproxima e título sobe linha por linha
+  const ph=document.querySelector('.page-head');
+  if(ph){
+    const h1=ph.querySelector('h1');const sp=new SplitText(h1,{type:'lines',mask:'lines'});
+    const img=ph.querySelector('.ph-photo img');
+    gsap.set(sp.lines,{yPercent:110});gsap.set(ph.querySelectorAll('.eyebrow,.lead,.ph-text .btn,.ph-text .hero-actions,.ph-text .edge,.ph-text p:not(.eyebrow):not(.lead)'),{opacity:0,y:30});
+    const R=matchMedia('(max-width: 820px)').matches?'0px':'28px';
+    CB.onIntro(()=>{const tl=gsap.timeline();
+      if(img)tl.fromTo(img.parentElement,{clipPath:'inset(100% 0 0 0 round '+R+')'},{clipPath:'inset(0% 0 0 0 round '+R+')',duration:1.4,ease:'expo.out',clearProps:'clipPath'},0).fromTo(img,{scale:1.25},{scale:1,duration:1.8,ease:'expo.out'},0);
+      // nome da página cai com peso, passa do ponto e assenta; o traço estica com mola
+      const eb=ph.querySelector('.eyebrow');
+      tl.fromTo(eb,{opacity:0,y:-60,rotate:-7},{opacity:1,y:0,rotate:0,duration:1.3,ease:'elastic.out(1,.45)'},.05);
+      if(eb)tl.fromTo(eb,{'--b':0},{'--b':1,duration:1.1,ease:'elastic.out(1.1,.35)'},.3);
+      tl
+        .to(sp.lines,{yPercent:0,duration:1.1,stagger:.09,ease:'expo.out'},.15)
+        .to(ph.querySelectorAll('.lead,.ph-text .btn,.ph-text .hero-actions,.ph-text .edge,.ph-text p:not(.eyebrow):not(.lead)'),{opacity:1,y:0,duration:1,stagger:.1,ease:'expo.out'},.45);});
+    if(img&&!M)gsap.to(img.parentElement,{yPercent:-10,ease:'none',scrollTrigger:{trigger:ph,start:'top top',end:'bottom top',scrub:true}});
+  }
+
+  // títulos de seção sobem de dentro de uma máscara
+  document.querySelectorAll('main section:not(.page-head) h2').forEach(h=>{
+    const s=new SplitText(h,{type:'lines',mask:'lines'});
+    gsap.set(s.lines,{yPercent:110});on(h,'top 88%',()=>gsap.to(s.lines,{yPercent:0,duration:1.1,stagger:.08,ease:'expo.out'}));
+  });
+  // rótulos curtos acima dos títulos
+  gsap.utils.toArray('main section:not(.page-head) .eyebrow').forEach(e=>{if(M||e.matches('.prose > p,.prose-sm > p'))return;gsap.set(e,{opacity:0,x:-24});on(e,'top 90%',()=>gsap.to(e,{opacity:1,x:0,duration:.8,ease:'expo.out'}));});
+
+  // fotos reveladas de baixo para cima, com leve zoom
+  gsap.utils.toArray('main section:not(.page-head) figure img, .tile-img img, .cta-photo img').forEach(im=>{
+    if(M)im.loading='eager';gsap.set(im,{clipPath:'inset(100% 0 0 0)',scale:1.25});on(M?(im.closest('figure,.tile-img,.cta-photo')||im.parentElement):im,'top 85%',()=>gsap.to(im,{clipPath:'inset(0% 0 0 0)',scale:1,duration:1.4,ease:'expo.out'}));
+    if(!M)gsap.to(im,{yPercent:-6,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  // blocos em grupo entram com peso (passam um pouco do ponto e assentam)
+  const groups=['.pf-panels .pfp','.tiles .tile','.rules .rule','.cards .card','.steps .step','.pillars li','.rows > div','.checklist li','.faq details','.fact','.edge > div','.contact-side > *','.form > *','.legal > *','.prose > p','.prose-sm > p','.dots-list li','.more-list > *','.inline-cta','.compare'];
+  const enter=b=>gsap.fromTo(b,{y:48,opacity:0,rotate:()=>gsap.utils.random(-1.2,1.2)},{y:0,x:0,opacity:1,rotate:0,duration:1,stagger:.08,ease:'back.out(1.7)',overwrite:true,clearProps:'transform'});
+  if(M)document.querySelectorAll(groups.join(',')).forEach(el=>CB.see(el,()=>enter([el])));
+  else ScrollTrigger.batch(groups.join(','),{start:'top 90%',once:true,onEnter:enter});
+  gsap.set(groups.join(','),{opacity:0});
+
+  // passos: a barra enche conforme a rolagem
+  gsap.utils.toArray('.steps').forEach(st=>{st.classList.remove('armed');
+    if(M){gsap.set(st.querySelectorAll('.bar'),{'--p':0});CB.see(st,()=>gsap.to(st.querySelectorAll('.bar'),{'--p':1,duration:1.2,stagger:.3,ease:'power2.out'}));}
+    else gsap.fromTo(st.querySelectorAll('.bar'),{'--p':0},{'--p':1,stagger:.25,ease:'none',scrollTrigger:{trigger:st,start:'top 80%',end:'bottom 55%',scrub:true}});});
+
+  // números e rótulos: entrada suave (sem letras embaralhadas)
+  gsap.utils.toArray('.fact .n, .rule-k, .edge b').forEach(n=>{gsap.set(n,{opacity:0,y:12});
+    on(n,'top 88%',()=>gsap.to(n,{opacity:1,y:0,duration:1,ease:'power3.out'}));});
+
+  // comparação do ICMS: barras crescem com a rolagem e assentam com mola
+  gsap.utils.toArray('.compare').forEach(c=>{c.classList.remove('armed');
+    gsap.set(c.querySelectorAll('.cmp-bar i'),{scaleX:0});on(c,'top 75%',()=>gsap.to(c.querySelectorAll('.cmp-bar i'),{scaleX:1,duration:1.6,stagger:.15,ease:'elastic.out(1,.55)'}));});
+
+  // perguntas: abrir com movimento
+  document.querySelectorAll('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open){const p=d.querySelector('p');p&&gsap.from(p,{y:-10,opacity:0,duration:.5,ease:'expo.out'});}}));
+
+  // seção escura de chamada: entra com leve escala
+  if(!M)gsap.utils.toArray('section.cta').forEach(c=>gsap.from(c,{clipPath:'inset(8% 4% 8% 4% round 28px)',ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top 35%',scrub:true}}));
+})();
+</script>

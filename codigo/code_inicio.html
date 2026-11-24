@@ -1,0 +1,755 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"><style>html,body{margin:0}
+:root{
+--c-navy:#17181f;--c-navy-2:#161b2f;--c-steel:#8d8f8e;--c-signal:#d4cdc8;--c-go:#1f9d5c;
+--c-f:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+.loader{position:fixed;inset:0;z-index:100;background:var(--c-navy);color:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:24px max(24px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));font-family:var(--c-f)}
+.loader .count{font-weight:800;font-stretch:125%;font-size:clamp(72px,16vw,220px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.loader .who{color:var(--c-steel);font-size:15px;max-width:22ch;text-align:right}
+.loader.done{display:none}
+.pnav{position:fixed;z-index:50;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:7px 7px 7px 14px;border-radius:999px;background:rgba(23,24,31,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);width:min(1080px,calc(100% - 32px));justify-content:space-between;transition:width .5s cubic-bezier(.2,.8,.2,1);font-family:var(--c-f);color:#fff}
+.pnav.small{width:min(460px,calc(100% - 32px))}
+.pnav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-stretch:112%;white-space:nowrap;font-size:16px}
+.pnav .brand img{width:22px;height:34px;object-fit:contain}
+.pnav .links{display:flex;gap:16px;font-size:15px}
+.pnav .links a{text-decoration:none;color:#e2deda;padding:6px 2px;border-bottom:2px solid transparent}
+.pnav .links a:hover{color:#fff}
+.pnav .links a[aria-current="page"]{color:#fff;border-color:var(--c-signal)}
+.pnav.small .links{display:none}
+.pnav .r{display:flex;align-items:center;gap:8px}
+.pnav .wa{background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;white-space:nowrap}
+.pnav .menu-b{border:0;background:#fff;color:var(--c-navy);font:600 15px var(--c-f);padding:10px 16px;border-radius:999px;cursor:pointer}
+@media (max-width:1100px){.pnav .links{display:none}.pnav{width:min(560px,calc(100% - 32px))}}
+@media (max-width:520px){.pnav .wa,.pnav .lang{display:none}}
+.povl{position:fixed;inset:0;z-index:45;background:var(--c-navy);color:#fff;font-family:var(--c-f);overflow-y:auto;padding:100px max(20px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));clip-path:inset(0 0 100% 0)}
+.povl .in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+@media (max-width:820px){.povl .in{grid-template-columns:1fr}}
+.povl .big a{display:block;overflow:hidden;text-decoration:none;color:#fff;font-weight:800;font-stretch:125%;font-size:clamp(34px,6vw,80px);line-height:1.04;letter-spacing:-.03em}
+.povl .big a span{display:inline-block}
+.povl .big a:hover,.povl .big a[aria-current="page"]{color:var(--c-signal)}
+.povl .extra{display:grid;gap:18px;color:var(--c-steel);font-size:16px}
+.povl .extra a{color:#fff}
+.povl .extra p{margin:0}
+.povl .extra .wa{justify-self:start;background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;padding:16px 24px;border-radius:999px}
+.page-main{position:relative;z-index:2}
+.foot-spacer{height:var(--fh,560px)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:1;background:#161b2f;color:#fff;font-family:var(--c-f);padding:56px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.foot .in{max-width:1280px;margin:0 auto}
+.foot .big{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(36px,6.6vw,104px);line-height:.92;letter-spacing:-.045em;max-width:18ch}
+.foot .sub{margin:16px 0 0;font-size:19px;max-width:46ch}
+.foot .grid{display:flex;flex-wrap:wrap;gap:24px 56px;justify-content:space-between;align-items:flex-end;margin-top:32px}
+.foot dl{margin:0;display:grid;grid-template-columns:auto auto;gap:6px 20px;font-size:16px}
+.foot dt{font-weight:700}.foot dd{margin:0}
+.foot .cta{display:inline-flex;background:var(--c-signal);color:var(--c-navy);text-decoration:none;font-weight:600;font-size:18px;padding:20px 30px;border-radius:999px;will-change:transform}
+.foot .legal{display:flex;flex-wrap:wrap;gap:16px 48px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(212,205,200,.25);font-size:14px;line-height:1.5}
+.foot .legal a{color:#d4cdc8;text-underline-offset:3px}
+.foot small{display:block;margin-top:20px;font-size:13px;opacity:.75}
+@media (max-height:700px),(max-width:600px){.foot{position:relative}.foot-spacer{display:none}}
+@media (prefers-reduced-motion:reduce){.loader{display:none}}
+.langw{position:relative}
+.pnav .lang{font:700 13px var(--c-f);color:#fff;background:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 12px;line-height:1;cursor:pointer}
+.pnav .lang:hover{border-color:#fff}
+.langm{position:absolute;right:0;top:calc(100% + 10px);list-style:none;margin:0;padding:6px;min-width:190px;background:#fff;border-radius:16px;box-shadow:0 18px 40px rgba(23,24,31,.25);z-index:5}
+.langm button{display:block;width:100%;text-align:left;font:500 15px var(--c-f);color:var(--c-navy);background:none;border:0;border-radius:10px;padding:10px 12px;cursor:pointer}
+.langm button:hover,.langm button[aria-current="true"]{background:#d4cdc8}
+@media (max-width:520px){.pnav .langw{display:none}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;max-width:min(560px,calc(100% - 32px));background:var(--c-navy);color:#fff;font:15px/1.45 var(--c-f);padding:14px 18px;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.toast a{color:var(--c-signal)}
+.cookie-b{position:fixed;z-index:65;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:#fff;color:#2b3142;border-radius:20px;box-shadow:0 18px 44px rgba(23,24,31,.25);padding:20px;font:15px/1.5 var(--c-f);display:grid;gap:14px}
+.cookie-b[hidden]{display:none}
+.cookie-b p{margin:0}.cookie-b a{color:#3f4a5e;font-weight:600}
+.ck-a{display:flex;flex-wrap:wrap;gap:10px}
+.ck-a button{font:600 15px var(--c-f);border-radius:999px;padding:11px 18px;cursor:pointer;border:2px solid var(--c-navy);background:#fff;color:var(--c-navy)}
+.ck-a button:first-child{background:var(--c-navy);color:#fff}
+@media (max-width:640px){.cookie-b{left:12px;right:12px;max-width:none}}
+.btn,.cta,.wa,.menu-b,.lang,.ck-a button,.langm button{transition:scale .18s cubic-bezier(.34,1.56,.64,1)}
+.btn:active,.cta:active,.wa:active,.menu-b:active,.lang:active,.ck-a button:active{scale:.94 1.04;transition-duration:.08s}
+@media (hover:hover){.btn:hover,.cta:hover,.wa:hover,.menu-b:hover{scale:1.04}}
+.page-head .btn-primary,.inline-cta .btn-primary,section.cta .btn-primary{background:var(--c-signal);color:var(--c-navy)}
+.page-head .btn-primary:hover,.inline-cta .btn-primary:hover,section.cta .btn-primary:hover{background:#e8e3df;box-shadow:none}
+.wa-float{display:none}
+@media (max-width:820px){
+.wa-float{display:flex;position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--c-go);color:#fff;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(23,24,31,.35);text-decoration:none}
+.wa-float svg{width:30px;height:30px}
+.pnav{padding:6px 6px 6px 12px}
+.pnav .brand{font-size:15px}
+}
+@media (max-width:820px){
+.page-head{min-height:min(100svh,860px)!important;display:flex!important;align-items:flex-end;padding-block:120px 40px!important}
+.page-head .wrap{display:block!important;position:static!important;width:100%}
+.page-head .ph-photo{position:absolute!important;inset:0!important;aspect-ratio:auto!important;max-height:none!important;max-width:none!important;width:auto!important;border-radius:0!important;margin:0!important;z-index:0}
+.page-head .ph-photo img{height:115%!important}
+.page-head .ph-photo::after{display:block!important;content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,31,.55) 0%,rgba(23,24,31,.25) 30%,rgba(23,24,31,.75) 62%,rgba(23,24,31,.96) 100%)!important}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,rgba(80,18,36,.5) 0%,rgba(80,18,36,.25) 30%,rgba(80,18,36,.8) 62%,rgba(80,18,36,.97) 100%)!important}
+.page-head .ph-text{position:relative;z-index:1}
+.page-head .lead{color:#e6edf3}
+}
+@media (max-width:820px){
+.pnav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(23,24,31,.9)}
+.fact{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(255,255,255,.9)!important}
+.page-head h1{font-size:clamp(2rem,9.2vw,3.2rem)!important;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+h1,h2{overflow-wrap:break-word}
+.eyebrow{transform:none}
+}
+.povl{display:flex;align-items:center;padding-top:calc(96px + env(safe-area-inset-top,0px))}
+.povl[hidden]{display:none}
+.povl .in{width:100%;max-width:1080px;align-items:center}
+.povl .big a{font-size:clamp(28px,min(5.6vw,6.4vh),72px);line-height:1.06;padding-block:.04em}
+@media (max-width:820px){.povl{align-items:flex-start}.povl .big a{font-size:clamp(28px,min(9vw,5.6vh),56px)}}
+html:not([lang="pt-BR"]) .page-head h1,html:not([lang="pt-BR"]) h2{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+html:not([lang="pt-BR"]) .page-head h1{max-width:16ch}
+.page-head .eyebrow{font-size:clamp(18px,1.9vw,26px);font-weight:700;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:14px;margin-bottom:18px;transform-origin:0 100%}
+.page-head .eyebrow::before{content:"";display:inline-block;width:44px;height:4px;border-radius:2px;background:currentColor;transform-origin:0 50%;transform:scaleX(var(--b,1));flex:none}
+.page-head h1{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.foot .fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.page-head .eyebrow{color:var(--c-signal)}
+.foot .sub,.foot dd,.foot .legal,.foot small{color:#d4cdc8}.foot dt{color:#8d8f8e}
+.foot{border-top:1px solid rgba(212,205,200,.18)}
+@media (min-width:901px){
+.page-head{min-height:min(88svh,820px);display:flex!important;align-items:flex-end}
+.page-head .wrap{display:block!important;width:100%}
+.page-head .ph-text{max-width:min(58%,760px)}
+.page-head .ph-photo{position:absolute!important;top:0;right:0;bottom:0;width:min(46vw,760px);max-width:none!important;max-height:none!important;aspect-ratio:auto!important;border-radius:0;z-index:0}
+.page-head .ph-photo img{height:110%!important}
+.page-head::after{content:"";position:absolute;z-index:2;width:128px;height:128px;border-radius:50%;background:#161b2f url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/logo.png) center/58% no-repeat;box-shadow:0 0 0 8px rgba(212,205,200,.9);right:calc(min(46vw,760px) - 64px);bottom:72px;animation:seloIn 1.2s cubic-bezier(.34,1.56,.64,1) .9s both}
+@keyframes seloIn{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1) rotate(0)}}
+.pg-sobre .page-head .ph-photo{border-radius:50vh 0 0 50vh}
+.pg-servicos .page-head .ph-photo{border-radius:0 0 0 260px}
+.pg-servicos .page-head::after{bottom:auto;top:140px}
+.pg-pf .page-head .ph-photo{top:110px;bottom:-140px;right:-6vw;width:min(52vw,820px);border-radius:50%}
+.pg-bagagem .page-head .ph-photo{top:110px;border-radius:999px 999px 0 0;right:4vw;width:min(40vw,640px)}
+.pg-bagagem .page-head::after{right:calc(4vw + min(40vw,640px) - 64px)}
+.pg-trading .page-head .ph-photo{border-radius:260px 0 0 0}
+.pg-trading .page-head::after{bottom:auto;top:120px}
+.pg-vinhos .page-head .ph-photo{top:110px;right:6vw;width:min(34vw,520px);border-radius:999px 999px 0 0}
+.pg-vinhos .page-head::after{right:calc(6vw + min(34vw,520px) - 64px);background-color:#4a1323}
+.pg-contato .page-head .ph-photo{border-radius:0 0 0 50%}
+.pg-pf .page-head::after{right:calc(min(46vw,760px) - 20px);bottom:90px}
+}
+.wines .wrap{align-items:center}
+.wines .wrap>.prose-sm{position:relative;z-index:2;background:#161b2f;color:#d4cdc8;padding:clamp(28px,4vw,56px);border-radius:28px;box-shadow:0 30px 60px -30px rgba(22,27,47,.6)}
+.wines .wrap>.prose-sm h2{color:#fff}
+.wines .wrap>.prose-sm p,.wines .wrap>.prose-sm li{color:#d4cdc8}
+.wines .wrap>.prose-sm .eyebrow{color:#d4cdc8!important}
+.wines .wrap>.prose-sm .checklist li{border-color:rgba(212,205,200,.2)}
+.pg-vinhos .wines .wrap>.prose-sm{background:#4a1323}
+@media (min-width:901px){
+.wines .wrap{gap:0!important;grid-template-columns:1.05fr .95fr}
+.wines .wrap>.prose-sm{margin-left:-140px}
+.feature-rev .wrap{grid-template-columns:.95fr 1.05fr}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-140px}
+.wines figure{aspect-ratio:auto;min-height:620px}
+.pg-sobre .wines figure{border-radius:28px 28px 28px 220px}
+.pg-trading .wines figure{border-radius:50vh 28px 28px 50vh}
+.pg-pf .wines figure{border-radius:220px 28px 220px 28px}
+.pg-vinhos .wines figure{border-radius:999px 999px 28px 28px}
+}
+@media (max-width:900px){
+.wines .wrap{gap:0!important}
+.wines .wrap>.prose-sm{margin:-56px 12px 0}
+}
+.photo-band{position:relative;isolation:isolate;background:#161b2f;color:#d4cdc8;overflow:hidden}
+.photo-band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,.92) 0%,rgba(22,27,47,.7) 45%,rgba(22,27,47,.9) 100%),var(--bg) center/cover no-repeat}
+.photo-band .sec-head h2{color:#fff}
+.photo-band .sec-head p,.photo-band .sec-head .eyebrow{color:#d4cdc8}
+.photo-band .tile{background:#e6e1dd!important;border-color:transparent}
+.wines .wrap>.prose-sm .checklist li::before{background:#d4cdc8}
+@media (min-width:901px){
+.page-head{--pw:min(46vw,760px);--pr:0px}
+.pg-pf .page-head{--pw:min(52vw,820px);--pr:-6vw}
+.pg-bagagem .page-head{--pw:min(40vw,640px);--pr:4vw}
+.pg-vinhos .page-head{--pw:min(34vw,520px);--pr:6vw}
+.page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+.pg-pf .page-head .ph-text{max-width:calc(100vw + 6vw - var(--pw) - 40px - max(20px,(100vw - 1280px) / 2))!important}
+.page-head .ph-text .lead{max-width:none}
+.wines .wrap>.prose-sm{margin-left:-100px}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-100px}
+}
+@media (min-width:901px){
+.page-head::after,.pg-servicos .page-head::after,.pg-trading .page-head::after,.pg-bagagem .page-head::after,.pg-vinhos .page-head::after,.pg-pf .page-head::after{top:auto;bottom:48px;right:calc(var(--pr) + 48px)}
+.pg-pf .page-head::after{right:48px}
+.page-head .ph-text,.pg-pf .page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+}
+.pnav .brand img{border-radius:5px;box-shadow:0 0 0 1px rgba(212,205,200,.45)}
+@media (min-width:901px){
+.page-head::after{width:132px;height:132px;border-radius:16px;background:url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png) center/cover no-repeat!important;box-shadow:0 0 0 6px rgba(212,205,200,.9),0 24px 40px -16px rgba(0,0,0,.6)}
+@keyframes seloIn{from{transform:translateY(-40px) rotate(-12deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+}
+.pnav .brand img,.brand img{width:30px;height:30px;object-fit:cover}
+.pg-vinhos .photo-band .rule{border-top-color:#8a2a44}
+.chat-btn{position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:52px;padding:0 20px;border:0;border-radius:999px;background:#161b2f;color:#d4cdc8;font:600 15px/1 var(--c-f);box-shadow:0 0 0 1px rgba(212,205,200,.35),0 14px 30px -12px rgba(0,0,0,.5);cursor:pointer}
+.chat-btn svg{width:20px;height:20px}
+.chat-btn.is-loading{opacity:.7;cursor:progress}
+@media (max-width:820px) and (pointer:coarse){.chat-btn{bottom:calc(86px + env(safe-area-inset-bottom,0px));height:48px;padding:0 16px}}
+.pf-panels{display:flex;gap:14px;height:min(560px,70vh);margin-top:8px}
+.pfp{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border-radius:26px;background:#161b2f;color:#fff;cursor:pointer;outline:none;transition:flex-grow .9s cubic-bezier(.34,1.35,.5,1)}
+.pfp.is-open{flex-grow:3.2;cursor:default}
+.pfp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.2s cubic-bezier(.2,.8,.2,1),filter .6s}
+.pfp:not(.is-open) img{filter:saturate(.6) brightness(.75)}
+.pfp.is-open img{transform:scale(1)}
+.pfp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,27,47,0) 30%,rgba(22,27,47,.55) 60%,rgba(22,27,47,.94) 100%)}
+.pfp-txt{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(18px,2.4vw,32px)}
+.pfp-k{display:inline-block;font:600 13px/1 var(--c-f);color:#161b2f;background:#d4cdc8;border-radius:999px;padding:7px 12px;margin-bottom:12px}
+.pfp h3{color:#fff;font-size:clamp(19px,1.7vw,26px);line-height:1.15;margin:0}
+.pfp p{color:#e6e1dd;margin:10px 0 0;max-width:44ch;max-height:0;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .6s cubic-bezier(.34,1.5,.5,1),max-height .6s}
+.pfp.is-open p{max-height:12em;opacity:1;transform:none;transition-delay:.25s}
+.pfp p a{color:#fff}
+.pfp:focus-visible{box-shadow:0 0 0 3px #d4cdc8}
+@media (max-width:900px){
+.pf-panels{flex-direction:column;height:auto}
+.pfp{flex:none;height:340px;cursor:default}
+.pfp img{transform:none;filter:none!important}
+.pfp p{max-height:none;opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.pfp,.pfp img,.pfp p{transition:none}}
+@media (min-width:901px){
+.pfp:not(.is-open) h3{font-size:16px;hyphens:auto;overflow-wrap:anywhere}
+.pfp:not(.is-open) .pfp-k{font-size:11px;padding:6px 10px}
+}
+.pnav .brand img,.brand img{width:44px!important;height:44px!important;border-radius:6px}
+.pnav .brand{gap:12px;font-size:18px}
+@media (max-width:820px){.pnav .brand img,.brand img{width:38px!important;height:38px!important}.pnav .brand{font-size:15px}}
+.pnav .brand img,.brand img{background:#d4cdc8;padding:4px;box-shadow:none;object-fit:contain}
+.pnav .brand img,.brand img{width:84px!important;height:84px!important;padding:6px;border-radius:10px;margin:-22px 0 -40px;position:relative;z-index:2;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+@media (max-width:820px){.pnav .brand img,.brand img{width:64px!important;height:64px!important;padding:5px;margin:-14px 0 -30px}}
+@media (min-width:821px){.pnav .brand img,.brand img{width:100px!important;height:100px!important;margin:-26px 0 -52px}}
+.pnav .brand img,.brand img{padding:0!important;background:#161b2f!important;border:1px solid rgba(212,205,200,.75);border-radius:8px!important;box-shadow:0 12px 28px -12px rgba(0,0,0,.7)}
+.pnav .brand img,.brand img{width:56px!important;height:56px!important;margin:0!important;box-shadow:none!important}
+@media (max-width:820px){.pnav .brand img,.brand img{width:46px!important;height:46px!important}}
+.pnav .brand{margin-right:18px;font-size:17px}
+.pnav .brand{flex-shrink:0}
+.pnav .wa{font-size:13px;padding:7px 12px}
+.pnav.small{width:min(580px,calc(100% - 32px))}
+@media (max-width:1100px){.pnav{width:min(580px,calc(100% - 32px))}}
+:root{
+--navy:#17181f;
+--navy-2:#161b2f;
+--paper:#d4cdc8;
+--ink:#161b2f;
+--steel:#8d8f8e;
+--signal:#d4cdc8;
+--go:#1f9d5c;
+--f:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--navy)}
+body{margin:0;background:var(--navy);color:#fff;font-family:var(--f);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1280px;margin-inline:auto}
+.x{font-stretch:125%}
+.n{font-stretch:62%}
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding-block:120px 56px}
+.hero .bg{position:absolute;inset:0;z-index:0}
+.hero .bg img{width:100%;height:115%;object-fit:cover;transform-origin:50% 40%}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,31,.6) 0%,rgba(23,24,31,.4) 40%,rgba(23,24,31,.94) 100%)}
+.hero .inner{position:relative;z-index:1;width:100%}
+.hero h1{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(44px,8.6vw,132px);line-height:.92;letter-spacing:-.045em;max-width:12ch}
+.hero h1 .ln{display:block}
+.hero h1 .swap{display:grid;overflow:hidden;color:var(--signal);padding-bottom:.06em}
+.swap span{grid-area:1/1;white-space:nowrap}
+.swap span:not(:first-child){visibility:hidden}
+.hero .row{display:flex;flex-wrap:wrap;gap:28px 48px;align-items:flex-end;justify-content:space-between;margin-top:36px}
+.hero p{margin:0;max-width:46ch;color:#dcd7d3;font-size:18px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 24px;border-radius:999px;font-weight:600;text-decoration:none;font-size:16px;will-change:transform}
+.btn.go{background:var(--go);color:#fff}
+.btn.ghost{border:1px solid rgba(255,255,255,.4);color:#fff}
+.scroll-hint{position:absolute;right:max(20px,env(safe-area-inset-right,0px));top:50%;writing-mode:vertical-rl;color:var(--steel);font-size:13px;z-index:1}
+.hero .bg video.hv{position:absolute;inset:0;width:100%;height:115%;object-fit:cover;transform-origin:50% 40%}
+.hero .bg::after{background:linear-gradient(90deg,rgba(23,24,31,.7) 0%,rgba(23,24,31,.35) 45%,rgba(23,24,31,0) 70%),linear-gradient(180deg,rgba(23,24,31,.35) 0%,rgba(23,24,31,0) 30%,rgba(23,24,31,.1) 55%,rgba(23,24,31,.92) 100%)}
+.band{background:var(--signal);color:var(--navy);overflow:hidden;padding-block:20px}
+.band .track{display:flex;width:max-content;gap:0;will-change:transform}
+.band .item{display:flex;align-items:center;gap:28px;padding-right:28px;font-weight:800;font-stretch:125%;font-size:clamp(28px,4.4vw,56px);letter-spacing:-.02em;white-space:nowrap}
+.band .box{width:.55em;height:.38em;background:var(--navy);border-radius:2px}
+.statement{background:var(--paper);color:var(--ink);padding-block:clamp(96px,16vw,200px)}
+.statement p{margin:0;font-weight:700;font-stretch:112%;font-size:clamp(30px,4.8vw,70px);line-height:1.08;letter-spacing:-.03em;max-width:20ch}
+.statement .pic{display:inline-block;width:1.7em;height:.86em;border-radius:999px;overflow:hidden;vertical-align:-.08em;margin-inline:.08em}
+.statement .pic img{width:100%;height:100%;object-fit:cover}
+.statement .who{margin-top:40px;font-size:18px;color:#444d5e;max-width:44ch}
+.services{background:var(--navy);overflow:hidden}
+.services .head{padding-top:clamp(80px,10vw,128px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.services h2{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(40px,6.4vw,96px);line-height:.95;letter-spacing:-.04em}
+.services .head p{margin:0;color:var(--steel);max-width:34ch}
+.h-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding-block:56px clamp(80px,10vw,128px);max-width:1280px;margin-inline:auto}
+.panel{display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:28px;align-items:stretch;background:var(--navy-2);border-radius:28px;overflow:hidden}
+.panel .ph{position:relative;overflow:hidden;aspect-ratio:16/9}
+.panel .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel .tx{padding:4px 32px 32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0}
+.panel .k{color:var(--signal);font-weight:600}
+.panel h3{margin:8px 0 12px;font-weight:800;font-stretch:112%;font-size:clamp(26px,2.6vw,38px);text-wrap:balance;line-height:1;letter-spacing:-.03em}
+.panel p{margin:0;color:#cfc9c5}
+.panel a{align-self:flex-start;color:#fff;font-weight:600;text-decoration-thickness:1px;text-underline-offset:5px}
+.progress{height:3px;background:rgba(255,255,255,.12);border-radius:3px;margin-top:-40px;margin-bottom:clamp(60px,8vw,96px);overflow:hidden}
+.progress i{display:block;height:100%;width:100%;background:var(--signal);transform-origin:0 50%;transform:scaleX(0)}
+@media (max-width:760px){.h-track{grid-template-columns:1fr}}
+@media (max-width:820px){
+.panel{width:100%;grid-template-columns:1fr}
+.panel .tx{padding:4px 24px 28px}
+.progress{display:none}
+}
+.steps{background:var(--paper);color:var(--ink);padding-block:clamp(96px,12vw,160px)}
+.steps h2{margin:0 0 12px;font-weight:800;font-stretch:125%;font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.04em}
+.steps .lead{margin:0 0 56px;color:#444d5e;max-width:46ch;font-size:18px}
+.stack{display:grid;gap:28px}
+.card{position:sticky;top:calc(96px + env(safe-area-inset-top,0px));min-height:min(60vh,520px);border-radius:28px;background:#e6e1dd;color:var(--ink);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(20px,4vw,56px);align-items:center;padding:clamp(24px,5vw,64px);box-shadow:0 -1px 0 rgba(22,27,47,.06);transform-origin:50% 0;overflow:hidden}
+.card:nth-child(2){background:#e2deda}
+.card:nth-child(3){background:var(--navy-2);color:#fff}
+.card:nth-child(4){background:var(--navy);color:#fff}
+.card .num{font-weight:800;font-stretch:62%;font-size:clamp(96px,16vw,220px);line-height:.8;letter-spacing:-.04em;opacity:.18;font-variant-numeric:tabular-nums}
+.card h3{margin:0 0 12px;font-weight:800;font-stretch:112%;font-size:clamp(30px,4vw,56px);letter-spacing:-.03em;line-height:1}
+.card p{margin:0;max-width:40ch;font-size:18px;opacity:.85}
+.card .thumb{width:clamp(120px,18vw,240px);aspect-ratio:3/4;border-radius:18px;overflow:hidden}
+.card .thumb img{width:100%;height:100%;object-fit:cover}
+.stamp{position:absolute;right:clamp(24px,6vw,96px);top:clamp(20px,4vw,48px);border:5px solid var(--go);color:var(--go);font-weight:800;font-stretch:125%;font-size:clamp(28px,4vw,52px);letter-spacing:.04em;padding:6px 18px;border-radius:10px;transform:rotate(-8deg);background:rgba(31,157,92,.08);pointer-events:none}
+@media (max-width:820px) and (pointer:coarse){.card{position:relative;top:auto;grid-template-columns:1fr;min-height:auto}.card .thumb{display:none}.card .num{font-size:96px}}
+.more{background:var(--navy);padding-block:clamp(96px,12vw,160px)}
+.more h2{margin:0 0 48px;font-weight:800;font-stretch:125%;font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.04em;max-width:14ch}
+.list{border-top:1px solid rgba(255,255,255,.16)}
+.li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;padding-block:28px;border-bottom:1px solid rgba(255,255,255,.16);align-items:baseline}
+.li h3{margin:0;font-weight:700;font-stretch:112%;font-size:clamp(24px,3vw,40px);letter-spacing:-.02em;line-height:1.05}
+.li p{margin:0;color:var(--steel)}
+@media (max-width:700px){.li{grid-template-columns:1fr;gap:8px}}
+main.page-main{position:relative;z-index:2;background:var(--navy)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.lang{font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 10px}
+.menu-extra{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;margin-top:28px;color:var(--steel);font-size:15px}
+.menu-extra p{margin:0}
+.menu-extra .btn{font-size:16px;line-height:1.2}
+.hero .tag{margin:0 0 18px;color:#e2deda;font-size:16px;font-weight:600}
+.modes{list-style:none;margin:40px 0 0;padding:20px 0 0;border-top:1px solid rgba(255,255,255,.2);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.modes li{display:flex;flex-direction:column;gap:2px}
+.modes b{font-weight:700;font-size:17px}.modes span{color:var(--steel);font-size:14px}
+@media (max-width:700px){.modes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.band-t{margin:0 auto 10px;max-width:1280px;font-weight:700;font-size:15px}
+.more-lead{margin:-28px 0 40px;color:var(--steel);max-width:46ch;font-size:18px}
+.more-link{display:inline-block;margin-top:20px;font-weight:700;text-underline-offset:5px}
+.more-link.light{color:#fff;margin-top:32px}
+.foot .sub{margin:16px 0 0;font-size:19px;max-width:46ch}
+.foot .legal{display:flex;flex-wrap:wrap;gap:16px 48px;margin-top:32px;padding-top:20px;border-top:1px solid rgba(23,24,31,.25);font-size:14px;line-height:1.5}
+.foot .legal a{text-underline-offset:3px}
+.flight{background:var(--paper);color:var(--ink);position:relative}
+.sky{position:relative;height:100svh;min-height:620px;overflow:hidden;background:radial-gradient(120% 90% at 50% 40%,#ddd7d3 0%,#e5e1de 60%,#d9d4d0 100%)}
+.giant{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);margin:0;text-align:center;font-weight:800;font-stretch:125%;font-size:clamp(56px,11vw,190px);line-height:.88;letter-spacing:-.05em;color:#cfc9c5;padding-inline:16px;text-wrap:balance}
+.plane-w{position:absolute;left:50%;top:0;width:min(62vh,560px);aspect-ratio:3/4;margin-left:calc(min(62vh,560px)/-2);will-change:transform}
+.plane{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.plane-shadow{position:absolute;inset:0;filter:blur(10px);opacity:.28}
+.plane-shadow .skin *{fill:#161b2f!important;stroke:none}
+.plane-shadow .bp{display:none}
+.bp path,.bp rect{stroke-dasharray:1;stroke-dashoffset:1}
+.trail{position:absolute;top:0;width:4px;height:120%;background:linear-gradient(180deg,#fff,rgba(255,255,255,0));transform-origin:50% 0;transform:scaleY(0);box-shadow:0 0 10px rgba(22,27,47,.18)}
+.facts{position:absolute;left:0;right:0;bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+.facts-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.fact{background:rgba(255,255,255,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:20px;padding:22px 24px}
+.fact h3{margin:0 0 6px;font-weight:800;font-stretch:112%;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.02em;line-height:1}
+.fact p{margin:0;color:#444d5e;font-size:15px}
+@media (max-width:820px) and (pointer:coarse){
+.sky{height:auto;min-height:0;padding-block:70vh 32px}
+.facts{position:relative;bottom:auto}
+.facts-in{grid-template-columns:1fr}
+.plane-w{width:min(80vw,380px);margin-left:calc(min(80vw,380px)/-2)}
+.giant{top:30vh}
+}
+.sky{background:#161b2f}
+.sky .fly{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 50%}
+.sky .fly-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,31,.55) 0%,rgba(23,24,31,0) 35%,rgba(23,24,31,0) 60%,rgba(23,24,31,.65) 100%)}
+.sky .giant{top:16%;transform:none;color:#fff;opacity:.92;text-shadow:0 2px 30px rgba(23,24,31,.35)}
+@media (max-width:820px) and (pointer:coarse){
+.hero{min-height:min(100svh,860px)}
+.sky{height:auto;min-height:0;padding:min(62svh,560px) 0 24px}
+.sky .giant{top:11%;font-size:clamp(46px,14vw,80px)}
+.facts{position:relative;bottom:auto}
+.facts-in{grid-template-columns:1fr;gap:10px}
+.fact{padding:14px 16px;border-radius:16px}
+.fact h3{font-size:22px;margin-bottom:4px}
+.fact p{font-size:14px;line-height:1.4}
+.fact .more-link{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){.bp{display:none}.trail{display:none}.plane-w{top:20%}}
+@media (max-width:820px){.scroll-hint{display:none}}
+@media (prefers-reduced-motion:reduce){
+.loader{display:none}
+.card{position:relative;top:auto}
+}
+
+header.cs-section-header,footer.cs-section-footer{display:none!important}
+.cs-widget:not(.cs-code-widget){display:none!important}
+.cs-section:not(:has(.cs-code-widget)){display:none!important}
+.cs-box:not(:has(.cs-code-widget)),.cs-line:not(:has(.cs-code-widget)){display:none!important}
+html,body{overflow-x:clip}
+body{margin:0!important}
+.cs-section:has(#cb),.cs-section:has(#cb) .cs-lines,.cs-section:has(#cb) .cs-line,.cs-section:has(#cb) .cs-boxes,.cs-section:has(#cb) .cs-box,.cs-section:has(#cb) .cs-widgets,.cs-code-widget:has(#cb),.cs-code-widget-preview:has(#cb){padding:0!important;margin:0!important;border:0!important;min-height:0!important;overflow:visible!important;transform:none!important;filter:none!important;contain:none!important;background:transparent!important}
+.cs-boxes:has(#cb),.cs-box:has(#cb),.cs-line:has(#cb){display:block!important;width:100%!important;max-width:none!important;flex:none!important;position:static!important}
+#cb{width:100vw;position:relative;left:50%;margin-left:-50vw;text-align:left}
+#cb [hidden]{display:none!important}
+</style><div id="cb" class="" data-page="inicio"><div aria-hidden="true" class="loader" data-noi18n=""><div class="count">0%</div><div class="who">Custom Broker<br/>Assessoria Aduaneira</div></div>
+<nav aria-label="Menu principal" class="pnav">
+<a class="brand" data-noi18n="" href="/"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png"/>Custom Broker</a>
+<div class="links"><a data-i="627001be" href="/sobre">Sobre</a><a data-i="07d63ea5" href="/servicos">Serviços</a><a data-i="5d4ce746" href="/pessoa-fisica">Pessoa Física</a><a data-i="e3cd5b2c" href="/tradingcompany">Trading</a><a data-i="4dace3b0" href="/vinhos">Vinhos</a><a data-i="1bd66dd4" href="/contato">Contato</a></div>
+<div class="r"><div class="langw"><button aria-expanded="false" aria-haspopup="true" aria-label="Idioma" class="lang" type="button">PT</button><ul class="langm" data-noi18n="" hidden=""><li><button data-l="pt" type="button">Português</button></li><li><button data-l="en" type="button">English</button></li><li><button data-l="es" type="button">Español</button></li><li><button data-l="fr" type="button">Français</button></li><li><button data-l="it" type="button">Italiano</button></li><li><button data-l="de" type="button">Deutsch</button></li><li><button data-l="zh" type="button">中文（普通话）</button></li></ul></div><a class="wa" href="https://wa.me/5511941012210" rel="noopener" target="_blank">WhatsApp</a><button aria-controls="menu" aria-expanded="false" class="menu-b" data-i="b6154120" type="button">Menu</button></div>
+</nav>
+<div class="povl" hidden="" id="menu"><div class="in">
+<div class="big"><a aria-current="page" href="/"><span data-i="94db4e17">Início</span></a><a href="/sobre"><span data-i="627001be">Sobre</span></a><a href="/servicos"><span data-i="07d63ea5">Serviços</span></a><a href="/pessoa-fisica"><span data-i="5d4ce746">Pessoa Física</span></a><a href="/tradingcompany"><span data-i="e3cd5b2c">Trading</span></a><a href="/vinhos"><span data-i="4dace3b0">Vinhos</span></a><a href="/bagagem-internacional"><span data-i="dcbcc054">Bagagem internacional</span></a><a href="/contato"><span data-i="1bd66dd4">Contato</span></a></div>
+<div class="extra"><a class="wa" data-i="cc068e4d" href="https://wa.me/5511941012210" rel="noopener" target="_blank">Falar no WhatsApp</a><p data-i="9f46f84c">Telefone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br</p><p><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></p></div>
+</div></div>
+<main class="page-main">
+<section class="hero gut" id="topo">
+<div class="bg"><video aria-hidden="true" autoplay="" class="hv" data-d="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/navio-loop-hd.mp4" data-m="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/navio-m.mp4" data-pd="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/navio-poster.jpg" data-pm="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/navio-m-poster.jpg" loop="" muted="" playsinline="" preload="auto"></video></div>
+<div class="inner wrap">
+<p class="tag" data-i="30e11f19">Assessoria aduaneira · Brasil todo</p>
+<h1><span class="ln l1" data-i="cfcd6edc">Cuidamos da sua</span><span aria-live="off" class="ln swap"><span data-i="c85066aa">carga</span><span data-i="9ebc8a54">bagagem</span><span data-i="606db662">mudança</span><span data-i="72d961ff">importação</span></span><span class="ln l3" data-i="2dab0660">do embarque à entrega.</span></h1>
+<div class="row">
+<div class="btns"><a class="btn go mag" data-i="1bda3153" href="/contato">Falar com um especialista</a><a class="btn ghost" data-i="9d870317" href="#servicos">Ver serviços</a></div>
+</div>
+<ul class="modes">
+<li><b data-i="63782890">Marítimo</b><span data-i="a38ef950">FCL e LCL</span></li>
+<li><b data-i="5eec38f7">Aéreo</b><span data-i="eabd51b5">principais aeroportos</span></li>
+<li><b data-i="79fbf96a">Portos e terminais</b><span data-i="d597ae4d">alfandegados</span></li>
+<li><b data-i="36b623bd">Porta a porta</b><span data-i="0bd58599">do exterior até você</span></li>
+</ul>
+</div>
+<div class="scroll-hint" data-i="8874c976">Role para ver</div>
+</section>
+<div aria-label="Documentos que cuidamos por você" class="band">
+<p class="band-t gut" data-i="4639395b">Documentos que cuidamos por você</p>
+<div class="track">
+<div class="item"><span>DUIMP</span><i class="box"></i><span data-i="d154726e">LI / Decex</span><i class="box"></i><span>RADAR</span><i class="box"></i><span>DTA</span><i class="box"></i><span data-i="14717070">Carta de crédito</span><i class="box"></i><span data-i="d65ab2df">Certificado de Origem</span><i class="box"></i><span>LPCO</span><i class="box"></i></div>
+</div>
+</div>
+<section class="statement gut">
+<div class="wrap">
+<p class="lit" data-i="d2de702a">Da análise dos documentos antes do embarque <span class="pic"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg"/></span> até a entrega no seu endereço, <span class="pic"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg"/></span> você fala com a mesma pessoa em cada etapa.</p>
+<p class="who" data-i="d2b41047">Uma única pessoa acompanha a sua carga, do primeiro orçamento até a liberação, em portos e aeroportos de todo o país.</p>
+</div>
+</section>
+<section class="services" id="servicos">
+<div class="gut"><div class="wrap head">
+<h2 data-i="27883317">Uma equipe para todo o processo de comércio exterior</h2>
+<p data-i="16a40e2e">Da análise documental antes do embarque até a entrega da mercadoria, você fala com quem acompanha a sua carga em cada etapa.</p>
+</div></div>
+<div class="h-wrap gut">
+<div class="h-track">
+<article class="panel"><div class="ph"><img alt="Contêineres empilhados no pátio" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg"/></div><div class="tx"><div><div class="k" data-i="087ed6a1">Empresas</div><h3 data-i="4159969e">Importação e exportação</h3><p data-i="55d1470c">Agenciamento aéreo e marítimo, desembaraço, seguro internacional e DTA.</p></div><a data-i="5291c5f3" href="/servicos">Saiba mais</a></div></article>
+<article class="panel"><div class="ph"><img alt="Encomenda do exterior entregue na porta" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-entrega.jpg"/></div><div class="tx"><div><div class="k" data-i="fdaa7230">Pessoa física</div><h3 data-i="66ee1468">Importação para pessoa física</h3><p data-i="5dc23982">Produtos em geral, encomendas, bagagem e mudança internacional, com entrega na sua casa.</p></div><a data-i="5291c5f3" href="/pessoa-fisica">Saiba mais</a></div></article>
+<article class="panel"><div class="ph"><img alt="Caminhões entrando no terminal do porto" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-caminhoes.jpg"/></div><div class="tx"><div><div class="k" data-i="54f75dd9">Benefício fiscal</div><h3 data-i="a54ba8ed">Trading company</h3><p data-i="9a850d53">Redução de ICMS e melhor fluxo de caixa. Peça uma simulação gratuita com os seus números.</p></div><a data-i="5291c5f3" href="/tradingcompany">Saiba mais</a></div></article>
+<article class="panel"><div class="ph"><img alt="Vinho sendo servido em taça" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-vinho-taca.jpg"/></div><div class="tx"><div><div class="k" data-i="175cd00c">Produtos regulados</div><h3 data-i="1443e6e4">Importação de vinhos</h3><p data-i="4ca4e27c">Laudos, Certificado de Origem e documentação exigida pelo MAPA.</p></div><a data-i="5291c5f3" href="/vinhos">Saiba mais</a></div></article>
+</div>
+</div>
+</section>
+<section class="flight" id="sobre">
+<div class="sky">
+<video aria-hidden="true" class="fly" data-d="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/aviao-scrub-hd.mp4" data-m="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/aviao-m.mp4" data-pd="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/aviao-poster.jpg" data-pm="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/aviao-m-poster.jpg" muted="" playsinline="" preload="auto"></video>
+<div aria-hidden="true" class="fly-shade"></div>
+<p aria-hidden="true" class="giant" data-i="c5ea781d">Portos e aeroportos do Brasil todo</p>
+<div class="facts gut"><div class="wrap facts-in">
+<div class="fact"><h3 data-i="36b623bd">Porta a porta</h3><p data-i="8c0e514b">Do embarque no exterior até a entrega no seu endereço, aéreo ou marítimo.</p></div>
+<div class="fact"><h3 data-i="3e72d135">1 contato</h3><p data-i="d3adb5f9">Uma única pessoa acompanha a sua carga, do primeiro orçamento até a liberação.</p></div>
+<div class="fact"><h3 data-i="0447fe94">Brasil todo</h3><p data-i="67cb849e">Atuação em portos e aeroportos de todo o país, com parceiros locais.</p><a class="more-link" data-i="c928ce15" href="/sobre">Conheça a Custom Broker</a></div>
+</div></div>
+</div>
+</section>
+<section class="steps gut" id="etapas">
+<div class="wrap">
+<h2 data-i="3042d970">Quatro etapas, um único contato</h2>
+<p class="lead" data-i="065455f3">Você acompanha o andamento com a mesma pessoa do primeiro contato até a carga liberada.</p>
+<div class="stack">
+<article class="card"><div class="num">01</div><div><h3 data-i="1bd66dd4">Contato</h3><p data-i="c1e69afa">Você conta o que vai importar ou exportar e recebe orientação sobre custos e prazos.</p></div><div class="thumb"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-escritorio.jpg"/></div></article>
+<article class="card"><div class="num">02</div><div><h3 data-i="6ae0b25f">Análise documental</h3><p data-i="4ebd1a88">Conferimos fatura, packing list, laudos e licenças antes do embarque.</p></div><div class="thumb"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-documentos.jpg"/></div></article>
+<article class="card"><div class="num">03</div><div><h3 data-i="2d99cbfb">Desembaraço</h3><p data-i="9de50567">Registro da declaração, acompanhamento da fiscalização e liberação da carga.</p></div><div class="thumb"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg"/></div><div aria-hidden="true" class="stamp" data-i="1cb75d6a">LIBERADO</div></article>
+<article class="card"><div class="num">04</div><div><h3 data-i="a6d420c9">Entrega</h3><p data-i="607f40a2">Transporte do terminal até o seu endereço, quando contratado porta a porta.</p></div><div class="thumb"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-aviao-pista.jpg"/></div></article>
+</div>
+</div>
+</section>
+<section class="more gut" id="mais">
+<div class="wrap">
+<h2 data-i="c2d01721">Soluções para as etapas mais difíceis</h2>
+<p class="more-lead" data-i="8022fd24">Quando a operação exige mais que o desembaraço, você conta com a mesma equipe para resolver.</p>
+<div class="list">
+<div class="li"><h3 class="scr" data-i="ff902f0c">Habilitação RADAR</h3><p data-i="96fb9b74">Credenciamento no Siscomex nas diversas modalidades.</p></div>
+<div class="li"><h3 class="scr" data-i="1b79d2ee">Processos administrativos aduaneiros</h3><p data-i="506126d5">Cargas em canal vermelho ou cinza e pendências na Receita, ANVISA e MAPA.</p></div>
+<div class="li"><h3 class="scr" data-i="a87532a3">Representação internacional</h3><p data-i="b65a4e5f">Aproximamos fabricantes e compradores no Brasil e no exterior.</p></div>
+<div class="li"><h3 class="scr" data-i="1443e6e4">Importação de vinhos</h3><p data-i="f68b74d4">Conferência de laudos e documentos conforme o MAPA.</p></div>
+</div>
+<a class="more-link light" data-i="5424f650" href="/servicos">Ver todos os serviços</a>
+</div>
+</section>
+</main>
+<div aria-hidden="true" class="foot-spacer"></div>
+<footer class="foot" id="rodape">
+<div class="in">
+<p class="big" data-i="59bb5133">Tem uma carga a caminho? Fale com a gente hoje.</p>
+<p class="sub" data-i="48384009">Envie a fatura ou a proforma pelo WhatsApp e fazemos a análise da sua operação.</p>
+<div class="grid">
+<dl><dt data-i="904ef931">Telefone</dt><dd>+55 11 2577-4757</dd><dt>WhatsApp</dt><dd>+55 11 94101-2210</dd><dt data-i="1e884e30">E-mail</dt><dd>contato@custombroker.com.br</dd></dl>
+<a class="cta" data-i="8f5eb57a" href="https://wa.me/5511941012210?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20falar%20sobre%20uma%20carga." rel="noopener" target="_blank">Chamar no WhatsApp</a>
+</div>
+<div class="legal">
+<div data-i="54bda3a8"><b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00</div>
+<div data-i="33de9c2a">R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001</div>
+<div><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></div>
+</div>
+<small data-i="0dc62a4a">© 2026 Custom Broker. Todos os direitos reservados.</small>
+</div>
+</footer>
+<div aria-label="Aviso de cookies" class="cookie-b" hidden="" id="cookie" role="dialog">
+<p data-i="92daad1c">Usamos só cookies necessários para o site funcionar e para lembrar o seu idioma. O chat só grava cookies se você abri-lo. Não usamos cookies de publicidade nem de medição. Saiba mais na <a href="/privacidade">Política de Privacidade</a>.</p>
+<div class="ck-a"><button data-i="7d23bcfe" id="cookie-ok" type="button">Entendi</button></div>
+</div>
+<div aria-live="polite" class="toast" hidden="" role="status"></div>
+</div><script>(function(){
+  var D={"en": {"607f40a2": "Transport from the terminal to your address, when door-to-door service is hired.", "0447fe94": "All of Brazil", "92daad1c": "We only use cookies needed for the site to work and to remember your language. The chat only stores cookies if you open it. We do not use advertising or analytics cookies. Learn more in the <a href=\"/privacidade\">Privacy Policy</a>.", "d154726e": "Import licence (LI / Decex)", "5d4ce746": "Individuals", "cfcd6edc": "We take care of your", "d3adb5f9": "One person follows your cargo, from the first quote to release.", "59bb5133": "Cargo on the way? Talk to us today.", "f68b74d4": "Review of lab reports and documents according to MAPA rules.", "c928ce15": "Meet Custom Broker", "16a40e2e": "From document review before shipment to delivery of the goods, you talk to the person following your cargo at every stage.", "1443e6e4": "Wine imports", "6ae0b25f": "Document review", "4639395b": "Documents we handle for you", "7d23bcfe": "Got it", "36b623bd": "Door to door", "4ebd1a88": "We check the invoice, packing list, lab reports and licences before shipment.", "2d99cbfb": "Clearance", "627001be": "About", "3042d970": "Four steps, one single contact", "07d63ea5": "Services", "8c0e514b": "From loading abroad to delivery at your address, by air or sea.", "1bda3153": "Talk to a specialist", "a87532a3": "International representation", "b6154120": "Menu", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "fdaa7230": "Individuals", "a54ba8ed": "Trading company", "506126d5": "Cargo in red or grey channel and pending issues with the Federal Revenue, ANVISA and MAPA.", "cc068e4d": "Chat on WhatsApp", "60324c31": "Privacy Policy", "eabd51b5": "main airports", "30e11f19": "Customs brokerage · All of Brazil", "dcbcc054": "International baggage", "9de50567": "Filing of the declaration, follow-up of the inspection and release of the cargo.", "2dab0660": "from shipment to delivery.", "63782890": "Sea", "79fbf96a": "Ports and terminals", "904ef931": "Phone", "1b79d2ee": "Administrative customs proceedings", "c1e69afa": "You tell us what you will import or export and get guidance on costs and lead times.", "d65ab2df": "Certificate of Origin", "175cd00c": "Regulated products", "a6d420c9": "Delivery", "8f5eb57a": "Message us on WhatsApp", "c85066aa": "cargo", "606db662": "move", "94db4e17": "Home", "4ca4e27c": "Lab reports, Certificate of Origin and the documents required by MAPA.", "9ebc8a54": "baggage", "0bd58599": "from abroad to you", "9d870317": "See services", "ff902f0c": "RADAR registration", "23781b5e": "Close", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brazil", "d2de702a": "From reviewing the documents before shipment <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg\"/></span> to delivery at your address, <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg\"/></span> you talk to the same person at every step.", "55d1470c": "Air and sea freight forwarding, customs clearance, international insurance and DTA transit.", "9a850d53": "Lower ICMS and better cash flow. Ask for a free simulation with your own figures.", "4159969e": "Import and export", "1e884e30": "Email", "9f46f84c": "Phone +55 11 2577-4757<br/>Email contato@custombroker.com.br", "54f75dd9": "Tax benefit", "4dace3b0": "Wine", "d2b41047": "A single person follows your cargo, from the first quote to clearance, at ports and airports across the country.", "8874c976": "Scroll to see", "e3cd5b2c": "Trading", "27883317": "One team for the whole foreign trade process", "1bd66dd4": "Contact", "b65a4e5f": "We connect manufacturers and buyers in Brazil and abroad.", "66ee1468": "Imports for individuals", "5dc23982": "General goods, parcels, baggage and international moves, delivered to your home.", "72d961ff": "import", "8022fd24": "When the operation needs more than customs clearance, the same team is there to solve it.", "087ed6a1": "Companies", "0dc62a4a": "© 2026 Custom Broker. All rights reserved.", "48384009": "Send the invoice or proforma by WhatsApp and we will review your operation.", "c2d01721": "Solutions for the hardest stages", "67cb849e": "Operations at ports and airports across the country, with local partners.", "14717070": "Letter of credit", "065455f3": "You follow progress with the same person from the first contact until the cargo is cleared.", "d597ae4d": "bonded", "c5ea781d": "Ports and airports all over Brazil", "5424f650": "See all services", "5eec38f7": "Air", "96fb9b74": "Siscomex registration in all its categories.", "3e72d135": "1 contact", "5291c5f3": "Learn more", "a38ef950": "FCL and LCL", "1cb75d6a": "CLEARED"}, "es": {"607f40a2": "Transporte del terminal a su dirección, cuando se contrata puerta a puerta.", "0447fe94": "Todo Brasil", "92daad1c": "Solo usamos cookies necesarias para que el sitio funcione y para recordar tu idioma. El chat solo guarda cookies si lo abres. No usamos cookies de publicidad ni de medición. Más información en la <a href=\"/privacidade\">Política de Privacidad</a>.", "d154726e": "Licencia de importación (LI / Decex)", "5d4ce746": "Personas físicas", "cfcd6edc": "Cuidamos de tu", "d3adb5f9": "Una sola persona sigue su carga, del primer presupuesto a la liberación.", "59bb5133": "¿Tiene una carga en camino? Hable con nosotros hoy.", "f68b74d4": "Revisión de análisis y documentos según el MAPA.", "c928ce15": "Conoce Custom Broker", "16a40e2e": "Desde el análisis documental antes del embarque hasta la entrega de la mercancía, usted habla con quien sigue su carga en cada etapa.", "1443e6e4": "Importación de vinos", "6ae0b25f": "Análisis documental", "4639395b": "Documentos que gestionamos por usted", "7d23bcfe": "Entendido", "36b623bd": "Puerta a puerta", "4ebd1a88": "Revisamos factura, packing list, análisis y licencias antes del embarque.", "2d99cbfb": "Despacho", "627001be": "Nosotros", "3042d970": "Cuatro etapas, un único contacto", "07d63ea5": "Servicios", "8c0e514b": "Del embarque en el exterior a la entrega en su dirección, aéreo o marítimo.", "1bda3153": "Hablar con un especialista", "a87532a3": "Representación internacional", "b6154120": "Menú", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "fdaa7230": "Personas físicas", "a54ba8ed": "Trading company", "506126d5": "Cargas en canal rojo o gris y asuntos pendientes ante la Receita Federal, ANVISA y MAPA.", "cc068e4d": "Hablar por WhatsApp", "60324c31": "Política de Privacidad", "eabd51b5": "principales aeropuertos", "30e11f19": "Agencia de aduanas · Todo Brasil", "dcbcc054": "Equipaje internacional", "9de50567": "Registro de la declaración, seguimiento de la fiscalización y liberación de la carga.", "2dab0660": "del embarque a la entrega.", "63782890": "Marítimo", "79fbf96a": "Puertos y terminales", "904ef931": "Teléfono", "1b79d2ee": "Procesos administrativos aduaneros", "c1e69afa": "Nos cuenta qué va a importar o exportar y recibe orientación sobre costos y plazos.", "d65ab2df": "Certificado de Origen", "175cd00c": "Productos regulados", "a6d420c9": "Entrega", "8f5eb57a": "Escribir por WhatsApp", "c85066aa": "carga", "606db662": "mudanza", "94db4e17": "Inicio", "4ca4e27c": "Análisis, Certificado de Origen y documentación exigida por el MAPA.", "9ebc8a54": "equipaje", "0bd58599": "del exterior hasta ti", "9d870317": "Ver servicios", "ff902f0c": "Habilitación RADAR", "23781b5e": "Cerrar", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasil", "d2de702a": "Desde el análisis de los documentos antes del embarque <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg\"/></span> hasta la entrega en tu dirección, <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg\"/></span> hablas con la misma persona en cada etapa.", "55d1470c": "Agenciamiento aéreo y marítimo, despacho aduanero, seguro internacional y tránsito aduanero (DTA).", "9a850d53": "Reducción del ICMS y mejor flujo de caja. Pida una simulación gratuita con sus números.", "4159969e": "Importación y exportación", "1e884e30": "Correo", "9f46f84c": "Teléfono +55 11 2577-4757<br/>Correo contato@custombroker.com.br", "54f75dd9": "Beneficio fiscal", "4dace3b0": "Vinos", "d2b41047": "Una sola persona acompaña tu carga, desde el primer presupuesto hasta la liberación, en puertos y aeropuertos de todo el país.", "8874c976": "Desplázate para ver", "e3cd5b2c": "Trading", "27883317": "Un equipo para todo el proceso de comercio exterior", "1bd66dd4": "Contacto", "b65a4e5f": "Acercamos fabricantes y compradores en Brasil y en el exterior.", "66ee1468": "Importación para personas físicas", "5dc23982": "Productos en general, encomiendas, equipaje y mudanzas internacionales, con entrega en su domicilio.", "72d961ff": "importación", "8022fd24": "Cuando la operación exige más que el despacho, cuenta con el mismo equipo para resolverlo.", "087ed6a1": "Empresas", "0dc62a4a": "© 2026 Custom Broker. Todos los derechos reservados.", "48384009": "Envíe la factura o la proforma por WhatsApp y analizamos su operación.", "c2d01721": "Soluciones para las etapas más difíciles", "67cb849e": "Actuación en puertos y aeropuertos de todo el país, con socios locales.", "14717070": "Carta de crédito", "065455f3": "Usted sigue el avance con la misma persona desde el primer contacto hasta la carga liberada.", "d597ae4d": "alfandegados", "c5ea781d": "Puertos y aeropuertos de todo Brasil", "5424f650": "Ver todos los servicios", "5eec38f7": "Aéreo", "96fb9b74": "Habilitación en el Siscomex en todas sus modalidades.", "3e72d135": "1 contacto", "5291c5f3": "Más información", "a38ef950": "FCL y LCL", "1cb75d6a": "LIBERADO"}, "fr": {"607f40a2": "Transport du terminal jusqu'à votre adresse, en cas de service porte à porte.", "0447fe94": "Tout le Brésil", "92daad1c": "Nous utilisons uniquement les cookies nécessaires au fonctionnement du site et à la mémorisation de votre langue. Le chat n'enregistre des cookies que si vous l'ouvrez. Nous n'utilisons pas de cookies publicitaires ni de mesure d'audience. En savoir plus dans la <a href=\"/privacidade\">Politique de confidentialité</a>.", "d154726e": "Licence d'importation (LI / Decex)", "5d4ce746": "Particuliers", "cfcd6edc": "Nous prenons soin de votre", "d3adb5f9": "Une seule personne suit votre marchandise, du premier devis à la mainlevée.", "59bb5133": "Une marchandise en route ? Parlez-nous dès aujourd'hui.", "f68b74d4": "Contrôle des analyses et des documents selon le MAPA.", "c928ce15": "Découvrez Custom Broker", "16a40e2e": "De l'analyse des documents avant l'embarquement jusqu'à la livraison, vous parlez avec la personne qui suit votre marchandise à chaque étape.", "1443e6e4": "Importation de vins", "6ae0b25f": "Analyse des documents", "4639395b": "Les documents que nous gérons pour vous", "7d23bcfe": "J'ai compris", "36b623bd": "Porte à porte", "4ebd1a88": "Nous vérifions facture, liste de colisage, analyses et licences avant l'embarquement.", "2d99cbfb": "Dédouanement", "627001be": "À propos", "3042d970": "Quatre étapes, un seul interlocuteur", "07d63ea5": "Services", "8c0e514b": "De l'embarquement à l'étranger jusqu'à la livraison à votre adresse, par avion ou par mer.", "1bda3153": "Parler à un spécialiste", "a87532a3": "Représentation internationale", "b6154120": "Menu", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "fdaa7230": "Particuliers", "a54ba8ed": "Trading company", "506126d5": "Marchandises en circuit rouge ou gris et dossiers en suspens auprès de la Receita Federal, de l'ANVISA et du MAPA.", "cc068e4d": "Écrire sur WhatsApp", "60324c31": "Politique de confidentialité", "eabd51b5": "principaux aéroports", "30e11f19": "Commissionnaire en douane · Tout le Brésil", "dcbcc054": "Bagages internationaux", "9de50567": "Dépôt de la déclaration, suivi du contrôle et mainlevée de la marchandise.", "2dab0660": "de l'expédition à la livraison.", "63782890": "Maritime", "79fbf96a": "Ports et terminaux", "904ef931": "Téléphone", "1b79d2ee": "Procédures administratives douanières", "c1e69afa": "Vous nous dites ce que vous allez importer ou exporter et recevez des conseils sur les coûts et les délais.", "d65ab2df": "Certificat d'origine", "175cd00c": "Produits réglementés", "a6d420c9": "Livraison", "8f5eb57a": "Nous écrire sur WhatsApp", "c85066aa": "marchandise", "606db662": "déménagement", "94db4e17": "Accueil", "4ca4e27c": "Analyses, certificat d'origine et documents exigés par le MAPA.", "9ebc8a54": "bagage", "0bd58599": "de l'étranger jusqu'à vous", "9d870317": "Voir les services", "ff902f0c": "Habilitation RADAR", "23781b5e": "Fermer", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brésil", "d2de702a": "De l'analyse des documents avant l'expédition <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg\"/></span> jusqu'à la livraison à votre adresse, <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg\"/></span> vous parlez à la même personne à chaque étape.", "55d1470c": "Commission de transport aérien et maritime, dédouanement, assurance internationale et transit sous douane (DTA).", "9a850d53": "ICMS réduit et meilleure trésorerie. Demandez une simulation gratuite avec vos chiffres.", "4159969e": "Import et export", "1e884e30": "E-mail", "9f46f84c": "Téléphone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "54f75dd9": "Avantage fiscal", "4dace3b0": "Vins", "d2b41047": "Une seule personne suit votre marchandise, du premier devis au dédouanement, dans les ports et aéroports de tout le pays.", "8874c976": "Faites défiler", "e3cd5b2c": "Trading", "27883317": "Une seule équipe pour tout le processus de commerce international", "1bd66dd4": "Contact", "b65a4e5f": "Nous rapprochons fabricants et acheteurs au Brésil et à l'étranger.", "66ee1468": "Importation pour particuliers", "5dc23982": "Produits en général, colis, bagages et déménagements internationaux, livrés chez vous.", "72d961ff": "importation", "8022fd24": "Quand l'opération exige plus que le dédouanement, la même équipe est là pour s’en charger.", "087ed6a1": "Entreprises", "0dc62a4a": "© 2026 Custom Broker. Tous droits réservés.", "48384009": "Envoyez la facture ou la proforma par WhatsApp et nous analysons votre opération.", "c2d01721": "Des solutions pour les étapes les plus difficiles", "67cb849e": "Présence dans les ports et aéroports de tout le pays, avec des partenaires locaux.", "14717070": "Lettre de crédit", "065455f3": "Vous suivez l'avancement avec la même personne, du premier contact jusqu'à la mainlevée.", "d597ae4d": "sous douane", "c5ea781d": "Ports et aéroports dans tout le Brésil", "5424f650": "Voir tous les services", "5eec38f7": "Aérien", "96fb9b74": "Habilitation au Siscomex dans toutes ses modalités.", "3e72d135": "1 interlocuteur", "5291c5f3": "En savoir plus", "a38ef950": "FCL et LCL", "1cb75d6a": "DÉDOUANÉ"}, "it": {"607f40a2": "Trasporto dal terminal al tuo indirizzo, quando è previsto il servizio porta a porta.", "0447fe94": "Tutto il Brasile", "92daad1c": "Usiamo solo i cookie necessari al funzionamento del sito e per ricordare la tua lingua. La chat salva cookie solo se la apri. Non usiamo cookie pubblicitari né di misurazione. Maggiori informazioni nell'<a href=\"/privacidade\">Informativa sulla privacy</a>.", "d154726e": "Licenza di importazione (LI / Decex)", "5d4ce746": "Privati", "cfcd6edc": "Ci occupiamo del tuo", "d3adb5f9": "Una sola persona segue la tua merce, dal primo preventivo allo svincolo.", "59bb5133": "Hai una spedizione in arrivo? Contattaci oggi stesso.", "f68b74d4": "Controllo di analisi e documenti secondo il MAPA.", "c928ce15": "Scopri Custom Broker", "16a40e2e": "Dall'analisi dei documenti prima dell'imbarco fino alla consegna della merce, parli con chi segue la tua spedizione in ogni fase.", "1443e6e4": "Importazione di vini", "6ae0b25f": "Analisi dei documenti", "4639395b": "I documenti che gestiamo per te", "7d23bcfe": "Ho capito", "36b623bd": "Porta a porta", "4ebd1a88": "Controlliamo fattura, packing list, analisi e licenze prima dell'imbarco.", "2d99cbfb": "Sdoganamento", "627001be": "Chi siamo", "3042d970": "Quattro fasi, un unico referente", "07d63ea5": "Servizi", "8c0e514b": "Dall'imbarco all'estero fino alla consegna al tuo indirizzo, via aerea o marittima.", "1bda3153": "Parla con uno specialista", "a87532a3": "Rappresentanza internazionale", "b6154120": "Menu", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "fdaa7230": "Privati", "a54ba8ed": "Trading company", "506126d5": "Merci in canale rosso o grigio e pendenze presso la Receita Federal, ANVISA e MAPA.", "cc068e4d": "Scrivici su WhatsApp", "60324c31": "Informativa sulla privacy", "eabd51b5": "principali aeroporti", "30e11f19": "Spedizioniere doganale · Tutto il Brasile", "dcbcc054": "Bagaglio internazionale", "9de50567": "Registrazione della dichiarazione, assistenza durante il controllo e svincolo della merce.", "2dab0660": "dall'imbarco alla consegna.", "63782890": "Marittimo", "79fbf96a": "Porti e terminal", "904ef931": "Telefono", "1b79d2ee": "Procedimenti amministrativi doganali", "c1e69afa": "Ci dici cosa importerai o esporterai e ricevi indicazioni su costi e tempi.", "d65ab2df": "Certificato di origine", "175cd00c": "Prodotti regolamentati", "a6d420c9": "Consegna", "8f5eb57a": "Scrivici su WhatsApp", "c85066aa": "carico", "606db662": "trasloco", "94db4e17": "Home", "4ca4e27c": "Analisi, certificato di origine e documenti richiesti dal MAPA.", "9ebc8a54": "bagaglio", "0bd58599": "dall'estero fino a te", "9d870317": "Vedi i servizi", "ff902f0c": "Abilitazione RADAR", "23781b5e": "Chiudi", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasile", "d2de702a": "Dall'analisi dei documenti prima dell'imbarco <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg\"/></span> fino alla consegna al tuo indirizzo, <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg\"/></span> parli con la stessa persona in ogni fase.", "55d1470c": "Spedizioni aeree e marittime, sdoganamento, assicurazione internazionale e transito doganale (DTA).", "9a850d53": "ICMS ridotto e migliore flusso di cassa. Chiedi una simulazione gratuita con i tuoi numeri.", "4159969e": "Importazione ed esportazione", "1e884e30": "E-mail", "9f46f84c": "Telefono +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "54f75dd9": "Agevolazione fiscale", "4dace3b0": "Vini", "d2b41047": "Una sola persona segue il tuo carico, dal primo preventivo allo sdoganamento, in porti e aeroporti di tutto il paese.", "8874c976": "Scorri per vedere", "e3cd5b2c": "Trading", "27883317": "Un unico team per tutto il processo di commercio estero", "1bd66dd4": "Contatti", "b65a4e5f": "Mettiamo in contatto produttori e acquirenti in Brasile e all'estero.", "66ee1468": "Importazione per privati", "5dc23982": "Prodotti in generale, pacchi, bagagli e traslochi internazionali, con consegna a casa tua.", "72d961ff": "importazione", "8022fd24": "Quando l'operazione richiede più dello sdoganamento, lo stesso team è pronto a intervenire.", "087ed6a1": "Aziende", "0dc62a4a": "© 2026 Custom Broker. Tutti i diritti riservati.", "48384009": "Invia la fattura o la proforma su WhatsApp e analizziamo la tua operazione.", "c2d01721": "Soluzioni per le fasi più difficili", "67cb849e": "Operiamo in porti e aeroporti di tutto il paese, con partner locali.", "14717070": "Lettera di credito", "065455f3": "Segui l'avanzamento con la stessa persona dal primo contatto fino allo svincolo della merce.", "d597ae4d": "doganali", "c5ea781d": "Porti e aeroporti in tutto il Brasile", "5424f650": "Vedi tutti i servizi", "5eec38f7": "Aereo", "96fb9b74": "Abilitazione al Siscomex in tutte le sue modalità.", "3e72d135": "1 referente", "5291c5f3": "Scopri di più", "a38ef950": "FCL e LCL", "1cb75d6a": "SDOGANATO"}, "de": {"607f40a2": "Transport vom Terminal zu Ihrer Adresse, wenn Tür-zu-Tür beauftragt ist.", "0447fe94": "Ganz Brasilien", "92daad1c": "Wir verwenden nur Cookies, die für die Funktion der Website und zum Speichern Ihrer Sprache nötig sind. Der Chat speichert nur Cookies, wenn Sie ihn öffnen. Wir verwenden keine Werbe- oder Analyse-Cookies. Mehr in der <a href=\"/privacidade\">Datenschutzerklärung</a>.", "d154726e": "Importlizenz (LI / Decex)", "5d4ce746": "Privatpersonen", "cfcd6edc": "Wir kümmern uns um Ihre", "d3adb5f9": "Eine Person betreut Ihre Ware, vom ersten Angebot bis zur Freigabe.", "59bb5133": "Haben Sie eine Sendung unterwegs? Sprechen Sie noch heute mit uns.", "f68b74d4": "Prüfung von Analysen und Dokumenten nach MAPA-Vorgaben.", "c928ce15": "Custom Broker kennenlernen", "16a40e2e": "Von der Dokumentenprüfung vor der Verschiffung bis zur Zustellung der Ware sprechen Sie in jeder Phase mit der Person, die Ihre Sendung betreut.", "1443e6e4": "Weinimport", "6ae0b25f": "Dokumentenprüfung", "4639395b": "Dokumente, die wir für Sie erledigen", "7d23bcfe": "Verstanden", "36b623bd": "Tür-zu-Tür", "4ebd1a88": "Wir prüfen Rechnung, Packliste, Analysen und Lizenzen vor der Verschiffung.", "2d99cbfb": "Verzollung", "627001be": "Über uns", "3042d970": "Vier Schritte, ein Ansprechpartner", "07d63ea5": "Leistungen", "8c0e514b": "Von der Verladung im Ausland bis zur Zustellung an Ihre Adresse, per Luft oder See.", "1bda3153": "Mit einem Experten sprechen", "a87532a3": "Internationale Vertretung", "b6154120": "Menü", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "fdaa7230": "Privatpersonen", "a54ba8ed": "Trading company", "506126d5": "Ware im roten oder grauen Kanal und offene Verfahren bei Receita Federal, ANVISA und MAPA.", "cc068e4d": "Per WhatsApp schreiben", "60324c31": "Datenschutzerklärung", "eabd51b5": "wichtigste Flughäfen", "30e11f19": "Zollagentur · Ganz Brasilien", "dcbcc054": "Internationales Gepäck", "9de50567": "Abgabe der Zollanmeldung, Begleitung der Kontrolle und Freigabe der Ware.", "2dab0660": "von der Verschiffung bis zur Zustellung.", "63782890": "Seefracht", "79fbf96a": "Häfen und Terminals", "904ef931": "Telefon", "1b79d2ee": "Zollverwaltungsverfahren", "c1e69afa": "Sie sagen uns, was Sie importieren oder exportieren möchten, und erhalten eine Beratung zu Kosten und Fristen.", "d65ab2df": "Ursprungszeugnis", "175cd00c": "Regulierte Produkte", "a6d420c9": "Zustellung", "8f5eb57a": "Per WhatsApp schreiben", "c85066aa": "Fracht", "606db662": "Umzug", "94db4e17": "Startseite", "4ca4e27c": "Analysen, Ursprungszeugnis und die vom MAPA verlangten Dokumente.", "9ebc8a54": "Gepäck", "0bd58599": "aus dem Ausland bis zu Ihnen", "9d870317": "Leistungen ansehen", "ff902f0c": "RADAR-Registrierung", "23781b5e": "Schließen", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasilien", "d2de702a": "Von der Prüfung der Dokumente vor der Verschiffung <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg\"/></span> bis zur Zustellung an Ihre Adresse <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg\"/></span> sprechen Sie bei jedem Schritt mit derselben Person.", "55d1470c": "Luft- und Seefrachtspedition, Zollabfertigung, internationale Versicherung und Zolltransit (DTA).", "9a850d53": "Weniger ICMS und besserer Cashflow. Fordern Sie eine kostenlose Simulation mit Ihren Zahlen an.", "4159969e": "Import und Export", "1e884e30": "E-Mail", "9f46f84c": "Telefon +55 11 2577-4757<br/>E-Mail contato@custombroker.com.br", "54f75dd9": "Steuervorteil", "4dace3b0": "Wein", "d2b41047": "Eine einzige Person begleitet Ihre Fracht vom ersten Angebot bis zur Freigabe, in Häfen und Flughäfen im ganzen Land.", "8874c976": "Scrollen", "e3cd5b2c": "Trading", "27883317": "Ein Team für den gesamten Außenhandelsprozess", "1bd66dd4": "Kontakt", "b65a4e5f": "Wir bringen Hersteller und Käufer in Brasilien und im Ausland zusammen.", "66ee1468": "Import für Privatpersonen", "5dc23982": "Waren aller Art, Pakete, Gepäck und internationale Umzüge, mit Lieferung bis zu Ihnen nach Hause.", "72d961ff": "Einfuhr", "8022fd24": "Wenn ein Vorgang mehr als die Zollabfertigung erfordert, löst ihn dasselbe Team.", "087ed6a1": "Unternehmen", "0dc62a4a": "© 2026 Custom Broker. Alle Rechte vorbehalten.", "48384009": "Senden Sie die Rechnung oder Proforma per WhatsApp und wir prüfen Ihren Vorgang.", "c2d01721": "Lösungen für die schwierigsten Schritte", "67cb849e": "Tätig in Häfen und Flughäfen im ganzen Land, mit lokalen Partnern.", "14717070": "Akkreditiv", "065455f3": "Sie verfolgen den Fortschritt mit derselben Person, vom ersten Kontakt bis zur Freigabe der Ware.", "d597ae4d": "Zolllager", "c5ea781d": "Häfen und Flughäfen in ganz Brasilien", "5424f650": "Alle Leistungen ansehen", "5eec38f7": "Luftfracht", "96fb9b74": "Registrierung im Siscomex in allen Kategorien.", "3e72d135": "1 Ansprechpartner", "5291c5f3": "Mehr erfahren", "a38ef950": "FCL und LCL", "1cb75d6a": "FREIGEGEBEN"}, "zh": {"607f40a2": "选择门到门服务时，从码头运送到您的地址。", "0447fe94": "巴西全境", "92daad1c": "我们只使用网站运行和记住您语言所必需的 Cookie。聊天窗口只有在您打开时才会存储 Cookie。我们不使用广告或统计 Cookie。详情请见<a href=\"/privacidade\">隐私政策</a>。", "d154726e": "进口许可证（LI / Decex）", "5d4ce746": "个人客户", "cfcd6edc": "我们负责您的", "d3adb5f9": "从首次报价到放行，由同一位专员跟进您的货物。", "59bb5133": "有货物在途？今天就联系我们。", "f68b74d4": "按照 MAPA 规定审核检测报告和文件。", "c928ce15": "了解 Custom Broker", "16a40e2e": "从装运前的文件审核到货物交付，每个环节都由跟进您货物的同一位专员与您沟通。", "1443e6e4": "葡萄酒进口", "6ae0b25f": "文件审核", "4639395b": "我们为您办理的文件", "7d23bcfe": "知道了", "36b623bd": "门到门", "4ebd1a88": "装运前审核发票、装箱单、检测报告和许可证。", "2d99cbfb": "清关", "627001be": "关于我们", "3042d970": "四个步骤，一个联系人", "07d63ea5": "服务", "8c0e514b": "从境外装运到送达您的地址，空运或海运。", "1bda3153": "咨询专家", "a87532a3": "国际代表", "b6154120": "菜单", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "fdaa7230": "个人客户", "a54ba8ed": "贸易公司", "506126d5": "红色或灰色通道货物，以及在联邦税务局、ANVISA 和 MAPA 的待处理事项。", "cc068e4d": "通过 WhatsApp 联系", "60324c31": "隐私政策", "eabd51b5": "主要机场", "30e11f19": "报关代理 · 全巴西", "dcbcc054": "国际行李", "9de50567": "申报登记、跟进查验并放行货物。", "2dab0660": "从装运到交付。", "63782890": "海运", "79fbf96a": "港口和码头", "904ef931": "电话", "1b79d2ee": "海关行政程序", "c1e69afa": "告诉我们您要进口或出口什么，我们为您提供费用和时间方面的建议。", "d65ab2df": "原产地证书", "175cd00c": "受监管产品", "a6d420c9": "交付", "8f5eb57a": "WhatsApp 联系", "c85066aa": "货物", "606db662": "搬家", "94db4e17": "首页", "4ca4e27c": "检测报告、原产地证书及 MAPA 要求的文件。", "9ebc8a54": "行李", "0bd58599": "从海外到您手中", "9d870317": "查看服务", "ff902f0c": "RADAR 资质办理", "23781b5e": "关闭", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · 巴西", "d2de702a": "从装运前的文件审核 <span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-navio-alto.jpg\"/></span> 到送达您的地址，<span class=\"pic\"><img alt=\"\" src=\"https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/cb-equipe-patio.jpg\"/></span> 每个环节您都与同一个人沟通。", "55d1470c": "空运和海运货代、报关、国际保险和海关转运（DTA）。", "9a850d53": "降低 ICMS，改善现金流。用您的数据申请免费测算。", "4159969e": "进口和出口", "1e884e30": "邮箱", "9f46f84c": "电话 +55 11 2577-4757<br/>邮箱 contato@custombroker.com.br", "54f75dd9": "税收优惠", "4dace3b0": "葡萄酒", "d2b41047": "从第一份报价到清关放行，由同一个人跟进您的货物，覆盖全国各地的港口和机场。", "8874c976": "向下滚动", "e3cd5b2c": "贸易公司", "27883317": "一个团队负责整个外贸流程", "1bd66dd4": "联系我们", "b65a4e5f": "连接巴西与海外的生产商和买家。", "66ee1468": "个人进口", "5dc23982": "各类商品、包裹、行李和国际搬家，送货上门。", "72d961ff": "进口", "8022fd24": "当业务需要的不只是清关时，同一个团队为您解决。", "087ed6a1": "企业客户", "0dc62a4a": "© 2026 Custom Broker。保留所有权利。", "48384009": "通过 WhatsApp 发送发票或形式发票，我们将分析您的业务。", "c2d01721": "为最难的环节提供解决方案", "67cb849e": "与当地合作伙伴一起，服务全国各地的港口和机场。", "14717070": "信用证", "065455f3": "从首次联系到货物放行，始终由同一位专员与您跟进。", "d597ae4d": "保税", "c5ea781d": "覆盖巴西各地的港口和机场", "5424f650": "查看全部服务", "5eec38f7": "空运", "96fb9b74": "办理 Siscomex 各类资质。", "3e72d135": "1 位联系人", "5291c5f3": "了解更多", "a38ef950": "整箱和拼箱", "1cb75d6a": "已放行"}};
+  var HL={pt:'pt-BR',en:'en',es:'es',fr:'fr',it:'it',de:'de',zh:'zh-CN'};
+  var root=document.getElementById('cb');if(!root)return;
+  var els=[].slice.call(root.querySelectorAll('[data-i]'));
+  els.forEach(function(e){e.__pt=e.innerHTML;});
+  var cur='pt';
+  function t(l,k){return (D[l]||{})[k];}
+  window.cbTx=function(k,pt){return cur==='pt'?pt:(t(cur,k)||pt);};
+  function apply(l,save){
+    if(!HL[l])l='pt';cur=l;
+    els.forEach(function(e){var v=l==='pt'?e.__pt:t(l,e.getAttribute('data-i'));if(v!=null&&e.innerHTML!==v)e.innerHTML=v;});
+    document.documentElement.lang=HL[l];
+    [].slice.call(root.querySelectorAll('.pnav .lang')).forEach(function(b){b.textContent=l.toUpperCase();});
+    [].slice.call(root.querySelectorAll('.langm [data-l]')).forEach(function(b){b.setAttribute('aria-current',b.getAttribute('data-l')===l?'true':'false');});
+    var mb=root.querySelector('.menu-b');if(mb)mb.textContent=mb.getAttribute('aria-expanded')==='true'?cbTx('23781b5e','Fechar'):cbTx('b6154120','Menu');
+    if(save){try{localStorage.setItem('cb_lang',l);}catch(e){}}
+  }
+  window.cbSetLang=function(l){apply(l,true);};
+  var l='pt';
+  try{var q=new URLSearchParams(location.search).get('lang');if(q&&HL[q]){l=q;localStorage.setItem('cb_lang',q);}else{var s=localStorage.getItem('cb_lang');if(s&&HL[s])l=s;}}catch(e){}
+  apply(l,false);
+})();
+</script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script><script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script><script>/* Comum a todas as páginas: carregamento, rolagem suave, menu, rodapé revelado, botões magnéticos */
+(function(){
+  const CB=window.CB={intro:[],lenis:null};
+  // cada página abre sempre no topo (sem herdar a posição da página anterior)
+  try{history.scrollRestoration='manual';}catch(e){}
+  const toTop=()=>{if(location.hash)return;scrollTo(0,0);CB.lenis&&CB.lenis.scrollTo(0,{immediate:true,force:true});
+    // quando a prévia está dentro de outra página, leva também o quadro para o topo
+    try{if(window.top!==window.self)document.documentElement.scrollIntoView({block:'start'});}catch(e){}};
+  toTop();addEventListener('pageshow',toTop);
+  const loader=document.querySelector('.loader');
+  const foot=document.querySelector('.foot');
+  const setFH=()=>{if(foot)document.documentElement.style.setProperty('--fh',foot.offsetHeight+'px');};
+  setFH();addEventListener('resize',setFH);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const runIntro=()=>{loader&&loader.classList.add('done');CB.intro.forEach(f=>{try{f()}catch(e){console.error(e)}});CB.started=true;};
+  CB.onIntro=f=>{CB.started?f():CB.intro.push(f);};
+  CB.mobile=matchMedia('(max-width: 820px) and (pointer: coarse)').matches;
+  // dispara uma vez quando o elemento aparece na tela (funciona em qualquer rolagem, também no celular)
+  CB.see=(el,fn,margin)=>{if(!el)return;if(!('IntersectionObserver' in window))return fn();
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{rootMargin:margin||'0px 0px -12% 0px'});io.observe(el);};
+
+  // celular: botão flutuante do WhatsApp
+  if(!document.querySelector('.wa-float')){const w=document.createElement('a');w.className='wa-float';w.href='https://wa.me/5511941012210';w.target='_blank';w.rel='noopener';w.setAttribute('aria-label','Falar no WhatsApp');
+    w.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    document.body.appendChild(w);}
+
+  // menu (funciona mesmo sem GSAP)
+  const btn=document.querySelector('.menu-b'),ov=document.querySelector('.povl'),nav=document.querySelector('.pnav');
+  ov&&ov.setAttribute('data-lenis-prevent','');
+  let open=false;
+  function closeMenu(){if(!open)return;open=false;btn.textContent=window.cbTx?cbTx('b6154120','Menu'):'Menu';btn.setAttribute('aria-expanded','false');
+    if(window.gsap&&!reduce)gsap.to(ov,{clipPath:'inset(0 0 100% 0)',duration:.6,ease:'expo.inOut',onComplete:()=>ov.hidden=true});else{ov.hidden=true;}
+    CB.lenis&&CB.lenis.start();}
+  CB.closeMenu=closeMenu;
+  btn&&btn.addEventListener('click',()=>{if(open)return closeMenu();open=true;const ckb=document.getElementById('cookie');ckb&&(ckb.hidden=true);ov.hidden=false;btn.textContent=window.cbTx?cbTx('23781b5e','Fechar'):'Fechar';btn.setAttribute('aria-expanded','true');CB.lenis&&CB.lenis.stop();
+    if(window.gsap&&!reduce){gsap.timeline().to(ov,{clipPath:'inset(0 0 0% 0)',duration:.7,ease:'expo.inOut'}).from(ov.querySelectorAll('.big a span'),{yPercent:110,duration:.8,stagger:.05,ease:'expo.out'},'-=.3').from(ov.querySelector('.extra'),{opacity:0,y:30,duration:.6},'-=.5');}
+    else ov.style.clipPath='none';});
+
+  // aviso curto
+  const toastEl=document.querySelector('.toast');let tt;
+  CB.toast=(html,ms)=>{if(!toastEl)return;toastEl.innerHTML=html;toastEl.hidden=false;clearTimeout(tt);tt=setTimeout(()=>toastEl.hidden=true,ms||5000);};
+  // seletor de idioma
+  const lb=document.querySelector('.pnav .lang'),lm=document.querySelector('.langm');
+  if(lb&&lm){
+    const NAMES={pt:'Português',en:'English',es:'Español',fr:'Français',it:'Italiano',de:'Deutsch',zh:'中文（普通话）'};
+    const setOpen=o=>{lm.hidden=!o;lb.setAttribute('aria-expanded',String(o));};
+    lb.addEventListener('click',e=>{e.stopPropagation();setOpen(lm.hidden);});
+    document.addEventListener('click',e=>{if(!lm.hidden&&!lm.contains(e.target))setOpen(false);});
+    lm.querySelectorAll('button').forEach(b=>{if(b.dataset.l==='pt')b.setAttribute('aria-current','true');
+      b.addEventListener('click',()=>{setOpen(false);const l=b.dataset.l;
+        window.cbSetLang&&cbSetLang(l);});});
+  }
+  // cookies
+  const ck=document.getElementById('cookie');
+  if(ck){let v=null;try{v=localStorage.getItem('cb-cookies');}catch(e){}
+    if(!v)setTimeout(()=>ck.hidden=false,1800);
+    const set=x=>{try{localStorage.setItem('cb-cookies',x);}catch(e){}ck.hidden=true;};
+    document.getElementById('cookie-ok').addEventListener('click',()=>set('todos'));
+    const ckn=document.getElementById('cookie-no');ckn&&ckn.addEventListener('click',()=>set('necessarios'));
+    const re=document.getElementById('cookie-reopen');re&&re.addEventListener('click',()=>{ck.hidden=false;});}
+
+  addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();lm&&(lm.hidden=true);}});
+
+  if(!window.gsap||reduce){runIntro();return;}
+  gsap.registerPlugin(ScrollTrigger,SplitText,ScrambleTextPlugin);
+
+  if(window.Lenis&&!CB.mobile){CB.lenis=new Lenis({lerp:.09});CB.lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>CB.lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);toTop();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();closeMenu();CB.lenis.scrollTo(t,{offset:-90,duration:1.3});}}));}
+
+  ScrollTrigger.create({start:140,onUpdate:s=>nav&&nav.classList.toggle('small',s.scroll()>140)});
+
+  // botões magnéticos (só com mouse)
+  gsap.matchMedia().add('(hover: hover) and (pointer: fine)',()=>{
+    document.querySelectorAll('.mag,.foot .cta,.pnav .wa').forEach(b=>{
+      const xT=gsap.quickTo(b,'x',{duration:.6,ease:'elastic.out(1,.4)'}),yT=gsap.quickTo(b,'y',{duration:.6,ease:'elastic.out(1,.4)'});
+      b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();xT((e.clientX-r.left-r.width/2)*.35);yT((e.clientY-r.top-r.height/2)*.35);});
+      b.addEventListener('pointerleave',()=>{xT(0);yT(0);});
+    });
+  });
+
+  // rodapé: a chamada sobe enquanto é revelada
+  if(foot&&!CB.mobile){const big=new SplitText(foot.querySelector('.big'),{type:'words,chars'});
+    gsap.from(big.chars,{yPercent:100,opacity:0,stagger:.012,ease:'expo.out',scrollTrigger:{trigger:'.foot-spacer',start:'top 85%',end:'bottom bottom',scrub:1}});}
+
+  // carregamento só na primeira visita
+  let first=!!loader;try{if(sessionStorage.getItem('cbSeen'))first=false;sessionStorage.setItem('cbSeen','1');}catch(e){}
+  if(first&&loader){const c={v:0},cnt=loader.querySelector('.count');
+    gsap.timeline().to(c,{v:100,duration:1.2,ease:'power2.inOut',onUpdate:()=>cnt.textContent=Math.round(c.v)+'%'})
+      .to(loader,{clipPath:'inset(0 0 100% 0)',duration:.8,ease:'expo.inOut'}).add(runIntro,'-=.35');}
+  else runIntro();
+  addEventListener('load',()=>{setFH();ScrollTrigger.refresh();});
+})();
+
+/* Chat (JivoChat) carregado só quando a pessoa clica — LGPD: sem cookies do chat antes do clique.
+   Na Locaweb: desligar o JivoChat automático e preencher o código do widget em CB_JIVO_ID. */
+(function(){
+  const ID=window.CB_JIVO_ID||'OthWJcb9T1';if(!ID)return;
+  const b=document.createElement('button');b.type='button';b.className='chat-btn';b.setAttribute('aria-label','Abrir o chat');
+  b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span>Chat</span>';
+  document.body.appendChild(b);
+  let loading=false;
+  b.addEventListener('click',()=>{
+    if(window.jivo_api){window.jivo_api.open();return;}
+    if(loading)return;loading=true;b.classList.add('is-loading');
+    window.jivo_onLoadCallback=function(){b.remove();try{window.jivo_api.open();}catch(e){}};
+    const s=document.createElement('script');s.src='https://code.jivosite.com/widget/'+encodeURIComponent(ID);s.async=true;
+    s.onerror=()=>{loading=false;b.classList.remove('is-loading');};
+    document.head.appendChild(s);
+  });
+})();
+
+
+// vídeos: arquivo leve e vertical no celular, alta qualidade no computador
+(function(){const m=matchMedia('(max-width: 820px) and (pointer: coarse)').matches;
+  document.querySelectorAll('video[data-d]').forEach(v=>{v.poster=m?v.dataset.pm:v.dataset.pd;v.muted=true;v.setAttribute('playsinline','');
+    if(m&&v.classList.contains('fly')){v.loop=true;v.autoplay=true;}
+    // no celular o vídeo (leve) é baixado inteiro antes de tocar: assim o iPhone toca mesmo onde o servidor não envia o vídeo em partes
+    if(m&&window.fetch&&window.URL){fetch(v.dataset.m).then(r=>r.blob()).then(b=>{v.src=URL.createObjectURL(b);v.addEventListener('error',()=>{v.src=v.dataset.m;v.play().catch(()=>{});},{once:true});v.play().catch(()=>{});}).catch(()=>{v.src=v.dataset.m;});}
+    // avião no computador: baixa o vídeo inteiro antes, para poder avançar e voltar com a rolagem em qualquer servidor
+    else if(v.classList.contains('fly')){/* no computador o avião usa quadros (abaixo) */}
+    else v.src=v.dataset.d;
+    // só toca quando está na tela (economiza bateria e evita travar)
+    if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>{if(!v.autoplay&&!v.loop)return;e.isIntersecting?v.play().catch(()=>{}):v.pause();}),{threshold:.05}).observe(v);
+    });})();
+(function(){
+  if(!window.gsap||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const CB=window.CB;const M=matchMedia('(max-width: 820px) and (pointer: coarse)').matches;const see=CB.see;
+  const h1=document.querySelector('.hero h1');
+  const split=new SplitText(h1.querySelectorAll('.l1,.l3'),{type:'lines',mask:'lines'});
+  const intro=gsap.timeline({paused:true})
+    .from('.hero .bg video',{scale:1.35,duration:2.2,ease:'expo.out'},0)
+    .from(split.lines,{yPercent:110,duration:1.1,stagger:.08,ease:'expo.out'},.15)
+    .from('.swap span:first-child',{yPercent:110,duration:1.1,ease:'expo.out'},.25)
+    .from('.hero .tag, .hero .row > *, .modes li',{y:40,opacity:0,duration:1,stagger:.08,ease:'expo.out'},.4);
+  CB.onIntro(()=>intro.play());
+
+  // palavra que troca
+  const words=[...document.querySelectorAll('.swap span')];let wi=0;
+  gsap.set(words.slice(1),{yPercent:150});words.forEach(w=>w.style.visibility='visible');
+  setInterval(()=>{const a=words[wi];wi=(wi+1)%words.length;const b=words[wi];
+    gsap.to(a,{yPercent:-150,duration:.8,ease:'expo.inOut'});gsap.fromTo(b,{yPercent:150},{yPercent:0,duration:.8,ease:'expo.inOut'});},2200);
+
+  // faixa infinita de documentos
+  const track=document.querySelector('.band .track');track.appendChild(track.firstElementChild.cloneNode(true));
+  const loop=gsap.to(track,{xPercent:-50,duration:M?16:22,ease:'none',repeat:-1});
+
+  const cards=gsap.utils.toArray('.card'),stamp=document.querySelector('.stamp');
+  const stampHit=()=>gsap.timeline()
+      .to(stamp,{scale:1,opacity:1,rotate:-8,duration:.32,ease:'power4.in'})
+      .to(stamp,{scaleX:1.12,scaleY:.9,duration:.08,ease:'power1.out'})
+      .to(stamp,{scaleX:1,scaleY:1,duration:.6,ease:'elastic.out(1.2,.3)'})
+      .fromTo(cards[2],{x:-8},{x:0,duration:.5,ease:'elastic.out(1.5,.2)'},.32);
+  gsap.set(stamp,{scale:3,opacity:0,rotate:-24});
+  // títulos dos serviços: entrada suave (sem letras embaralhadas)
+  gsap.set('.scr',{opacity:0,y:18});
+  const scr=h=>gsap.to(h,{opacity:1,y:0,duration:1.1,ease:'power3.out'});
+
+  if(M){
+    // CELULAR: tudo entra quando aparece na tela, sem prender a rolagem (leve e sem travar)
+    const pop=(el,from,d)=>{gsap.set(el,{opacity:0});see(el,()=>gsap.fromTo(el,{opacity:0,...from},{opacity:1,y:0,x:0,scale:1,rotate:0,duration:d||1,ease:'back.out(1.5)',clearProps:'transform'}));};
+    const lit=new SplitText('.statement .lit',{type:'words'});
+    gsap.set(lit.words,{opacity:.14});see(document.querySelector('.statement .lit'),()=>gsap.to(lit.words,{opacity:1,stagger:.04,duration:.4,ease:'none'}));
+    gsap.set('.statement .pic',{scale:0});see(document.querySelector('.statement .lit'),()=>gsap.to('.statement .pic',{scale:1,duration:1.1,stagger:.25,delay:.3,ease:'elastic.out(1,.5)'}));
+    document.querySelectorAll('.services h2,.steps h2,.more h2').forEach(h=>pop(h,{y:50}));
+    document.querySelectorAll('.panel').forEach((p,i)=>{pop(p,{y:70,rotate:i%2?1.5:-1.5});const im=p.querySelector('img');gsap.set(im,{clipPath:'inset(0 0 100% 0)'});see(p,()=>gsap.to(im,{clipPath:'inset(0 0 0% 0)',duration:1.2,ease:'expo.out',delay:.15}));});
+    const g=document.querySelector('.giant');gsap.set(g,{opacity:0,y:40});see(document.querySelector('.sky'),()=>gsap.to(g,{opacity:.95,y:0,duration:1.2,ease:'expo.out'}));
+    document.querySelectorAll('.fact').forEach((f,i)=>pop(f,{y:50}));
+    cards.forEach((c,i)=>{pop(c,{y:80,rotate:i%2?2:-2},1.1);const n=c.querySelector('.num');gsap.set(n,{opacity:0,yPercent:60});see(c,()=>gsap.to(n,{opacity:1,yPercent:0,duration:1,delay:.2,ease:'expo.out'}));});
+    see(cards[2],()=>gsap.delayedCall(.6,stampHit));
+    document.querySelectorAll('.scr').forEach(h=>see(h,()=>scr(h)));
+    document.querySelectorAll('.li p,.more-lead,.lead,.who').forEach(p=>pop(p,{y:30},.8));
+    return;
+  }
+
+  // COMPUTADOR
+  gsap.to('.hero .bg video',{yPercent:12,scale:1.08,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  const skew=gsap.quickTo(track,'skewX',{duration:.4,ease:'power3'});
+  ScrollTrigger.create({onUpdate:s=>{const v=s.getVelocity();loop.timeScale(1+Math.min(Math.abs(v)/400,5)*(v<0?-1:1));skew(gsap.utils.clamp(-12,12,-v/180));gsap.delayedCall(.25,()=>{loop.timeScale(1);});}});
+
+  const lit=new SplitText('.statement .lit',{type:'words'});
+  gsap.fromTo(lit.words,{opacity:.14},{opacity:1,stagger:.05,ease:'none',scrollTrigger:{trigger:'.statement',start:'top 80%',end:'center 55%',scrub:true}});
+  gsap.from('.statement .pic',{width:0,margin:0,duration:1.2,ease:'elastic.out(1,.6)',stagger:.2,scrollTrigger:{trigger:'.statement .lit',start:'top 75%'}});
+
+  // serviços: os 4 cartões entram com peso, um depois do outro, e a foto se revela
+  ScrollTrigger.batch('.panel',{start:'top 85%',once:true,onEnter:b=>{
+    gsap.fromTo(b,{y:80,opacity:0,rotate:()=>gsap.utils.random(-1.5,1.5)},{y:0,opacity:1,rotate:0,duration:1.1,stagger:.12,ease:'back.out(1.6)'});
+    b.forEach((p,i)=>gsap.fromTo(p.querySelector('img'),{clipPath:'inset(0 0 100% 0)',scale:1.25},{clipPath:'inset(0 0 0% 0)',scale:1,duration:1.3,delay:i*.12,ease:'expo.out'}));}});
+  gsap.set('.panel',{opacity:0});
+  document.querySelectorAll('.panel').forEach(p=>{const im=p.querySelector('img');
+    gsap.to(im,{yPercent:-8,ease:'none',scrollTrigger:{trigger:p,start:'top bottom',end:'bottom top',scrub:true}});});
+
+  // avião: sequência de quadros do vídeo desenhada conforme a rolagem (funciona em qualquer navegador e servidor)
+  const vid=document.querySelector('.sky .fly');
+  const fly=document.createElement('canvas');fly.className='fly';fly.setAttribute('aria-hidden','true');
+  vid.replaceWith(fly);vid.removeAttribute('src');try{vid.load();}catch(e){}
+  const N=94,frames=[],ctx=fly.getContext('2d');let shown=-1;
+  const scrub={t:0};
+  const size=()=>{const r=fly.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);fly.width=Math.round(r.width*d);fly.height=Math.round(r.height*d);shown=-1;draw();};
+  function draw(){let i=Math.round(scrub.t*(N-1));
+    // se o quadro ainda não chegou, usa o mais próximo já carregado
+    let j=i;while(j>=0&&!(frames[j]&&frames[j].complete&&frames[j].naturalWidth))j--;
+    if(j<0)return;if(j===shown)return;shown=j;const im=frames[j];
+    const cw=fly.width,ch=fly.height,s=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*s,h=im.naturalHeight*s;
+    ctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);}
+  // carrega primeiro alguns quadros espalhados (o avião já aparece) e depois o resto
+  const order=[];for(let k=0;k<N;k+=8)order.push(k);for(let k=0;k<N;k++)if(k%8)order.push(k);
+  let qi=0;const next=()=>{if(qi>=order.length)return;const k=order[qi++];const im=new Image();im.decoding='async';
+    im.onload=im.onerror=()=>{if(k===0||Math.abs(k-Math.round(scrub.t*(N-1)))<9){shown=-1;draw();}next();};im.src='https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/media/fly/f'+String(k+1).padStart(3,'0')+'.webp';frames[k]=im;};
+  for(let c=0;c<6;c++)next();
+  size();addEventListener('resize',size);
+  const setT=()=>draw();
+  const fl=gsap.timeline({defaults:{ease:'none'}});
+  fl.to(scrub,{t:1,duration:7,onUpdate:setT},0)
+    .fromTo(fly,{scale:1.18},{scale:1,duration:7},0)
+    .fromTo('.giant',{yPercent:30,opacity:0},{yPercent:-40,opacity:.95,duration:3},0)
+    .to('.giant',{opacity:0,duration:2},5)
+    .from('.fact',{y:60,opacity:0,duration:1,stagger:.7,ease:'power2.out'},1.6);
+  ScrollTrigger.create({trigger:'.flight',start:'top top',end:'+=220%',pin:'.sky',scrub:.6,animation:fl,invalidateOnRefresh:true});
+
+  // cartões empilhando: o anterior encolhe
+  cards.forEach((c,i)=>{
+    if(i<cards.length-1)gsap.to(c,{scale:.94,ease:'none',scrollTrigger:{trigger:cards[i+1],start:'top bottom',end:'top 136px',scrub:true}});
+    gsap.from(c.querySelector('.num'),{yPercent:60,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:c,start:'top 75%'}});
+  });
+  ScrollTrigger.create({trigger:cards[2],start:'top 45%',once:true,onEnter:stampHit});
+
+  document.querySelectorAll('.scr').forEach(h=>ScrollTrigger.create({trigger:h,start:'top 85%',once:true,onEnter:()=>scr(h)}));
+  gsap.from('.more h2',{yPercent:30,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.more',start:'top 70%'}});
+  addEventListener('load',()=>ScrollTrigger.refresh());
+})();
+</script>

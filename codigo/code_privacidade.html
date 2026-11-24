@@ -1,0 +1,1001 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"><style>:root{--card:#e6e1dd;
+--ink:#161b2f;
+--ink-2:#163250;
+--paper:#ddd7d3;
+--white:#ffffff;
+--text:#2b3142;
+--muted:#444d5e;
+--line:#b9b2ad;
+--brand:#5b687c;
+--brand-dark:#3f4a5e;
+--wine:#6b1d33;
+--whats:#15803d;
+--f-display:"Archivo", "Arial Narrow", Arial, sans-serif;
+--f-body:"IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+--f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+--wrap:1180px;
+--ease:cubic-bezier(.2,.7,.2,1);
+color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:112%;color:var(--ink);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-dark);margin:0 0 14px}
+.preview-note{background:#fff7d6;color:#5a4a00;font-size:.85rem;text-align:center;padding-block:7px}
+.preview-note .wrap{padding-block:0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(22,27,47,.96);backdrop-filter:blur(8px);transition:box-shadow .3s}
+.top.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
+.logo-bulb{flex:none;width:26px;height:40px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(140,195,238,.25));transition:transform .4s var(--ease)}
+.logo:hover .logo-bulb{transform:rotate(-6deg) scale(1.05)}
+.logo-words{display:grid;line-height:1}
+.logo b{font-family:var(--f-display);font-stretch:125%;font-weight:600;font-size:1.08rem;letter-spacing:.09em;color:#d4cdc8}
+.logo small{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#8d8f8e;margin-top:5px}
+.nav{display:flex;gap:20px;margin-left:auto;font-size:.92rem}
+.nav a{color:#d4cdc8;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav a:hover{color:var(--white);border-color:var(--brand)}
+.btn{display:inline-flex;align-items:center;gap:9px;font:600 .95rem/1 var(--f-body);text-decoration:none;padding:14px 22px;border-radius:6px;border:2px solid transparent;transition:transform .25s var(--ease),background .25s,box-shadow .25s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-whats{background:var(--whats);color:var(--white)}
+.btn-whats:hover{background:#116a32;box-shadow:0 8px 22px rgba(21,128,61,.35)}
+.btn-line{border-color:rgba(255,255,255,.45);color:var(--white)}
+.btn-line:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
+.top .btn{padding:10px 16px;font-size:.88rem}
+.nav a.new{color:#e9b7c4}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.3);border-radius:6px;color:var(--white);font:600 .85rem/1 var(--f-body);padding:9px 12px;cursor:pointer;gap:8px;align-items:center}
+.menu-btn span{display:block;width:16px;height:2px;background:currentColor;box-shadow:0 5px 0 currentColor,0 -5px 0 currentColor}
+@media (max-width:1140px){
+.menu-btn{display:inline-flex}
+.top .wrap{flex-wrap:wrap}
+.nav{display:none;order:3;width:100%;flex-direction:column;gap:0;margin:0;padding-bottom:12px}
+.nav.open{display:flex;animation:rise .35s var(--ease) both}
+.nav a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:1rem}
+}
+.hero{background:var(--ink);color:#d6e2ee;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:stretch;padding-block:0}
+.hero-text{padding-block:84px 72px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow{color:#d4cdc8}
+.hero h1{color:var(--white);font-size:clamp(2.3rem,5vw,3.9rem);font-weight:800}
+.hero h1 em{font-style:normal;color:#d4cdc8}
+.hero p.lead{font-size:1.15rem;max-width:34em;margin:22px 0 32px;color:#d4cdc8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-modes{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#8d8f8e}
+.hero-modes span{transition:color .4s}
+.hero-modes span.on{color:var(--white)}
+.hero-modes span.on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand);margin-right:8px;vertical-align:1px}
+.stage{position:relative;overflow:hidden;min-height:540px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.4s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);transition:transform 9s ease-out}
+.slide.zoom img{transform:scale(1.07)}
+@keyframes drift{from{transform:scale(1.01)}to{transform:scale(1.07)}}
+.stage::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 22%);pointer-events:none}
+.slide figcaption{position:absolute;right:20px;bottom:18px;z-index:2;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:rgba(22,27,47,.7);padding:6px 10px;border-radius:4px}
+.dots{position:absolute;left:28px;bottom:22px;z-index:3;display:flex;gap:8px}
+.dots{gap:4px}
+.dots button{width:40px;height:44px;border:0;background:none;cursor:pointer;padding:0;position:relative;display:grid;align-items:center}
+.dots button::before{content:"";display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.dots button.on::after{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:var(--card,#e6e1dd);transform-origin:left;animation:fill 6s linear forwards}
+.stage.paused .dots button.on::after{animation-play-state:paused}
+.dots{bottom:6px}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.load{animation:rise .9s var(--ease) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.34s}.d4{animation-delay:.48s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:900px){
+.hero .wrap{grid-template-columns:1fr;gap:0}
+.hero-text{padding-block:52px 40px}
+.stage{min-height:340px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+.stage::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 25%)}
+}
+.docs{background:var(--card,#e6e1dd);border-bottom:1px solid var(--line)}
+.docs .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding-block:20px;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+.docs strong{font-family:var(--f-body);font-weight:600;color:var(--ink);letter-spacing:0;font-size:.9rem}
+section{padding-block:96px}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:24px 56px;align-items:end;margin-bottom:48px}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:800}
+.sec-head p{margin:0;color:var(--muted);max-width:34em}
+@media (max-width:800px){.sec-head{grid-template-columns:1fr}section{padding-block:68px}}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+.card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:420px;border-radius:10px;overflow:hidden;color:var(--white);text-decoration:none;background:var(--ink-2);isolation:isolate}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s var(--ease)}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,0) 20%,rgba(22,27,47,.55) 45%,rgba(22,27,47,.95) 75%);transition:background .4s}
+.card:hover img{transform:scale(1.04)}
+.card-body{padding:24px}
+.card .tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#cfe4f6;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.card h3{color:var(--white);font-size:1.45rem;font-weight:800;margin:8px 0 10px}
+.card p{margin:0;font-size:.95rem;color:#d3dfeb;line-height:1.5}
+.card .more{display:inline-flex;gap:6px;margin-top:16px;font-weight:600;font-size:.9rem;color:var(--white)}
+.card .more i{font-style:normal;transition:transform .3s var(--ease)}
+.card:hover .more i{transform:translateX(5px)}
+.card.wine{background:var(--wine)}
+.card.wine::before{background:radial-gradient(120% 70% at 85% 0%,rgba(255,255,255,.12),transparent 60%)}
+.card.wine .tag{color:#f0c2cd}
+.card.wine p{color:#f2dbe1}
+.wine-mark{position:absolute;top:24px;right:24px;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:5.4rem;line-height:.8;color:rgba(255,255,255,.12)}
+.wine-mark small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;color:rgba(255,255,255,.55);text-align:right;margin-top:8px;font-weight:500}
+.facts{background:var(--card,#e6e1dd);border-block:1px solid var(--line);padding-block:64px}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media (max-width:760px){.facts .wrap{grid-template-columns:1fr}}
+.fact{border-left:3px solid var(--brand);padding-left:20px}
+.fact .n{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.fact .n small{font-size:.45em;margin-left:4px;color:var(--brand-dark)}
+.fact p{margin:10px 0 0;color:var(--muted);max-width:22em}
+.about-link{grid-column:1/-1;justify-self:start;font-weight:600;color:var(--brand-dark);text-decoration:none;border-bottom:2px solid var(--brand);padding-bottom:3px}
+.about-link i{font-style:normal;display:inline-block;transition:transform .3s var(--ease)}
+.about-link:hover i{transform:translateX(5px)}
+.wines{background:var(--paper)}
+.wines .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+@media (max-width:900px){.wines .wrap{grid-template-columns:1fr;gap:36px}}
+.wines figure{margin:0;position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/5;max-width:100%}
+.wines figure img{width:100%;height:100%;object-fit:cover;display:block}
+.wines h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;margin-bottom:18px}
+.wines p{margin:0 0 26px;max-width:36em}
+.checklist{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+@media (max-width:520px){.checklist{grid-template-columns:1fr}}
+.checklist li{display:flex;gap:10px;align-items:baseline;font-size:.95rem;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.checklist li::before{content:"";flex:none;width:8px;height:8px;border-radius:2px;background:var(--wine);transform:translateY(-1px)}
+.more-list{margin-bottom:30px}
+.more-list dt a{text-decoration:none;color:var(--ink);border-bottom:1px solid var(--brand)}
+.more-list dt a:hover{color:var(--brand-dark)}
+.btn-wine{background:var(--wine);color:var(--white)}
+.btn-wine:hover{box-shadow:0 8px 22px rgba(107,29,51,.3)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;position:relative}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr;gap:28px 0}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding:0 24px 0 0}
+.step .num{font-family:var(--f-mono);font-size:.8rem;color:var(--brand-dark);letter-spacing:.1em}
+.step .bar{height:2px;background:var(--line);margin:12px 0 20px;position:relative;overflow:hidden}
+.step .bar::after{content:"";position:absolute;inset:0;background:var(--brand);transform:scaleX(1);transform-origin:left;transition:transform 1s var(--ease)}
+.steps.armed .step .bar::after{transform:scaleX(0)}
+.steps.armed.in .step .bar::after{transform:scaleX(1)}
+.steps.in .step:nth-child(2) .bar::after{transition-delay:.25s}
+.steps.in .step:nth-child(3) .bar::after{transition-delay:.5s}
+.steps.in .step:nth-child(4) .bar::after{transition-delay:.75s}
+.step h3{font-size:1.2rem;font-weight:800;margin-bottom:8px}
+.step p{margin:0;color:var(--muted);font-size:.95rem}
+.cta{color:var(--white);padding-block:0;background:var(--ink);overflow:hidden}
+.cta .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:stretch}
+.cta-text{padding-block:96px;min-width:0}
+.cta-photo{margin:0;position:relative;overflow:hidden;min-height:420px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.cta-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}
+@media (max-width:900px){.cta .wrap{grid-template-columns:1fr;gap:0}.cta-text{padding-block:64px 40px}.cta-photo{min-height:300px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}.cta-photo::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}}
+.cta h2{color:var(--white);font-size:clamp(2rem,4.2vw,3.2rem);font-weight:800;max-width:15em}
+.cta p{color:#d4cdc8;max-width:32em;margin:18px 0 30px}
+.contact-row{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:34px;font-size:.95rem;color:#d4cdc8}
+.contact-row span{user-select:all}
+.contact-row b{display:block;font-family:var(--f-mono);font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#8d8f8e;user-select:none}
+footer{background:#08182a;color:#8ea4b9;font-size:.9rem;padding-block:40px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+footer .logo{margin-bottom:6px}
+.feature-rev .wrap{grid-template-columns:1.1fr .9fr}
+.feature-rev figure{order:2}
+@media (max-width:900px){.feature-rev .wrap{grid-template-columns:1fr}.feature-rev figure{order:0}}
+.wines .prose-sm p{margin:0 0 16px}
+[id]{scroll-margin-top:96px}
+.tiles .tile{display:flex;flex-direction:column}
+.tile-link{display:inline-flex;align-self:flex-start;gap:6px;margin-top:auto;padding-top:18px;font-weight:600;font-size:.95rem;color:var(--brand-dark);text-decoration:none}
+.tile-link i{font-style:normal;transition:transform .3s var(--ease)}
+.tile-link:hover i{transform:translateX(4px)}
+.flash{animation:flash 2.2s ease-out}
+@keyframes flash{0%,40%{box-shadow:0 0 0 3px var(--brand),0 12px 28px rgba(22,27,47,.12)}100%{box-shadow:0 0 0 0 rgba(61,143,209,0)}}
+.tile-img{margin:-28px -28px 22px;height:190px;overflow:hidden;border-radius:10px 10px 0 0}
+.tile-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease)}
+.tile:hover .tile-img img{transform:scale(1.05)}
+.card.wine::before{background:linear-gradient(180deg,rgba(74,18,34,0) 20%,rgba(74,18,34,.6) 45%,rgba(60,14,28,.96) 75%)}
+.faq{display:grid;border-top:1px solid var(--line);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-weight:600;color:var(--ink);font-size:1.05rem;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--brand-dark);font-weight:500;font-size:1.2rem;transition:transform .3s var(--ease),background .3s}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--paper)}
+.faq details p{margin:0 0 20px;color:var(--muted);max-width:68ch}
+.faq details[open] p{animation:rise .35s var(--ease) both}
+.edge{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:22px;border:1px solid var(--line);border-radius:10px;background:var(--card,#e6e1dd);overflow:hidden}
+.edge div{padding:18px 22px;border-left:1px solid var(--line)}
+.edge div:first-child{border-left:0}
+.edge b{display:block;font-family:var(--f-display);font-stretch:112%;font-weight:800;color:var(--ink);font-size:1.15rem}
+.edge span{font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){.edge{grid-template-columns:1fr}.edge div{border-left:0;border-top:1px solid var(--line)}.edge div:first-child{border-top:0}}
+.legal{max-width:760px}
+.legal h2{font-size:1.35rem;font-weight:800;margin:36px 0 10px}
+.legal p,.legal li{color:var(--text)}
+.legal ul{padding-left:20px;display:grid;gap:8px}
+.legal-date{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.link-btn{font:inherit;color:var(--brand-dark);font-weight:600;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.cookie{position:fixed;z-index:58;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:var(--card,#e6e1dd);color:var(--text);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 40px rgba(22,27,47,.18);padding:20px;display:grid;gap:14px;font-size:.92rem;animation:rise .5s var(--ease) both}
+.cookie p{margin:0}
+.cookie a{color:var(--brand-dark);font-weight:600}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:10px}
+.cookie-actions .btn{padding:11px 18px;font-size:.9rem}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:var(--card,#e6e1dd)}
+@media (max-width:640px){.cookie{left:12px;right:12px;max-width:none;bottom:calc(84px + env(safe-area-inset-bottom,0px))}.cookie-actions .btn{flex:1;justify-content:center}}
+.f-consent{margin:0;font-size:.85rem;color:var(--muted)}
+.f-consent a{color:var(--brand-dark);font-weight:600}
+.lang-pill{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;color:#d4cdc8;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 10px;white-space:nowrap}
+.lang-pill:hover{color:var(--white);border-color:var(--white)}
+footer .f-links{display:grid;gap:6px}
+footer .f-links a{color:#d4cdc8;text-decoration:none}
+footer .f-links a:hover{color:var(--white);text-decoration:underline}
+.view[hidden]{display:none!important}
+.page-head{background:var(--ink);color:#d4cdc8;padding-block:0;overflow:hidden}
+.page-head .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:stretch}
+.ph-text{padding-block:72px 64px;min-width:0;animation:rise .8s var(--ease) both}
+.page-head .eyebrow{color:#d4cdc8}
+.page-head h1{color:var(--white);font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800}
+.page-head .lead{font-size:1.1rem;max-width:36em;margin:20px 0 0;color:#d4cdc8}
+.ph-photo{margin:0;position:relative;overflow:hidden;min-height:340px;margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)))}
+.ph-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:drift 12s ease-out both}
+.ph-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(22,27,47,0) 30%)}
+.page-head-wine{background:var(--wine)}
+.page-head-wine .eyebrow{color:#f0c2cd}
+.page-head-wine .ph-photo::after{background:linear-gradient(90deg,var(--wine) 0%,rgba(107,29,51,0) 30%)}
+@media (max-width:900px){
+.page-head .wrap{grid-template-columns:1fr;gap:0}
+.ph-text{padding-block:48px 36px}
+.ph-photo{min-height:240px;margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)))}
+.ph-photo::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(22,27,47,0) 35%)}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,var(--wine) 0%,rgba(107,29,51,0) 35%)}
+}
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+@media (max-width:900px){.two-col{grid-template-columns:1fr;gap:36px}}
+.prose{max-width:62ch;min-width:0}
+.prose h2{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;margin-bottom:18px}
+.prose p{margin:0 0 16px}
+.h2-sm{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;margin-bottom:22px}
+.pillars{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.pillars li{display:grid;gap:4px;padding:18px 0;border-bottom:1px solid var(--line)}
+.pillars b{font-family:var(--f-display);font-stretch:112%;font-weight:800;color:var(--ink);font-size:1.1rem}
+.pillars span{color:var(--muted);font-size:.95rem}
+.svc-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+@media (max-width:860px){.svc-cols{grid-template-columns:1fr;gap:48px}}
+.rows{margin:0;display:grid;border-top:1px solid var(--line)}
+.rows>div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rows dt{font-weight:600;color:var(--ink)}
+.rows dd{margin:0;color:var(--muted);font-size:.95rem}
+@media (max-width:520px){.rows>div{grid-template-columns:1fr;gap:2px}}
+.rows-2{grid-template-columns:1fr 1fr;column-gap:48px;border-top:0}
+.rows-2>div{grid-template-columns:1fr;gap:4px;border-top:1px solid var(--line);border-bottom:0}
+@media (max-width:760px){.rows-2{grid-template-columns:1fr}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:900px){.tiles{grid-template-columns:1fr}}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:28px;transition:transform .3s var(--ease),box-shadow .3s}
+section:not([style]) .tile{background:var(--card,#e6e1dd)}
+.tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(22,27,47,.08)}
+.tile h3{font-size:1.25rem;font-weight:800;margin-bottom:10px}
+.tile p{margin:0;color:var(--muted);font-size:.95rem}
+.tile-hl{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+.dots-list{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem;display:grid;gap:6px}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1000px){.rules{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--card,#e6e1dd);border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:8px;padding:24px}
+.rule-k{display:block;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;color:var(--brand-dark);margin-bottom:12px}
+.rule h3{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.rule p{margin:0;color:var(--muted);font-size:.93rem}
+@media (min-width:1001px){.rules-3{grid-template-columns:repeat(3,1fr)}}
+.rule p a{color:var(--brand-dark);font-weight:600}
+.compare{background:var(--card,#e6e1dd);border:1px solid var(--line);border-radius:10px;padding:28px;display:grid;gap:26px}
+.cmp-row{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center}
+@media (max-width:640px){.cmp-row{grid-template-columns:1fr;gap:12px}}
+.cmp-label{font-weight:600;color:var(--ink)}
+.cmp-label small{display:block;font-family:var(--f-mono);font-size:.74rem;color:var(--muted);font-weight:500}
+.cmp-bars{display:grid;gap:10px;min-width:0}
+.cmp-bar{position:relative;display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:6px;background:var(--paper);overflow:hidden;font-size:.9rem;isolation:isolate}
+.cmp-bar i{position:absolute;inset:0 auto 0 0;width:var(--w);background:#c7d6e4;z-index:-1;transform-origin:left}
+.compare.armed .cmp-bar i{transform:scaleX(0)}
+.compare.armed.in .cmp-bar i{transform:scaleX(1);transition:transform 1.2s var(--ease) .3s}
+.compare.armed.in .cmp-row.good .cmp-bar i{transition-delay:.7s}
+.cmp-bar.icms i{background:#e4b9a8}
+.good .cmp-bar i{background:#b9dcc6}
+.good .cmp-bar.icms i{background:#8fcaa5}
+.cmp-bar b{font-weight:500;color:var(--ink)}
+.cmp-bar em{font-style:normal;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.cmp-note{margin:0;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line);padding-top:18px}
+.cmp-note strong{color:#17733f}
+.inline-cta{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;background:var(--ink);color:#d4cdc8;border-radius:10px;padding:28px 32px}
+.inline-cta p{margin:0;max-width:40em}
+.btn-primary{background:var(--brand-dark);color:var(--white)}
+.btn-primary:hover{background:#1f5f95;box-shadow:0 8px 22px rgba(61,143,209,.3)}
+.contact-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:start}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.form{background:var(--card,#e6e1dd);border:1px solid var(--line);border-radius:10px;padding:32px;display:grid;gap:18px;min-width:0}
+.f-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:600px){.f-2{grid-template-columns:1fr}.form{padding:22px}}
+.f-row{display:grid;gap:6px;min-width:0}
+.f-row label{font-size:.85rem;font-weight:600;color:var(--ink)}
+.f-row input,.f-row select,.f-row textarea{font:inherit;font-size:1rem;color:var(--text);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s}
+.f-row input:focus,.f-row select:focus,.f-row textarea:focus{outline:none;border-color:var(--brand);background:var(--card,#e6e1dd)}
+.form .btn{justify-self:start}
+.f-note{margin:0;font-size:.9rem;color:#5a4a00;background:#fff7d6;border-radius:6px;padding:10px 14px}
+.contact-side{display:grid;gap:22px;align-content:start}
+.contact-side .btn{justify-self:start}
+.contact-side dl{margin:0;display:grid;gap:16px}
+.contact-side dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.contact-side dd{margin:2px 0 0;color:var(--ink);font-weight:500;user-select:all}
+.map-link{font-weight:600;color:var(--brand-dark);text-decoration:none;border-bottom:2px solid var(--brand);justify-self:start;padding-bottom:3px}
+.map-link i{font-style:normal}
+.nav a.active{color:var(--white);border-color:var(--brand)}
+.float-whats{display:none!important;position:fixed;z-index:55;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--whats);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s var(--ease)}
+.float-whats:hover{transform:scale(1.08)}
+.float-whats::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--whats);animation:pulse 2.8s ease-out infinite;z-index:-1}
+@keyframes pulse{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.55);opacity:0}}
+.reveal.armed{opacity:0;transform:translateY(26px)}
+.reveal.armed.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.cards .reveal.armed.in:nth-child(2){transition-delay:.1s}
+.cards .reveal.armed.in:nth-child(3){transition-delay:.2s}
+.cards .reveal.armed.in:nth-child(4){transition-delay:.3s}
+.mbar{display:none}
+@media (max-width:1140px){
+.top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--ink)}
+.nav{position:fixed;left:0;right:0;top:calc(68px + env(safe-area-inset-top,0px));bottom:0;z-index:49;background:var(--ink);padding:8px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));overflow-y:auto;width:auto;order:0}
+.nav a{display:flex;justify-content:space-between;align-items:center;min-height:56px;font-size:1.15rem;font-weight:500;color:var(--white);border-bottom:1px solid rgba(255,255,255,.1)}
+.nav a::after{content:"›";font-size:1.5rem;color:#8d8f8e;line-height:1}
+.nav a.active{color:#d4cdc8;border-bottom-color:rgba(255,255,255,.1)}
+.nav a.active::after{color:#d4cdc8}
+.nav-extra{display:grid;gap:12px;margin-top:24px}
+.nav-extra .btn{justify-content:center}
+.nav-extra p{margin:8px 0 0;color:#8d8f8e;font-size:.9rem;line-height:1.5}
+.nav-extra p span{user-select:all;color:#d4cdc8}
+body.menu-open{overflow:hidden}
+.menu-btn[aria-expanded="true"] span{background:transparent;box-shadow:none;position:relative}
+.menu-btn[aria-expanded="true"] span::before,.menu-btn[aria-expanded="true"] span::after{content:"";position:absolute;left:0;top:0;width:16px;height:2px;background:currentColor;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:rotate(-45deg)}
+}
+@media (min-width:1141px){.nav-extra,.nav .m-only{display:none}}
+@media (max-width:640px){
+body{font-size:16px}
+.preview-note{font-size:.75rem;padding-block:5px}
+.top .wrap{min-height:60px;gap:12px}
+.nav{top:calc(60px + env(safe-area-inset-top,0px))}
+.top .wrap > .btn-whats,.top .lang-pill{display:none}
+.menu-btn{padding:10px 14px;min-height:44px}
+.logo b{font-size:.95rem}
+.logo small{font-size:.55rem}
+section{padding-block:56px}
+.sec-head{margin-bottom:28px}
+.hero-text{padding-block:36px 28px}
+.hero h1{font-size:2.1rem}
+.hero p.lead{font-size:1.02rem;margin:16px 0 24px}
+.hero-actions{display:grid;grid-template-columns:1fr;gap:10px}
+.hero-actions .btn,.wines .btn,.inline-cta .btn,.cta .btn,.form .btn{width:100%;justify-content:center;min-height:50px}
+.hero-modes{display:none}
+.stage{min-height:250px}
+.dots{left:20px;bottom:16px}
+.slide figcaption{right:16px;bottom:12px;font-size:.66rem}
+.docs .wrap{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;padding-block:14px;gap:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.docs .wrap::-webkit-scrollbar{display:none}
+.docs strong{flex:none;font-size:.82rem;padding-right:4px}
+.docs span{flex:none;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:calc(-1 * max(20px,env(safe-area-inset-left,0px)));padding-inline:max(20px,env(safe-area-inset-left,0px));padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cards::-webkit-scrollbar{display:none}
+.cards .card{flex:0 0 84%;min-height:340px;scroll-snap-align:center}
+.swipe-hint{display:flex}
+.facts{padding-block:44px}
+.facts .wrap{gap:24px}
+.wines figure{aspect-ratio:16/11}
+.ph-text{padding-block:36px 28px}
+.page-head h1{font-size:1.95rem}
+.page-head .lead{font-size:1rem}
+.ph-photo{min-height:200px}
+.tile{padding:22px}
+.tile-img{margin:-22px -22px 18px;height:160px}
+.rule{padding:20px}
+.compare{padding:20px}
+.inline-cta{padding:22px}
+.cta-text{padding-block:52px 32px}
+.cta-photo{min-height:220px}
+.contact-row{display:grid;gap:14px}
+.step{padding-right:0}
+.float-whats{display:none}
+.mbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(22,27,47,.08);transition:transform .3s var(--ease)}
+.mbar .btn{justify-content:center;min-height:48px;padding:12px}
+.mbar .btn-ghost{border-color:var(--ink);color:var(--ink);background:var(--card,#e6e1dd)}
+body.menu-open .mbar{transform:translateY(110%)}
+footer{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
+.swipe-hint{display:none;align-items:center;gap:8px;margin:14px 0 0;font-size:.85rem;color:var(--muted)}
+.swipe-hint i{font-style:normal;display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important}
+.reveal.armed{opacity:1;transform:none}
+.steps.armed .step .bar::after{transform:scaleX(1)}
+.compare.armed .cmp-bar i{transform:none}
+.slide img,.slide.zoom img{transform:none}
+}
+:root{--f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-mono:"Archivo",system-ui,sans-serif;--ink:#17181f;--ink-2:#161b2f;--brand:#5b687c;--brand-dark:#3f4a5e;--paper:#d4cdc8}
+html{scroll-behavior:auto}
+body{background:var(--paper)}
+.page-main{background:var(--paper)}
+.eyebrow{font-family:var(--f-display);font-size:1rem;letter-spacing:0;text-transform:none;font-weight:600;color:var(--brand-dark);font-stretch:100%}
+h1,h2,h3{font-stretch:118%;letter-spacing:-.025em}
+.sec-head h2,.prose h2,.wines h2,.cta h2{font-size:clamp(2.2rem,4.6vw,3.9rem);line-height:.98;letter-spacing:-.035em;font-stretch:125%}
+.h2-sm{font-size:clamp(1.8rem,3.2vw,2.6rem);font-stretch:125%;letter-spacing:-.03em}
+section{padding-block:clamp(72px,10vw,140px)}
+.page-head{position:relative;padding-block:130px 72px!important;overflow:hidden}
+.page-head .wrap{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,5vw,72px);align-items:end}
+.ph-photo{position:relative!important;margin:0!important;min-height:0!important;aspect-ratio:4/5;max-height:72svh;width:100%;max-width:560px;justify-self:end;border-radius:28px;overflow:hidden}
+.ph-photo img{animation:none!important;position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover;image-rendering:auto}
+.ph-photo::after{display:none!important}
+.ph-text{position:relative;z-index:1;padding:0 0 8px!important;animation:none!important}
+.page-head h1{font-size:clamp(2.6rem,6.2vw,5.8rem)!important;line-height:.93;letter-spacing:-.045em;font-stretch:125%;max-width:14ch}
+.page-head .lead{font-size:clamp(1.05rem,1.4vw,1.22rem);color:#dbe5ee;max-width:40em}
+.page-head .eyebrow{color:var(--brand)}
+.page-head-wine .eyebrow{color:#f0c2cd}
+@media (max-width:900px){.page-head{padding-block:110px 48px!important}.page-head .wrap{grid-template-columns:1fr}.ph-photo{justify-self:stretch;max-width:none;aspect-ratio:4/3;max-height:none;order:2}}
+.f-go{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-weight:600;color:var(--ink)}
+.btn{border-radius:999px;padding:15px 24px}
+.btn:hover{transform:none}
+.btn-primary{background:var(--ink);color:#fff}
+.tile-link,.about-link,.map-link{color:var(--brand-dark)}
+.rule{border-top-color:var(--brand)}
+.fact{border-left-color:var(--brand)}
+.cards .card,.tile,.rule,.compare,.form,.inline-cta,.edge,.wines figure{border-radius:22px}
+.tile-img{border-radius:22px 22px 0 0}
+.card .tag,.rule-k,.cmp-label small,.contact-side dt,.legal-date,.step .num,.contact-row b{letter-spacing:0;text-transform:none;font-size:.9rem;font-weight:600}
+.step .bar::after{transform:scaleX(var(--p,1))!important;transition:none!important;background:var(--brand)!important}
+.reveal.armed{opacity:1;transform:none}
+.f-row input,.f-row select,.f-row textarea{border-radius:12px}
+.inline-cta{background:var(--ink)}
+.fill{background:#fff2b8}
+@media (max-width:900px){.page-head{min-height:72svh;padding-block:120px 40px!important}}
+html,body{margin:0}
+:root{
+--c-navy:#17181f;--c-navy-2:#161b2f;--c-steel:#8d8f8e;--c-signal:#d4cdc8;--c-go:#1f9d5c;
+--c-f:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+.loader{position:fixed;inset:0;z-index:100;background:var(--c-navy);color:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:24px max(24px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));font-family:var(--c-f)}
+.loader .count{font-weight:800;font-stretch:125%;font-size:clamp(72px,16vw,220px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.loader .who{color:var(--c-steel);font-size:15px;max-width:22ch;text-align:right}
+.loader.done{display:none}
+.pnav{position:fixed;z-index:50;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:7px 7px 7px 14px;border-radius:999px;background:rgba(23,24,31,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);width:min(1080px,calc(100% - 32px));justify-content:space-between;transition:width .5s cubic-bezier(.2,.8,.2,1);font-family:var(--c-f);color:#fff}
+.pnav.small{width:min(460px,calc(100% - 32px))}
+.pnav .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-stretch:112%;white-space:nowrap;font-size:16px}
+.pnav .brand img{width:22px;height:34px;object-fit:contain}
+.pnav .links{display:flex;gap:16px;font-size:15px}
+.pnav .links a{text-decoration:none;color:#e2deda;padding:6px 2px;border-bottom:2px solid transparent}
+.pnav .links a:hover{color:#fff}
+.pnav .links a[aria-current="page"]{color:#fff;border-color:var(--c-signal)}
+.pnav.small .links{display:none}
+.pnav .r{display:flex;align-items:center;gap:8px}
+.pnav .wa{background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;white-space:nowrap}
+.pnav .menu-b{border:0;background:#fff;color:var(--c-navy);font:600 15px var(--c-f);padding:10px 16px;border-radius:999px;cursor:pointer}
+@media (max-width:1100px){.pnav .links{display:none}.pnav{width:min(560px,calc(100% - 32px))}}
+@media (max-width:520px){.pnav .wa,.pnav .lang{display:none}}
+.povl{position:fixed;inset:0;z-index:45;background:var(--c-navy);color:#fff;font-family:var(--c-f);overflow-y:auto;padding:100px max(20px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));clip-path:inset(0 0 100% 0)}
+.povl .in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+@media (max-width:820px){.povl .in{grid-template-columns:1fr}}
+.povl .big a{display:block;overflow:hidden;text-decoration:none;color:#fff;font-weight:800;font-stretch:125%;font-size:clamp(34px,6vw,80px);line-height:1.04;letter-spacing:-.03em}
+.povl .big a span{display:inline-block}
+.povl .big a:hover,.povl .big a[aria-current="page"]{color:var(--c-signal)}
+.povl .extra{display:grid;gap:18px;color:var(--c-steel);font-size:16px}
+.povl .extra a{color:#fff}
+.povl .extra p{margin:0}
+.povl .extra .wa{justify-self:start;background:var(--c-go);color:#fff;text-decoration:none;font-weight:600;padding:16px 24px;border-radius:999px}
+.page-main{position:relative;z-index:2}
+.foot-spacer{height:var(--fh,560px)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:1;background:#161b2f;color:#fff;font-family:var(--c-f);padding:56px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.foot .in{max-width:1280px;margin:0 auto}
+.foot .big{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(36px,6.6vw,104px);line-height:.92;letter-spacing:-.045em;max-width:18ch}
+.foot .sub{margin:16px 0 0;font-size:19px;max-width:46ch}
+.foot .grid{display:flex;flex-wrap:wrap;gap:24px 56px;justify-content:space-between;align-items:flex-end;margin-top:32px}
+.foot dl{margin:0;display:grid;grid-template-columns:auto auto;gap:6px 20px;font-size:16px}
+.foot dt{font-weight:700}.foot dd{margin:0}
+.foot .cta{display:inline-flex;background:var(--c-signal);color:var(--c-navy);text-decoration:none;font-weight:600;font-size:18px;padding:20px 30px;border-radius:999px;will-change:transform}
+.foot .legal{display:flex;flex-wrap:wrap;gap:16px 48px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(212,205,200,.25);font-size:14px;line-height:1.5}
+.foot .legal a{color:#d4cdc8;text-underline-offset:3px}
+.foot small{display:block;margin-top:20px;font-size:13px;opacity:.75}
+@media (max-height:700px),(max-width:600px){.foot{position:relative}.foot-spacer{display:none}}
+@media (prefers-reduced-motion:reduce){.loader{display:none}}
+.langw{position:relative}
+.pnav .lang{font:700 13px var(--c-f);color:#fff;background:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 12px;line-height:1;cursor:pointer}
+.pnav .lang:hover{border-color:#fff}
+.langm{position:absolute;right:0;top:calc(100% + 10px);list-style:none;margin:0;padding:6px;min-width:190px;background:#fff;border-radius:16px;box-shadow:0 18px 40px rgba(23,24,31,.25);z-index:5}
+.langm button{display:block;width:100%;text-align:left;font:500 15px var(--c-f);color:var(--c-navy);background:none;border:0;border-radius:10px;padding:10px 12px;cursor:pointer}
+.langm button:hover,.langm button[aria-current="true"]{background:#d4cdc8}
+@media (max-width:520px){.pnav .langw{display:none}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;max-width:min(560px,calc(100% - 32px));background:var(--c-navy);color:#fff;font:15px/1.45 var(--c-f);padding:14px 18px;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.toast a{color:var(--c-signal)}
+.cookie-b{position:fixed;z-index:65;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;background:#fff;color:#2b3142;border-radius:20px;box-shadow:0 18px 44px rgba(23,24,31,.25);padding:20px;font:15px/1.5 var(--c-f);display:grid;gap:14px}
+.cookie-b[hidden]{display:none}
+.cookie-b p{margin:0}.cookie-b a{color:#3f4a5e;font-weight:600}
+.ck-a{display:flex;flex-wrap:wrap;gap:10px}
+.ck-a button{font:600 15px var(--c-f);border-radius:999px;padding:11px 18px;cursor:pointer;border:2px solid var(--c-navy);background:#fff;color:var(--c-navy)}
+.ck-a button:first-child{background:var(--c-navy);color:#fff}
+@media (max-width:640px){.cookie-b{left:12px;right:12px;max-width:none}}
+.btn,.cta,.wa,.menu-b,.lang,.ck-a button,.langm button{transition:scale .18s cubic-bezier(.34,1.56,.64,1)}
+.btn:active,.cta:active,.wa:active,.menu-b:active,.lang:active,.ck-a button:active{scale:.94 1.04;transition-duration:.08s}
+@media (hover:hover){.btn:hover,.cta:hover,.wa:hover,.menu-b:hover{scale:1.04}}
+.page-head .btn-primary,.inline-cta .btn-primary,section.cta .btn-primary{background:var(--c-signal);color:var(--c-navy)}
+.page-head .btn-primary:hover,.inline-cta .btn-primary:hover,section.cta .btn-primary:hover{background:#e8e3df;box-shadow:none}
+.wa-float{display:none}
+@media (max-width:820px){
+.wa-float{display:flex;position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--c-go);color:#fff;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(23,24,31,.35);text-decoration:none}
+.wa-float svg{width:30px;height:30px}
+.pnav{padding:6px 6px 6px 12px}
+.pnav .brand{font-size:15px}
+}
+@media (max-width:820px){
+.page-head{min-height:min(100svh,860px)!important;display:flex!important;align-items:flex-end;padding-block:120px 40px!important}
+.page-head .wrap{display:block!important;position:static!important;width:100%}
+.page-head .ph-photo{position:absolute!important;inset:0!important;aspect-ratio:auto!important;max-height:none!important;max-width:none!important;width:auto!important;border-radius:0!important;margin:0!important;z-index:0}
+.page-head .ph-photo img{height:115%!important}
+.page-head .ph-photo::after{display:block!important;content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,24,31,.55) 0%,rgba(23,24,31,.25) 30%,rgba(23,24,31,.75) 62%,rgba(23,24,31,.96) 100%)!important}
+.page-head-wine .ph-photo::after{background:linear-gradient(180deg,rgba(80,18,36,.5) 0%,rgba(80,18,36,.25) 30%,rgba(80,18,36,.8) 62%,rgba(80,18,36,.97) 100%)!important}
+.page-head .ph-text{position:relative;z-index:1}
+.page-head .lead{color:#e6edf3}
+}
+@media (max-width:820px){
+.pnav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(23,24,31,.9)}
+.fact{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(255,255,255,.9)!important}
+.page-head h1{font-size:clamp(2rem,9.2vw,3.2rem)!important;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+h1,h2{overflow-wrap:break-word}
+.eyebrow{transform:none}
+}
+.povl{display:flex;align-items:center;padding-top:calc(96px + env(safe-area-inset-top,0px))}
+.povl[hidden]{display:none}
+.povl .in{width:100%;max-width:1080px;align-items:center}
+.povl .big a{font-size:clamp(28px,min(5.6vw,6.4vh),72px);line-height:1.06;padding-block:.04em}
+@media (max-width:820px){.povl{align-items:flex-start}.povl .big a{font-size:clamp(28px,min(9vw,5.6vh),56px)}}
+html:not([lang="pt-BR"]) .page-head h1,html:not([lang="pt-BR"]) h2{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+html:not([lang="pt-BR"]) .page-head h1{max-width:16ch}
+.page-head .eyebrow{font-size:clamp(18px,1.9vw,26px);font-weight:700;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:14px;margin-bottom:18px;transform-origin:0 100%}
+.page-head .eyebrow::before{content:"";display:inline-block;width:44px;height:4px;border-radius:2px;background:currentColor;transform-origin:0 50%;transform:scaleX(var(--b,1));flex:none}
+.page-head h1{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.foot .fill{background:#fff2b8;color:#5a4a00;border-radius:4px;padding:0 5px;font-weight:600}
+.page-head .eyebrow{color:var(--c-signal)}
+.foot .sub,.foot dd,.foot .legal,.foot small{color:#d4cdc8}.foot dt{color:#8d8f8e}
+.foot{border-top:1px solid rgba(212,205,200,.18)}
+@media (min-width:901px){
+.page-head{min-height:min(88svh,820px);display:flex!important;align-items:flex-end}
+.page-head .wrap{display:block!important;width:100%}
+.page-head .ph-text{max-width:min(58%,760px)}
+.page-head .ph-photo{position:absolute!important;top:0;right:0;bottom:0;width:min(46vw,760px);max-width:none!important;max-height:none!important;aspect-ratio:auto!important;border-radius:0;z-index:0}
+.page-head .ph-photo img{height:110%!important}
+.page-head::after{content:"";position:absolute;z-index:2;width:128px;height:128px;border-radius:50%;background:#161b2f url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/logo.png) center/58% no-repeat;box-shadow:0 0 0 8px rgba(212,205,200,.9);right:calc(min(46vw,760px) - 64px);bottom:72px;animation:seloIn 1.2s cubic-bezier(.34,1.56,.64,1) .9s both}
+@keyframes seloIn{from{transform:scale(0) rotate(-90deg)}to{transform:scale(1) rotate(0)}}
+.pg-sobre .page-head .ph-photo{border-radius:50vh 0 0 50vh}
+.pg-servicos .page-head .ph-photo{border-radius:0 0 0 260px}
+.pg-servicos .page-head::after{bottom:auto;top:140px}
+.pg-pf .page-head .ph-photo{top:110px;bottom:-140px;right:-6vw;width:min(52vw,820px);border-radius:50%}
+.pg-bagagem .page-head .ph-photo{top:110px;border-radius:999px 999px 0 0;right:4vw;width:min(40vw,640px)}
+.pg-bagagem .page-head::after{right:calc(4vw + min(40vw,640px) - 64px)}
+.pg-trading .page-head .ph-photo{border-radius:260px 0 0 0}
+.pg-trading .page-head::after{bottom:auto;top:120px}
+.pg-vinhos .page-head .ph-photo{top:110px;right:6vw;width:min(34vw,520px);border-radius:999px 999px 0 0}
+.pg-vinhos .page-head::after{right:calc(6vw + min(34vw,520px) - 64px);background-color:#4a1323}
+.pg-contato .page-head .ph-photo{border-radius:0 0 0 50%}
+.pg-pf .page-head::after{right:calc(min(46vw,760px) - 20px);bottom:90px}
+}
+.wines .wrap{align-items:center}
+.wines .wrap>.prose-sm{position:relative;z-index:2;background:#161b2f;color:#d4cdc8;padding:clamp(28px,4vw,56px);border-radius:28px;box-shadow:0 30px 60px -30px rgba(22,27,47,.6)}
+.wines .wrap>.prose-sm h2{color:#fff}
+.wines .wrap>.prose-sm p,.wines .wrap>.prose-sm li{color:#d4cdc8}
+.wines .wrap>.prose-sm .eyebrow{color:#d4cdc8!important}
+.wines .wrap>.prose-sm .checklist li{border-color:rgba(212,205,200,.2)}
+.pg-vinhos .wines .wrap>.prose-sm{background:#4a1323}
+@media (min-width:901px){
+.wines .wrap{gap:0!important;grid-template-columns:1.05fr .95fr}
+.wines .wrap>.prose-sm{margin-left:-140px}
+.feature-rev .wrap{grid-template-columns:.95fr 1.05fr}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-140px}
+.wines figure{aspect-ratio:auto;min-height:620px}
+.pg-sobre .wines figure{border-radius:28px 28px 28px 220px}
+.pg-trading .wines figure{border-radius:50vh 28px 28px 50vh}
+.pg-pf .wines figure{border-radius:220px 28px 220px 28px}
+.pg-vinhos .wines figure{border-radius:999px 999px 28px 28px}
+}
+@media (max-width:900px){
+.wines .wrap{gap:0!important}
+.wines .wrap>.prose-sm{margin:-56px 12px 0}
+}
+.photo-band{position:relative;isolation:isolate;background:#161b2f;color:#d4cdc8;overflow:hidden}
+.photo-band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,27,47,.92) 0%,rgba(22,27,47,.7) 45%,rgba(22,27,47,.9) 100%),var(--bg) center/cover no-repeat}
+.photo-band .sec-head h2{color:#fff}
+.photo-band .sec-head p,.photo-band .sec-head .eyebrow{color:#d4cdc8}
+.photo-band .tile{background:#e6e1dd!important;border-color:transparent}
+.wines .wrap>.prose-sm .checklist li::before{background:#d4cdc8}
+@media (min-width:901px){
+.page-head{--pw:min(46vw,760px);--pr:0px}
+.pg-pf .page-head{--pw:min(52vw,820px);--pr:-6vw}
+.pg-bagagem .page-head{--pw:min(40vw,640px);--pr:4vw}
+.pg-vinhos .page-head{--pw:min(34vw,520px);--pr:6vw}
+.page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+.pg-pf .page-head .ph-text{max-width:calc(100vw + 6vw - var(--pw) - 40px - max(20px,(100vw - 1280px) / 2))!important}
+.page-head .ph-text .lead{max-width:none}
+.wines .wrap>.prose-sm{margin-left:-100px}
+.feature-rev .wrap>.prose-sm{margin-left:0;margin-right:-100px}
+}
+@media (min-width:901px){
+.page-head::after,.pg-servicos .page-head::after,.pg-trading .page-head::after,.pg-bagagem .page-head::after,.pg-vinhos .page-head::after,.pg-pf .page-head::after{top:auto;bottom:48px;right:calc(var(--pr) + 48px)}
+.pg-pf .page-head::after{right:48px}
+.page-head .ph-text,.pg-pf .page-head .ph-text{max-width:calc(100vw - var(--pr) - var(--pw) - 110px - max(20px,(100vw - 1280px) / 2))!important}
+}
+.pnav .brand img{border-radius:5px;box-shadow:0 0 0 1px rgba(212,205,200,.45)}
+@media (min-width:901px){
+.page-head::after{width:132px;height:132px;border-radius:16px;background:url(https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png) center/cover no-repeat!important;box-shadow:0 0 0 6px rgba(212,205,200,.9),0 24px 40px -16px rgba(0,0,0,.6)}
+@keyframes seloIn{from{transform:translateY(-40px) rotate(-12deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+}
+.pnav .brand img,.brand img{width:30px;height:30px;object-fit:cover}
+.pg-vinhos .photo-band .rule{border-top-color:#8a2a44}
+.chat-btn{position:fixed;z-index:44;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:52px;padding:0 20px;border:0;border-radius:999px;background:#161b2f;color:#d4cdc8;font:600 15px/1 var(--c-f);box-shadow:0 0 0 1px rgba(212,205,200,.35),0 14px 30px -12px rgba(0,0,0,.5);cursor:pointer}
+.chat-btn svg{width:20px;height:20px}
+.chat-btn.is-loading{opacity:.7;cursor:progress}
+@media (max-width:820px) and (pointer:coarse){.chat-btn{bottom:calc(86px + env(safe-area-inset-bottom,0px));height:48px;padding:0 16px}}
+.pf-panels{display:flex;gap:14px;height:min(560px,70vh);margin-top:8px}
+.pfp{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border-radius:26px;background:#161b2f;color:#fff;cursor:pointer;outline:none;transition:flex-grow .9s cubic-bezier(.34,1.35,.5,1)}
+.pfp.is-open{flex-grow:3.2;cursor:default}
+.pfp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.2s cubic-bezier(.2,.8,.2,1),filter .6s}
+.pfp:not(.is-open) img{filter:saturate(.6) brightness(.75)}
+.pfp.is-open img{transform:scale(1)}
+.pfp::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,27,47,0) 30%,rgba(22,27,47,.55) 60%,rgba(22,27,47,.94) 100%)}
+.pfp-txt{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(18px,2.4vw,32px)}
+.pfp-k{display:inline-block;font:600 13px/1 var(--c-f);color:#161b2f;background:#d4cdc8;border-radius:999px;padding:7px 12px;margin-bottom:12px}
+.pfp h3{color:#fff;font-size:clamp(19px,1.7vw,26px);line-height:1.15;margin:0}
+.pfp p{color:#e6e1dd;margin:10px 0 0;max-width:44ch;max-height:0;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .6s cubic-bezier(.34,1.5,.5,1),max-height .6s}
+.pfp.is-open p{max-height:12em;opacity:1;transform:none;transition-delay:.25s}
+.pfp p a{color:#fff}
+.pfp:focus-visible{box-shadow:0 0 0 3px #d4cdc8}
+@media (max-width:900px){
+.pf-panels{flex-direction:column;height:auto}
+.pfp{flex:none;height:340px;cursor:default}
+.pfp img{transform:none;filter:none!important}
+.pfp p{max-height:none;opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){.pfp,.pfp img,.pfp p{transition:none}}
+@media (min-width:901px){
+.pfp:not(.is-open) h3{font-size:16px;hyphens:auto;overflow-wrap:anywhere}
+.pfp:not(.is-open) .pfp-k{font-size:11px;padding:6px 10px}
+}
+.pnav .brand img,.brand img{width:44px!important;height:44px!important;border-radius:6px}
+.pnav .brand{gap:12px;font-size:18px}
+@media (max-width:820px){.pnav .brand img,.brand img{width:38px!important;height:38px!important}.pnav .brand{font-size:15px}}
+.pnav .brand img,.brand img{background:#d4cdc8;padding:4px;box-shadow:none;object-fit:contain}
+.pnav .brand img,.brand img{width:84px!important;height:84px!important;padding:6px;border-radius:10px;margin:-22px 0 -40px;position:relative;z-index:2;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+@media (max-width:820px){.pnav .brand img,.brand img{width:64px!important;height:64px!important;padding:5px;margin:-14px 0 -30px}}
+@media (min-width:821px){.pnav .brand img,.brand img{width:100px!important;height:100px!important;margin:-26px 0 -52px}}
+.pnav .brand img,.brand img{padding:0!important;background:#161b2f!important;border:1px solid rgba(212,205,200,.75);border-radius:8px!important;box-shadow:0 12px 28px -12px rgba(0,0,0,.7)}
+.pnav .brand img,.brand img{width:56px!important;height:56px!important;margin:0!important;box-shadow:none!important}
+@media (max-width:820px){.pnav .brand img,.brand img{width:46px!important;height:46px!important}}
+.pnav .brand{margin-right:18px;font-size:17px}
+.pnav .brand{flex-shrink:0}
+.pnav .wa{font-size:13px;padding:7px 12px}
+.pnav.small{width:min(580px,calc(100% - 32px))}
+@media (max-width:1100px){.pnav{width:min(580px,calc(100% - 32px))}}
+
+
+header.cs-section-header,footer.cs-section-footer{display:none!important}
+.cs-widget:not(.cs-code-widget){display:none!important}
+.cs-section:not(:has(.cs-code-widget)){display:none!important}
+.cs-box:not(:has(.cs-code-widget)),.cs-line:not(:has(.cs-code-widget)){display:none!important}
+html,body{overflow-x:clip}
+body{margin:0!important}
+.cs-section:has(#cb),.cs-section:has(#cb) .cs-lines,.cs-section:has(#cb) .cs-line,.cs-section:has(#cb) .cs-boxes,.cs-section:has(#cb) .cs-box,.cs-section:has(#cb) .cs-widgets,.cs-code-widget:has(#cb),.cs-code-widget-preview:has(#cb){padding:0!important;margin:0!important;border:0!important;min-height:0!important;overflow:visible!important;transform:none!important;filter:none!important;contain:none!important;background:transparent!important}
+.cs-boxes:has(#cb),.cs-box:has(#cb),.cs-line:has(#cb){display:block!important;width:100%!important;max-width:none!important;flex:none!important;position:static!important}
+#cb{width:100vw;position:relative;left:50%;margin-left:-50vw;text-align:left}
+#cb [hidden]{display:none!important}
+</style><div id="cb" class="pg-priv" data-page="privacidade">
+<nav aria-label="Menu principal" class="pnav">
+<a class="brand" data-noi18n="" href="/"><img alt="" src="https://cdn.jsdelivr.net/gh/admcustombroker-arch/custombroker-midia@6c6419852b93930c2de18e1b5c72fbb31caee923/img/container.png"/>Custom Broker</a>
+<div class="links"><a data-i="627001be" href="/sobre">Sobre</a><a data-i="07d63ea5" href="/servicos">Serviços</a><a data-i="5d4ce746" href="/pessoa-fisica">Pessoa Física</a><a data-i="e3cd5b2c" href="/tradingcompany">Trading</a><a data-i="4dace3b0" href="/vinhos">Vinhos</a><a data-i="1bd66dd4" href="/contato">Contato</a></div>
+<div class="r"><div class="langw"><button aria-expanded="false" aria-haspopup="true" aria-label="Idioma" class="lang" type="button">PT</button><ul class="langm" data-noi18n="" hidden=""><li><button data-l="pt" type="button">Português</button></li><li><button data-l="en" type="button">English</button></li><li><button data-l="es" type="button">Español</button></li><li><button data-l="fr" type="button">Français</button></li><li><button data-l="it" type="button">Italiano</button></li><li><button data-l="de" type="button">Deutsch</button></li><li><button data-l="zh" type="button">中文（普通话）</button></li></ul></div><a class="wa" href="https://wa.me/5511941012210" rel="noopener" target="_blank">WhatsApp</a><button aria-controls="menu" aria-expanded="false" class="menu-b" data-i="b6154120" type="button">Menu</button></div>
+</nav>
+<div class="povl" hidden="" id="menu"><div class="in">
+<div class="big"><a href="/"><span data-i="94db4e17">Início</span></a><a href="/sobre"><span data-i="627001be">Sobre</span></a><a href="/servicos"><span data-i="07d63ea5">Serviços</span></a><a href="/pessoa-fisica"><span data-i="5d4ce746">Pessoa Física</span></a><a href="/tradingcompany"><span data-i="e3cd5b2c">Trading</span></a><a href="/vinhos"><span data-i="4dace3b0">Vinhos</span></a><a href="/bagagem-internacional"><span data-i="dcbcc054">Bagagem internacional</span></a><a href="/contato"><span data-i="1bd66dd4">Contato</span></a></div>
+<div class="extra"><a class="wa" data-i="cc068e4d" href="https://wa.me/5511941012210" rel="noopener" target="_blank">Falar no WhatsApp</a><p data-i="9f46f84c">Telefone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br</p><p><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></p></div>
+</div></div>
+<main class="page-main">
+<section class="page-head">
+<div class="wrap" style="grid-template-columns:1fr">
+<div class="ph-text">
+<p class="eyebrow" data-i="95f382bb">LGPD · Lei nº 13.709/2018</p>
+<h1 data-i="60324c31">Política de Privacidade</h1>
+<p class="lead" data-i="74fda3ac">Como a Custom Broker coleta, usa e protege os seus dados pessoais neste site e no atendimento.</p>
+</div>
+</div>
+</section>
+<section>
+<div class="wrap">
+<div class="legal">
+<p class="legal-date" data-i="6afd340d">Última atualização: 24 de novembro de 2026</p>
+<h2 data-i="9620224a">1. Quem é responsável pelos seus dados</h2>
+<p data-i="19e31bf9">A controladora dos dados é CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA, inscrita no CNPJ sob o nº 28.603.168/0001-00, com sede na R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP, CEP 04750-001 ("Custom Broker").</p>
+<p data-i="3e3bfa3d">Canal para assuntos de privacidade e proteção de dados: <a href="mailto:operacional@custombroker.com.br">operacional@custombroker.com.br</a>.</p>
+<h2 data-i="78bf5349">2. Quais dados coletamos</h2>
+<ul>
+<li data-i="4f49718b"><b>Formulário de contato:</b> nome, e-mail, telefone/WhatsApp, assunto e mensagem.</li>
+<li data-i="870145b5"><b>Atendimento:</b> o chat do site serve só para o primeiro contato. Depois disso, o atendimento e a troca de documentos seguem pelo e-mail operacional@custombroker.com.br, ou pelo WhatsApp se você preferir. Coletamos os dados que você nos envia nessas conversas. Por segurança, não envie documentos pessoais pelo chat.</li>
+<li data-i="a0d0dc95"><b>Prestação dos serviços:</b> documentos e informações necessários ao despacho aduaneiro, como CPF ou CNPJ, faturas, documentos de transporte, passaporte e comprovantes de viagem ou residência.</li>
+<li data-i="850749bf"><b>Navegação:</b> dados técnicos necessários para exibir o site, como endereço IP e tipo de navegador, e a sua escolha de idioma.</li>
+</ul>
+<h2 data-i="42fdfa63">3. Para que usamos e com qual base legal</h2>
+<ul>
+<li data-i="3f673c19"><b>Responder ao seu contato e enviar orçamentos</b>: procedimentos preliminares a um contrato (art. 7º, V).</li>
+<li data-i="d4c46c4a"><b>Prestar os serviços contratados</b>: execução de contrato (art. 7º, V).</li>
+<li data-i="2114c883"><b>Cumprir obrigações legais e regulatórias</b> junto à Receita Federal, MAPA, ANVISA e outros órgãos: cumprimento de obrigação legal (art. 7º, II).</li>
+<li data-i="34f334ab"><b>Manter o site funcionando e seguro</b>, incluindo os cookies necessários e a sua escolha de idioma: legítimo interesse (art. 7º, IX).</li>
+</ul>
+<h2 data-i="ad6f03a6">4. Com quem compartilhamos</h2>
+<ul>
+<li data-i="b1938f0b">Órgãos públicos envolvidos no comércio exterior, quando necessário para o despacho.</li>
+<li data-i="9aa830f6">Parceiros operacionais, como agentes de carga, transportadoras, terminais e seguradoras, apenas na medida necessária para a sua operação.</li>
+<li data-i="8dfcdc11">Fornecedores de tecnologia que operam o site e o atendimento: Locaweb (hospedagem), WhatsApp/Meta (quando você nos escreve ou usa o formulário), Google Fonts e as redes de distribuição jsDelivr e unpkg (fontes e scripts do site, que recebem o endereço IP do seu navegador) e o JivoChat (chat do site, que guarda as mensagens trocadas no atendimento).</li>
+</ul>
+<p data-i="78940c9b">Não vendemos seus dados pessoais.</p>
+<h2 data-i="4658851b">5. Transferência internacional</h2>
+<p data-i="6f0397da">Alguns dados são transferidos para fora do Brasil: para fornecedores de tecnologia com servidores no exterior (como WhatsApp/Meta, JivoChat, Google Fonts, jsDelivr e unpkg) e, quando a sua operação exige, para parceiros no exterior, como agentes de carga, exportadores e produtores. Fazemos isso apenas na medida necessária para atender ao seu pedido ou prestar o serviço, com as garantias previstas na LGPD (art. 33).</p>
+<h2 data-i="873989da">6. Por quanto tempo guardamos</h2>
+<p data-i="dcc1157a">Guardamos os documentos das operações realizadas (como faturas, declarações de importação, passaporte e comprovantes) por 5 anos após o fim do ano em que a operação foi feita, prazo em que a Receita Federal ainda pode revisá-la. Os contatos que não resultaram em contratação (formulário, WhatsApp e chat) e as conversas do chat ficam guardados por até 1 ano após o último contato. Os registros de acesso ao site (endereço IP, data e hora) ficam guardados por 6 meses, como exige o Marco Civil da Internet. Depois desses prazos, os dados são eliminados ou anonimizados.</p>
+<h2 data-i="01ddcaca">7. Seus direitos</h2>
+<p data-i="b69d25cc">Você pode, a qualquer momento, pedir: confirmação de que tratamos seus dados, acesso, correção, anonimização, bloqueio ou eliminação de dados desnecessários, portabilidade, informação sobre compartilhamento e revogação do consentimento (art. 18 da LGPD). Envie o pedido para <a href="mailto:operacional@custombroker.com.br">operacional@custombroker.com.br</a>. Respondemos em até 15 dias. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+<h2 data-i="01fa66ce" id="cookies">8. Cookies</h2>
+<p data-i="c07049c7">Cookies são pequenos arquivos guardados no seu navegador. Usamos:</p>
+<ul>
+<li data-i="35119a92"><b>Necessários:</b> fazem o site funcionar e guardam a sua escolha de idioma. Não podem ser desligados.</li>
+<li data-i="55a1dfc8"><b>Do chat:</b> o JivoChat só é carregado, e só grava os cookies dele, quando você clica no botão do chat.</li>
+<li data-i="54a19bbf">Não usamos cookies de publicidade nem de medição de visitas. Se isso mudar, esses cookies só serão ativados com a sua permissão, e esta política será atualizada.</li>
+</ul>
+<p><span data-i="a3598f85">Você pode mudar sua escolha a qualquer momento:</span><button class="link-btn" data-i="98777a51" id="cookie-reopen" type="button">rever preferências de cookies</button>.</p>
+<h2 data-i="7b4ed0b9">9. Segurança</h2>
+<p data-i="ae74610b">Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, perda ou uso indevido, como acesso restrito à equipe e conexão segura (HTTPS).</p>
+<h2 data-i="9054e418">10. Alterações</h2>
+<p data-i="b8f540b4">Esta política pode ser atualizada. A data da última versão fica no início da página.</p>
+<p data-i="974a4144">Esta política foi escrita em português. As versões em outros idiomas são traduções; em caso de divergência, vale a versão em português.</p>
+</div>
+</div>
+</section>
+
+<!-- ===================== CONTATO ===================== -->
+</main>
+<div aria-hidden="true" class="foot-spacer"></div>
+<footer class="foot" id="rodape">
+<div class="in">
+<p class="big" data-i="fbb98adc">Dúvidas sobre os seus dados?</p>
+<p class="sub" data-i="993cb15f">Escreva para operacional@custombroker.com.br. Para assuntos da sua operação, fale com a gente pelo WhatsApp.</p>
+<div class="grid">
+<dl><dt data-i="904ef931">Telefone</dt><dd>+55 11 2577-4757</dd><dt>WhatsApp</dt><dd>+55 11 94101-2210</dd><dt data-i="1e884e30">E-mail</dt><dd>contato@custombroker.com.br</dd></dl>
+<a class="cta" data-i="8f5eb57a" href="https://wa.me/5511941012210?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tenho%20uma%20d%C3%BAvida." rel="noopener" target="_blank">Chamar no WhatsApp</a>
+</div>
+<div class="legal">
+<div data-i="54bda3a8"><b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00</div>
+<div data-i="33de9c2a">R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001</div>
+<div><a data-i="60324c31" href="/privacidade">Política de Privacidade</a></div>
+</div>
+<small data-i="0dc62a4a">© 2026 Custom Broker. Todos os direitos reservados.</small>
+</div>
+</footer>
+<div aria-label="Aviso de cookies" class="cookie-b" hidden="" id="cookie" role="dialog">
+<p data-i="92daad1c">Usamos só cookies necessários para o site funcionar e para lembrar o seu idioma. O chat só grava cookies se você abri-lo. Não usamos cookies de publicidade nem de medição. Saiba mais na <a href="/privacidade">Política de Privacidade</a>.</p>
+<div class="ck-a"><button data-i="7d23bcfe" id="cookie-ok" type="button">Entendi</button></div>
+</div>
+<div aria-live="polite" class="toast" hidden="" role="status"></div>
+</div><script>(function(){
+  var D={"en": {"19e31bf9": "The data controller is CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA, CNPJ no. 28.603.168/0001-00, headquartered at R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP, ZIP 04750-001 (\"Custom Broker\").", "c07049c7": "Cookies are small files stored in your browser. We use:", "a3598f85": "You can change your choice at any time:", "92daad1c": "We only use cookies needed for the site to work and to remember your language. The chat only stores cookies if you open it. We do not use advertising or analytics cookies. Learn more in the <a href=\"/privacidade\">Privacy Policy</a>.", "7b4ed0b9": "9. Security", "9aa830f6": "Operating partners, such as freight forwarders, carriers, terminals and insurers, only as far as needed for your operation.", "6f0397da": "Some data is transferred outside Brazil: to technology providers with servers abroad (such as WhatsApp/Meta, JivoChat, Google Fonts, jsDelivr and unpkg) and, when your operation requires it, to partners abroad, such as freight forwarders, exporters and producers. We do this only as far as needed to handle your request or provide the service, with the safeguards set out in the LGPD (art. 33).", "5d4ce746": "Individuals", "2114c883": "<b>Comply with legal and regulatory obligations</b> with the Federal Revenue, MAPA, ANVISA and other agencies: compliance with a legal obligation (art. 7, II).", "95f382bb": "LGPD · Law no. 13,709/2018", "9620224a": "1. Who is responsible for your data", "8f5eb57a": "Message us on WhatsApp", "3e3bfa3d": "Channel for privacy and data protection matters: <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>.", "ad6f03a6": "4. Who we share it with", "78940c9b": "We do not sell your personal data.", "d4c46c4a": "<b>Provide the contracted services</b>: performance of a contract (art. 7, V).", "94db4e17": "Home", "23781b5e": "Close", "34f334ab": "<b>Keep the site working and secure</b>, including necessary cookies and your language choice: legitimate interest (art. 7, IX).", "7d23bcfe": "Got it", "850749bf": "<b>Browsing:</b> technical data needed to display the site, such as IP address and browser type, and your language choice.", "b1938f0b": "Public agencies involved in foreign trade, when needed for clearance.", "870145b5": "<b>Customer service:</b> the site chat is only for first contact. After that, service and document exchange continue by email at operacional@custombroker.com.br, or by WhatsApp if you prefer. We collect the data you send us in these conversations. For security, do not send personal documents through the chat.", "ae74610b": "We take technical and administrative measures to protect your data against unauthorized access, loss or misuse, such as access restricted to the team and a secure connection (HTTPS).", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brazil", "9f46f84c": "Phone +55 11 2577-4757<br/>Email contato@custombroker.com.br", "627001be": "About", "35119a92": "<b>Necessary:</b> make the site work and store your language choice. They cannot be turned off.", "8dfcdc11": "Technology providers that run the site and our service: Locaweb (hosting), WhatsApp/Meta (when you write to us or use the form), Google Fonts and the jsDelivr and unpkg networks (site fonts and scripts, which receive your browser’s IP address) and JivoChat (site chat, which stores the messages exchanged).", "78bf5349": "2. What data we collect", "4dace3b0": "Wine", "dcc1157a": "We keep the documents of completed operations (such as invoices, import declarations, passport and receipts) for 5 years after the end of the year in which the operation took place, the period during which the Federal Revenue can still review it. Contacts that did not result in a contract (form, WhatsApp and chat) and chat conversations are kept for up to 1 year after the last contact. Site access logs (IP address, date and time) are kept for 6 months, as required by the Brazilian Internet Civil Framework (Marco Civil da Internet). After these periods, the data is deleted or anonymized.", "07d63ea5": "Services", "4f49718b": "<b>Contact form:</b> name, email, phone/WhatsApp, subject and message.", "55a1dfc8": "<b>Chat:</b> JivoChat is only loaded, and only stores its cookies, when you click the chat button.", "74fda3ac": "How Custom Broker collects, uses and protects your personal data on this site and in our service.", "01fa66ce": "8. Cookies", "974a4144": "This policy was written in Portuguese. Versions in other languages are translations; in case of discrepancy, the Portuguese version prevails.", "e3cd5b2c": "Trading", "1bd66dd4": "Contact", "b69d25cc": "You may at any time request: confirmation that we process your data, access, correction, anonymization, blocking or deletion of unnecessary data, portability, information about sharing and withdrawal of consent (art. 18 of the LGPD). Send your request to <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>. We reply within 15 days. You may also file a complaint with the National Data Protection Authority (ANPD).", "873989da": "6. How long we keep it", "b6154120": "Menu", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "6afd340d": "Last updated: November 24, 2026", "0dc62a4a": "© 2026 Custom Broker. All rights reserved.", "cc068e4d": "Chat on WhatsApp", "98777a51": "review cookie preferences", "42fdfa63": "3. What we use it for and on what legal basis", "60324c31": "Privacy Policy", "993cb15f": "Write to operacional@custombroker.com.br. For matters about your operation, talk to us on WhatsApp.", "01ddcaca": "7. Your rights", "fbb98adc": "Questions about your data?", "a0d0dc95": "<b>Service delivery:</b> documents and information needed for customs clearance, such as CPF or CNPJ, invoices, transport documents, passport and proof of travel or residence.", "3f673c19": "<b>Reply to your contact and send quotes</b>: preliminary procedures to a contract (art. 7, V).", "b8f540b4": "This policy may be updated. The date of the latest version is at the top of the page.", "9054e418": "10. Changes", "dcbcc054": "International baggage", "1e884e30": "Email", "4658851b": "5. International transfer", "54a19bbf": "We do not use advertising or visitor-analytics cookies. If that changes, those cookies will only be enabled with your permission, and this policy will be updated.", "904ef931": "Phone"}, "es": {"19e31bf9": "La responsable de los datos es CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA, CNPJ n.º 28.603.168/0001-00, con sede en R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP, CEP 04750-001 (\"Custom Broker\").", "c07049c7": "Las cookies son pequeños archivos guardados en tu navegador. Usamos:", "a3598f85": "Puedes cambiar tu elección en cualquier momento:", "92daad1c": "Solo usamos cookies necesarias para que el sitio funcione y para recordar tu idioma. El chat solo guarda cookies si lo abres. No usamos cookies de publicidad ni de medición. Más información en la <a href=\"/privacidade\">Política de Privacidad</a>.", "7b4ed0b9": "9. Seguridad", "9aa830f6": "Socios operativos, como agentes de carga, transportistas, terminales y aseguradoras, solo en la medida necesaria para tu operación.", "6f0397da": "Algunos datos se transfieren fuera de Brasil: a proveedores de tecnología con servidores en el exterior (como WhatsApp/Meta, JivoChat, Google Fonts, jsDelivr y unpkg) y, cuando tu operación lo exige, a socios en el exterior, como agentes de carga, exportadores y productores. Lo hacemos solo en la medida necesaria para atender tu pedido o prestar el servicio, con las garantías previstas en la LGPD (art. 33).", "5d4ce746": "Personas físicas", "2114c883": "<b>Cumplir obligaciones legales y regulatorias</b> ante la Receita Federal, MAPA, ANVISA y otros organismos: cumplimiento de obligación legal (art. 7, II).", "95f382bb": "LGPD · Ley n.º 13.709/2018", "9620224a": "1. Quién es responsable de tus datos", "8f5eb57a": "Escribir por WhatsApp", "3e3bfa3d": "Canal para asuntos de privacidad y protección de datos: <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>.", "ad6f03a6": "4. Con quién compartimos", "78940c9b": "No vendemos tus datos personales.", "d4c46c4a": "<b>Prestar los servicios contratados</b>: ejecución de contrato (art. 7, V).", "94db4e17": "Inicio", "23781b5e": "Cerrar", "34f334ab": "<b>Mantener el sitio funcionando y seguro</b>, incluidas las cookies necesarias y tu elección de idioma: interés legítimo (art. 7, IX).", "7d23bcfe": "Entendido", "850749bf": "<b>Navegación:</b> datos técnicos necesarios para mostrar el sitio, como dirección IP y tipo de navegador, y tu elección de idioma.", "b1938f0b": "Organismos públicos involucrados en el comercio exterior, cuando es necesario para el despacho.", "870145b5": "<b>Atención:</b> el chat del sitio sirve solo para el primer contacto. Después, la atención y el intercambio de documentos siguen por el correo operacional@custombroker.com.br, o por WhatsApp si prefieres. Recopilamos los datos que nos envías en esas conversaciones. Por seguridad, no envíes documentos personales por el chat.", "ae74610b": "Adoptamos medidas técnicas y administrativas para proteger tus datos contra acceso no autorizado, pérdida o uso indebido, como acceso restringido al equipo y conexión segura (HTTPS).", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasil", "9f46f84c": "Teléfono +55 11 2577-4757<br/>Correo contato@custombroker.com.br", "627001be": "Nosotros", "35119a92": "<b>Necesarias:</b> hacen funcionar el sitio y guardan tu elección de idioma. No pueden desactivarse.", "8dfcdc11": "Proveedores de tecnología que operan el sitio y la atención: Locaweb (hospedaje), WhatsApp/Meta (cuando nos escribes o usas el formulario), Google Fonts y las redes de distribución jsDelivr y unpkg (fuentes y scripts del sitio, que reciben la dirección IP de tu navegador) y JivoChat (chat del sitio, que guarda los mensajes intercambiados).", "78bf5349": "2. Qué datos recopilamos", "4dace3b0": "Vinos", "dcc1157a": "Guardamos los documentos de las operaciones realizadas (como facturas, declaraciones de importación, pasaporte y comprobantes) durante 5 años tras el fin del año en que se hizo la operación, plazo en que la Receita Federal aún puede revisarla. Los contactos que no resultaron en contratación (formulario, WhatsApp y chat) y las conversaciones del chat se guardan hasta 1 año después del último contacto. Los registros de acceso al sitio (dirección IP, fecha y hora) se guardan durante 6 meses, como exige el Marco Civil de Internet. Tras esos plazos, los datos se eliminan o anonimizan.", "07d63ea5": "Servicios", "4f49718b": "<b>Formulario de contacto:</b> nombre, correo, teléfono/WhatsApp, asunto y mensaje.", "55a1dfc8": "<b>Del chat:</b> JivoChat solo se carga, y solo guarda sus cookies, cuando haces clic en el botón del chat.", "74fda3ac": "Cómo Custom Broker recopila, usa y protege tus datos personales en este sitio y en la atención.", "01fa66ce": "8. Cookies", "974a4144": "Esta política fue escrita en portugués. Las versiones en otros idiomas son traducciones; en caso de divergencia, prevalece la versión en portugués.", "e3cd5b2c": "Trading", "1bd66dd4": "Contacto", "b69d25cc": "Puedes pedir en cualquier momento: confirmación de que tratamos tus datos, acceso, corrección, anonimización, bloqueo o eliminación de datos innecesarios, portabilidad, información sobre compartición y revocación del consentimiento (art. 18 de la LGPD). Envía el pedido a <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>. Respondemos en hasta 15 días. También puedes reclamar ante la Autoridad Nacional de Protección de Datos (ANPD).", "873989da": "6. Por cuánto tiempo los guardamos", "b6154120": "Menú", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "6afd340d": "Última actualización: 24 de noviembre de 2026", "0dc62a4a": "© 2026 Custom Broker. Todos los derechos reservados.", "cc068e4d": "Hablar por WhatsApp", "98777a51": "revisar preferencias de cookies", "42fdfa63": "3. Para qué los usamos y con qué base legal", "60324c31": "Política de Privacidad", "993cb15f": "Escribe a operacional@custombroker.com.br. Para asuntos de tu operación, habla con nosotros por WhatsApp.", "01ddcaca": "7. Tus derechos", "fbb98adc": "¿Dudas sobre tus datos?", "a0d0dc95": "<b>Prestación de los servicios:</b> documentos e información necesarios para el despacho aduanero, como CPF o CNPJ, facturas, documentos de transporte, pasaporte y comprobantes de viaje o residencia.", "3f673c19": "<b>Responder a tu contacto y enviar presupuestos</b>: procedimientos preliminares a un contrato (art. 7, V).", "b8f540b4": "Esta política puede actualizarse. La fecha de la última versión está al inicio de la página.", "9054e418": "10. Cambios", "dcbcc054": "Equipaje internacional", "1e884e30": "Correo", "4658851b": "5. Transferencia internacional", "54a19bbf": "No usamos cookies de publicidad ni de medición de visitas. Si eso cambia, esas cookies solo se activarán con tu permiso y esta política será actualizada.", "904ef931": "Teléfono"}, "fr": {"19e31bf9": "Le responsable du traitement est CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA, CNPJ n° 28.603.168/0001-00, dont le siège est R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP, CEP 04750-001 (« Custom Broker »).", "c07049c7": "Les cookies sont de petits fichiers stockés dans votre navigateur. Nous utilisons :", "a3598f85": "Vous pouvez modifier votre choix à tout moment :", "92daad1c": "Nous utilisons uniquement les cookies nécessaires au fonctionnement du site et à la mémorisation de votre langue. Le chat n'enregistre des cookies que si vous l'ouvrez. Nous n'utilisons pas de cookies publicitaires ni de mesure d'audience. En savoir plus dans la <a href=\"/privacidade\">Politique de confidentialité</a>.", "7b4ed0b9": "9. Sécurité", "9aa830f6": "Partenaires opérationnels, comme transitaires, transporteurs, terminaux et assureurs, uniquement dans la mesure nécessaire à votre opération.", "6f0397da": "Certaines données sont transférées hors du Brésil : vers des fournisseurs technologiques ayant des serveurs à l'étranger (comme WhatsApp/Meta, JivoChat, Google Fonts, jsDelivr et unpkg) et, lorsque votre opération l'exige, vers des partenaires à l'étranger, comme transitaires, exportateurs et producteurs. Nous le faisons uniquement dans la mesure nécessaire pour traiter votre demande ou fournir le service, avec les garanties prévues par la LGPD (art. 33).", "5d4ce746": "Particuliers", "2114c883": "<b>Respecter les obligations légales et réglementaires</b> auprès de la Receita Federal, du MAPA, de l'ANVISA et d'autres organismes : respect d'une obligation légale (art. 7, II).", "95f382bb": "LGPD · Loi n° 13.709/2018", "9620224a": "1. Qui est responsable de vos données", "8f5eb57a": "Nous écrire sur WhatsApp", "3e3bfa3d": "Canal pour les questions de confidentialité et de protection des données : <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>.", "ad6f03a6": "4. Avec qui nous les partageons", "78940c9b": "Nous ne vendons pas vos données personnelles.", "d4c46c4a": "<b>Fournir les services contractés</b> : exécution du contrat (art. 7, V).", "94db4e17": "Accueil", "23781b5e": "Fermer", "34f334ab": "<b>Assurer le fonctionnement et la sécurité du site</b>, y compris les cookies nécessaires et votre choix de langue : intérêt légitime (art. 7, IX).", "7d23bcfe": "J'ai compris", "850749bf": "<b>Navigation :</b> données techniques nécessaires pour afficher le site, comme l’adresse IP et le type de navigateur, et votre choix de langue.", "b1938f0b": "Organismes publics du commerce extérieur, lorsque c'est nécessaire au dédouanement.", "870145b5": "<b>Service client :</b> le chat du site sert uniquement au premier contact. Ensuite, le suivi et l'échange de documents se font par e-mail à operacional@custombroker.com.br, ou par WhatsApp si vous préférez. Nous collectons les données que vous nous envoyez dans ces échanges. Par sécurité, n'envoyez pas de documents personnels par le chat.", "ae74610b": "Nous prenons des mesures techniques et administratives pour protéger vos données contre l'accès non autorisé, la perte ou l'usage abusif, comme un accès réservé à l'équipe et une connexion sécurisée (HTTPS).", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brésil", "9f46f84c": "Téléphone +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "627001be": "À propos", "35119a92": "<b>Nécessaires :</b> font fonctionner le site et mémorisent votre choix de langue. Ils ne peuvent pas être désactivés.", "8dfcdc11": "Fournisseurs technologiques qui font fonctionner le site et le service : Locaweb (hébergement), WhatsApp/Meta (lorsque vous nous écrivez ou utilisez le formulaire), Google Fonts et les réseaux de distribution jsDelivr et unpkg (polices et scripts du site, qui reçoivent l'adresse IP de votre navigateur) et JivoChat (chat du site, qui conserve les messages échangés).", "78bf5349": "2. Quelles données nous collectons", "4dace3b0": "Vins", "dcc1157a": "Nous conservons les documents des opérations réalisées (factures, déclarations d'importation, passeport et justificatifs) pendant 5 ans après la fin de l'année de l'opération, délai pendant lequel la Receita Federal peut encore la contrôler. Les contacts n'ayant pas abouti à un contrat (formulaire, WhatsApp et chat) et les conversations du chat sont conservés jusqu'à 1 an après le dernier contact. Les journaux d'accès au site (adresse IP, date et heure) sont conservés 6 mois, comme l'exige le Marco Civil da Internet. Passé ces délais, les données sont supprimées ou anonymisées.", "07d63ea5": "Services", "4f49718b": "<b>Formulaire de contact :</b> nom, e-mail, téléphone/WhatsApp, objet et message.", "55a1dfc8": "<b>Chat :</b> JivoChat n'est chargé, et n'enregistre ses cookies, que lorsque vous cliquez sur le bouton du chat.", "74fda3ac": "Comment Custom Broker collecte, utilise et protège vos données personnelles sur ce site et dans le service client.", "01fa66ce": "8. Cookies", "974a4144": "Cette politique a été rédigée en portugais. Les versions dans d’autres langues sont des traductions ; en cas de divergence, la version portugaise prévaut.", "e3cd5b2c": "Trading", "1bd66dd4": "Contact", "b69d25cc": "Vous pouvez à tout moment demander : la confirmation que nous traitons vos données, l'accès, la correction, l'anonymisation, le blocage ou la suppression de données inutiles, la portabilité, des informations sur le partage et le retrait du consentement (art. 18 de la LGPD). Envoyez votre demande à <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>. Nous répondons sous 15 jours. Vous pouvez aussi saisir l'Autorité nationale de protection des données (ANPD).", "873989da": "6. Combien de temps nous les conservons", "b6154120": "Menu", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "6afd340d": "Dernière mise à jour : 24 novembre 2026", "0dc62a4a": "© 2026 Custom Broker. Tous droits réservés.", "cc068e4d": "Écrire sur WhatsApp", "98777a51": "revoir les préférences de cookies", "42fdfa63": "3. À quoi nous les utilisons et sur quelle base légale", "60324c31": "Politique de confidentialité", "993cb15f": "Écrivez à operacional@custombroker.com.br. Pour les questions liées à votre opération, contactez-nous sur WhatsApp.", "01ddcaca": "7. Vos droits", "fbb98adc": "Des questions sur vos données ?", "a0d0dc95": "<b>Prestation des services :</b> documents et informations nécessaires au dédouanement, comme CPF ou CNPJ, factures, documents de transport, passeport et justificatifs de voyage ou de résidence.", "3f673c19": "<b>Répondre à votre contact et envoyer des devis</b> : mesures précontractuelles (art. 7, V).", "b8f540b4": "Cette politique peut être mise à jour. La date de la dernière version figure en haut de la page.", "9054e418": "10. Modifications", "dcbcc054": "Bagages internationaux", "1e884e30": "E-mail", "4658851b": "5. Transfert international", "54a19bbf": "Nous n'utilisons pas de cookies publicitaires ni de mesure d'audience. Si cela change, ces cookies ne seront activés qu'avec votre accord, et cette politique sera mise à jour.", "904ef931": "Téléphone"}, "it": {"19e31bf9": "Il titolare del trattamento è CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA, CNPJ n. 28.603.168/0001-00, con sede in R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP, CEP 04750-001 (\"Custom Broker\").", "c07049c7": "I cookie sono piccoli file salvati nel tuo browser. Usiamo:", "a3598f85": "Puoi cambiare la tua scelta in qualsiasi momento:", "92daad1c": "Usiamo solo i cookie necessari al funzionamento del sito e per ricordare la tua lingua. La chat salva cookie solo se la apri. Non usiamo cookie pubblicitari né di misurazione. Maggiori informazioni nell'<a href=\"/privacidade\">Informativa sulla privacy</a>.", "7b4ed0b9": "9. Sicurezza", "9aa830f6": "Partner operativi, come spedizionieri, vettori, terminal e assicurazioni, solo nella misura necessaria alla tua operazione.", "6f0397da": "Alcuni dati vengono trasferiti fuori dal Brasile: a fornitori di tecnologia con server all'estero (come WhatsApp/Meta, JivoChat, Google Fonts, jsDelivr e unpkg) e, quando la tua operazione lo richiede, a partner all'estero, come spedizionieri, esportatori e produttori. Lo facciamo solo nella misura necessaria a gestire la tua richiesta o a erogare il servizio, con le garanzie previste dalla LGPD (art. 33).", "5d4ce746": "Privati", "2114c883": "<b>Adempiere a obblighi legali e regolamentari</b> presso Receita Federal, MAPA, ANVISA e altri enti: adempimento di un obbligo legale (art. 7, II).", "95f382bb": "LGPD · Legge n. 13.709/2018", "9620224a": "1. Chi è responsabile dei tuoi dati", "8f5eb57a": "Scrivici su WhatsApp", "3e3bfa3d": "Canale per privacy e protezione dei dati: <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>.", "ad6f03a6": "4. Con chi li condividiamo", "78940c9b": "Non vendiamo i tuoi dati personali.", "d4c46c4a": "<b>Erogare i servizi contrattati</b>: esecuzione del contratto (art. 7, V).", "94db4e17": "Home", "23781b5e": "Chiudi", "34f334ab": "<b>Mantenere il sito funzionante e sicuro</b>, inclusi i cookie necessari e la tua scelta della lingua: legittimo interesse (art. 7, IX).", "7d23bcfe": "Ho capito", "850749bf": "<b>Navigazione:</b> dati tecnici necessari a mostrare il sito, come indirizzo IP e tipo di browser, e la tua scelta della lingua.", "b1938f0b": "Enti pubblici coinvolti nel commercio estero, quando necessario per lo sdoganamento.", "870145b5": "<b>Assistenza:</b> la chat del sito serve solo per il primo contatto. Dopo, l'assistenza e lo scambio di documenti proseguono via e-mail a operacional@custombroker.com.br, o su WhatsApp se preferisci. Raccogliamo i dati che ci invii in queste conversazioni. Per sicurezza, non inviare documenti personali tramite la chat.", "ae74610b": "Adottiamo misure tecniche e amministrative per proteggere i tuoi dati da accessi non autorizzati, perdita o uso improprio, come accesso riservato al team e connessione sicura (HTTPS).", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasile", "9f46f84c": "Telefono +55 11 2577-4757<br/>E-mail contato@custombroker.com.br", "627001be": "Chi siamo", "35119a92": "<b>Necessari:</b> fanno funzionare il sito e salvano la tua scelta della lingua. Non possono essere disattivati.", "8dfcdc11": "Fornitori di tecnologia che gestiscono il sito e l'assistenza: Locaweb (hosting), WhatsApp/Meta (quando ci scrivi o usi il modulo), Google Fonts e le reti di distribuzione jsDelivr e unpkg (font e script del sito, che ricevono l'indirizzo IP del tuo browser) e JivoChat (chat del sito, che conserva i messaggi scambiati).", "78bf5349": "2. Quali dati raccogliamo", "4dace3b0": "Vini", "dcc1157a": "Conserviamo i documenti delle operazioni svolte (come fatture, dichiarazioni di importazione, passaporto e ricevute) per 5 anni dalla fine dell'anno in cui è avvenuta l'operazione, periodo in cui la Receita Federal può ancora rivederla. I contatti che non hanno portato a un contratto (modulo, WhatsApp e chat) e le conversazioni della chat sono conservati fino a 1 anno dall'ultimo contatto. I registri di accesso al sito (indirizzo IP, data e ora) sono conservati per 6 mesi, come richiede il Marco Civil da Internet. Dopo questi periodi, i dati vengono eliminati o anonimizzati.", "07d63ea5": "Servizi", "4f49718b": "<b>Modulo di contatto:</b> nome, e-mail, telefono/WhatsApp, oggetto e messaggio.", "55a1dfc8": "<b>Della chat:</b> JivoChat viene caricato, e salva i suoi cookie, solo quando clicchi sul pulsante della chat.", "74fda3ac": "Come Custom Broker raccoglie, usa e protegge i tuoi dati personali su questo sito e nell'assistenza.", "01fa66ce": "8. Cookie", "974a4144": "Questa informativa è stata scritta in portoghese. Le versioni in altre lingue sono traduzioni; in caso di divergenza prevale la versione portoghese.", "e3cd5b2c": "Trading", "1bd66dd4": "Contatti", "b69d25cc": "Puoi chiedere in qualsiasi momento: conferma che trattiamo i tuoi dati, accesso, rettifica, anonimizzazione, blocco o cancellazione dei dati non necessari, portabilità, informazioni sulla condivisione e revoca del consenso (art. 18 della LGPD). Invia la richiesta a <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>. Rispondiamo entro 15 giorni. Puoi anche presentare reclamo all'Autorità Nazionale per la Protezione dei Dati (ANPD).", "873989da": "6. Per quanto tempo li conserviamo", "b6154120": "Menu", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "6afd340d": "Ultimo aggiornamento: 24 novembre 2026", "0dc62a4a": "© 2026 Custom Broker. Tutti i diritti riservati.", "cc068e4d": "Scrivici su WhatsApp", "98777a51": "rivedi le preferenze sui cookie", "42fdfa63": "3. Per cosa li usiamo e con quale base giuridica", "60324c31": "Informativa sulla privacy", "993cb15f": "Scrivi a operacional@custombroker.com.br. Per questioni sulla tua operazione, parlaci su WhatsApp.", "01ddcaca": "7. I tuoi diritti", "fbb98adc": "Domande sui tuoi dati?", "a0d0dc95": "<b>Erogazione dei servizi:</b> documenti e informazioni necessari allo sdoganamento, come CPF o CNPJ, fatture, documenti di trasporto, passaporto e prove di viaggio o residenza.", "3f673c19": "<b>Rispondere al tuo contatto e inviare preventivi</b>: misure precontrattuali (art. 7, V).", "b8f540b4": "Questa informativa può essere aggiornata. La data dell’ultima versione è in cima alla pagina.", "9054e418": "10. Modifiche", "dcbcc054": "Bagaglio internazionale", "1e884e30": "E-mail", "4658851b": "5. Trasferimento internazionale", "54a19bbf": "Non usiamo cookie pubblicitari né di misurazione delle visite. Se questo cambierà, questi cookie saranno attivati solo con il tuo permesso e questa informativa sarà aggiornata.", "904ef931": "Telefono"}, "de": {"19e31bf9": "Verantwortlich ist CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA, CNPJ Nr. 28.603.168/0001-00, mit Sitz in R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP, PLZ 04750-001 („Custom Broker“).", "c07049c7": "Cookies sind kleine Dateien, die in Ihrem Browser gespeichert werden. Wir verwenden:", "a3598f85": "Sie können Ihre Wahl jederzeit ändern:", "92daad1c": "Wir verwenden nur Cookies, die für die Funktion der Website und zum Speichern Ihrer Sprache nötig sind. Der Chat speichert nur Cookies, wenn Sie ihn öffnen. Wir verwenden keine Werbe- oder Analyse-Cookies. Mehr in der <a href=\"/privacidade\">Datenschutzerklärung</a>.", "7b4ed0b9": "9. Sicherheit", "9aa830f6": "Operative Partner wie Spediteure, Transportunternehmen, Terminals und Versicherer, nur soweit für Ihren Vorgang nötig.", "6f0397da": "Einige Daten werden ins Ausland übermittelt: an Technikanbieter mit Servern im Ausland (wie WhatsApp/Meta, JivoChat, Google Fonts, jsDelivr und unpkg) und, wenn Ihr Vorgang es erfordert, an Partner im Ausland wie Spediteure, Exporteure und Erzeuger. Wir tun dies nur, soweit es für Ihre Anfrage oder die Leistung nötig ist, mit den in der LGPD vorgesehenen Garantien (Art. 33).", "5d4ce746": "Privatpersonen", "2114c883": "<b>Gesetzliche und behördliche Pflichten erfüllen</b> gegenüber Bundessteuerbehörde, MAPA, ANVISA und anderen Stellen: Erfüllung einer rechtlichen Pflicht (Art. 7, II).", "95f382bb": "LGPD · Gesetz Nr. 13.709/2018", "9620224a": "1. Wer für Ihre Daten verantwortlich ist", "8f5eb57a": "Per WhatsApp schreiben", "3e3bfa3d": "Kontakt für Datenschutzfragen: <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>.", "ad6f03a6": "4. An wen wir sie weitergeben", "78940c9b": "Wir verkaufen Ihre personenbezogenen Daten nicht.", "d4c46c4a": "<b>Vertraglich vereinbarte Leistungen erbringen</b>: Vertragserfüllung (Art. 7, V).", "94db4e17": "Startseite", "23781b5e": "Schließen", "34f334ab": "<b>Website betriebsfähig und sicher halten</b>, einschließlich notwendiger Cookies und Ihrer Sprachwahl: berechtigtes Interesse (Art. 7, IX).", "7d23bcfe": "Verstanden", "850749bf": "<b>Nutzung der Website:</b> technische Daten zur Anzeige der Website, etwa IP-Adresse und Browsertyp, sowie Ihre Sprachwahl.", "b1938f0b": "Am Außenhandel beteiligte Behörden, wenn für die Abfertigung nötig.", "870145b5": "<b>Kundenkontakt:</b> Der Chat der Website dient nur dem ersten Kontakt. Danach laufen Betreuung und Dokumentenaustausch per E-Mail an operacional@custombroker.com.br oder auf Wunsch per WhatsApp. Wir erheben die Daten, die Sie uns in diesen Gesprächen senden. Senden Sie aus Sicherheitsgründen keine persönlichen Dokumente über den Chat.", "ae74610b": "Wir treffen technische und organisatorische Maßnahmen, um Ihre Daten vor unbefugtem Zugriff, Verlust oder Missbrauch zu schützen, etwa Zugriff nur für das Team und eine sichere Verbindung (HTTPS).", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · Brasilien", "9f46f84c": "Telefon +55 11 2577-4757<br/>E-Mail contato@custombroker.com.br", "627001be": "Über uns", "35119a92": "<b>Notwendig:</b> lassen die Website funktionieren und speichern Ihre Sprachwahl. Sie können nicht deaktiviert werden.", "8dfcdc11": "Technikanbieter, die Website und Kundenkontakt betreiben: Locaweb (Hosting), WhatsApp/Meta (wenn Sie uns schreiben oder das Formular nutzen), Google Fonts und die Netzwerke jsDelivr und unpkg (Schriften und Skripte der Website, die die IP-Adresse Ihres Browsers erhalten) sowie JivoChat (Chat der Website, der die ausgetauschten Nachrichten speichert).", "78bf5349": "2. Welche Daten wir erheben", "4dace3b0": "Wein", "dcc1157a": "Wir bewahren die Unterlagen abgeschlossener Vorgänge (wie Rechnungen, Einfuhranmeldungen, Reisepass und Belege) 5 Jahre nach Ende des Jahres auf, in dem der Vorgang stattfand, solange die Bundessteuerbehörde ihn noch prüfen kann. Kontakte ohne Vertragsabschluss (Formular, WhatsApp und Chat) und Chatverläufe werden bis zu 1 Jahr nach dem letzten Kontakt gespeichert. Zugriffsprotokolle der Website (IP-Adresse, Datum und Uhrzeit) werden 6 Monate gespeichert, wie es das Marco Civil da Internet verlangt. Danach werden die Daten gelöscht oder anonymisiert.", "07d63ea5": "Leistungen", "4f49718b": "<b>Kontaktformular:</b> Name, E-Mail, Telefon/WhatsApp, Betreff und Nachricht.", "55a1dfc8": "<b>Chat:</b> JivoChat wird nur geladen und speichert seine Cookies nur, wenn Sie auf den Chat-Button klicken.", "74fda3ac": "Wie Custom Broker Ihre personenbezogenen Daten auf dieser Website und im Kundenkontakt erhebt, nutzt und schützt.", "01fa66ce": "8. Cookies", "974a4144": "Diese Erklärung wurde auf Portugiesisch verfasst. Fassungen in anderen Sprachen sind Übersetzungen; bei Abweichungen gilt die portugiesische Fassung.", "e3cd5b2c": "Trading", "1bd66dd4": "Kontakt", "b69d25cc": "Sie können jederzeit verlangen: Bestätigung der Verarbeitung, Auskunft, Berichtigung, Anonymisierung, Sperrung oder Löschung nicht benötigter Daten, Übertragbarkeit, Information über Weitergaben und Widerruf der Einwilligung (Art. 18 LGPD). Senden Sie Ihre Anfrage an <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>. Wir antworten innerhalb von 15 Tagen. Sie können sich auch bei der Nationalen Datenschutzbehörde (ANPD) beschweren.", "873989da": "6. Wie lange wir sie speichern", "b6154120": "Menü", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "6afd340d": "Zuletzt aktualisiert: 24. November 2026", "0dc62a4a": "© 2026 Custom Broker. Alle Rechte vorbehalten.", "cc068e4d": "Per WhatsApp schreiben", "98777a51": "Cookie-Einstellungen prüfen", "42fdfa63": "3. Wofür wir sie nutzen und auf welcher Rechtsgrundlage", "60324c31": "Datenschutzerklärung", "993cb15f": "Schreiben Sie an operacional@custombroker.com.br. Für Fragen zu Ihrem Vorgang erreichen Sie uns per WhatsApp.", "01ddcaca": "7. Ihre Rechte", "fbb98adc": "Fragen zu Ihren Daten?", "a0d0dc95": "<b>Erbringung der Leistungen:</b> für die Zollabfertigung nötige Dokumente und Angaben, etwa CPF oder CNPJ, Rechnungen, Transportdokumente, Reisepass und Reise- oder Wohnsitznachweise.", "3f673c19": "<b>Ihre Anfrage beantworten und Angebote senden</b>: vorvertragliche Maßnahmen (Art. 7, V).", "b8f540b4": "Diese Erklärung kann aktualisiert werden. Das Datum der letzten Fassung steht oben auf der Seite.", "9054e418": "10. Änderungen", "dcbcc054": "Internationales Gepäck", "1e884e30": "E-Mail", "4658851b": "5. Übermittlung ins Ausland", "54a19bbf": "Wir verwenden keine Werbe- oder Besuchsmessungs-Cookies. Sollte sich das ändern, werden diese Cookies nur mit Ihrer Erlaubnis aktiviert und diese Erklärung wird aktualisiert.", "904ef931": "Telefon"}, "zh": {"19e31bf9": "数据控制者为 CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA，CNPJ 编号 28.603.168/0001-00，地址：R. Dr. Antônio Bento, 746, Santo Amaro, São Paulo - SP，邮编 04750-001（“Custom Broker”）。", "c07049c7": "Cookie 是保存在您浏览器中的小文件。我们使用：", "a3598f85": "您可以随时更改您的选择：", "92daad1c": "我们只使用网站运行和记住您语言所必需的 Cookie。聊天窗口只有在您打开时才会存储 Cookie。我们不使用广告或统计 Cookie。详情请见<a href=\"/privacidade\">隐私政策</a>。", "7b4ed0b9": "9. 安全", "9aa830f6": "运营合作伙伴，如货代、承运人、码头和保险公司，仅限您业务所需的范围。", "6f0397da": "部分数据会传输到巴西境外：传给在境外设有服务器的技术供应商（如 WhatsApp/Meta、JivoChat、Google Fonts、jsDelivr 和 unpkg），以及在您的业务需要时传给境外合作伙伴，如货代、出口商和生产商。我们仅在处理您的请求或提供服务所需的范围内这样做，并采取 LGPD 规定的保障措施（第 33 条）。", "5d4ce746": "个人客户", "2114c883": "<b>履行对联邦税务局、MAPA、ANVISA 等机构的法律和监管义务</b>：履行法定义务（第 7 条第 II 项）。", "95f382bb": "LGPD · 第 13.709/2018 号法律", "9620224a": "1. 谁对您的数据负责", "8f5eb57a": "WhatsApp 联系", "3e3bfa3d": "隐私和数据保护事务联系渠道：<a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>。", "ad6f03a6": "4. 我们与谁共享", "78940c9b": "我们不出售您的个人数据。", "d4c46c4a": "<b>提供约定的服务</b>：履行合同（第 7 条第 V 项）。", "94db4e17": "首页", "23781b5e": "关闭", "34f334ab": "<b>保持网站正常运行和安全</b>，包括必要的 Cookie 和您的语言选择：正当利益（第 7 条第 IX 项）。", "7d23bcfe": "知道了", "850749bf": "<b>浏览：</b>显示网站所需的技术数据，例如 IP 地址和浏览器类型，以及您选择的语言。", "b1938f0b": "清关所需时，与参与外贸的政府机构共享。", "870145b5": "<b>客户服务：</b>网站聊天仅用于首次联系。之后的服务和文件往来通过邮箱 operacional@custombroker.com.br 进行，您也可选择 WhatsApp。我们收集您在这些沟通中发送的数据。为安全起见，请勿通过聊天发送个人证件。", "ae74610b": "我们采取技术和管理措施保护您的数据免遭未经授权的访问、丢失或滥用，例如仅限团队访问和安全连接（HTTPS）。", "33de9c2a": "R. Dr. Antônio Bento, 746 · Santo Amaro<br/>São Paulo - SP · 04750-001 · 巴西", "9f46f84c": "电话 +55 11 2577-4757<br/>邮箱 contato@custombroker.com.br", "627001be": "关于我们", "35119a92": "<b>必要 Cookie：</b>保证网站运行并保存您的语言选择，无法关闭。", "8dfcdc11": "运营网站和服务的技术供应商：Locaweb（托管）、WhatsApp/Meta（您给我们写信或使用表单时）、Google Fonts 以及 jsDelivr 和 unpkg 分发网络（网站字体和脚本，会获取您浏览器的 IP 地址），以及 JivoChat（网站聊天，保存沟通记录）。", "78bf5349": "2. 我们收集哪些数据", "4dace3b0": "葡萄酒", "dcc1157a": "已完成业务的文件（如发票、进口申报单、护照和凭证）自业务发生年度结束后保存 5 年，在此期间联邦税务局仍可复核。未达成合作的咨询（表单、WhatsApp 和聊天）及聊天记录在最后一次联系后最多保存 1 年。网站访问记录（IP 地址、日期和时间）按《巴西互联网民事框架》（Marco Civil da Internet）要求保存 6 个月。超过上述期限后，数据将被删除或匿名化。", "07d63ea5": "服务", "4f49718b": "<b>联系表单：</b>姓名、邮箱、电话/WhatsApp、主题和留言。", "55a1dfc8": "<b>聊天 Cookie：</b>只有在您点击聊天按钮时，JivoChat 才会加载并存储其 Cookie。", "74fda3ac": "Custom Broker 如何在本网站和服务中收集、使用和保护您的个人数据。", "01fa66ce": "8. Cookie", "974a4144": "本政策以葡萄牙语撰写，其他语言版本均为翻译；如有不一致，以葡萄牙语版本为准。", "e3cd5b2c": "贸易公司", "1bd66dd4": "联系我们", "b69d25cc": "您可随时要求：确认我们是否处理您的数据、访问、更正、匿名化、封存或删除不必要的数据、可携带、了解共享情况以及撤回同意（LGPD 第 18 条）。请将请求发送至 <a href=\"mailto:operacional@custombroker.com.br\">operacional@custombroker.com.br</a>。我们将在 15 天内答复。您也可以向国家数据保护局（ANPD）投诉。", "873989da": "6. 我们保存多久", "b6154120": "菜单", "54bda3a8": "<b>CUSTOM BROKER ASSESSORIA IMPORTACAO EXPORTACAO LTDA</b><br/>CNPJ 28.603.168/0001-00", "6afd340d": "最后更新：2026 年 11 月 24 日", "0dc62a4a": "© 2026 Custom Broker。保留所有权利。", "cc068e4d": "通过 WhatsApp 联系", "98777a51": "查看 Cookie 偏好", "42fdfa63": "3. 我们的使用目的和法律依据", "60324c31": "隐私政策", "993cb15f": "请写信至 operacional@custombroker.com.br。业务相关问题请通过 WhatsApp 联系我们。", "01ddcaca": "7. 您的权利", "fbb98adc": "对您的数据有疑问？", "a0d0dc95": "<b>提供服务：</b>清关所需的文件和信息，例如 CPF 或 CNPJ、发票、运输单据、护照以及旅行或居住证明。", "3f673c19": "<b>回复您的咨询并发送报价</b>：订立合同前的准备程序（第 7 条第 V 项）。", "b8f540b4": "本政策可能会更新。最新版本的日期见页面顶部。", "9054e418": "10. 变更", "dcbcc054": "国际行李", "1e884e30": "邮箱", "4658851b": "5. 跨境传输", "54a19bbf": "我们不使用广告或访问统计 Cookie。如有变化，这类 Cookie 只会在您同意后启用，并会更新本政策。", "904ef931": "电话"}};
+  var HL={pt:'pt-BR',en:'en',es:'es',fr:'fr',it:'it',de:'de',zh:'zh-CN'};
+  var root=document.getElementById('cb');if(!root)return;
+  var els=[].slice.call(root.querySelectorAll('[data-i]'));
+  els.forEach(function(e){e.__pt=e.innerHTML;});
+  var cur='pt';
+  function t(l,k){return (D[l]||{})[k];}
+  window.cbTx=function(k,pt){return cur==='pt'?pt:(t(cur,k)||pt);};
+  function apply(l,save){
+    if(!HL[l])l='pt';cur=l;
+    els.forEach(function(e){var v=l==='pt'?e.__pt:t(l,e.getAttribute('data-i'));if(v!=null&&e.innerHTML!==v)e.innerHTML=v;});
+    document.documentElement.lang=HL[l];
+    [].slice.call(root.querySelectorAll('.pnav .lang')).forEach(function(b){b.textContent=l.toUpperCase();});
+    [].slice.call(root.querySelectorAll('.langm [data-l]')).forEach(function(b){b.setAttribute('aria-current',b.getAttribute('data-l')===l?'true':'false');});
+    var mb=root.querySelector('.menu-b');if(mb)mb.textContent=mb.getAttribute('aria-expanded')==='true'?cbTx('23781b5e','Fechar'):cbTx('b6154120','Menu');
+    if(save){try{localStorage.setItem('cb_lang',l);}catch(e){}}
+  }
+  window.cbSetLang=function(l){apply(l,true);};
+  var l='pt';
+  try{var q=new URLSearchParams(location.search).get('lang');if(q&&HL[q]){l=q;localStorage.setItem('cb_lang',q);}else{var s=localStorage.getItem('cb_lang');if(s&&HL[s])l=s;}}catch(e){}
+  apply(l,false);
+})();
+</script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script><script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script><script>/* Comum a todas as páginas: carregamento, rolagem suave, menu, rodapé revelado, botões magnéticos */
+(function(){
+  const CB=window.CB={intro:[],lenis:null};
+  // cada página abre sempre no topo (sem herdar a posição da página anterior)
+  try{history.scrollRestoration='manual';}catch(e){}
+  const toTop=()=>{if(location.hash)return;scrollTo(0,0);CB.lenis&&CB.lenis.scrollTo(0,{immediate:true,force:true});
+    // quando a prévia está dentro de outra página, leva também o quadro para o topo
+    try{if(window.top!==window.self)document.documentElement.scrollIntoView({block:'start'});}catch(e){}};
+  toTop();addEventListener('pageshow',toTop);
+  const loader=document.querySelector('.loader');
+  const foot=document.querySelector('.foot');
+  const setFH=()=>{if(foot)document.documentElement.style.setProperty('--fh',foot.offsetHeight+'px');};
+  setFH();addEventListener('resize',setFH);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const runIntro=()=>{loader&&loader.classList.add('done');CB.intro.forEach(f=>{try{f()}catch(e){console.error(e)}});CB.started=true;};
+  CB.onIntro=f=>{CB.started?f():CB.intro.push(f);};
+  CB.mobile=matchMedia('(max-width: 820px) and (pointer: coarse)').matches;
+  // dispara uma vez quando o elemento aparece na tela (funciona em qualquer rolagem, também no celular)
+  CB.see=(el,fn,margin)=>{if(!el)return;if(!('IntersectionObserver' in window))return fn();
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{rootMargin:margin||'0px 0px -12% 0px'});io.observe(el);};
+
+  // celular: botão flutuante do WhatsApp
+  if(!document.querySelector('.wa-float')){const w=document.createElement('a');w.className='wa-float';w.href='https://wa.me/5511941012210';w.target='_blank';w.rel='noopener';w.setAttribute('aria-label','Falar no WhatsApp');
+    w.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+    document.body.appendChild(w);}
+
+  // menu (funciona mesmo sem GSAP)
+  const btn=document.querySelector('.menu-b'),ov=document.querySelector('.povl'),nav=document.querySelector('.pnav');
+  ov&&ov.setAttribute('data-lenis-prevent','');
+  let open=false;
+  function closeMenu(){if(!open)return;open=false;btn.textContent=window.cbTx?cbTx('b6154120','Menu'):'Menu';btn.setAttribute('aria-expanded','false');
+    if(window.gsap&&!reduce)gsap.to(ov,{clipPath:'inset(0 0 100% 0)',duration:.6,ease:'expo.inOut',onComplete:()=>ov.hidden=true});else{ov.hidden=true;}
+    CB.lenis&&CB.lenis.start();}
+  CB.closeMenu=closeMenu;
+  btn&&btn.addEventListener('click',()=>{if(open)return closeMenu();open=true;const ckb=document.getElementById('cookie');ckb&&(ckb.hidden=true);ov.hidden=false;btn.textContent=window.cbTx?cbTx('23781b5e','Fechar'):'Fechar';btn.setAttribute('aria-expanded','true');CB.lenis&&CB.lenis.stop();
+    if(window.gsap&&!reduce){gsap.timeline().to(ov,{clipPath:'inset(0 0 0% 0)',duration:.7,ease:'expo.inOut'}).from(ov.querySelectorAll('.big a span'),{yPercent:110,duration:.8,stagger:.05,ease:'expo.out'},'-=.3').from(ov.querySelector('.extra'),{opacity:0,y:30,duration:.6},'-=.5');}
+    else ov.style.clipPath='none';});
+
+  // aviso curto
+  const toastEl=document.querySelector('.toast');let tt;
+  CB.toast=(html,ms)=>{if(!toastEl)return;toastEl.innerHTML=html;toastEl.hidden=false;clearTimeout(tt);tt=setTimeout(()=>toastEl.hidden=true,ms||5000);};
+  // seletor de idioma
+  const lb=document.querySelector('.pnav .lang'),lm=document.querySelector('.langm');
+  if(lb&&lm){
+    const NAMES={pt:'Português',en:'English',es:'Español',fr:'Français',it:'Italiano',de:'Deutsch',zh:'中文（普通话）'};
+    const setOpen=o=>{lm.hidden=!o;lb.setAttribute('aria-expanded',String(o));};
+    lb.addEventListener('click',e=>{e.stopPropagation();setOpen(lm.hidden);});
+    document.addEventListener('click',e=>{if(!lm.hidden&&!lm.contains(e.target))setOpen(false);});
+    lm.querySelectorAll('button').forEach(b=>{if(b.dataset.l==='pt')b.setAttribute('aria-current','true');
+      b.addEventListener('click',()=>{setOpen(false);const l=b.dataset.l;
+        window.cbSetLang&&cbSetLang(l);});});
+  }
+  // cookies
+  const ck=document.getElementById('cookie');
+  if(ck){let v=null;try{v=localStorage.getItem('cb-cookies');}catch(e){}
+    if(!v)setTimeout(()=>ck.hidden=false,1800);
+    const set=x=>{try{localStorage.setItem('cb-cookies',x);}catch(e){}ck.hidden=true;};
+    document.getElementById('cookie-ok').addEventListener('click',()=>set('todos'));
+    const ckn=document.getElementById('cookie-no');ckn&&ckn.addEventListener('click',()=>set('necessarios'));
+    const re=document.getElementById('cookie-reopen');re&&re.addEventListener('click',()=>{ck.hidden=false;});}
+
+  addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();lm&&(lm.hidden=true);}});
+
+  if(!window.gsap||reduce){runIntro();return;}
+  gsap.registerPlugin(ScrollTrigger,SplitText,ScrambleTextPlugin);
+
+  if(window.Lenis&&!CB.mobile){CB.lenis=new Lenis({lerp:.09});CB.lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>CB.lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);toTop();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id.length>1&&document.querySelector(id);if(t){e.preventDefault();closeMenu();CB.lenis.scrollTo(t,{offset:-90,duration:1.3});}}));}
+
+  ScrollTrigger.create({start:140,onUpdate:s=>nav&&nav.classList.toggle('small',s.scroll()>140)});
+
+  // botões magnéticos (só com mouse)
+  gsap.matchMedia().add('(hover: hover) and (pointer: fine)',()=>{
+    document.querySelectorAll('.mag,.foot .cta,.pnav .wa').forEach(b=>{
+      const xT=gsap.quickTo(b,'x',{duration:.6,ease:'elastic.out(1,.4)'}),yT=gsap.quickTo(b,'y',{duration:.6,ease:'elastic.out(1,.4)'});
+      b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();xT((e.clientX-r.left-r.width/2)*.35);yT((e.clientY-r.top-r.height/2)*.35);});
+      b.addEventListener('pointerleave',()=>{xT(0);yT(0);});
+    });
+  });
+
+  // rodapé: a chamada sobe enquanto é revelada
+  if(foot&&!CB.mobile){const big=new SplitText(foot.querySelector('.big'),{type:'words,chars'});
+    gsap.from(big.chars,{yPercent:100,opacity:0,stagger:.012,ease:'expo.out',scrollTrigger:{trigger:'.foot-spacer',start:'top 85%',end:'bottom bottom',scrub:1}});}
+
+  // carregamento só na primeira visita
+  let first=!!loader;try{if(sessionStorage.getItem('cbSeen'))first=false;sessionStorage.setItem('cbSeen','1');}catch(e){}
+  if(first&&loader){const c={v:0},cnt=loader.querySelector('.count');
+    gsap.timeline().to(c,{v:100,duration:1.2,ease:'power2.inOut',onUpdate:()=>cnt.textContent=Math.round(c.v)+'%'})
+      .to(loader,{clipPath:'inset(0 0 100% 0)',duration:.8,ease:'expo.inOut'}).add(runIntro,'-=.35');}
+  else runIntro();
+  addEventListener('load',()=>{setFH();ScrollTrigger.refresh();});
+})();
+
+/* Chat (JivoChat) carregado só quando a pessoa clica — LGPD: sem cookies do chat antes do clique.
+   Na Locaweb: desligar o JivoChat automático e preencher o código do widget em CB_JIVO_ID. */
+(function(){
+  const ID=window.CB_JIVO_ID||'OthWJcb9T1';if(!ID)return;
+  const b=document.createElement('button');b.type='button';b.className='chat-btn';b.setAttribute('aria-label','Abrir o chat');
+  b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span>Chat</span>';
+  document.body.appendChild(b);
+  let loading=false;
+  b.addEventListener('click',()=>{
+    if(window.jivo_api){window.jivo_api.open();return;}
+    if(loading)return;loading=true;b.classList.add('is-loading');
+    window.jivo_onLoadCallback=function(){b.remove();try{window.jivo_api.open();}catch(e){}};
+    const s=document.createElement('script');s.src='https://code.jivosite.com/widget/'+encodeURIComponent(ID);s.async=true;
+    s.onerror=()=>{loading=false;b.classList.remove('is-loading');};
+    document.head.appendChild(s);
+  });
+})();
+
+/* Páginas internas: movimento aplicado aos blocos de conteúdo existentes */
+(function(){
+  // formulário de contato: monta a mensagem e abre o WhatsApp
+  const form=document.querySelector('form.form');
+  if(form)form.addEventListener('submit',e=>{e.preventDefault();
+    if(!form.reportValidity())return;
+    const v=n=>{const el=form.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+    const txt='Olá, Custom Broker.\nNome: '+v('nome')+'\nE-mail: '+v('email')+(v('telefone')?'\nTelefone: '+v('telefone'):'')+'\nAssunto: '+v('assunto')+(v('mensagem')?'\n\n'+v('mensagem'):'');
+    const url='https://wa.me/5511941012210?text='+encodeURIComponent(txt);
+    let n=form.querySelector('.f-go');if(!n){n=document.createElement('p');n.className='f-go';form.appendChild(n);}
+    n.innerHTML='Mensagem pronta. <a class="btn btn-whats" href="'+url+'" target="_blank" rel="noopener">Abrir no WhatsApp</a>';
+    n.querySelector('a').focus();});
+  // painéis de fotos (Pessoa Física): o painel escolhido abre e os outros encolhem
+  document.querySelectorAll('.pf-panels').forEach(g=>{const ps=[...g.querySelectorAll('.pfp')];
+    const open=p=>ps.forEach(x=>x.classList.toggle('is-open',x===p));
+    ps.forEach(p=>{p.addEventListener('mouseenter',()=>open(p));p.addEventListener('focus',()=>open(p));p.addEventListener('click',()=>open(p));});});
+  // assunto vindo de um botão (?assunto=...)
+  try{const a=new URLSearchParams(location.search).get('assunto'),sel=document.querySelector('select[name="assunto"]');
+    if(a&&sel){const o=[...sel.options].find(o=>o.text===a);if(o)sel.value=o.value;}}catch(e){}
+  if(!window.gsap||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const CB=window.CB,M=CB.mobile;
+  // dispara uma vez: no celular quando aparece na tela, no computador pelo ScrollTrigger
+  const on=(el,start,fn)=>M?CB.see(el,fn):ScrollTrigger.create({trigger:el,start,once:true,onEnter:fn});
+
+  // topo da página: foto em tela cheia aproxima e título sobe linha por linha
+  const ph=document.querySelector('.page-head');
+  if(ph){
+    const h1=ph.querySelector('h1');const sp=new SplitText(h1,{type:'lines',mask:'lines'});
+    const img=ph.querySelector('.ph-photo img');
+    gsap.set(sp.lines,{yPercent:110});gsap.set(ph.querySelectorAll('.eyebrow,.lead,.ph-text .btn,.ph-text .hero-actions,.ph-text .edge,.ph-text p:not(.eyebrow):not(.lead)'),{opacity:0,y:30});
+    const R=matchMedia('(max-width: 820px)').matches?'0px':'28px';
+    CB.onIntro(()=>{const tl=gsap.timeline();
+      if(img)tl.fromTo(img.parentElement,{clipPath:'inset(100% 0 0 0 round '+R+')'},{clipPath:'inset(0% 0 0 0 round '+R+')',duration:1.4,ease:'expo.out',clearProps:'clipPath'},0).fromTo(img,{scale:1.25},{scale:1,duration:1.8,ease:'expo.out'},0);
+      // nome da página cai com peso, passa do ponto e assenta; o traço estica com mola
+      const eb=ph.querySelector('.eyebrow');
+      tl.fromTo(eb,{opacity:0,y:-60,rotate:-7},{opacity:1,y:0,rotate:0,duration:1.3,ease:'elastic.out(1,.45)'},.05);
+      if(eb)tl.fromTo(eb,{'--b':0},{'--b':1,duration:1.1,ease:'elastic.out(1.1,.35)'},.3);
+      tl
+        .to(sp.lines,{yPercent:0,duration:1.1,stagger:.09,ease:'expo.out'},.15)
+        .to(ph.querySelectorAll('.lead,.ph-text .btn,.ph-text .hero-actions,.ph-text .edge,.ph-text p:not(.eyebrow):not(.lead)'),{opacity:1,y:0,duration:1,stagger:.1,ease:'expo.out'},.45);});
+    if(img&&!M)gsap.to(img.parentElement,{yPercent:-10,ease:'none',scrollTrigger:{trigger:ph,start:'top top',end:'bottom top',scrub:true}});
+  }
+
+  // títulos de seção sobem de dentro de uma máscara
+  document.querySelectorAll('main section:not(.page-head) h2').forEach(h=>{
+    const s=new SplitText(h,{type:'lines',mask:'lines'});
+    gsap.set(s.lines,{yPercent:110});on(h,'top 88%',()=>gsap.to(s.lines,{yPercent:0,duration:1.1,stagger:.08,ease:'expo.out'}));
+  });
+  // rótulos curtos acima dos títulos
+  gsap.utils.toArray('main section:not(.page-head) .eyebrow').forEach(e=>{if(M||e.matches('.prose > p,.prose-sm > p'))return;gsap.set(e,{opacity:0,x:-24});on(e,'top 90%',()=>gsap.to(e,{opacity:1,x:0,duration:.8,ease:'expo.out'}));});
+
+  // fotos reveladas de baixo para cima, com leve zoom
+  gsap.utils.toArray('main section:not(.page-head) figure img, .tile-img img, .cta-photo img').forEach(im=>{
+    if(M)im.loading='eager';gsap.set(im,{clipPath:'inset(100% 0 0 0)',scale:1.25});on(M?(im.closest('figure,.tile-img,.cta-photo')||im.parentElement):im,'top 85%',()=>gsap.to(im,{clipPath:'inset(0% 0 0 0)',scale:1,duration:1.4,ease:'expo.out'}));
+    if(!M)gsap.to(im,{yPercent:-6,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  // blocos em grupo entram com peso (passam um pouco do ponto e assentam)
+  const groups=['.pf-panels .pfp','.tiles .tile','.rules .rule','.cards .card','.steps .step','.pillars li','.rows > div','.checklist li','.faq details','.fact','.edge > div','.contact-side > *','.form > *','.legal > *','.prose > p','.prose-sm > p','.dots-list li','.more-list > *','.inline-cta','.compare'];
+  const enter=b=>gsap.fromTo(b,{y:48,opacity:0,rotate:()=>gsap.utils.random(-1.2,1.2)},{y:0,x:0,opacity:1,rotate:0,duration:1,stagger:.08,ease:'back.out(1.7)',overwrite:true,clearProps:'transform'});
+  if(M)document.querySelectorAll(groups.join(',')).forEach(el=>CB.see(el,()=>enter([el])));
+  else ScrollTrigger.batch(groups.join(','),{start:'top 90%',once:true,onEnter:enter});
+  gsap.set(groups.join(','),{opacity:0});
+
+  // passos: a barra enche conforme a rolagem
+  gsap.utils.toArray('.steps').forEach(st=>{st.classList.remove('armed');
+    if(M){gsap.set(st.querySelectorAll('.bar'),{'--p':0});CB.see(st,()=>gsap.to(st.querySelectorAll('.bar'),{'--p':1,duration:1.2,stagger:.3,ease:'power2.out'}));}
+    else gsap.fromTo(st.querySelectorAll('.bar'),{'--p':0},{'--p':1,stagger:.25,ease:'none',scrollTrigger:{trigger:st,start:'top 80%',end:'bottom 55%',scrub:true}});});
+
+  // números e rótulos: entrada suave (sem letras embaralhadas)
+  gsap.utils.toArray('.fact .n, .rule-k, .edge b').forEach(n=>{gsap.set(n,{opacity:0,y:12});
+    on(n,'top 88%',()=>gsap.to(n,{opacity:1,y:0,duration:1,ease:'power3.out'}));});
+
+  // comparação do ICMS: barras crescem com a rolagem e assentam com mola
+  gsap.utils.toArray('.compare').forEach(c=>{c.classList.remove('armed');
+    gsap.set(c.querySelectorAll('.cmp-bar i'),{scaleX:0});on(c,'top 75%',()=>gsap.to(c.querySelectorAll('.cmp-bar i'),{scaleX:1,duration:1.6,stagger:.15,ease:'elastic.out(1,.55)'}));});
+
+  // perguntas: abrir com movimento
+  document.querySelectorAll('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open){const p=d.querySelector('p');p&&gsap.from(p,{y:-10,opacity:0,duration:.5,ease:'expo.out'});}}));
+
+  // seção escura de chamada: entra com leve escala
+  if(!M)gsap.utils.toArray('section.cta').forEach(c=>gsap.from(c,{clipPath:'inset(8% 4% 8% 4% round 28px)',ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'top 35%',scrub:true}}));
+})();
+</script>
